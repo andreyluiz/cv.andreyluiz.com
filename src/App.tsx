@@ -1,6 +1,19 @@
-import cvData from './cv.json';
+import { useMemo, useState } from 'react';
+import frontendData from './variants/frontend.json';
+import { Experience, Variant } from './variants/types';
+import web3Data from './variants/web3.json';
+
+enum VariantName {
+  Frontend = 'frontend',
+  Web3 = 'web3'
+}
 
 function App() {
+  const [variant, setVariant] = useState<VariantName>(VariantName.Frontend);
+  const [variants] = useState<{ [key in VariantName]: Variant }>({
+    [VariantName.Frontend]: frontendData,
+    [VariantName.Web3]: web3Data
+  });
   const { 
     personalInfo, 
     summary,
@@ -10,14 +23,20 @@ function App() {
     education, 
     languages,
     publications
-  } = cvData
+  } = useMemo(() => variants[variant], [variant, variants]);
 
-  const recentExperiences = experience.filter(exp => 
+
+  const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setVariant(e.target.value as VariantName);
+  };
+
+  const recentExperiences = experience.filter((exp: Experience) => 
     new Date(exp.period.start).getFullYear() >= 2020
   )
-  const previousExperiences = experience.filter(exp => 
+  const previousExperiences = experience.filter((exp: Experience) => 
     new Date(exp.period.start).getFullYear() < 2020
   )
+
 
   return (
     <div className="max-w-4xl mx-auto p-12 bg-white print:text-sm">
@@ -31,6 +50,10 @@ function App() {
           <h2 className="text-xl font-bold text-gray-800 print:text-lg">
             {personalInfo.title}
           </h2>
+          <select onChange={handleVariantChange} className="bg-gray-50 p-2 rounded-lg ml-auto print:hidden">
+            <option value="frontend">Frontend</option>
+            <option value="web3">Web3</option>
+          </select>
         </div>
         <div className="text-gray-600 mt-2 print:mt-1 flex flex-wrap justify-between gap-4 print:gap-2 print:text-xs">
           <p>📧 {personalInfo.email}</p>
