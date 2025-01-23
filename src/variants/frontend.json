@@ -8,10 +8,10 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "With over 14 years of experience in Software Engineering, I have brought projects from mock-ups into production. As a frontend development expert, I have always strived to deliver something that causes a wow at first glance. As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job.",
+  "summary": "With over 14 years of experience in Software Engineering, I have brought projects from mock-ups into production using React, Svelte, and Next.js. As a frontend development expert, I have always strived to deliver something that causes a wow reaction at first glance. As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job.",
   "skills": {
     "programmingLanguages": ["JavaScript", "TypeScript", "Python", "Go"],
-    "technologies": ["React (React Native)", "Svelte", "Docker", "Git", "AWS"]
+    "technologies": ["React (React Native)", "SvelteKit", "Next.js", "Docker", "Git", "AWS"]
   },
   "experience": [
     {

@@ -8,10 +8,10 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "With over 14 years of experience in Software Engineering, I have brought projects from mock-ups into production using diverse technologies. As a web3 expert, I have always strived to deliver reliable and secure applications. As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job.",
+  "summary": "With over 14 years of experience in Software Engineering, I have brought projects from mock-ups to production using JavaScript, TypeScript, and Python. As a full stack development expert, I have always strived to deliver reliable and functional products that cause a wow reaction at first glance. As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job.",
   "skills": {
-    "programmingLanguages": ["JavaScript", "TypeScript", "Go", "Solidity"],
-    "technologies": ["React (React Native)", "Git", "AWS", "Web3", "ERC20"]
+    "programmingLanguages": ["JavaScript", "TypeScript", "Python", "Go"],
+    "technologies": ["Node.js", "SvelteKit", "Next.js", "Git", "AWS"]
   },
   "experience": [
     {
@@ -24,8 +24,8 @@
       },
       "achievements": [
         "Led the continuous development of clients' dApps through full-cycle management: development, delivery, and deployment.",
-        "Directly interacted with Web3 APIs on custom made blockchain projects.",
-        "Worked on building core functionalities of the Unchained platform, like the Sia library."
+        "Worked on building core functionalities of the Unchained platform, like the Sia library.",
+        "Developed APIs for dApps integrated with MongoDB and PostgreSQL."
       ]
     },
     {
@@ -38,7 +38,8 @@
       },
       "achievements": [
         "Built a platform to manage candidates selected from LinkedIn.",
-        "Integrated AI features to transform recruitment processes becoming the first to use AI in the Brazilian market."
+        "Integrated AI features to transform recruitment processes becoming the first to use AI in the Brazilian market.",
+        "Leveraged MongoDB and APIs to build a robust and scalable platform, and to feed a Chrome Extension."
       ]
     },
     {
@@ -64,6 +65,7 @@
       },
       "achievements": [
         "Enhanced various mobile application functionalities, enhancing rent processes and stabilizing Bluetooth.",
+        "Used Meteor and Cordova to implement new features and make the app more robust.",
         "Published the app on leading stores, amplifying customer outreach."
       ]
     },
@@ -91,7 +93,8 @@
       },
       "achievements": [
         "Developed React components for Adobe Content Manager.",
-        "Implemented features for the SkyQ application of British Sky Broadcasting."
+        "Implemented features for the SkyQ application of British Sky Broadcasting.",
+        "Created a Python application to extract data from people tracker cameras."
       ]
     },
     {

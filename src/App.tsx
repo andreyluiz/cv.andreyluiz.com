@@ -1,18 +1,21 @@
 import { useMemo, useState } from 'react';
 import frontendData from './variants/frontend.json';
+import fullstackData from './variants/fullstack.json';
 import { Experience, Variant } from './variants/types';
 import web3Data from './variants/web3.json';
 
 enum VariantName {
   Frontend = 'frontend',
-  Web3 = 'web3'
+  Web3 = 'web3',
+  FullStack = 'fullstack',
 }
 
 function App() {
   const [variant, setVariant] = useState<VariantName>(VariantName.Frontend);
   const [variants] = useState<{ [key in VariantName]: Variant }>({
     [VariantName.Frontend]: frontendData,
-    [VariantName.Web3]: web3Data
+    [VariantName.Web3]: web3Data,
+    [VariantName.FullStack]: fullstackData
   });
   const { 
     personalInfo, 
@@ -53,6 +56,7 @@ function App() {
           <select onChange={handleVariantChange} className="bg-gray-50 dark:bg-gray-800 p-2 rounded-lg ml-auto print:hidden text-gray-800 dark:text-gray-100">
             <option value="frontend">Frontend</option>
             <option value="web3">Web3</option>
+            <option value="fullstack">Fullstack</option>
           </select>
         </div>
         <div className="text-gray-600 dark:text-gray-400 mt-2 print:mt-1 flex flex-wrap justify-between gap-4 print:gap-2 print:text-xs">
