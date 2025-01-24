@@ -145,7 +145,7 @@ function App() {
       </section>
 
       {/* Previous Experience */}
-      <section className="mb-8 print:mb-4 print:pt-14 print:break-before-all">
+      <section className="mb-8 print:mb-4 print:pt-14 print:break-before-page">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 border-b-2 border-gray-300 pb-2 mb-3 print:mb-2 print:text-lg">
           Previous Experience
         </h2>
@@ -245,7 +245,7 @@ function App() {
 
       {/* Print Source */}
       <div className="hidden print:block mt-6 pt-3 text-center text-gray-400 dark:text-gray-600 text-xs border-t border-gray-200">
-        This CV was generated with web technologies (soon to be available at cv.andreyluiz.com)
+        This CV was generated with <a href="https://cv.andreyluiz.com" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 hover:underline">cv.andreyluiz.com</a>
       </div>
     </div>
   );

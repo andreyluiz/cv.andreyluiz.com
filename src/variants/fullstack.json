@@ -20,26 +20,12 @@
       "location": "Switzerland",
       "period": {
         "start": "July 2024",
-        "end": "Present"
+        "end": "January 2025"
       },
       "achievements": [
         "Led the continuous development of clients' dApps through full-cycle management: development, delivery, and deployment.",
         "Worked on building core functionalities of the Unchained platform, like the Sia library.",
         "Developed APIs for dApps integrated with MongoDB and PostgreSQL."
-      ]
-    },
-    {
-      "title": "Co-Founder & CTO",
-      "company": "HuntLab",
-      "location": "Brazil (Remote)",
-      "period": {
-        "start": "August 2023",
-        "end": "Present"
-      },
-      "achievements": [
-        "Built a platform to manage candidates selected from LinkedIn.",
-        "Integrated AI features to transform recruitment processes becoming the first to use AI in the Brazilian market.",
-        "Leveraged MongoDB and APIs to build a robust and scalable platform, and to feed a Chrome Extension."
       ]
     },
     {
