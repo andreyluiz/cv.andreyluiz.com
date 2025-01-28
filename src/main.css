@@ -8,5 +8,5 @@ body {
 
 @page {
   size: A4;
-  margin: 0;
+  margin: 16mm 16mm 16mm 16mm;
 }

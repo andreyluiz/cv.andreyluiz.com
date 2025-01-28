@@ -23,10 +23,11 @@
         "end": "January 2025"
       },
       "achievements": [
-        "Led the continuous development of clients' dApps through full-cycle management: development, delivery, and deployment.",
-        "Worked on building core functionalities of the Unchained platform, like the Sia library.",
+        "Led the continuous development of clients' dApps using SvelteKit and TypeScript.",
+        "Worked on building core functionalities of the Unchained platform using TypeScript.",
         "Developed APIs for dApps integrated with MongoDB and PostgreSQL."
-      ]
+      ],
+      "techStack": ["SvelteKit", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
       "title": "Frontend Engineer",
@@ -37,9 +38,10 @@
         "end": "June 2024"
       },
       "achievements": [
-        "Led the migration of SonarCloud issues screen to MIUI using React.",
-        "Developed critical features for CaYC methodology and Clean Code Taxonomy."
-      ]
+        "Led the migration of SonarCloud issues screen to MIUI using React, improving the user experience and performance.",
+        "Developed critical features for CaYC methodology and Clean Code Taxonomy using React and TypeScript, making our users more informed about the code quality of their projects."
+      ],
+      "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
       "title": "Full Stack Engineer",
@@ -50,10 +52,10 @@
         "end": "November 2022"
       },
       "achievements": [
-        "Enhanced various mobile application functionalities, enhancing rent processes and stabilizing Bluetooth.",
-        "Used Meteor and Cordova to implement new features and make the app more robust.",
+        "Enhanced various mobile application functionalities using Meteor.js and Svelte, enhancing rent processes and stabilizing Bluetooth.",
         "Published the app on leading stores, amplifying customer outreach."
-      ]
+      ],
+      "techStack": ["Meteor.js", "Svelte", "Git", "AWS", "Cordova"]
     },
     {
       "title": "Frontend Engineer",
@@ -64,10 +66,11 @@
         "end": "September 2021"
       },
       "achievements": [
-        "Led multiple valuable contributions into developing Anibis messenger.",
-        "Led the migration of the messaging service to a different messaging provider.",
-        "Performed as a Scrum Master for the Aldrin squad."
-      ]
+        "Led multiple valuable contributions into developing Anibis messenger using React and TypeScript, granting constant improvements to the user experience.",
+        "Led the migration of the messaging service to a different messaging provider, improving the performance and stability of the application.",
+        "Performed as a Scrum Master for the Aldrin squad, ensuring the team's communication and productivity."
+      ],
+      "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
     {
       "title": "Full Stack Engineer",
@@ -78,10 +81,11 @@
         "end": "January 2020"
       },
       "achievements": [
-        "Developed React components for Adobe Content Manager.",
-        "Implemented features for the SkyQ application of British Sky Broadcasting.",
-        "Created a Python application to extract data from people tracker cameras."
-      ]
+        "Developed React components for Adobe Content Manager for a global client on the energy sector, giving the content team more flexibility to manage the content of their clients.",
+        "Developed a Python application for a client on the video surveillance sector, ensuring easy data analysis and reporting.",
+        "Implemented features for the SkyQ application of British Sky Broadcasting, a global client on the media sector, improving performance, reliability and user experience."
+      ],
+      "techStack": ["React", "Redux", "TypeScript", "Git", "Python"]
     },
     {
       "title": "Frontend Engineer",
@@ -92,9 +96,10 @@
         "end": "February 2018"
       },
       "achievements": [
-        "Built the company's main front-end application using React and Redux.",
-        "Launched the application into beta testing as the first front-end developer."
-      ]
+        "Built the company's main front-end application using React and Redux, providing a robust and scalable platform for the company's first clients.",
+        "Launched the application into beta testing, enabling the company to start receiving clients and revenue."
+      ],
+      "techStack": ["React", "Redux", "JavaScript", "Git"]
     },
     {
       "title": "Frontend Engineer",
@@ -105,9 +110,10 @@
         "end": "December 2016"
       },
       "achievements": [
-        "Developed features in JavaScript and jQuery for the Landing Pages squad.",
-        "Contributed to the migration of the landing pages editor to a WYSIWYG editor."
-      ]
+        "Developed features in JavaScript and jQuery for the Landing Pages squad, improving code quality and performance.",
+        "Contributed to the migration of the landing pages editor to a WYSIWYG editor, providing a more user-friendly editor for the users."
+      ],
+      "techStack": ["JavaScript", "jQuery", "Git"]
     },
     {
       "title": "Frontend Developer",
@@ -118,8 +124,10 @@
         "end": "December 2015"
       },
       "achievements": [
-        "Implemented features for a JIRA plugin for testing management using Angular.js."
-      ]
+        "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company an edge in the market.",
+        "Contributed to the core feature of testing suites, allowing the company to outperform competitors."
+      ],
+      "techStack": ["Angular.js", "JavaScript", "Git"]
     },
     {
       "title": "Full Stack Developer",
@@ -131,14 +139,10 @@
       },
       "achievements": [
         "Everyone starts somewhere, right?",
-        "Developed key features for a file processing tool for financial analysis."
-      ]
-    }
-  ],
-  "projects": [
-    {
-      "name": "HuntLab Platform",
-      "description": "A recruitment platform integrated with LinkedIn that leverages AI for efficient candidate management and decision making."
+        "Developed key features for a file processing tool for financial analysis using Java, further enhancing the company's reputation in the market.",
+        "Contributed heavily as a pioneer on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
+      ],
+      "techStack": ["Java", "JSP", "JavaScript", "Git"]
     }
   ],
   "education": [

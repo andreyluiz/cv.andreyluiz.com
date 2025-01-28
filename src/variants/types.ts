@@ -6,7 +6,7 @@ export interface Variant {
     technologies: string[];
   };
   experience: Experience[];
-  projects: Project[];
+  projects?: Project[];
   education: Education[];
   languages: Language[];
   publications: Publication[];
@@ -31,11 +31,13 @@ export interface Experience {
     end: string;
   };
   achievements: string[];
+  techStack: string[];
 }
 
 export interface Project {
   name: string;
   description: string;
+  techStack: string[];
 }
 
 export interface Education {
