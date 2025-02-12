@@ -66,7 +66,7 @@ function App() {
             <h3 className="font-semibold mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
               Technologies
             </h3>
-            
+
             <ul className="list-disc list-inside text-neutral-700 dark:text-neutral-300 space-y-1 print:space-y-0.5 print:text-xs">
               {skills.technologies.map((tech, index) => (
                 <li key={index}>{tech}</li>
