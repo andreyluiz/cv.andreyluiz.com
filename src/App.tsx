@@ -4,7 +4,6 @@ import data from "./variants/fullstack.json";
 function App() {
   const {
     personalInfo,
-    summary,
     skills,
     experience,
     education,
@@ -31,47 +30,35 @@ function App() {
           <p>📍 {personalInfo.location}</p>
           <p>🌐 {personalInfo.website}</p>
           <p>🔗 {personalInfo.linkedin}</p>
+          <p>🔄 Immediately available</p>
         </div>
       </header>
-
-      {/* Summary Section */}
-      <section className="mb-8 print:mb-4">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
-          Professional Summary
-        </h2>
-        {summary.map((s) => (
-          <p className="text-neutral-700 dark:text-neutral-300 text-justify print:text-sm mb-2">
-            {s}
-          </p>
-        ))}
-      </section>
 
       {/* Skills Section */}
       <section className="mb-8 print:mb-4">
         <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
           Core Skills
         </h2>
-        <div className="grid grid-cols-2 gap-6 print:gap-4">
-          <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:p-3 rounded-lg">
-            <h3 className="font-semibold mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
+        <div className="grid grid-cols-1 print:grid-cols-2 md:grid-cols-2 gap-6 print:gap-4">
+          <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
+            <h3 className="font-medium mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
               Programming Languages
             </h3>
-            <ul className="list-disc list-inside text-neutral-700 dark:text-neutral-300 space-y-1 print:space-y-0.5 print:text-xs">
+            <div className="flex flex-wrap gap-2">
               {skills.programmingLanguages.map((lang, index) => (
-                <li key={index}>{lang}</li>
+                <Badge key={index}>{lang}</Badge>
               ))}
-            </ul>
+            </div>
           </div>
-          <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:p-3 rounded-lg">
-            <h3 className="font-semibold mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
+          <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
+            <h3 className="font-medium mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
               Technologies
             </h3>
-
-            <ul className="list-disc list-inside text-neutral-700 dark:text-neutral-300 space-y-1 print:space-y-0.5 print:text-xs">
+            <div className="flex flex-wrap gap-2">
               {skills.technologies.map((tech, index) => (
-                <li key={index}>{tech}</li>
+                <Badge key={index}>{tech}</Badge>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -213,17 +200,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* Print Source */}
-      <div className="hidden print:block mt-6 pt-3 text-center text-neutral-400 dark:text-neutral-600 text-xs border-t border-neutral-200">
-        This CV was generated with{" "}
-        <a
-          href="https://cv.andreyluiz.com"
-          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 hover:underline"
-        >
-          cv.andreyluiz.com
-        </a>
-      </div>
     </div>
   );
 }

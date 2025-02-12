@@ -8,10 +8,18 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": ["With over 14 years of experience in Software Engineering, I have brought projects from mock-ups to production using JavaScript, TypeScript, Node.js, Sveltekit, and Next.js.", "As a full stack development expert, I have always strived to deliver reliable and functional products that cause a wow reaction at first glance.", "My expertise spans technologies on the front-end, like React, the back-end, like Node.js and C#, and the database, like PostgreSQL and MongoDB. I recently started venturing on some AWS studies to make my devops knowledge broader.", "As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job."],
   "skills": {
     "programmingLanguages": ["JavaScript", "TypeScript", "C#"],
-    "technologies": ["Node.js", "SvelteKit", "Next.js", "PostgreSQL", "MongoDB", "Git", "AWS"]
+    "technologies": [
+      "React",
+      "Node.js",
+      "SvelteKit",
+      "Next.js",
+      "PostgreSQL",
+      "MongoDB",
+      "Git",
+      "AWS"
+    ]
   },
   "experience": [
     {
@@ -23,11 +31,18 @@
         "end": "January 2025"
       },
       "achievements": [
-        "Led the continuous development of clients' dApps using SvelteKit and TypeScript.",
-        "Worked on building core functionalities of the Unchained platform using TypeScript.",
-        "Developed APIs for dApps integrated with MongoDB and PostgreSQL."
+        "Led the continuous development of clients' decentralized applications using SvelteKit and TypeScript, granting the company a net revenue of more than 50k CHF in the first months of operation.",
+        "Spearheaded enhancements on core functionalities within the Unchained platform leveraging TypeScript, contributing to the production readiness."
       ],
-      "techStack": ["SvelteKit", "TypeScript", "MongoDB", "PostgreSQL", "TailwindCSS", "Git", "AWS"]
+      "techStack": [
+        "SvelteKit",
+        "TypeScript",
+        "MongoDB",
+        "PostgreSQL",
+        "TailwindCSS",
+        "Git",
+        "AWS"
+      ]
     },
     {
       "title": "Frontend Engineer",
@@ -38,8 +53,9 @@
         "end": "June 2024"
       },
       "achievements": [
-        "Led the migration of SonarCloud issues screen to MIUI using React, improving the user experience and performance.",
-        "Developed critical features for CaYC methodology and Clean Code Taxonomy using React and TypeScript, making our users more informed about the code quality of their projects."
+        "Executed three key features for SonarCloud's project section in React, streamlining the Clean Code Taxonomy integration and educating users on best practices in coding standards.",
+        "Pioneered the CaYC team's efforts, identifying and deploying 8 critical features to integrate CaYC methodology across product lines, facilitating team-wide communication and workflow efficiency.",
+        "Improved SonarCloud's issues screen by migrating to MIUI using React, enhancing user experience and UI consistency."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -52,8 +68,10 @@
         "end": "November 2022"
       },
       "achievements": [
-        "Enhanced various mobile application functionalities using Meteor.js and Svelte, enhancing rent processes and stabilizing Bluetooth.",
-        "Published the app on leading stores, amplifying customer outreach."
+        "Led the enhancement of the Equip app, refining both map search and rental processes within the on-demand sports equipment platform, thereby accelerating prototype development in 3 months.",
+        "Deployed more than 150 features and bug fixes in the rental lifecycle, making the app ready for production for the first time.",
+        "Improved the Bluetooth connection from the app to the rental stations, improving reliability from 1 among 5 successful attempts, to 5 among 5 successful attempts.",
+        "Published the app on Play Store and Apple Store, facilitating the reach of the company to leads and customers in Switzerland, France, and the US."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -66,8 +84,8 @@
         "end": "September 2021"
       },
       "achievements": [
-        "Led multiple valuable contributions into developing Anibis messenger using React and TypeScript, granting constant improvements to the user experience.",
-        "Led the migration of the messaging service to a different messaging provider, improving the performance and stability of the application.",
+        "Led valuable contributions into developing Anibis messenger using React and TypeScript, granting constant improvements to the user experience.",
+        "Managed the transition of messaging services from Twilio to Sendbird, overhauling the React application to optimize maintainability, supporting 100% of the company's users in the first month.",
         "Performed as a Scrum Master for the Aldrin squad, ensuring the team's communication and productivity."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
@@ -81,23 +99,30 @@
         "end": "January 2020"
       },
       "achievements": [
-        "Developed React components for Adobe Content Manager for a global client on the energy sector, giving the content team more flexibility to manage the content of their clients.",
-        "Developed a Python application for a client on the video surveillance sector, ensuring easy data analysis and reporting.",
-        "Implemented features for the SkyQ application of British Sky Broadcasting, a global client on the media sector, improving performance, reliability and user experience."
+        "Created 3 React components for Adobe Content Manager for a leading energy company from Germany and the UK, improving the catalog of available components for content managers.",
+        "Implemented features in React for the SkyQ application of British Sky Broadcasting for Germany and Austria, improving user experience and application availability.",
+        "Researched and executed important features for SkyQ for PlayStation 4, including all the processes of deployment and release in the store, spreading even more the availability of the company's product."
       ],
-      "techStack": ["React", "Redux", "PostgreSQL", "TypeScript", "Git", "Python"]
+      "techStack": [
+        "React",
+        "Redux",
+        "PostgreSQL",
+        "TypeScript",
+        "Git",
+        "Python"
+      ]
     },
     {
       "title": "Frontend Engineer",
-      "company": "datarisk.io",
+      "company": "DataRisk",
       "location": "Brazil",
       "period": {
         "start": "January 2017",
         "end": "February 2018"
       },
       "achievements": [
-        "Built the company's main front-end application using React and Redux, providing a robust and scalable platform for the company's first clients.",
-        "Launched the application into beta testing, enabling the company to start receiving clients and revenue."
+        "Researched and started the company's main front-end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
+        "Played a crucial role as the first front-end developer, collaborating closely with a designer to launch the application into beta testing, a significant milestone for the company's growth."
       ],
       "techStack": ["React", "Redux", "JavaScript", "Git"]
     },
@@ -110,8 +135,9 @@
         "end": "December 2016"
       },
       "achievements": [
-        "Developed features in JavaScript and jQuery for the Landing Pages squad, improving code quality and performance.",
-        "Contributed to the migration of the landing pages editor to a WYSIWYG editor, providing a more user-friendly editor for the users."
+        "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
+        "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages.",
+        "Collaborated with decisions and actions for the front-end chapter of the company, always ensuring the front-end development had a bright future ahead."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -124,8 +150,8 @@
         "end": "December 2015"
       },
       "achievements": [
-        "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company an edge in the market.",
-        "Contributed to the core feature of testing suites, allowing the company to outperform competitors."
+        "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company the first international customers.",
+        "Led the front-end development of the core feature of testing suites, allowing the company to outperform competitors."
       ],
       "techStack": ["Angular.js", "JavaScript", "Git"]
     },
@@ -138,26 +164,25 @@
         "end": "June 2015"
       },
       "achievements": [
-        "Everyone starts somewhere, right?",
-        "Developed key features for a file processing tool for financial analysis using Java, further enhancing the company's reputation in the market.",
+        "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
         "Created and optimized queries on PostgreSQL database for fast data querying.",
-        "Contributed heavily as a pioneer on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
+        "Pioneered on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
       ],
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
   "education": [
     {
-      "degree": "Diploma in Software Engineering and Development",
-      "institution": "Faculdade Unilagos",
-      "year": "2011",
-      "location": "Brazil"
-    },
-    {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "2023",
+      "year": "October 2023",
       "location": "Switzerland"
+    },
+    {
+      "degree": "Diploma in Software Engineering and Development",
+      "institution": "Faculdade Unilagos",
+      "year": "December 2011",
+      "location": "Brazil"
     }
   ],
   "languages": [
