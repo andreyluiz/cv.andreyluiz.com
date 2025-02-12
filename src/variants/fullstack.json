@@ -8,9 +8,9 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "With over 14 years of experience in Software Engineering, I have brought projects from mock-ups to production using JavaScript, TypeScript, Node.js and Python. As a full stack development expert, I have always strived to deliver reliable and functional products that cause a wow reaction at first glance. As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job.",
+  "summary": ["With over 14 years of experience in Software Engineering, I have brought projects from mock-ups to production using JavaScript, TypeScript, Node.js, Sveltekit, and Next.js.", "As a full stack development expert, I have always strived to deliver reliable and functional products that cause a wow reaction at first glance.", "My expertise spans technologies on the front-end, like React, the back-end, like Node.js and C#, and the database, like PostgreSQL and MongoDB. I recently started venturing on some AWS studies to make my devops knowledge broader.", "As a team player, I always look to help others and learn from them. For me, Software Engineering is a philosophy, not a simple job."],
   "skills": {
-    "programmingLanguages": ["JavaScript", "TypeScript", "Python", "C#"],
+    "programmingLanguages": ["JavaScript", "TypeScript", "C#"],
     "technologies": ["Node.js", "SvelteKit", "Next.js", "PostgreSQL", "MongoDB", "Git", "AWS"]
   },
   "experience": [
@@ -27,7 +27,7 @@
         "Worked on building core functionalities of the Unchained platform using TypeScript.",
         "Developed APIs for dApps integrated with MongoDB and PostgreSQL."
       ],
-      "techStack": ["SvelteKit", "TypeScript", "MongoDB", "TailwindCSS", "Git", "AWS"]
+      "techStack": ["SvelteKit", "TypeScript", "MongoDB", "PostgreSQL", "TailwindCSS", "Git", "AWS"]
     },
     {
       "title": "Frontend Engineer",

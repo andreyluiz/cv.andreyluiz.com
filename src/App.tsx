@@ -1,33 +1,16 @@
-import { useMemo, useState } from "react";
-import frontendData from "./variants/frontend.json";
-import fullstackData from "./variants/fullstack.json";
-import { Variant } from "./variants/types";
-
-enum VariantName {
-  Frontend = "frontend",
-  FullStack = "fullstack",
-}
+import Badge from "./components/Badge";
+import data from "./variants/fullstack.json";
 
 function App() {
-  const [variant, setVariant] = useState<VariantName>(VariantName.Frontend);
-  const [variants] = useState<{ [key in VariantName]: Variant }>({
-    [VariantName.Frontend]: frontendData,
-    [VariantName.FullStack]: fullstackData,
-  });
   const {
     personalInfo,
     summary,
     skills,
     experience,
-    projects,
     education,
     languages,
     publications,
-  } = useMemo(() => variants[variant], [variant, variants]);
-
-  const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setVariant(e.target.value as VariantName);
-  };
+  } = data;
 
   return (
     <div className="max-w-4xl mx-auto p-12 print:p-0 bg-white dark:bg-neutral-900 print:text-sm">
@@ -41,13 +24,6 @@ function App() {
           <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 print:text-lg">
             {personalInfo.title}
           </h2>
-          <select
-            onChange={handleVariantChange}
-            className="bg-neutral-50 dark:bg-neutral-800 p-2 rounded-lg ml-auto print:hidden text-neutral-800 dark:text-neutral-100"
-          >
-            <option value="frontend">Frontend</option>
-            <option value="fullstack">Fullstack</option>
-          </select>
         </div>
         <div className="text-neutral-600 dark:text-neutral-400 mt-2 print:mt-1 flex flex-wrap justify-between gap-4 print:gap-2 print:text-xs">
           <p>📧 {personalInfo.email}</p>
@@ -63,9 +39,11 @@ function App() {
         <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
           Professional Summary
         </h2>
-        <p className="text-neutral-700 dark:text-neutral-300 text-justify print:text-sm">
-          {summary}
-        </p>
+        {summary.map((s) => (
+          <p className="text-neutral-700 dark:text-neutral-300 text-justify print:text-sm mb-2">
+            {s}
+          </p>
+        ))}
       </section>
 
       {/* Skills Section */}
@@ -88,6 +66,7 @@ function App() {
             <h3 className="font-semibold mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
               Technologies
             </h3>
+            
             <ul className="list-disc list-inside text-neutral-700 dark:text-neutral-300 space-y-1 print:space-y-0.5 print:text-xs">
               {skills.technologies.map((tech, index) => (
                 <li key={index}>{tech}</li>
@@ -152,12 +131,7 @@ function App() {
                   </span>
                   <ul className="list-none text-neutral-700 dark:text-neutral-300 flex flex-wrap gap-2">
                     {exp.techStack.map((tech, index) => (
-                      <li
-                        key={index}
-                        className="bg-neutral-50 dark:bg-neutral-700 p-1 px-2 print:px-1 rounded-lg"
-                      >
-                        {tech}
-                      </li>
+                      <Badge key={index}>{tech}</Badge>
                     ))}
                   </ul>
                 </div>
@@ -166,30 +140,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* Projects */}
-      {projects && projects.length > 0 && (
-        <section className="mb-8 print:mb-4">
-          <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
-            Notable Projects
-          </h2>
-          <div className="grid grid-cols-1 gap-4 print:gap-2 print:text-sm">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="bg-neutral-50 dark:bg-neutral-800 p-4 print:p-3 rounded-lg"
-              >
-                <h3 className="text-lg font-semibold text-neutral-800 dark:text-neutral-100 mb-2 print:text-base">
-                  {project.name}
-                </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 print:text-xs">
-                  {project.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* Education & Certifications */}
       <section className="mb-8 print:mb-4 break-inside-avoid">
