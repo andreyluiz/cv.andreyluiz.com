@@ -74,7 +74,7 @@ function App() {
               key={index}
               className="bg-neutral-50 dark:bg-neutral-800 rounded-lg break-inside-avoid"
             >
-              <div className="p-3 print:p-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 print:gap-1 border-b border-neutral-200">
+              <div className="p-3 print:p-2 print:px-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 print:gap-1 border-b border-neutral-200">
                 <div>
                   <span className="font-medium text-neutral-800 dark:text-neutral-100">
                     {exp.company}
@@ -109,7 +109,7 @@ function App() {
                 </ul>
               )}
               {exp.techStack.length > 0 && (
-                <div className="flex items-baseline p-3 print:p-2">
+                <div className="flex items-baseline p-3 print:p-2 print:px-0">
                   <h3 className="font-medium text-neutral-800 dark:text-neutral-100">
                     Tech Stack
                   </h3>
@@ -137,7 +137,7 @@ function App() {
           {education.map((edu, index) => (
             <div
               key={index}
-              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 rounded-lg"
+              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 print:px-0 rounded-lg"
             >
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
                 <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 print:text-base">
@@ -164,7 +164,7 @@ function App() {
           {publications.map((pub, index) => (
             <div
               key={index}
-              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 rounded-lg"
+              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 print:px-0 rounded-lg"
             >
               <a
                 href={pub.url}
@@ -188,7 +188,7 @@ function App() {
           {languages.map((language, index) => (
             <div
               key={index}
-              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 rounded-lg"
+              className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 print:px-0 rounded-lg"
             >
               <p className="font-medium text-neutral-800 dark:text-neutral-100">
                 {language.name}
