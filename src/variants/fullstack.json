@@ -15,6 +15,7 @@
       "Node.js",
       "SvelteKit",
       "Next.js",
+      "Phaser",
       "PostgreSQL",
       "MongoDB",
       "Git",
@@ -32,7 +33,8 @@
       },
       "achievements": [
         "Led the continuous development of clients' decentralized applications using SvelteKit and TypeScript, granting the company a net revenue of more than 50k CHF in the first months of operation.",
-        "Spearheaded enhancements on core functionalities within the Unchained platform leveraging TypeScript, contributing to the production readiness."
+        "Spearheaded enhancements on core functionalities within the Unchained platform leveraging TypeScript, contributing to the production readiness.",
+        "Developed a Phaser game for our client's staking portal, ensuring smooth gameplay and user engagement."
       ],
       "techStack": [
         "SvelteKit",
@@ -40,7 +42,7 @@
         "MongoDB",
         "PostgreSQL",
         "TailwindCSS",
-        "Git",
+        "Phaser",
         "AWS"
       ]
     },
@@ -69,7 +71,6 @@
       },
       "achievements": [
         "Led the enhancement of the Equip app, refining both map search and rental processes within the on-demand sports equipment platform, thereby accelerating prototype development in 3 months.",
-        "Deployed more than 150 features and bug fixes in the rental lifecycle, making the app ready for production for the first time.",
         "Improved the Bluetooth connection from the app to the rental stations, improving reliability from 1 among 5 successful attempts, to 5 among 5 successful attempts.",
         "Published the app on Play Store and Apple Store, facilitating the reach of the company to leads and customers in Switzerland, France, and the US."
       ],
