@@ -8,7 +8,7 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "I am Andrey Luiz, a Senior Full Stack Engineer based in Fribourg, Switzerland. My expertise includes JavaScript, TypeScript, React, Node.js, SvelteKit, and AWS. I've developed decentralized applications and Phaser games at Timeleap, enhanced frontend experiences at SonarSource using React, and modernized Equip’s mobile app architecture by migrating from Meteor.js to React Native. I hold an AWS certification and have published research on automated profile recognition. Fluent in Portuguese and English, I also have working knowledge of French and basic German.",
+  "summary": "Senior Full Stack Engineer with expertise in React, Node.js, TypeScript, and AWS. Passionate about building scalable applications that enhance user experience and drive business growth. Proven track record of delivering high-impact features at Timeleap, SonarSource, and Equip. AWS Certified with a strong research background in AI-driven profile recognition. Fluent in Portuguese and English, with working proficiency in French and German.",
   "skills": {
     "programmingLanguages": ["JavaScript", "TypeScript", "C#"],
     "technologies": [
