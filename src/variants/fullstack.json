@@ -96,14 +96,7 @@
         "Implemented features in React for the SkyQ application of British Sky Broadcasting for Germany and Austria, improving user experience and application availability.",
         "Researched and executed important features for SkyQ for PlayStation 4, including all the processes of deployment and release in the store, spreading even more the availability of the company's product."
       ],
-      "techStack": [
-        "React",
-        "Redux",
-        "PostgreSQL",
-        "TypeScript",
-        "Git",
-        "Python"
-      ]
+      "techStack": ["React", "Redux", "PostgreSQL", "TypeScript", "Git", "Python"]
     },
     {
       "title": "Frontend Engineer",
