@@ -11,6 +11,7 @@ function App() {
     education,
     languages,
     publications,
+    summary,
   } = data;
 
   return (
@@ -36,6 +37,19 @@ function App() {
         </div>
       </Section>
 
+      {/* Summary Section */}
+      <Section>
+        <Title
+          tag="h2"
+          className="text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2"
+        >
+          Summary
+        </Title>
+        <p className="text-neutral-800 dark:text-neutral-100 print:text-xs">
+          {summary}
+        </p>
+      </Section>
+
       {/* Skills Section */}
       <Section>
         <Title
@@ -46,7 +60,10 @@ function App() {
         </Title>
         <div className="grid grid-cols-1 print:grid-cols-2 md:grid-cols-2 gap-6 print:gap-4">
           <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
-            <Title tag="h3" className="text-neutral-800 dark:text-neutral-100">
+            <Title
+              tag="h3"
+              className="text-neutral-800 dark:text-neutral-100 mb-2"
+            >
               Programming Languages
             </Title>
             <div className="flex flex-wrap gap-2">
@@ -56,7 +73,10 @@ function App() {
             </div>
           </div>
           <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
-            <Title tag="h3" className="text-neutral-800 dark:text-neutral-100">
+            <Title
+              tag="h3"
+              className="text-neutral-800 dark:text-neutral-100 mb-2"
+            >
               Technologies
             </Title>
             <div className="flex flex-wrap gap-2">
@@ -83,10 +103,13 @@ function App() {
               className="bg-neutral-50 dark:bg-neutral-800 rounded-lg break-inside-avoid"
             >
               <div className="p-3 print:p-2 print:px-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 print:gap-1 border-b border-neutral-200">
-                <div>
-                  <span className="font-medium text-neutral-800 dark:text-neutral-100">
+                <div className="flex items-baseline gap-0.5">
+                  <Title
+                    tag="h3"
+                    className="font-medium text-neutral-800 dark:text-neutral-100"
+                  >
                     {exp.company}
-                  </span>
+                  </Title>
                   <span className="text-neutral-600 dark:text-neutral-400 mx-2">
                     •
                   </span>
@@ -118,12 +141,9 @@ function App() {
               )}
               {exp.techStack.length > 0 && (
                 <div className="flex items-baseline p-3 print:p-2 print:px-0">
-                  <Title
-                    tag="h3"
-                    className="text-neutral-800 dark:text-neutral-100"
-                  >
+                  <span className="font-medium text-neutral-800 dark:text-neutral-100">
                     Tech Stack
-                  </Title>
+                  </span>
                   <span className="text-neutral-600 dark:text-neutral-400 mx-2">
                     •
                   </span>

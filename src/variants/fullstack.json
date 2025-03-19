@@ -8,6 +8,7 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
+  "summary": "I am Andrey Luiz, a Senior Full Stack Engineer based in Fribourg, Switzerland. My expertise includes JavaScript, TypeScript, React, Node.js, SvelteKit, and AWS. I've developed decentralized applications and Phaser games at Timeleap, enhanced frontend experiences at SonarSource using React, and modernized Equip’s mobile app architecture by migrating from Meteor.js to React Native. I hold an AWS certification and have published research on automated profile recognition. Fluent in Portuguese and English, I also have working knowledge of French and basic German.",
   "skills": {
     "programmingLanguages": ["JavaScript", "TypeScript", "C#"],
     "technologies": [
@@ -33,7 +34,6 @@
       },
       "achievements": [
         "Led the continuous development of clients' decentralized applications using SvelteKit and TypeScript, granting the company a net revenue of more than 50k CHF in the first months of operation.",
-        "Spearheaded enhancements on core functionalities within the Unchained platform leveraging TypeScript, contributing to the production readiness.",
         "Developed a Phaser game for our client's staking portal, ensuring smooth gameplay and user engagement."
       ],
       "techStack": [
@@ -137,8 +137,7 @@
       },
       "achievements": [
         "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
-        "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages.",
-        "Collaborated with decisions and actions for the front-end chapter of the company, always ensuring the front-end development had a bright future ahead."
+        "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -166,7 +165,6 @@
       },
       "achievements": [
         "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
-        "Created and optimized queries on PostgreSQL database for fast data querying.",
         "Pioneered on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
       ],
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
