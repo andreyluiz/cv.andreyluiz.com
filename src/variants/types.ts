@@ -1,10 +1,7 @@
 export interface Variant {
   personalInfo: PersonalInfo;
   summary: string;
-  skills: {
-    programmingLanguages: string[];
-    technologies: string[];
-  };
+  skills: [string, string[]][];
   experience: Experience[];
   projects?: Project[];
   education: Education[];
