@@ -1,4 +1,6 @@
 import Badge from "./components/Badge";
+import Section from "./components/Section";
+import Title from "./components/Title";
 import data from "./variants/fullstack.json";
 
 function App() {
@@ -12,17 +14,17 @@ function App() {
   } = data;
 
   return (
-    <div className="max-w-4xl mx-auto p-12 print:p-0 bg-white dark:bg-neutral-900 print:text-sm">
+    <main className="max-w-4xl mx-auto p-12 print:p-0 bg-white dark:bg-neutral-900 print:text-sm">
       {/* Header Section */}
-      <header className="mb-8 print:mb-4">
+      <Section>
         <div className="flex items-baseline">
-          <h1 className="text-4xl font-bold text-neutral-800 dark:text-neutral-100 print:text-2xl">
+          <Title tag="h1" className="text-neutral-800 dark:text-neutral-100">
             {personalInfo.name}
-          </h1>
+          </Title>
           <span className="text-neutral-600 mx-2">•</span>
-          <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-100 print:text-lg">
+          <Title tag="h2" className="text-neutral-800 dark:text-neutral-100">
             {personalInfo.title}
-          </h2>
+          </Title>
         </div>
         <div className="text-neutral-600 dark:text-neutral-400 mt-2 print:mt-1 flex flex-wrap justify-between gap-4 print:gap-2 print:text-xs">
           <p>📧 {personalInfo.email}</p>
@@ -32,18 +34,21 @@ function App() {
           <p>🔗 {personalInfo.linkedin}</p>
           <p>🔄 Immediately available</p>
         </div>
-      </header>
+      </Section>
 
       {/* Skills Section */}
-      <section className="mb-8 print:mb-4">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
+      <Section>
+        <Title
+          tag="h2"
+          className="text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2"
+        >
           Core Skills
-        </h2>
+        </Title>
         <div className="grid grid-cols-1 print:grid-cols-2 md:grid-cols-2 gap-6 print:gap-4">
           <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
-            <h3 className="font-medium mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
+            <Title tag="h3" className="text-neutral-800 dark:text-neutral-100">
               Programming Languages
-            </h3>
+            </Title>
             <div className="flex flex-wrap gap-2">
               {skills.programmingLanguages.map((lang, index) => (
                 <Badge key={index}>{lang}</Badge>
@@ -51,9 +56,9 @@ function App() {
             </div>
           </div>
           <div className="bg-neutral-50 dark:bg-neutral-800 p-4 print:px-0 rounded-lg">
-            <h3 className="font-medium mb-3 print:mb-2 text-neutral-800 dark:text-neutral-100 print:text-base">
+            <Title tag="h3" className="text-neutral-800 dark:text-neutral-100">
               Technologies
-            </h3>
+            </Title>
             <div className="flex flex-wrap gap-2">
               {skills.technologies.map((tech, index) => (
                 <Badge key={index}>{tech}</Badge>
@@ -61,13 +66,16 @@ function App() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* Professional Experience */}
-      <section className="mb-8 print:mb-4">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
+      <Section>
+        <Title
+          tag="h2"
+          className="text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2"
+        >
           Professional Experience
-        </h2>
+        </Title>
         <div className="space-y-6 print:space-y-3 print:text-sm">
           {experience.map((exp, index) => (
             <div
@@ -110,9 +118,12 @@ function App() {
               )}
               {exp.techStack.length > 0 && (
                 <div className="flex items-baseline p-3 print:p-2 print:px-0">
-                  <h3 className="font-medium text-neutral-800 dark:text-neutral-100">
+                  <Title
+                    tag="h3"
+                    className="text-neutral-800 dark:text-neutral-100"
+                  >
                     Tech Stack
-                  </h3>
+                  </Title>
                   <span className="text-neutral-600 dark:text-neutral-400 mx-2">
                     •
                   </span>
@@ -126,13 +137,16 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* Education & Certifications */}
-      <section className="mb-8 print:mb-4 break-inside-avoid">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
+      <Section className="break-inside-avoid">
+        <Title
+          tag="h2"
+          className="text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2"
+        >
           Education & Certifications
-        </h2>
+        </Title>
         <div className="space-y-4 print:space-y-2 print:text-sm">
           {education.map((edu, index) => (
             <div
@@ -140,9 +154,12 @@ function App() {
               className="bg-neutral-50 dark:bg-neutral-800 p-3 print:p-2 print:px-0 rounded-lg"
             >
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1">
-                <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-100 print:text-base">
+                <Title
+                  tag="h3"
+                  className="text-neutral-800 dark:text-neutral-100"
+                >
                   {edu.degree}
-                </h3>
+                </Title>
                 <span className="text-neutral-600 dark:text-neutral-400">
                   {edu.year}
                 </span>
@@ -153,13 +170,16 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* Publications */}
-      <section className="mb-8 print:mb-4 break-inside-avoid">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
+      <Section className="break-inside-avoid">
+        <Title
+          tag="h2"
+          className="text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2"
+        >
           Publications
-        </h2>
+        </Title>
         <div className="space-y-2 print:text-sm">
           {publications.map((pub, index) => (
             <div
@@ -177,13 +197,13 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* Languages */}
-      <section className="mb-8 print:mb-4 break-inside-avoid">
-        <h2 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 border-b-2 border-neutral-300 pb-2 mb-3 print:mb-2 print:text-lg">
+      <Section className="break-inside-avoid">
+        <Title tag="h2" className="text-neutral-800 dark:text-neutral-100">
           Languages
-        </h2>
+        </Title>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 print:gap-2 print:text-sm">
           {languages.map((language, index) => (
             <div
@@ -199,8 +219,8 @@ function App() {
             </div>
           ))}
         </div>
-      </section>
-    </div>
+      </Section>
+    </main>
   );
 }
 
