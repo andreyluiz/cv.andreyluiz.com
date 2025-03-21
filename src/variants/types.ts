@@ -5,6 +5,7 @@ export interface Variant {
   experience: Experience[];
   projects?: Project[];
   education: Education[];
+  certifications: Certification[];
   languages: Language[];
   publications: Publication[];
 }
@@ -44,6 +45,12 @@ export interface Education {
   location: string;
 }
 
+export interface Certification {
+  degree: string;
+  institution: string;
+  year: string;
+  location: string;
+}
 export interface Language {
   name: string;
   level: string;

@@ -10,3 +10,16 @@ body {
   size: A4;
   margin: 16mm 16mm 16mm 16mm;
 }
+
+@media print {
+  body {
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Georgia', serif;
+  }
+}

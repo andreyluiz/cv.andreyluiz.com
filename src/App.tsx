@@ -1,44 +1,83 @@
+import { useMemo } from 'react';
 import Title from './components/Title';
 import data from './variants/fullstack.json';
 import { Variant } from './variants/types';
 
 function App() {
-  const { personalInfo, skills, experience, education, languages, publications, summary } =
-    data as Variant;
+  const {
+    personalInfo,
+    skills,
+    experience,
+    education,
+    languages,
+    certifications,
+    publications,
+    summary,
+  } = useMemo(() => data as Variant, [data]);
+
+  console.log(publications);
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 print:gap-4 print:p-0 print:text-sm">
+    <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
       {/* Header section */}
-      <section>
+      <header>
         <div className="flex items-baseline">
           <Title tag="h1">{personalInfo.name}</Title>
-          <span className="mx-2 text-neutral-600">•</span>
+          <Title tag="h2" className="mx-2 !text-neutral-600">
+            -
+          </Title>
           <Title tag="h2">{personalInfo.title}</Title>
         </div>
-        <div className="mt-2 grid grid-cols-2 print:mt-1 print:gap-2 print:text-xs">
-          <p>Email: {personalInfo.email}</p>
-          <p>Phone: {personalInfo.phone}</p>
-          <p>Location: {personalInfo.location}</p>
-          <p>Website: {personalInfo.website}</p>
-          <p>LinkedIn: {personalInfo.linkedin}</p>
-          <p>Available: Immediately</p>
-        </div>
-      </section>
+        <table className="mt-4 w-full">
+          <tbody>
+            <tr className="mb-2">
+              <td className="w-24 pr-2">
+                <span className="font-bold">Email:</span>
+              </td>
+              <td className="pr-6">{personalInfo.email}</td>
+              <td className="w-24 pr-2">
+                <span className="font-bold">Phone:</span>
+              </td>
+              <td>{personalInfo.phone}</td>
+            </tr>
+            <tr className="my-2">
+              <td className="w-24 pr-2">
+                <span className="font-bold">Location:</span>
+              </td>
+              <td className="pr-6">{personalInfo.location}</td>
+              <td className="w-24 pr-2">
+                <span className="font-bold">Website:</span>
+              </td>
+              <td>{personalInfo.website}</td>
+            </tr>
+            <tr className="mt-2">
+              <td className="w-24 pr-2">
+                <span className="font-bold">LinkedIn:</span>
+              </td>
+              <td className="pr-6">{personalInfo.linkedin}</td>
+              <td className="w-24 pr-2">
+                <span className="font-bold">Available:</span>
+              </td>
+              <td>Immediately</td>
+            </tr>
+          </tbody>
+        </table>
+      </header>
 
       {/* Summary section */}
       <section>
-        <Title tag="h2" className="mb-3 border-b-2 border-neutral-300 pb-2 print:mb-2">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
           Summary
         </Title>
-        <p className="print:text-xs">{summary}</p>
+        <p>{summary}</p>
       </section>
 
       {/* Skills section */}
       <section>
-        <Title tag="h2" className="mb-3 border-b-2 border-neutral-300 pb-2 print:mb-2">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
           Core Skills
         </Title>
-        <ul className="list-inside list-none rounded-lg bg-neutral-50 py-3 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 print:py-2 print:text-xs">
+        <ul className="list-inside list-none text-neutral-700 dark:text-neutral-300">
           {skills.map(([category, skills]) => (
             <li key={category} className="leading-relaxed print:leading-normal">
               - <span className="font-bold">{category}</span>:{' '}
@@ -50,30 +89,31 @@ function App() {
 
       {/* Professional Experience */}
       <section>
-        <Title tag="h2" className="mb-3 border-b-2 border-neutral-300 pb-2 print:mb-2">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
           Professional Experience
         </Title>
-        <div className="space-y-6 print:space-y-3 print:text-sm">
+        <div className="flex flex-col gap-6 print:gap-4">
           {experience.map((exp, index) => (
             <div
               key={index}
-              className="break-inside-avoid rounded-lg bg-neutral-50 dark:bg-neutral-800"
+              className="break-inside-avoid border-b border-neutral-300 pb-4 last:border-b-0"
             >
-              <div className="flex flex-col gap-2 border-b border-neutral-200 py-3 print:gap-1 print:py-2">
+              <div className="flex items-baseline justify-between gap-2 print:gap-1">
                 <div className="flex items-baseline gap-0.5">
                   <span className="text-neutral-600 dark:text-neutral-400">
-                    <Title tag="h3" className="inline font-medium">
-                      {exp.company}
+                    <Title tag="h3" className="inline !text-base">
+                      {exp.title}
                     </Title>
-                    &nbsp;- {exp.title} - {exp.location}
+                    &nbsp;- {exp.company}, {exp.location}
                   </span>
                 </div>
-                <div className="text-sm text-neutral-600 dark:text-neutral-400 print:text-xs">
+                <span className="ml-auto">|</span>
+                <div className="text-sm text-neutral-600 dark:text-neutral-400">
                   {exp.period.start} - {exp.period.end}
                 </div>
               </div>
               {exp.achievements.length > 0 && (
-                <ul className="list-inside list-none py-3 text-neutral-700 dark:text-neutral-300 print:py-2 print:text-xs">
+                <ul className="list-inside list-none py-4 text-neutral-700 dark:text-neutral-300">
                   {exp.achievements.map((achievement, i) => (
                     <li key={i} className="leading-relaxed print:leading-normal">
                       - {achievement}
@@ -82,7 +122,7 @@ function App() {
                 </ul>
               )}
               {exp.techStack.length > 0 && (
-                <div className="flex items-baseline py-3 print:py-2">
+                <div className="flex items-baseline">
                   <span className="font-medium">Tech Stack:</span>&nbsp;
                   <span className="leading-relaxed print:leading-normal">
                     {exp.techStack.join(', ')}
@@ -94,22 +134,39 @@ function App() {
         </div>
       </section>
 
-      {/* Education & Certifications */}
+      {/* Certifications */}
       <section className="break-inside-avoid">
-        <Title tag="h2" className="mb-3 border-b-2 border-neutral-300 pb-2 print:mb-2">
-          Education & Certifications
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
+          Certifications
         </Title>
-        <div className="space-y-4 print:space-y-2 print:text-sm">
+        <div className="flex flex-col gap-4 print:gap-2">
+          {certifications.map((cert, index) => (
+            <div key={index} className="border-b border-neutral-200 pb-4 last:border-b-0">
+              <div className="flex flex-col gap-1">
+                <Title tag="h3">{cert.degree}</Title>
+                <span className="text-neutral-600 dark:text-neutral-400">{cert.year}</span>
+              </div>
+              <p className="mt-1 text-neutral-700 dark:text-neutral-300">
+                {cert.institution} - {cert.location}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Education */}
+      <section className="break-inside-avoid">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
+          Education
+        </Title>
+        <div className="flex flex-col gap-4 print:gap-2">
           {education.map((edu, index) => (
-            <div
-              key={index}
-              className="rounded-lg bg-neutral-50 py-3 dark:bg-neutral-800 print:py-2"
-            >
+            <div key={index} className="border-b border-neutral-200 pb-4 last:border-b-0">
               <div className="flex flex-col gap-1">
                 <Title tag="h3">{edu.degree}</Title>
                 <span className="text-neutral-600 dark:text-neutral-400">{edu.year}</span>
               </div>
-              <p className="mt-1 text-neutral-700 dark:text-neutral-300 print:text-xs">
+              <p className="mt-1 text-neutral-700 dark:text-neutral-300">
                 {edu.institution} - {edu.location}
               </p>
             </div>
@@ -119,22 +176,21 @@ function App() {
 
       {/* Publications */}
       <section className="break-inside-avoid">
-        <Title tag="h2" className="mb-3 border-b-2 border-neutral-300 pb-2 print:mb-2">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
           Publications
         </Title>
-        <div className="space-y-2 print:text-sm">
+        <div className="flex flex-col gap-4 print:gap-2">
           {publications.map((pub, index) => (
-            <div
-              key={index}
-              className="rounded-lg bg-neutral-50 py-3 dark:bg-neutral-800 print:py-2"
-            >
+            <div key={index} className="border-b border-neutral-300 pb-4 last:border-b-0">
               <a
                 href={pub.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-500 hover:underline dark:text-blue-400 print:text-neutral-600"
+                className="inline-block text-blue-600 hover:text-blue-500 hover:underline dark:text-blue-400 print:text-neutral-600"
               >
-                {pub.title} - {pub.location}
+                <span>
+                  {pub.title} - {pub.location}
+                </span>
               </a>
             </div>
           ))}
@@ -143,17 +199,14 @@ function App() {
 
       {/* Languages */}
       <section className="break-inside-avoid">
-        <Title tag="h2">Languages</Title>
-        <div className="grid grid-cols-2 gap-4 print:gap-2 print:text-sm">
+        <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
+          Languages
+        </Title>
+        <div className="grid grid-cols-4 gap-4 print:gap-2">
           {languages.map((language, index) => (
-            <div
-              key={index}
-              className="rounded-lg bg-neutral-50 py-3 dark:bg-neutral-800 print:py-2"
-            >
+            <div key={index}>
               <p className="font-medium">{language.name}</p>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400 print:text-xs">
-                {language.level}
-              </p>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">{language.level}</p>
             </div>
           ))}
         </div>

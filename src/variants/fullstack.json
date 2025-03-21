@@ -8,10 +8,11 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Senior Full Stack Engineer with expertise in React, Node.js, TypeScript, and AWS. Passionate about building scalable applications that enhance user experience and drive business growth. Proven track record of delivering high-impact features at Timeleap, SonarSource, and Equip. AWS Certified with a strong research background in AI-driven profile recognition. Fluent in Portuguese and English, with working proficiency in French and German.",
+  "summary": "Senior Full Stack Engineer specializing in React, Node.js, TypeScript, AWS, and Web3, with a passion for developing scalable, high-performance applications. Proven track record of delivering impactful solutions at Timeleap, SonarSource, and Equip, enhancing user experience and driving business growth. Experienced in applying AI-driven tools for automated Twitter profile analysis. AWS Certified, currently pursuing Rust certifications to deepen backend expertise and expand technical versatility. Fluent in Portuguese and English, with working proficiency in French and German.",
   "skills": [
     ["Frontend", ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]],
-    ["Backend", ["Node.js", "Python", "C#", "Rust"]],
+    ["Backend", ["Node.js", "Python", "Rust"]],
+    ["Web3", ["Solidity", "Ethers.js"]],
     ["Databases", ["PostgreSQL", "MongoDB"]],
     ["DevOps & Cloud", ["AWS", "Git", "CI/CD"]]
   ],
@@ -25,8 +26,8 @@
         "end": "January 2025"
       },
       "achievements": [
-        "Led the continuous development of clients' decentralized applications using SvelteKit and TypeScript, granting the company a net revenue of more than 50k CHF in the first months of operation.",
-        "Developed a Phaser game for our client's staking portal, ensuring smooth gameplay and user engagement."
+        "Led the development of decentralized applications using SvelteKit and TypeScript, generating 50k+ CHF in revenue within the first months of operation.",
+        "Built a Phaser-based staking portal game, optimizing performance and increasing user engagement."
       ],
       "techStack": [
         "SvelteKit",
@@ -47,9 +48,9 @@
         "end": "June 2024"
       },
       "achievements": [
-        "Executed three key features for SonarCloud's project section in React, streamlining the Clean Code Taxonomy integration and educating users on best practices in coding standards.",
-        "Pioneered the CaYC team's efforts, identifying and deploying 8 critical features to integrate CaYC methodology across product lines, facilitating team-wide communication and workflow efficiency.",
-        "Improved SonarCloud's issues screen by migrating to MIUI using React, enhancing user experience and UI consistency."
+        "Delivered three key features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
+        "Led CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
+        "Migrated SonarCloud's issues screen to MIUI using React, enhancing UI consistency and user experience."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -62,9 +63,9 @@
         "end": "November 2022"
       },
       "achievements": [
-        "Led the enhancement of the Equip app, refining both map search and rental processes within the on-demand sports equipment platform, thereby accelerating prototype development in 3 months.",
-        "Improved the Bluetooth connection from the app to the rental stations, improving reliability from 1 among 5 successful attempts, to 5 among 5 successful attempts.",
-        "Published the app on Play Store and Apple Store, facilitating the reach of the company to leads and customers in Switzerland, France, and the US."
+        "Enhanced Equip app's map search and rental processes, reducing prototype development time by 3 months.",
+        "Optimized Bluetooth connectivity for rental stations, increasing reliability from 20% to 100%.",
+        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in Switzerland, France, and the US."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -77,9 +78,9 @@
         "end": "September 2021"
       },
       "achievements": [
-        "Led valuable contributions into developing Anibis messenger using React and TypeScript, granting constant improvements to the user experience.",
-        "Managed the transition of messaging services from Twilio to Sendbird, overhauling the React application to optimize maintainability, supporting 100% of the company's users in the first month.",
-        "Performed as a Scrum Master for the Aldrin squad, ensuring the team's communication and productivity."
+        "Developed and enhanced Anibis Messenger using React and TypeScript, continuously improving user experience.",
+        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month.",
+        "Served as Scrum Master for the Aldrin squad, driving team productivity and communication efficiency."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -92,9 +93,9 @@
         "end": "January 2020"
       },
       "achievements": [
-        "Created 3 React components for Adobe Content Manager for a leading energy company from Germany and the UK, improving the catalog of available components for content managers.",
-        "Implemented features in React for the SkyQ application of British Sky Broadcasting for Germany and Austria, improving user experience and application availability.",
-        "Researched and executed important features for SkyQ for PlayStation 4, including all the processes of deployment and release in the store, spreading even more the availability of the company's product."
+        "Built 3 React components for Adobe Content Manager, enhancing content workflows for energy companies in Germany and the UK.",
+        "Developed new features for the SkyQ application (British Sky Broadcasting), improving user experience and availability across Germany and Austria.",
+        "Designed and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
       ],
       "techStack": ["React", "Redux", "PostgreSQL", "TypeScript", "Git", "Python"]
     },
@@ -107,8 +108,8 @@
         "end": "February 2018"
       },
       "achievements": [
-        "Researched and started the company's main front-end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
-        "Played a crucial role as the first front-end developer, collaborating closely with a designer to launch the application into beta testing, a significant milestone for the company's growth."
+        "Built DataRisk's first frontend application from scratch using React and Redux, turning the company's vision into a working product.",
+        "Led frontend development, collaborating with designers to launch the company's first beta product, securing initial customers."
       ],
       "techStack": ["React", "Redux", "JavaScript", "Git"]
     },
@@ -121,8 +122,8 @@
         "end": "December 2016"
       },
       "achievements": [
-        "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
-        "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages."
+        "Developed key features in JavaScript and jQuery for the Landing Pages team, enhancing product quality and customer experience.",
+        "Migrated the landing pages editor to a WYSIWYG interface, improving usability and design flexibility."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -135,8 +136,8 @@
         "end": "December 2015"
       },
       "achievements": [
-        "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company the first international customers.",
-        "Led the front-end development of the core feature of testing suites, allowing the company to outperform competitors."
+        "Developed features for a JIRA testing management plugin using Angular.js, helping Kanoah secure its first international customers.",
+        "Led frontend development for testing suites, improving Kanoah's market competitiveness."
       ],
       "techStack": ["Angular.js", "JavaScript", "Git"]
     },
@@ -149,13 +150,13 @@
         "end": "June 2015"
       },
       "achievements": [
-        "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
-        "Pioneered on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
+        "Developed core features for a Java-based file processing tool, improving data analysis capabilities and strengthening Softplan's reputation in financial software.",
+        "Built interactive JavaScript and CSS interfaces, enhancing user experience and usability."
       ],
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
-  "education": [
+  "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
