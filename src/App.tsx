@@ -18,7 +18,7 @@ function App() {
   console.log(publications);
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
+    <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
       {/* Header section */}
       <header>
         <div className="flex items-baseline">
@@ -77,11 +77,13 @@ function App() {
         <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
           Core Skills
         </Title>
-        <ul className="list-inside list-none text-neutral-700 dark:text-neutral-300">
+        <ul className="list-inside list-none dark:text-neutral-300">
           {skills.map(([category, skills]) => (
             <li key={category} className="leading-relaxed print:leading-normal">
-              - <span className="font-bold">{category}</span>:{' '}
-              {Array.isArray(skills) ? skills.join(', ') : skills}
+              - <span className="font-bold">{category}:</span>{' '}
+              <span className="text-neutral-600 dark:text-neutral-400">
+                {Array.isArray(skills) ? skills.join(', ') : skills}
+              </span>
             </li>
           ))}
         </ul>
@@ -100,20 +102,22 @@ function App() {
             >
               <div className="flex items-baseline justify-between gap-2 print:gap-1">
                 <div className="flex items-baseline gap-0.5">
-                  <span className="text-neutral-600 dark:text-neutral-400">
+                  <span>
                     <Title tag="h3" className="inline !text-base">
                       {exp.title}
                     </Title>
-                    &nbsp;- {exp.company}, {exp.location}
+                    <span className="text-neutral-600 dark:text-neutral-400">
+                      &nbsp;- {exp.company}, {exp.location}
+                    </span>
                   </span>
                 </div>
                 <span className="ml-auto">|</span>
-                <div className="text-sm text-neutral-600 dark:text-neutral-400">
+                <div className="text-neutral-600 dark:text-neutral-400">
                   {exp.period.start} - {exp.period.end}
                 </div>
               </div>
               {exp.achievements.length > 0 && (
-                <ul className="list-inside list-none py-4 text-neutral-700 dark:text-neutral-300">
+                <ul className="list-inside list-none py-4">
                   {exp.achievements.map((achievement, i) => (
                     <li key={i} className="leading-relaxed print:leading-normal">
                       - {achievement}
@@ -123,8 +127,8 @@ function App() {
               )}
               {exp.techStack.length > 0 && (
                 <div className="flex items-baseline">
-                  <span className="font-medium">Tech Stack:</span>&nbsp;
-                  <span className="leading-relaxed print:leading-normal">
+                  <span className="font-bold">Tech Stack:</span>&nbsp;
+                  <span className="text-neutral-600 dark:text-neutral-400">
                     {exp.techStack.join(', ')}
                   </span>
                 </div>
@@ -146,7 +150,7 @@ function App() {
                 <Title tag="h3">{cert.degree}</Title>
                 <span className="text-neutral-600 dark:text-neutral-400">{cert.year}</span>
               </div>
-              <p className="mt-1 text-neutral-700 dark:text-neutral-300">
+              <p className="text-neutral-600 dark:text-neutral-400">
                 {cert.institution} - {cert.location}
               </p>
             </div>
@@ -166,7 +170,7 @@ function App() {
                 <Title tag="h3">{edu.degree}</Title>
                 <span className="text-neutral-600 dark:text-neutral-400">{edu.year}</span>
               </div>
-              <p className="mt-1 text-neutral-700 dark:text-neutral-300">
+              <p className="text-neutral-600 dark:text-neutral-400">
                 {edu.institution} - {edu.location}
               </p>
             </div>
@@ -205,8 +209,8 @@ function App() {
         <div className="grid grid-cols-4 gap-4 print:gap-2">
           {languages.map((language, index) => (
             <div key={index}>
-              <p className="font-medium">{language.name}</p>
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">{language.level}</p>
+              <p className="font-bold">{language.name}</p>
+              <p className="text-neutral-600 dark:text-neutral-400">{language.level}</p>
             </div>
           ))}
         </div>

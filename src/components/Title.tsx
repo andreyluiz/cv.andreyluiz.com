@@ -13,8 +13,8 @@ export default function Title({ children, className, tag = 'h2' }: Props) {
     <Tag
       className={cn('text-neutral-800 dark:text-neutral-100', className, {
         'text-4xl font-bold print:text-2xl': tag === 'h1',
-        'text-2xl font-bold print:text-lg': tag === 'h2',
-        'text-lg font-semibold print:text-sm': tag === 'h3',
+        'text-2xl font-bold print:text-xl': tag === 'h2',
+        'text-md font-semibold': tag === 'h3',
       })}
     >
       {children}
