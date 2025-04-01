@@ -8,7 +8,7 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Senior Full Stack Engineer specializing in React, Node.js, TypeScript, AWS, and Web3, with a passion for developing scalable, high-performance applications. Proven track record of delivering impactful solutions at Timeleap, SonarSource, and Equip, enhancing user experience and driving business growth. Experienced in applying AI-driven tools for automated Twitter profile analysis. AWS Certified, currently pursuing Rust certifications to deepen backend expertise and expand technical versatility. Fluent in Portuguese and English, with working proficiency in French and German.",
+  "summary": "Senior Full Stack Engineer specializing in React, Node.js, TypeScript, AWS, and Web3, with a passion for developing scalable, high-performance applications. Proven track record of delivering impactful solutions at Timeleap, SonarSource, and Equip, enhancing user experience and driving business growth. Experienced in applying AI-driven tools for automated Twitter profile analysis. AWS Certified, currently diving into Rust ecosystem to deepen backend expertise and expand technical versatility. Fluent in Portuguese and English, with working proficiency in French and German.",
   "skills": [
     ["Frontend", ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]],
     ["Backend", ["Node.js", "Python", "Rust"]],
