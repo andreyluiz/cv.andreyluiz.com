@@ -6,7 +6,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 if (!OPENAI_API_KEY) {
   console.error(
-    "OpenAI API key is not set. Please set OPENAI_API_KEY in your .env file.",
+    "OpenAI API key is not set. Please set OPENAI_API_KEY in your .env file."
   );
 }
 
@@ -18,7 +18,7 @@ const openai = new OpenAI({
 export async function tailorResume(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant,
+  currentResume: Variant
 ) {
   try {
     const response = await openai.chat.completions.create({
@@ -45,7 +45,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
           content: `Job Title: ${jobTitle}\nJob Description:\n${jobDescription}\n\nCurrent Resume:\n${JSON.stringify(
             currentResume,
             null,
-            2,
+            2
           )}`,
         },
       ],
@@ -201,7 +201,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
 
     if (!functionCall || functionCall.name !== "tailor_resume") {
       throw new Error(
-        "Expected function call to tailor_resume was not returned",
+        "Expected function call to tailor_resume was not returned"
       );
     }
 
@@ -217,6 +217,58 @@ Return the modified resume in the exact same JSON structure as the input, but wi
     return tailoredResume;
   } catch (error) {
     console.error("Error tailoring resume:", error);
+    throw error;
+  }
+}
+
+export async function generateCoverLetter(
+  jobTitle: string,
+  jobDescription: string,
+  currentResume: Variant
+) {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4.1-2025-04-14",
+      messages: [
+        {
+          role: "system",
+          content: `You are a professional cover letter writer. Your task is to write a compelling cover letter that:
+1. Highlights the candidate's relevant experience and skills that match the job requirements
+2. Demonstrates enthusiasm for the role and company
+3. Shows how the candidate's background aligns with the job description
+4. Maintains a professional and engaging tone
+5. Is concise and well-structured
+6. Includes a clear call to action
+7. Doesn't include any augmentations, or lies about the candidate's skills or experiences.
+
+The cover letter MUST have this format:
+
+- Name and contact information
+- A greeting
+- A first paragraph highlighting how the candidate's background aligns with the job description, and how they are a great fit for the role. This paragraph should be short, and should be impactful, without buzz words, but with enthusiasm.
+- A second paragraph explaining the background of the candidate and accomplishments that are relevant to the job description. This paragraph should be longer, and should be more detailed. No augmentations or lies. Just the facts.
+- A third paragraph with other relevant information that might help the candidate stand out from other candidates. This paragraph should be short.
+- The last paragraph should be a call to action, asking the recipient to schedule an interview with the candidate. This paragraph should be short. It also should be sincere and impactful, but without buzz words.
+- Finally, the cover letter should finish with a greeting and the candidate's name.
+
+The cover letter should be written in a professional tone and should be tailored to the specific job description.`,
+        },
+        {
+          role: "user",
+          content: `Job Title: ${jobTitle}\nJob Description:\n${jobDescription}\n\nCandidate's Resume:\n${JSON.stringify(
+            currentResume,
+            null,
+            2
+          )}`,
+        },
+      ],
+      max_tokens: 1000,
+      temperature: 0.7,
+    });
+
+    return response.choices[0].message.content;
+  } catch (error) {
+    console.error("Error generating cover letter:", error);
     throw error;
   }
 }

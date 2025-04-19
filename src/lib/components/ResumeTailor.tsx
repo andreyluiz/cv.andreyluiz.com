@@ -5,6 +5,7 @@ import { Variant } from "@/lib/types";
 import { useState } from "react";
 import Button from "./Button";
 import ChangesModal from "./ChangesModal";
+import CoverLetterModal from "./CoverLetterModal";
 import JobDescriptionModal from "./JobDescriptionModal";
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
 export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChangesModalOpen, setIsChangesModalOpen] = useState(false);
+  const [isCoverLetterModalOpen, setIsCoverLetterModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -22,14 +24,14 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
 
   const handleJobDescriptionSubmit = async (
     jobTitle: string,
-    jobDescription: string,
+    jobDescription: string
   ) => {
     try {
       setIsLoading(true);
       const tailoredResume = await tailorResume(
         jobTitle,
         jobDescription,
-        resumeData,
+        resumeData
       );
       onResumeUpdate(tailoredResume);
       setIsTailored(true);
@@ -48,9 +50,14 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
           {isTailored ? "Resume Tailored" : "Tailor Resume"}
         </Button>
         {isTailored && (
-          <Button onClick={() => setIsChangesModalOpen(true)}>
-            What changed?
-          </Button>
+          <>
+            <Button onClick={() => setIsChangesModalOpen(true)}>
+              What changed?
+            </Button>
+            <Button onClick={() => setIsCoverLetterModalOpen(true)}>
+              Generate Cover Letter
+            </Button>
+          </>
         )}
       </div>
 
@@ -68,6 +75,14 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         isOpen={isChangesModalOpen}
         onClose={() => setIsChangesModalOpen(false)}
         changes={resumeData.changes || []}
+      />
+
+      <CoverLetterModal
+        isOpen={isCoverLetterModalOpen}
+        onClose={() => setIsCoverLetterModalOpen(false)}
+        jobTitle={jobTitle}
+        jobDescription={jobDescription}
+        resumeData={resumeData}
       />
 
       {isLoading && (
