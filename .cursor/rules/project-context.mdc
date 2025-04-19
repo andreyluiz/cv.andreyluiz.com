@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Context
+
+This is a personal CV website project built with modern web technologies.
+
+The project a well-structured, modern web application following current best practices in React development. It uses a robust set of tools for development, building, and maintaining code quality. The presence of Tailwind CSS suggests a focus on responsive and maintainable styling, while TypeScript indicates a strong emphasis on type safety and code reliability.
+
+# Tech Stack
+
+- Frontend Framework: React 18 with TypeScript
+- Build Tool: Vite 6.0
+- Styling: Tailwind CSS 3.4 with PostCSS
+- Package Manager: PNPM 8.14
+
+# Project Structure
+
+- Modern React application structure with TypeScript support
+- Component-based architecture with a dedicated components/ directory
+- Utility functions in the lib/ directory
+- Custom variants in the variants/ directory (likely for styling variants)
+
+# Development Tools
+
+- ESLint for code linting
+- Prettier for code formatting
+- TypeScript for type safety
+- Tailwind CSS for utility-first styling
+- PostCSS for CSS processing
+
+# Project Features
+
+- Development server with hot module replacement (via Vite)
+- Production build optimization
+- Code quality tools (linting and formatting)
+- Type checking
+- Modern CSS processing pipeline
+
+# Development Workflow:
+- pnpm dev for development
+- pnpm build for production builds
+- pnpm lint and pnpm format for code quality
+- pnpm preview for previewing production builds

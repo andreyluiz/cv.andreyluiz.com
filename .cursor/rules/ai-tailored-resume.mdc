@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Context
+
+This is feature of this personal CV website. This feature allows the user to add a job description, and the website should tailor the current CV based on the job description using AI.
+
+The base of the CV is the [fullstack.json](mdc:src/variants/fullstack.json) file, and this consistutes the full description of the candidate experiences and skills. This file should be used together with the job description to make a tailored CV.
+
+# How to?
+
+The user should be able to click a button, or something similar, to add a job description. This can be made with a modal. The button should only be present if a localhost item is present. The localhost item could be called `resume-tailoring`.
+
+After the user submits the job description, we need to use OpenAI APIs submit the contents of [fullstack.json](mdc:src/variants/fullstack.json) (perhaps extracted into raw text, to avoid too much token usage) and the job description.
+
+The return of the OpenAPI request should be formatted as JSON, and this JSON should be a sub-set of [fullstack.json](mdc:src/variants/fullstack.json). So we will basically replace the contents of the state in the [App.tsx](mdc:src/App.tsx) with the returned data. 
+
+# What information is needed?
+
+The most important information to be tailored by the AI is the summary, skills, and professional experience.
+
+Information like contact, and languages are irrelevant and can be static.
+
+Information like education, certifications and publications can be occasional, and only placed if relevant.
