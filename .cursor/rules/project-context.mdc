@@ -1,0 +1,82 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Context
+
+This project is a CV website for Andrey Luiz, a professional in the field of software engineering. The website has a default CV with all the skills, experiences and qualifications, but also offers features based in AI to tailor resumes according to job description, and also generate cover letters.
+
+# Tech Stack
+
+- Bun 1.2.9 as package manager
+- TypeScript 5
+- Next.js 15.3.1
+- React 19 with TypeScript support
+- TailwindCSS 4
+- ESLint + Prettier
+- CVA + clsx + tailwind-merge for class handling
+- OpenAI SDK integration
+
+# Guidelines
+
+1. Project Structure Guidelines:
+- Clear separation of concerns with `src/app` and `src/lib` directories
+- Components are organized in `src/lib/components`
+- Types are centralized in `src/lib/types.ts`
+- Server-side code is isolated in `src/lib/server`
+
+2. TypeScript Patterns:
+- Strict type definitions for all components and functions
+- Extensive use of interfaces for type definitions
+- Consistent use of `interface Props` pattern for component props
+- Type extensions using `extends` for reusable prop types
+- Strong typing for domain models (Variant, Experience, Education, etc.)
+
+3. Component Architecture:
+- Functional components with TypeScript
+- Props interfaces are defined at the top of each component file
+- Consistent use of `PropsWithChildren` for components that accept children
+- Component composition pattern (components are small and focused)
+
+4. Styling Conventions:
+- TailwindCSS for styling with consistent class naming
+- Use of `class-variance-authority` (cva) for component variants
+- Utility function `cn` for merging class names using `clsx` and `tailwind-merge`
+- Dark mode support with `dark:` variants
+- Print-specific styles with `print:` variants
+
+5. Code Quality Standards:
+- ESLint configuration extends Next.js core web vitals and TypeScript rules
+- Prettier for consistent code formatting
+- Core web vitals optimization through Next.js configuration
+
+6. Component Design Patterns:
+- Modular component design (Button, Modal, Title, Section, etc.)
+- Consistent prop naming (`className`, `children`, etc.)
+- Use of variant patterns for components like Button and Title
+- Reusable layout components (Section, Modal)
+
+7. State Management:
+- React hooks for state management (`useState`, `useEffect`)
+- Props drilling for simple state passing
+- Clear separation of state management logic
+
+8. File Naming Conventions:
+- PascalCase for component files
+- camelCase for utility files
+- `.tsx` extension for React components
+- `.ts` extension for pure TypeScript files
+
+9. Accessibility Considerations:
+- Semantic HTML elements (proper heading hierarchy with h1, h2, h3)
+- ARIA-friendly component structure
+
+10. Responsive Design:
+- Mobile-first approach with Tailwind classes
+- Print-specific styles for resume content
+- Dark mode support throughout the application
+
+11. Error Handling:
+- Type-safe error handling through TypeScript
+- Clear prop validation through TypeScript interfaces
