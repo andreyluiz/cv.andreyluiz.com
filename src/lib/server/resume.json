@@ -1,0 +1,221 @@
+{
+  "name": "Andrey Luiz",
+  "title": "Senior Full Stack Engineer",
+  "contactInfo": {
+    "email": "andreyluiz.developer@gmail.com",
+    "phone": "+41 76 503 86 65",
+    "location": "Fribourg, Switzerland",
+    "website": "andreyluiz.com",
+    "linkedin": "linkedin.com/in/andreyluiz"
+  },
+  "summary": "Senior Full Stack Engineer specializing in React, Node.js, TypeScript, AWS, and Web3, with a passion for developing scalable, high-performance applications. Proven track record of delivering impactful solutions at Timeleap, SonarSource, and Equip, enhancing user experience and driving business growth. Experienced in applying AI-driven tools for automated Twitter profile analysis. AWS Certified, currently diving into Rust ecosystem to deepen backend expertise and expand technical versatility. Fluent in Portuguese and English, with working proficiency in French and German.",
+  "skills": [
+    {
+      "domain": "Frontend",
+      "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
+    },
+    { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
+    { "domain": "Web3", "skills": ["Solidity", "Ethers.js"] },
+    { "domain": "Databases", "skills": ["PostgreSQL", "MongoDB"] },
+    { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Engineer",
+      "company": "Timeleap",
+      "location": "Switzerland",
+      "period": {
+        "start": "July 2024",
+        "end": "January 2025"
+      },
+      "achievements": [
+        "Led the development of decentralized applications using SvelteKit and TypeScript, generating 50k+ CHF in revenue within the first months of operation.",
+        "Built a Phaser-based staking portal game, optimizing performance and increasing user engagement."
+      ],
+      "techStack": [
+        "SvelteKit",
+        "TypeScript",
+        "MongoDB",
+        "PostgreSQL",
+        "TailwindCSS",
+        "Phaser",
+        "AWS"
+      ]
+    },
+    {
+      "title": "Frontend Engineer",
+      "company": "Sonar",
+      "location": "Switzerland",
+      "period": {
+        "start": "November 2022",
+        "end": "June 2024"
+      },
+      "achievements": [
+        "Delivered three key features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
+        "Led CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
+        "Migrated SonarCloud's issues screen to MIUI using React, enhancing UI consistency and user experience."
+      ],
+      "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
+    },
+    {
+      "title": "Full Stack Engineer",
+      "company": "Equip",
+      "location": "Switzerland",
+      "period": {
+        "start": "June 2021",
+        "end": "November 2022"
+      },
+      "achievements": [
+        "Enhanced Equip app's map search and rental processes, reducing prototype development time by 3 months.",
+        "Optimized Bluetooth connectivity for rental stations, increasing reliability from 20% to 100%.",
+        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in Switzerland, France, and the US."
+      ],
+      "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
+    },
+    {
+      "title": "Frontend Engineer",
+      "company": "Scout24 Schweiz AG",
+      "location": "Switzerland",
+      "period": {
+        "start": "February 2020",
+        "end": "September 2021"
+      },
+      "achievements": [
+        "Developed and enhanced Anibis Messenger using React and TypeScript, continuously improving user experience.",
+        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month.",
+        "Served as Scrum Master for the Aldrin squad, driving team productivity and communication efficiency."
+      ],
+      "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
+    },
+    {
+      "title": "Full Stack Engineer",
+      "company": "Integer Consulting",
+      "location": "Portugal",
+      "period": {
+        "start": "February 2018",
+        "end": "January 2020"
+      },
+      "achievements": [
+        "Built 3 React components for Adobe Content Manager, enhancing content workflows for energy companies in Germany and the UK.",
+        "Developed new features for the SkyQ application (British Sky Broadcasting), improving user experience and availability across Germany and Austria.",
+        "Designed and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
+      ],
+      "techStack": [
+        "React",
+        "Redux",
+        "PostgreSQL",
+        "TypeScript",
+        "Git",
+        "Python"
+      ]
+    },
+    {
+      "title": "Frontend Engineer",
+      "company": "DataRisk",
+      "location": "Brazil",
+      "period": {
+        "start": "January 2017",
+        "end": "February 2018"
+      },
+      "achievements": [
+        "Built DataRisk's first frontend application from scratch using React and Redux, turning the company's vision into a working product.",
+        "Led frontend development, collaborating with designers to launch the company's first beta product, securing initial customers."
+      ],
+      "techStack": ["React", "Redux", "JavaScript", "Git"]
+    },
+    {
+      "title": "Frontend Engineer",
+      "company": "Resultados Digitais",
+      "location": "Brazil",
+      "period": {
+        "start": "April 2016",
+        "end": "December 2016"
+      },
+      "achievements": [
+        "Developed key features in JavaScript and jQuery for the Landing Pages team, enhancing product quality and customer experience.",
+        "Migrated the landing pages editor to a WYSIWYG interface, improving usability and design flexibility."
+      ],
+      "techStack": ["JavaScript", "jQuery", "Git"]
+    },
+    {
+      "title": "Frontend Developer",
+      "company": "Kanoah",
+      "location": "Brazil",
+      "period": {
+        "start": "June 2015",
+        "end": "December 2015"
+      },
+      "achievements": [
+        "Developed features for a JIRA testing management plugin using Angular.js, helping Kanoah secure its first international customers.",
+        "Led frontend development for testing suites, improving Kanoah's market competitiveness."
+      ],
+      "techStack": ["Angular.js", "JavaScript", "Git"]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Softplan Planejamento e Sistemas",
+      "location": "Brazil",
+      "period": {
+        "start": "March 2014",
+        "end": "June 2015"
+      },
+      "achievements": [
+        "Developed core features for a Java-based file processing tool, improving data analysis capabilities and strengthening Softplan's reputation in financial software.",
+        "Built interactive JavaScript and CSS interfaces, enhancing user experience and usability."
+      ],
+      "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
+    }
+  ],
+  "certifications": [
+    {
+      "degree": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services",
+      "year": "October 2023",
+      "location": "Switzerland"
+    },
+    {
+      "degree": "Rust Programming: From Fundamentals to Advanced Concepts with AI-Assisted Development",
+      "institution": "LinkedIn",
+      "year": "March 2025",
+      "location": "Switzerland"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Diploma in Software Engineering and Development",
+      "institution": "Faculdade Unilagos",
+      "year": "December 2011",
+      "location": "Brazil"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Portuguese",
+      "level": "Native"
+    },
+    {
+      "name": "English",
+      "level": "Full Professional"
+    },
+    {
+      "name": "French",
+      "level": "Limited Working"
+    },
+    {
+      "name": "German",
+      "level": "Elementary"
+    }
+  ],
+  "publications": [
+    {
+      "title": "Bot Seeker®, an Automated Profile Recognition Software on Twitter",
+      "location": "ResearchGate",
+      "url": "https://www.researchgate.net/publication/353804679_Bot_SeekerR_an_Automated_Profile_Recognition_Software_on_Twitter"
+    },
+    {
+      "title": "Robots, lies and misinformation in Venezuela. Identifying automated Twitter profiles of the Telesur and Vtv media",
+      "location": "ResearchGate",
+      "url": "https://www.researchgate.net/publication/339788432_Robots_lies_and_misinformation_in_Venezuela_Identifying_automated_Twitter_profiles_of_the_Telesur_and_Vtv_media"
+    }
+  ]
+}
