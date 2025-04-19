@@ -14,13 +14,13 @@ export async function getResume(): Promise<Variant> {
 export async function tailorResume(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant
+  currentResume: Variant,
 ): Promise<Variant> {
   try {
     return await tailorResumeWithOpenAI(
       jobTitle,
       jobDescription,
-      currentResume
+      currentResume,
     );
   } catch (error) {
     console.error("Error tailoring resume:", error);
@@ -31,13 +31,13 @@ export async function tailorResume(
 export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant
-): Promise<string> {
+  currentResume: Variant,
+): Promise<string | null> {
   try {
     return await generateCoverLetterWithOpenAI(
       jobTitle,
       jobDescription,
-      currentResume
+      currentResume,
     );
   } catch (error) {
     console.error("Error generating cover letter:", error);

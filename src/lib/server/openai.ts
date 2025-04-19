@@ -6,7 +6,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 if (!OPENAI_API_KEY) {
   console.error(
-    "OpenAI API key is not set. Please set OPENAI_API_KEY in your .env file."
+    "OpenAI API key is not set. Please set OPENAI_API_KEY in your .env file.",
   );
 }
 
@@ -18,7 +18,7 @@ const openai = new OpenAI({
 export async function tailorResume(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant
+  currentResume: Variant,
 ) {
   try {
     const response = await openai.chat.completions.create({
@@ -45,7 +45,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
           content: `Job Title: ${jobTitle}\nJob Description:\n${jobDescription}\n\nCurrent Resume:\n${JSON.stringify(
             currentResume,
             null,
-            2
+            2,
           )}`,
         },
       ],
@@ -201,7 +201,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
 
     if (!functionCall || functionCall.name !== "tailor_resume") {
       throw new Error(
-        "Expected function call to tailor_resume was not returned"
+        "Expected function call to tailor_resume was not returned",
       );
     }
 
@@ -224,7 +224,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
 export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant
+  currentResume: Variant,
 ) {
   try {
     const response = await openai.chat.completions.create({
@@ -258,7 +258,7 @@ The cover letter should be written in a professional tone and should be tailored
           content: `Job Title: ${jobTitle}\nJob Description:\n${jobDescription}\n\nCandidate's Resume:\n${JSON.stringify(
             currentResume,
             null,
-            2
+            2,
           )}`,
         },
       ],

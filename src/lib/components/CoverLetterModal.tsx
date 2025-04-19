@@ -1,6 +1,6 @@
 import { generateCoverLetter } from "@/lib/server/actions";
 import { Variant } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Button from "./Button";
 import Modal from "./Modal";
 
@@ -23,29 +23,33 @@ export default function CoverLetterModal({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generateNewCoverLetter = async () => {
+  const generateNewCoverLetter = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
       const newCoverLetter = await generateCoverLetter(
         jobTitle,
         jobDescription,
-        resumeData
+        resumeData,
       );
-      setCoverLetter(newCoverLetter);
+      if (newCoverLetter) {
+        setCoverLetter(newCoverLetter);
+      } else {
+        setError("Failed to generate cover letter. Please try again.");
+      }
     } catch (error) {
       setError("Failed to generate cover letter. Please try again.");
       console.error("Error generating cover letter:", error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [jobTitle, jobDescription, resumeData]);
 
   useEffect(() => {
     if (isOpen && !coverLetter) {
       generateNewCoverLetter();
     }
-  }, [isOpen]);
+  }, [coverLetter, generateNewCoverLetter, isOpen]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Cover Letter">
