@@ -23,6 +23,6 @@ export default function Title({ children, className, tag }: Props) {
   const Tag = tag as keyof React.JSX.IntrinsicElements;
 
   return (
-    <Tag className={cn(titleVariants({ tag }), className)}>{children}</Tag>
+    <Tag className={cn(titleVariants({ tag, className }))}>{children}</Tag>
   );
 }

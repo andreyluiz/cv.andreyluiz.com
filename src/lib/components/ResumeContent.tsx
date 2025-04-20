@@ -16,7 +16,7 @@ export default function ResumeContent({ initialResume }: Props) {
   useEffect(() => {
     setHasTailoringFeature(
       localStorage.getItem("tailoring") === "true" ||
-        process.env.NODE_ENV === "development",
+        process.env.NODE_ENV === "development"
     );
   }, []);
 
@@ -130,7 +130,7 @@ export default function ResumeContent({ initialResume }: Props) {
               <div className="flex items-baseline justify-between gap-2 print:gap-1">
                 <div className="flex items-baseline gap-0.5">
                   <span>
-                    <Title tag="h3" className="inline !text-base">
+                    <Title tag="h3" className="inline !text-lg">
                       {exp.title}
                     </Title>
                     <span className="text-neutral-600 dark:text-neutral-400">
