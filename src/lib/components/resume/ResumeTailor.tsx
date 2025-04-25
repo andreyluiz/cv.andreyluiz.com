@@ -1,12 +1,12 @@
 "use client";
 
+import ChangesModal from "@/lib/components/modals/ChangesModal";
+import CoverLetterModal from "@/lib/components/modals/CoverLetterModal";
+import JobDescriptionModal from "@/lib/components/modals/JobDescriptionModal";
+import Button from "@/lib/components/ui/Button";
 import { tailorResume } from "@/lib/server/actions";
 import { Variant } from "@/lib/types";
 import { useState } from "react";
-import Button from "./Button";
-import ChangesModal from "./ChangesModal";
-import CoverLetterModal from "./CoverLetterModal";
-import JobDescriptionModal from "./JobDescriptionModal";
 
 interface Props {
   resumeData: Variant;

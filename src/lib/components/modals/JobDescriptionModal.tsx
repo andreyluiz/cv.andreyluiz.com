@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "@/lib/components/ui/Button";
 import Modal from "./Modal";
 
 interface JobDescriptionModalProps {

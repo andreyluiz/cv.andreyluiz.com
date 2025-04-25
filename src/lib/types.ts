@@ -47,6 +47,10 @@ export interface Project {
   name: string;
   description: string;
   techStack: string[];
+  period: {
+    start: string;
+    end: string;
+  };
 }
 
 export interface Education {

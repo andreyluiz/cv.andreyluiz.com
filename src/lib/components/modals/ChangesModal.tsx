@@ -1,5 +1,5 @@
+import Button from "@/lib/components/ui/Button";
 import { Change } from "@/lib/types";
-import Button from "./Button";
 import Modal from "./Modal";
 
 interface ChangesModalProps {

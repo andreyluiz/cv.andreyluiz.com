@@ -1,7 +1,7 @@
+import Button from "@/lib/components/ui/Button";
 import { generateCoverLetter } from "@/lib/server/actions";
 import { Variant } from "@/lib/types";
 import { useCallback, useEffect, useState } from "react";
-import Button from "./Button";
 import Modal from "./Modal";
 
 interface CoverLetterModalProps {

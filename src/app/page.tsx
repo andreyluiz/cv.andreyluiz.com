@@ -1,4 +1,4 @@
-import ResumeContent from "@/lib/components/ResumeContent";
+import ResumeContent from "@/lib/components/resume/ResumeContent";
 import { getResume } from "@/lib/server/actions";
 import { Variant } from "@/lib/types";
 import { Metadata } from "next";
