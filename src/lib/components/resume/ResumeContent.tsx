@@ -7,6 +7,7 @@ import Education from "./Education";
 import Experience from "./Experience";
 import Header from "./Header";
 import Languages from "./Languages";
+import Projects from "./Projects";
 import Publications from "./Publications";
 import ResumeTailor from "./ResumeTailor";
 import Skills from "./Skills";
@@ -23,7 +24,7 @@ export default function ResumeContent({ initialResume }: Props) {
   useEffect(() => {
     setHasTailoringFeature(
       localStorage.getItem("tailoring") === "true" ||
-        process.env.NODE_ENV === "development",
+        process.env.NODE_ENV === "development"
     );
   }, []);
 
@@ -38,6 +39,7 @@ export default function ResumeContent({ initialResume }: Props) {
     languages,
     publications,
     summary,
+    projects,
   } = currentResume;
 
   return (
@@ -54,6 +56,7 @@ export default function ResumeContent({ initialResume }: Props) {
       <Experience experience={experience} />
       <Certifications certifications={certifications} />
       <Education education={education} />
+      <Projects projects={projects} />
       <Publications publications={publications} />
       <Languages languages={languages} />
     </main>

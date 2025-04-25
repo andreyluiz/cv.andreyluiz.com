@@ -166,6 +166,26 @@
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
+  "projects": [
+    {
+      "name": "Unofficial Tutorial Of Iced Library",
+      "description": "A tutorial for the Iced library, a Rust library for building user interfaces. I'm migrating the tutorial to the latest version of the Iced library.",
+      "techStack": ["Rust", "Iced", "User Interfaces"],
+      "period": {
+        "start": "February 2025",
+        "end": "Present"
+      }
+    },
+    {
+      "name": "Rust UI Labs",
+      "description": "We are making an effort to migrate some common UI components to Leptos and Dioxus. These components are often used in web applications, but nobody tried to port them to Rust yet.",
+      "techStack": ["Rust", "Leptos", "Dioxus", "UI Components"],
+      "period": {
+        "start": "February 2025",
+        "end": "Present"
+      }
+    }
+  ],
   "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
@@ -204,18 +224,6 @@
     {
       "name": "German",
       "level": "Elementary"
-    }
-  ],
-  "publications": [
-    {
-      "title": "Bot Seeker®, an Automated Profile Recognition Software on Twitter",
-      "location": "ResearchGate",
-      "url": "https://www.researchgate.net/publication/353804679_Bot_SeekerR_an_Automated_Profile_Recognition_Software_on_Twitter"
-    },
-    {
-      "title": "Robots, lies and misinformation in Venezuela. Identifying automated Twitter profiles of the Telesur and Vtv media",
-      "location": "ResearchGate",
-      "url": "https://www.researchgate.net/publication/339788432_Robots_lies_and_misinformation_in_Venezuela_Identifying_automated_Twitter_profiles_of_the_Telesur_and_Vtv_media"
     }
   ]
 }
