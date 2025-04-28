@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function Projects({ projects }: Props) {
-  if (!projects) return null;
+  if (!projects || projects.length === 0) return null;
 
   return (
     <section className="break-inside-avoid">

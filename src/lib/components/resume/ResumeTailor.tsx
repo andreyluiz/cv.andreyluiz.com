@@ -25,6 +25,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
   const handleJobDescriptionSubmit = async (
     jobTitle: string,
     jobDescription: string,
+    aiInstructions: string
   ) => {
     try {
       setIsLoading(true);
@@ -32,6 +33,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         jobTitle,
         jobDescription,
         resumeData,
+        aiInstructions
       );
       onResumeUpdate(tailoredResume);
       setIsTailored(true);

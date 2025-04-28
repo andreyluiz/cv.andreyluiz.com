@@ -1,10 +1,15 @@
 import Button from "@/lib/components/ui/Button";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 interface JobDescriptionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (jobTitle: string, jobDescription: string) => void;
+  onSubmit: (
+    jobTitle: string,
+    jobDescription: string,
+    aiInstructions: string
+  ) => void;
   jobTitle: string;
   setJobTitle: (jobTitle: string) => void;
   jobDescription: string;
@@ -20,9 +25,25 @@ export default function JobDescriptionModal({
   jobDescription,
   setJobDescription,
 }: JobDescriptionModalProps) {
+  const [aiInstructions, setAiInstructions] = useState("");
+
+  useEffect(() => {
+    // Load AI instructions from localStorage when modal opens
+    if (isOpen) {
+      const savedInstructions = localStorage.getItem(
+        "resumeTailorInstructions"
+      );
+      if (savedInstructions) {
+        setAiInstructions(savedInstructions);
+      }
+    }
+  }, [isOpen]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(jobTitle, jobDescription);
+    // Save AI instructions to localStorage
+    localStorage.setItem("resumeTailorInstructions", aiInstructions);
+    onSubmit(jobTitle, jobDescription, aiInstructions);
     onClose();
   };
 
@@ -58,6 +79,18 @@ export default function JobDescriptionModal({
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Paste the job description here..."
             required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="aiInstructions" className="mb-2 block font-medium">
+            AI Instructions (Optional)
+          </label>
+          <textarea
+            id="aiInstructions"
+            className="h-32 w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
+            value={aiInstructions}
+            onChange={(e) => setAiInstructions(e.target.value)}
+            placeholder="Add specific instructions for the AI model (e.g., focus on certain skills, emphasize particular experiences)..."
           />
         </div>
         <div className="flex justify-end gap-4">

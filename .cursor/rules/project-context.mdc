@@ -80,3 +80,11 @@ This project is a CV website for Andrey Luiz, a professional in the field of sof
 11. Error Handling:
 - Type-safe error handling through TypeScript
 - Clear prop validation through TypeScript interfaces
+
+# Features
+- Full resume available
+- Resume tailoring
+  - A modal opens and the user inserts the title, description of the role, and instructions for the AI model
+  - A tailored resume is generated using OpenAI APIs
+- Cover letter generation
+  - When a resume is tailored, a cover letter can be generated
