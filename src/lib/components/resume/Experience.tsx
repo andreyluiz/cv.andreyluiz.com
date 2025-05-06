@@ -1,15 +1,18 @@
 import Title from "@/lib/components/ui/Title";
 import { Variant } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   experience: Variant["experience"];
 }
 
 export default function Experience({ experience }: Props) {
+  const t = useTranslations("resume.experience");
+
   return (
     <section>
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        Professional Experience
+        {t("title")}
       </Title>
       <div className="flex flex-col gap-6 print:gap-4">
         {experience.map((exp, index) => (
@@ -44,7 +47,7 @@ export default function Experience({ experience }: Props) {
             )}
             {exp.techStack.length > 0 && (
               <div className="flex items-baseline">
-                <span className="font-bold">Tech Stack:</span>&nbsp;
+                <span className="font-bold">{t("tech_stack")}:</span>&nbsp;
                 <span className="text-neutral-600 dark:text-neutral-400">
                   {exp.techStack.join(", ")}
                 </span>

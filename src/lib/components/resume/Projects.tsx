@@ -1,4 +1,5 @@
 import { Variant } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import Title from "../ui/Title";
 
 interface Props {
@@ -6,12 +7,14 @@ interface Props {
 }
 
 export default function Projects({ projects }: Props) {
+  const t = useTranslations("resume.projects");
+
   if (!projects || projects.length === 0) return null;
 
   return (
     <section className="break-inside-avoid">
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        Projects
+        {t("title")}
       </Title>
       <div className="flex flex-col gap-4 print:gap-2">
         {projects.map((project, index) => (
@@ -32,7 +35,7 @@ export default function Projects({ projects }: Props) {
             </div>
             {project.techStack.length > 0 && (
               <div className="flex items-baseline">
-                <span className="font-bold">Tech Stack:</span>&nbsp;
+                <span className="font-bold">{t("tech_stack")}:</span>&nbsp;
                 <span className="text-neutral-600 dark:text-neutral-400">
                   {project.techStack.join(", ")}
                 </span>

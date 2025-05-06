@@ -1,15 +1,18 @@
 import Title from "@/lib/components/ui/Title";
 import { Variant } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   education: Variant["education"];
 }
 
 export default function Education({ education }: Props) {
+  const t = useTranslations("resume.education");
+
   return (
     <section className="break-inside-avoid">
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        Education
+        {t("title")}
       </Title>
       <div className="flex flex-col gap-4 print:gap-2">
         {education.map((edu, index) => (

@@ -5,10 +5,19 @@ import {
   generateCoverLetter as generateCoverLetterWithOpenAI,
   tailorResume as tailorResumeWithOpenAI,
 } from "./openai";
-import resumeData from "./resume.json";
+import resumeEnglish from "./resume-en.json";
+import resumeFrench from "./resume-fr.json";
+import resumePortuguese from "./resume-pt.json";
 
-export async function getResume(): Promise<Variant> {
-  return resumeData as Variant;
+export async function getResume(lang: string = "en"): Promise<Variant> {
+  switch (lang) {
+    case "fr":
+      return resumeFrench as Variant;
+    case "pt":
+      return resumePortuguese as Variant;
+    default:
+      return resumeEnglish as Variant;
+  }
 }
 
 export async function tailorResume(

@@ -1,7 +1,12 @@
 "use client";
 
+import { useRouter } from "@/i18n/navigation";
+import { langsOptions } from "@/lib/lang";
+import { getResume } from "@/lib/server/actions";
 import { Variant } from "@/lib/types";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Select from "../ui/Select";
 import Certifications from "./Certifications";
 import Education from "./Education";
 import Experience from "./Experience";
@@ -20,6 +25,8 @@ interface Props {
 export default function ResumeContent({ initialResume }: Props) {
   const [currentResume, setCurrentResume] = useState<Variant>(initialResume);
   const [hasTailoringFeature, setHasTailoringFeature] = useState(false);
+  const { locale } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     setHasTailoringFeature(
@@ -27,6 +34,19 @@ export default function ResumeContent({ initialResume }: Props) {
         process.env.NODE_ENV === "development"
     );
   }, []);
+
+  useEffect(() => {
+    fetchResume(locale as string);
+  }, [locale]);
+
+  const fetchResume = async (lang: string) => {
+    const resume = await getResume(lang);
+    setCurrentResume(resume);
+  };
+
+  const handleLangChange = (locale: string) => {
+    router.replace("/", { locale });
+  };
 
   const {
     name,
@@ -44,12 +64,20 @@ export default function ResumeContent({ initialResume }: Props) {
 
   return (
     <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
-      {hasTailoringFeature && (
-        <ResumeTailor
-          resumeData={currentResume}
-          onResumeUpdate={setCurrentResume}
+      <div className="flex justify-between items-center gap-4">
+        {hasTailoringFeature && (
+          <ResumeTailor
+            resumeData={currentResume}
+            onResumeUpdate={setCurrentResume}
+          />
+        )}
+        <Select
+          className="print:hidden"
+          options={langsOptions}
+          value={locale as string}
+          onChange={handleLangChange}
         />
-      )}
+      </div>
       <Header name={name} title={title} contactInfo={contactInfo} />
       <Summary summary={summary} />
       <Skills skills={skills} />

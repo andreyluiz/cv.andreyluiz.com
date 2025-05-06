@@ -1,0 +1,39 @@
+{
+  "resume": {
+    "certifications": {
+      "title": "Certificações"
+    },
+    "education": {
+      "title": "Educação"
+    },
+    "experience": {
+      "tech_stack": "Stack Tecnológica",
+      "title": "Experiência Profissional"
+    },
+    "header": {
+      "available": "Disponível",
+      "email": "E-mail",
+      "immediately": "Imediatamente",
+      "linkedin": "LinkedIn",
+      "location": "Localização",
+      "phone": "Telefone",
+      "website": "Website"
+    },
+    "languages": {
+      "title": "Idiomas"
+    },
+    "projects": {
+      "tech_stack": "Stack Tecnológica",
+      "title": "Projetos"
+    },
+    "publications": {
+      "title": "Publicações"
+    },
+    "skills": {
+      "title": "Habilidades Principais"
+    },
+    "summary": {
+      "title": "Resumo"
+    }
+  }
+}

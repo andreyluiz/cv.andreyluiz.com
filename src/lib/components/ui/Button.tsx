@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Button as HeadlessButton } from "@headlessui/react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes } from "react";
 
@@ -26,8 +27,11 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button className={cn(buttonVariants({ variant }), className)} {...props}>
+    <HeadlessButton
+      className={cn(buttonVariants({ variant, className }))}
+      {...props}
+    >
       {children}
-    </button>
+    </HeadlessButton>
   );
 }

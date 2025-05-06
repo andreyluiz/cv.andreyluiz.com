@@ -1,0 +1,229 @@
+{
+  "name": "Andrey Luiz",
+  "title": "Ingénieur Full Stack Senior",
+  "contactInfo": {
+    "email": "andreyluiz.developer@gmail.com",
+    "phone": "+41 76 503 86 65",
+    "location": "Fribourg, Suisse",
+    "website": "andreyluiz.com",
+    "linkedin": "linkedin.com/in/andreyluiz"
+  },
+  "summary": "Ingénieur Full Stack Senior spécialisé en React, Node.js, TypeScript, AWS et Web3, passionné par le développement d'applications évolutives et performantes. Expérience avérée dans la livraison de solutions impactantes chez Timeleap, SonarSource et Equip, améliorant l'expérience utilisateur et stimulant la croissance de l'entreprise. Expérience dans l'application d'outils basés sur l'IA pour l'analyse automatisée de profils Twitter. Certifié AWS, actuellement en exploration de l'écosystème Rust pour approfondir l'expertise backend et élargir la versatilité technique. Bilingue en Portugais et Anglais, avec une maîtrise professionnelle du Français et de l'Allemand.",
+  "skills": [
+    {
+      "domain": "Frontend",
+      "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
+    },
+    { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
+    { "domain": "Web3", "skills": ["Solidity", "Ethers.js"] },
+    { "domain": "Bases de Données", "skills": ["PostgreSQL", "MongoDB"] },
+    { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
+  ],
+  "experience": [
+    {
+      "title": "Ingénieur Full Stack",
+      "company": "Timeleap",
+      "location": "Suisse",
+      "period": {
+        "start": "Juillet 2024",
+        "end": "Janvier 2025"
+      },
+      "achievements": [
+        "Dirigé le développement d'applications décentralisées utilisant SvelteKit et TypeScript, générant plus de 50k CHF de revenus dans les premiers mois d'exploitation.",
+        "Construit un portail de staking basé sur Phaser, optimisant les performances et augmentant l'engagement des utilisateurs."
+      ],
+      "techStack": [
+        "SvelteKit",
+        "TypeScript",
+        "MongoDB",
+        "PostgreSQL",
+        "TailwindCSS",
+        "Phaser",
+        "AWS"
+      ]
+    },
+    {
+      "title": "Ingénieur Frontend",
+      "company": "Sonar",
+      "location": "Suisse",
+      "period": {
+        "start": "Novembre 2022",
+        "end": "Juin 2024"
+      },
+      "achievements": [
+        "Livré trois fonctionnalités clés pour la section projets de SonarCloud en React, améliorant l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de programmation.",
+        "Dirigé l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, optimisant l'efficacité du flux de travail et la collaboration inter-équipes.",
+        "Migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, améliorant la cohérence de l'interface et l'expérience utilisateur."
+      ],
+      "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
+    },
+    {
+      "title": "Ingénieur Full Stack",
+      "company": "Equip",
+      "location": "Suisse",
+      "period": {
+        "start": "Juin 2021",
+        "end": "Novembre 2022"
+      },
+      "achievements": [
+        "Amélioré la recherche sur carte et les processus de location de l'application Equip, réduisant le temps de développement du prototype de 3 mois.",
+        "Optimisé la connectivité Bluetooth pour les stations de location, augmentant la fiabilité de 20% à 100%.",
+        "Lancé l'application Equip sur Play Store et Apple Store, étendant la portée de l'entreprise en Suisse, France et aux États-Unis."
+      ],
+      "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
+    },
+    {
+      "title": "Ingénieur Frontend",
+      "company": "Scout24 Schweiz AG",
+      "location": "Suisse",
+      "period": {
+        "start": "Février 2020",
+        "end": "Septembre 2021"
+      },
+      "achievements": [
+        "Développé et amélioré Anibis Messenger en utilisant React et TypeScript, améliorant continuellement l'expérience utilisateur.",
+        "Migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois.",
+        "Servi comme Scrum Master pour l'équipe Aldrin, stimulant la productivité de l'équipe et l'efficacité de la communication."
+      ],
+      "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
+    },
+    {
+      "title": "Ingénieur Full Stack",
+      "company": "Integer Consulting",
+      "location": "Portugal",
+      "period": {
+        "start": "Février 2018",
+        "end": "Janvier 2020"
+      },
+      "achievements": [
+        "Développé 3 composants React pour Adobe Content Manager, améliorant les flux de travail de contenu pour les entreprises énergétiques en Allemagne et au Royaume-Uni.",
+        "Développé de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), améliorant l'expérience utilisateur et la disponibilité en Allemagne et en Autriche.",
+        "Conçu et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en magasin."
+      ],
+      "techStack": [
+        "React",
+        "Redux",
+        "PostgreSQL",
+        "TypeScript",
+        "Git",
+        "Python"
+      ]
+    },
+    {
+      "title": "Ingénieur Frontend",
+      "company": "DataRisk",
+      "location": "Brésil",
+      "period": {
+        "start": "Janvier 2017",
+        "end": "Février 2018"
+      },
+      "achievements": [
+        "Construit la première application frontend de DataRisk à partir de zéro en utilisant React et Redux, transformant la vision de l'entreprise en un produit fonctionnel.",
+        "Dirigé le développement frontend, collaborant avec les designers pour lancer le premier produit bêta de l'entreprise, sécurisant les premiers clients."
+      ],
+      "techStack": ["React", "Redux", "JavaScript", "Git"]
+    },
+    {
+      "title": "Ingénieur Frontend",
+      "company": "Resultados Digitais",
+      "location": "Brésil",
+      "period": {
+        "start": "Avril 2016",
+        "end": "Décembre 2016"
+      },
+      "achievements": [
+        "Développé des fonctionnalités clés en JavaScript et jQuery pour l'équipe Landing Pages, améliorant la qualité du produit et l'expérience client.",
+        "Migré l'éditeur de landing pages vers une interface WYSIWYG, améliorant l'ergonomie et la flexibilité du design."
+      ],
+      "techStack": ["JavaScript", "jQuery", "Git"]
+    },
+    {
+      "title": "Développeur Frontend",
+      "company": "Kanoah",
+      "location": "Brésil",
+      "period": {
+        "start": "Juin 2015",
+        "end": "Décembre 2015"
+      },
+      "achievements": [
+        "Développé des fonctionnalités pour un plugin de gestion de tests JIRA en utilisant Angular.js, aidant Kanoah à sécuriser ses premiers clients internationaux.",
+        "Dirigé le développement frontend pour les suites de test, améliorant la compétitivité de Kanoah sur le marché."
+      ],
+      "techStack": ["Angular.js", "JavaScript", "Git"]
+    },
+    {
+      "title": "Développeur Full Stack",
+      "company": "Softplan Planejamento e Sistemas",
+      "location": "Brésil",
+      "period": {
+        "start": "Mars 2014",
+        "end": "Juin 2015"
+      },
+      "achievements": [
+        "Développé des fonctionnalités principales pour un outil de traitement de fichiers basé sur Java, améliorant les capacités d'analyse de données et renforçant la réputation de Softplan dans les logiciels financiers.",
+        "Construit des interfaces interactives en JavaScript et CSS, améliorant l'expérience utilisateur et l'ergonomie."
+      ],
+      "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Tutoriel Non Officiel de la Bibliothèque Iced",
+      "description": "Un tutoriel pour la bibliothèque Iced, une bibliothèque Rust pour construire des interfaces utilisateur. Je migre le tutoriel vers la dernière version de la bibliothèque Iced.",
+      "techStack": ["Rust", "Iced", "Interfaces Utilisateur"],
+      "period": {
+        "start": "Février 2025",
+        "end": "Présent"
+      }
+    },
+    {
+      "name": "Rust UI Labs",
+      "description": "Nous faisons un effort pour migrer certains composants UI communs vers Leptos et Dioxus. Ces composants sont souvent utilisés dans les applications web, mais personne n'a encore essayé de les porter vers Rust.",
+      "techStack": ["Rust", "Leptos", "Dioxus", "Composants UI"],
+      "period": {
+        "start": "Février 2025",
+        "end": "Présent"
+      }
+    }
+  ],
+  "certifications": [
+    {
+      "degree": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services",
+      "year": "Octobre 2023",
+      "location": "Suisse"
+    },
+    {
+      "degree": "Programmation Rust : Des Fondamentaux aux Concepts Avancés avec Développement Assisté par IA",
+      "institution": "LinkedIn",
+      "year": "Mars 2025",
+      "location": "Suisse"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Diplôme en Ingénierie et Développement de Logiciels",
+      "institution": "Faculdade Unilagos",
+      "year": "Décembre 2011",
+      "location": "Brésil"
+    }
+  ],
+  "languages": [
+    {
+      "name": "Portugais",
+      "level": "Natif"
+    },
+    {
+      "name": "Anglais",
+      "level": "Professionnel Complet"
+    },
+    {
+      "name": "Français",
+      "level": "Maîtrise Limitée"
+    },
+    {
+      "name": "Allemand",
+      "level": "Élémentaire"
+    }
+  ]
+}

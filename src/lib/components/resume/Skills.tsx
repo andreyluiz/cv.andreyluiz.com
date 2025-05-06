@@ -1,15 +1,18 @@
 import Title from "@/lib/components/ui/Title";
 import { Variant } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   skills: Variant["skills"];
 }
 
 export default function Skills({ skills }: Props) {
+  const t = useTranslations("resume.skills");
+
   return (
     <section>
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        Core Skills
+        {t("title")}
       </Title>
       <ul className="list-inside list-none dark:text-neutral-300">
         {skills.map((skill) => (

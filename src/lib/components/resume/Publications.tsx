@@ -1,17 +1,20 @@
 import Title from "@/lib/components/ui/Title";
 import { Variant } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 interface Props {
   publications: Variant["publications"];
 }
 
 export default function Publications({ publications }: Props) {
+  const t = useTranslations("resume.publications");
+
   if (!publications?.length) return null;
 
   return (
     <section className="break-inside-avoid">
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        Publications
+        {t("title")}
       </Title>
       <div className="flex flex-col gap-4 print:gap-2">
         {publications.map((pub, index) => (
