@@ -166,26 +166,6 @@
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
-  "projects": [
-    {
-      "name": "Unofficial Tutorial Of Iced Library",
-      "description": "A tutorial for the Iced library, a Rust library for building user interfaces. I'm migrating the tutorial to the latest version of the Iced library.",
-      "techStack": ["Rust", "Iced", "User Interfaces"],
-      "period": {
-        "start": "February 2025",
-        "end": "Present"
-      }
-    },
-    {
-      "name": "Rust UI Labs",
-      "description": "We are making an effort to migrate some common UI components to Leptos and Dioxus. These components are often used in web applications, but nobody tried to port them to Rust yet.",
-      "techStack": ["Rust", "Leptos", "Dioxus", "UI Components"],
-      "period": {
-        "start": "February 2025",
-        "end": "Present"
-      }
-    }
-  ],
   "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",

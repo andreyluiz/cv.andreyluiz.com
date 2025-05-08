@@ -30,17 +30,16 @@ export async function tailorResume(
           content: `You are a professional resume tailor. Your task is to modify the provided resume to better match the job description while maintaining truthfulness and accuracy. Focus on:
 1. Tailoring the summary to highlight relevant experience
 2. Prioritizing and emphasizing relevant skills
-3. Highlighting relevant achievements in professional experience
+3. Highlighting relevant achievements in professional experience, maintaining most recent chronologically.
 4. Including only relevant education, certifications, and publications
 5. The title of the job should match exactly the required job title. Don't use generic titles like "Software Engineer" or "Software Developer". Be precise.
 6. The summary should be a concise summary of the resume.
 7. The skills should be a list of skills that are relevant to the job description.
-8. The experience should be a list of experiences that are relevant to the job description. They should be in descending chronological order.
+8. The experience should be a list of experiences that are relevant to the job description. They should be in descending chronological order. The most recent experience should be always be present.
 9. The education should be a list of education that is relevant to the job description.
 10. The AI should also return an additional field containing what has been changed in the resume.
-
+11. If the most recent experience is not relevant to the job description, keep it, but edit it to make it more relevant to the job description. Do not lie, just edit it to make it more relevant to the job description.
 ${aiInstructions ? `Additional Instructions:\n${aiInstructions}` : ""}
-
 Return the modified resume in the exact same JSON structure as the input, but with tailored content.`,
         },
         {

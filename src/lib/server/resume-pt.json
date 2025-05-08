@@ -166,26 +166,6 @@
       "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
-  "projects": [
-    {
-      "name": "Tutorial Não Oficial da Biblioteca Iced",
-      "description": "Um tutorial para a biblioteca Iced, uma biblioteca Rust para construir interfaces de usuário. Estou migrando o tutorial para a versão mais recente da biblioteca Iced.",
-      "techStack": ["Rust", "Iced", "Interfaces de Usuário"],
-      "period": {
-        "start": "Fevereiro 2025",
-        "end": "Presente"
-      }
-    },
-    {
-      "name": "Rust UI Labs",
-      "description": "Estamos fazendo um esforço para migrar alguns componentes UI comuns para Leptos e Dioxus. Estes componentes são frequentemente usados em aplicações web, mas ninguém tentou portá-los para Rust ainda.",
-      "techStack": ["Rust", "Leptos", "Dioxus", "Componentes UI"],
-      "period": {
-        "start": "Fevereiro 2025",
-        "end": "Presente"
-      }
-    }
-  ],
   "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
