@@ -37,10 +37,10 @@ export default function Experience({ experience }: Props) {
               </div>
             </div>
             {exp.achievements.length > 0 && (
-              <ul className="list-inside list-none py-4">
+              <ul className="list-disc py-4 ml-4">
                 {exp.achievements.map((achievement, i) => (
                   <li key={i} className="leading-relaxed print:leading-normal">
-                    - {achievement}
+                    {achievement}
                   </li>
                 ))}
               </ul>

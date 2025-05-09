@@ -14,13 +14,13 @@ export default function Skills({ skills }: Props) {
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
         {t("title")}
       </Title>
-      <ul className="list-inside list-none dark:text-neutral-300">
+      <ul className="list-disc ml-4 dark:text-neutral-300">
         {skills.map((skill) => (
           <li
             key={skill.domain}
             className="leading-relaxed print:leading-normal"
           >
-            - <span className="font-bold">{skill.domain}:</span>{" "}
+            <span className="font-bold">{skill.domain}:</span>{" "}
             <span className="text-neutral-600 dark:text-neutral-400">
               {skill.skills?.join(", ")}
             </span>
