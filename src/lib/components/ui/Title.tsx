@@ -5,9 +5,8 @@ import React, { PropsWithChildren } from "react";
 const titleVariants = cva("text-neutral-800 dark:text-neutral-100", {
   variants: {
     tag: {
-      h1: "text-4xl font-bold print:text-2xl",
-      h2: "text-2xl font-bold print:text-xl",
-      h3: "text-md font-semibold",
+      h1: "text-4xl font-semibold print:text-2xl",
+      h2: "text-2xl font-semibold print:text-xl",
     },
   },
   defaultVariants: {

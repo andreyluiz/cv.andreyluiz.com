@@ -31,7 +31,7 @@ export default function ResumeContent({ initialResume }: Props) {
   useEffect(() => {
     setHasTailoringFeature(
       localStorage.getItem("tailoring") === "true" ||
-        process.env.NODE_ENV === "development"
+        process.env.NODE_ENV === "development",
     );
   }, []);
 
@@ -63,7 +63,7 @@ export default function ResumeContent({ initialResume }: Props) {
   } = currentResume;
 
   return (
-    <main className="mx-auto flex max-w-4xl flex-col gap-8 bg-white p-12 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
+    <main className="mx-auto max-w-4xl space-y-8 print:space-y-3 bg-white p-12 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 print:p-0">
       <div className="flex justify-between items-center gap-4">
         {hasTailoringFeature && (
           <ResumeTailor

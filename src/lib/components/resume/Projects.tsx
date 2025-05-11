@@ -24,7 +24,7 @@ export default function Projects({ projects }: Props) {
           >
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-center gap-2">
-                <Title tag="h3">{project.name}</Title>
+                <span className="font-bold">{project.name}</span>
                 <p className="text-neutral-600 dark:text-neutral-400">
                   {project.period.start} - {project.period.end}
                 </p>

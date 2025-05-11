@@ -18,14 +18,12 @@ export default function Experience({ experience }: Props) {
         {experience.map((exp, index) => (
           <div
             key={index}
-            className="break-inside-avoid border-b border-neutral-300 pb-4 last:border-b-0"
+            className="break-inside-avoid border-b border-neutral-300 pb-4 last:border-b-0 space-y-4 print:space-y-2"
           >
             <div className="flex items-baseline justify-between gap-2 print:gap-1">
               <div className="flex items-baseline gap-0.5">
                 <span>
-                  <Title tag="h3" className="inline !text-lg">
-                    {exp.title}
-                  </Title>
+                  <span className="font-bold">{exp.title}</span>
                   <span className="text-neutral-600 dark:text-neutral-400">
                     &nbsp;- {exp.company}, {exp.location}
                   </span>
@@ -37,7 +35,7 @@ export default function Experience({ experience }: Props) {
               </div>
             </div>
             {exp.achievements.length > 0 && (
-              <ul className="list-disc py-4 ml-4">
+              <ul className="list-disc ml-4">
                 {exp.achievements.map((achievement, i) => (
                   <li key={i} className="leading-relaxed print:leading-normal">
                     {achievement}

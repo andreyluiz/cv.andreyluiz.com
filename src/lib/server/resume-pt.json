@@ -8,14 +8,13 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Engenheiro Full Stack Sênior especializado em React, Node.js, TypeScript, AWS e Web3, com paixão por desenvolver aplicações escaláveis e de alto desempenho. Histórico comprovado de entrega de soluções impactantes na Timeleap, SonarSource e Equip, melhorando a experiência do usuário e impulsionando o crescimento do negócio. Experiência na aplicação de ferramentas baseadas em IA para análise automatizada de perfis no Twitter. Certificado AWS, atualmente explorando o ecossistema Rust para aprofundar conhecimentos em backend e expandir versatilidade técnica. Fluente em Português e Inglês, com proficiência profissional em Francês e Alemão.",
+  "summary": "Engenheiro full stack com mais de 9 anos de experiência em todo o stack, especializado em frameworks Javascript, Python e AWS. Melhorou a experiência do usuário e impulsionou o crescimento dos negócios em várias empresas suíças como Timeleap e SonarSource. Aumentou a confiabilidade de 20% para 100% otimizando a conectividade Bluetooth para estações de aluguel. Lançou aplicativos no Google Play e Apple Store, expandindo o alcance da empresa em diferentes países.",
   "skills": [
     {
       "domain": "Frontend",
       "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
     },
     { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
-    { "domain": "Web3", "skills": ["Solidity", "Ethers.js"] },
     { "domain": "Bancos de Dados", "skills": ["PostgreSQL", "MongoDB"] },
     { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
   ],
@@ -30,7 +29,7 @@
       },
       "achievements": [
         "Liderou o desenvolvimento de aplicações descentralizadas usando SvelteKit e TypeScript, gerando mais de 50k CHF em receita nos primeiros meses de operação.",
-        "Construiu um portal de staking baseado em Phaser, otimizando performance e aumentando o engajamento dos usuários."
+        "Arquitetou e desenvolveu um portal de staking baseado em Phaser, resultando em mais de 600 jogadores na primeira semana de lançamento."
       ],
       "techStack": [
         "SvelteKit",
@@ -52,8 +51,8 @@
       },
       "achievements": [
         "Entregou três funcionalidades principais para a seção de projetos do SonarCloud em React, melhorando a integração da Taxonomia de Código Limpo e a educação dos usuários sobre melhores práticas de programação.",
-        "Liderou a adoção de 8 funcionalidades críticas pela equipe CaYC, otimizando a eficiência do fluxo de trabalho e a colaboração entre equipes.",
-        "Migrou a tela de issues do SonarCloud para MIUI usando React, melhorando a consistência da UI e a experiência do usuário."
+        "Pioneirou a adoção de 8 funcionalidades críticas pela equipe CaYC, otimizando a eficiência do fluxo de trabalho e a colaboração entre equipes.",
+        "Migrou a tela de issues do SonarCloud para MIUI usando React, recebendo feedback positivo da liderança sênior por melhorar o fluxo de trabalho diário dos desenvolvedores."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -67,8 +66,8 @@
       },
       "achievements": [
         "Aprimorou a busca no mapa e os processos de aluguel do aplicativo Equip, reduzindo o tempo de desenvolvimento do protótipo em 3 meses.",
-        "Otimizou a conectividade Bluetooth para estações de aluguel, aumentando a confiabilidade de 20% para 100%.",
-        "Lançou o aplicativo Equip na Play Store e Apple Store, expandindo o alcance da empresa na Suíça, França e EUA."
+        "Otimizou as capacidades Bluetooth do aplicativo híbrido para conexão com estações de aluguel, aumentando a confiabilidade de 20% para 100%.",
+        "Lançou o aplicativo Equip na Play Store e Apple Store, expandindo o alcance da empresa em três países."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -81,9 +80,8 @@
         "end": "Setembro 2021"
       },
       "achievements": [
-        "Desenvolveu e aprimorou o Anibis Messenger usando React e TypeScript, continuamente melhorando a experiência do usuário.",
-        "Migrou os serviços de mensagens do Twilio para Sendbird, garantindo adoção total por 100% dos usuários no primeiro mês.",
-        "Atuou como Scrum Master para o squad Aldrin, impulsionando a produtividade da equipe e a eficiência na comunicação."
+        "Aprimorou e refatorou o Anibis Messenger usando React e TypeScript, recebendo reações positivas da gerência.",
+        "Migrou os serviços de mensagens do Twilio para Sendbird, garantindo adoção total por 100% dos usuários no primeiro mês."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -96,9 +94,8 @@
         "end": "Janeiro 2020"
       },
       "achievements": [
-        "Desenvolveu 3 componentes React para o Adobe Content Manager, aprimorando fluxos de trabalho de conteúdo para empresas de energia na Alemanha e Reino Unido.",
-        "Desenvolveu novas funcionalidades para o aplicativo SkyQ (British Sky Broadcasting), melhorando a experiência do usuário e disponibilidade na Alemanha e Áustria.",
-        "Projetou e implementou funcionalidades principais para o SkyQ no PlayStation 4, expandindo o alcance do produto através de lançamentos bem-sucedidos na loja."
+        "Conduziu novas funcionalidades para o aplicativo SkyQ (British Sky Broadcasting), melhorando a experiência do usuário e a disponibilidade em todos os países onde o produto estava presente.",
+        "Desenvolveu e implementou funcionalidades principais para o SkyQ no PlayStation 4, expandindo o alcance do produto através de lançamentos bem-sucedidos na loja."
       ],
       "techStack": [
         "React",
@@ -118,8 +115,8 @@
         "end": "Fevereiro 2018"
       },
       "achievements": [
-        "Construiu a primeira aplicação frontend da DataRisk do zero usando React e Redux, transformando a visão da empresa em um produto funcional.",
-        "Liderou o desenvolvimento frontend, colaborando com designers para lançar o primeiro produto beta da empresa, conquistando os primeiros clientes."
+        "Liderou a aplicação inicial de frontend da DataRisk utilizando React e Redux, permitindo que os três primeiros clientes testassem o novo produto inovador de machine learning.",
+        "Liderou o desenvolvimento frontend, colaborando com designers para lançar o primeiro produto beta da empresa, garantindo os primeiros clientes."
       ],
       "techStack": ["React", "Redux", "JavaScript", "Git"]
     },
@@ -132,8 +129,8 @@
         "end": "Dezembro 2016"
       },
       "achievements": [
-        "Desenvolveu funcionalidades principais em JavaScript e jQuery para a equipe de Landing Pages, melhorando a qualidade do produto e a experiência do cliente.",
-        "Migrou o editor de landing pages para uma interface WYSIWYG, melhorando a usabilidade e flexibilidade de design."
+        "Introduziu funcionalidades principais em JavaScript e jQuery para a equipe de Landing Pages, melhorando a qualidade do produto e a experiência do cliente.",
+        "Migrou o editor de landing pages para uma interface WYSIWYG, melhorando a usabilidade e flexibilidade de design, recebendo feedback positivo dos clientes nas primeiras semanas de lançamento."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -146,37 +143,23 @@
         "end": "Dezembro 2015"
       },
       "achievements": [
-        "Desenvolveu funcionalidades para um plugin de gerenciamento de testes JIRA usando Angular.js, ajudando a Kanoah a conquistar seus primeiros clientes internacionais.",
+        "Desenvolveu funcionalidades para um plugin de gerenciamento de testes JIRA usando Angular.js, ajudando a Kanoah a conquistar os primeiros clientes internacionais.",
         "Liderou o desenvolvimento frontend para suites de teste, melhorando a competitividade da Kanoah no mercado."
       ],
       "techStack": ["Angular.js", "JavaScript", "Git"]
-    },
-    {
-      "title": "Desenvolvedor Full Stack",
-      "company": "Softplan Planejamento e Sistemas",
-      "location": "Brasil",
-      "period": {
-        "start": "Março 2014",
-        "end": "Junho 2015"
-      },
-      "achievements": [
-        "Desenvolveu funcionalidades principais para uma ferramenta de processamento de arquivos baseada em Java, melhorando capacidades de análise de dados e fortalecendo a reputação da Softplan em software financeiro.",
-        "Construiu interfaces interativas em JavaScript e CSS, melhorando a experiência do usuário e usabilidade."
-      ],
-      "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
   "certifications": [
     {
-      "degree": "AWS Certified Cloud Practitioner",
-      "institution": "Amazon Web Services",
-      "year": "Outubro 2023",
-      "location": "Suíça"
-    },
-    {
       "degree": "Programação Rust: Dos Fundamentos aos Conceitos Avançados com Desenvolvimento Assistido por IA",
       "institution": "LinkedIn",
       "year": "Março 2025",
+      "location": "Suíça"
+    },
+    {
+      "degree": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services",
+      "year": "Outubro 2023",
       "location": "Suíça"
     }
   ],
@@ -190,10 +173,6 @@
   ],
   "languages": [
     {
-      "name": "Português",
-      "level": "Nativo"
-    },
-    {
       "name": "Inglês",
       "level": "Profissional Completo"
     },
@@ -202,8 +181,8 @@
       "level": "Proficiência Limitada"
     },
     {
-      "name": "Alemão",
-      "level": "Básico"
+      "name": "Português",
+      "level": "Nativo"
     }
   ]
 }

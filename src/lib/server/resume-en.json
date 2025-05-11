@@ -8,14 +8,13 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Senior Full Stack Engineer specializing in React, Node.js, TypeScript, AWS, and Web3, with a passion for developing scalable, high-performance applications. Proven track record of delivering impactful solutions at Timeleap, SonarSource, and Equip, enhancing user experience and driving business growth. Experienced in applying AI-driven tools for automated Twitter profile analysis. AWS Certified, currently diving into Rust ecosystem to deepen backend expertise and expand technical versatility. Fluent in Portuguese and English, with working proficiency in French and German.",
+  "summary": "Full stack engineer with 9+ years of experience across the stack, specializing in Javascript frameworks, Python, and AWS. Enhanced user experience and drove business growth at multiple Swiss firms like Timeleap and SonarSource. Increased reliability from 20% to 100% by optimizing Bluetooth connectivity for rental stations. Launched apps on Google Play and Apple Store, expanding company's reach in different countries.",
   "skills": [
     {
       "domain": "Frontend",
       "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
     },
     { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
-    { "domain": "Web3", "skills": ["Solidity", "Ethers.js"] },
     { "domain": "Databases", "skills": ["PostgreSQL", "MongoDB"] },
     { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
   ],
@@ -30,7 +29,7 @@
       },
       "achievements": [
         "Led the development of decentralized applications using SvelteKit and TypeScript, generating 50k+ CHF in revenue within the first months of operation.",
-        "Built a Phaser-based staking portal game, optimizing performance and increasing user engagement."
+        "Architected and developed a Phaser-based staking portal game, resulting in more than 600 players in the first week of release."
       ],
       "techStack": [
         "SvelteKit",
@@ -52,8 +51,8 @@
       },
       "achievements": [
         "Delivered three key features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
-        "Led CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
-        "Migrated SonarCloud's issues screen to MIUI using React, enhancing UI consistency and user experience."
+        "Pioneered CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
+        "Migrated SonarCloud's issues screen to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -67,8 +66,8 @@
       },
       "achievements": [
         "Enhanced Equip app's map search and rental processes, reducing prototype development time by 3 months.",
-        "Optimized Bluetooth connectivity for rental stations, increasing reliability from 20% to 100%.",
-        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in Switzerland, France, and the US."
+        "Optimized Bluetooth capabilities of the hybrid app for connection with rental stations, increasing reliability from 20% to 100%.",
+        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in three countries."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -81,9 +80,8 @@
         "end": "September 2021"
       },
       "achievements": [
-        "Developed and enhanced Anibis Messenger using React and TypeScript, continuously improving user experience.",
-        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month.",
-        "Served as Scrum Master for the Aldrin squad, driving team productivity and communication efficiency."
+        "Enhanced and refactored Anibis Messenger using React and TypeScript, getting positive reactions from management.",
+        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -96,9 +94,8 @@
         "end": "January 2020"
       },
       "achievements": [
-        "Built 3 React components for Adobe Content Manager, enhancing content workflows for energy companies in Germany and the UK.",
-        "Developed new features for the SkyQ application (British Sky Broadcasting), improving user experience and availability across Germany and Austria.",
-        "Designed and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
+        "Conducted new features for the SkyQ application (British Sky Broadcasting), improving user experience and availability in all countries where the product was present.",
+        "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
       ],
       "techStack": [
         "React",
@@ -118,7 +115,7 @@
         "end": "February 2018"
       },
       "achievements": [
-        "Built DataRisk's first frontend application from scratch using React and Redux, turning the company's vision into a working product.",
+        "Spearheaded DataRisk's initial frontend application by leveraging React and Redux, enabling the first three first clients to test the new innovative machine learning product.",
         "Led frontend development, collaborating with designers to launch the company's first beta product, securing initial customers."
       ],
       "techStack": ["React", "Redux", "JavaScript", "Git"]
@@ -132,8 +129,8 @@
         "end": "December 2016"
       },
       "achievements": [
-        "Developed key features in JavaScript and jQuery for the Landing Pages team, enhancing product quality and customer experience.",
-        "Migrated the landing pages editor to a WYSIWYG interface, improving usability and design flexibility."
+        "Introduced key features in JavaScript and jQuery for the Landing Pages team, enhancing product quality and customer experience.",
+        "Migrated the landing pages editor to a WYSIWYG interface, improving usability and design flexibility, and getting positive feedback from clients in the first weeks of release."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -146,37 +143,23 @@
         "end": "December 2015"
       },
       "achievements": [
-        "Developed features for a JIRA testing management plugin using Angular.js, helping Kanoah secure its first international customers.",
+        "Developed features for a JIRA testing management plugin using Angular.js, helping Kanoah secure the first international customers.",
         "Led frontend development for testing suites, improving Kanoah's market competitiveness."
       ],
       "techStack": ["Angular.js", "JavaScript", "Git"]
-    },
-    {
-      "title": "Full Stack Developer",
-      "company": "Softplan Planejamento e Sistemas",
-      "location": "Brazil",
-      "period": {
-        "start": "March 2014",
-        "end": "June 2015"
-      },
-      "achievements": [
-        "Developed core features for a Java-based file processing tool, improving data analysis capabilities and strengthening Softplan's reputation in financial software.",
-        "Built interactive JavaScript and CSS interfaces, enhancing user experience and usability."
-      ],
-      "techStack": ["Java", "JSP", "PostgreSQL", "JavaScript", "Git"]
     }
   ],
   "certifications": [
     {
-      "degree": "AWS Certified Cloud Practitioner",
-      "institution": "Amazon Web Services",
-      "year": "October 2023",
+      "degree": "Rust Programming: Fundamental to Advanced with AI-Assisted Development",
+      "institution": "LinkedIn",
+      "year": "March 2025",
       "location": "Switzerland"
     },
     {
-      "degree": "Rust Programming: From Fundamentals to Advanced Concepts with AI-Assisted Development",
-      "institution": "LinkedIn",
-      "year": "March 2025",
+      "degree": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services",
+      "year": "October 2023",
       "location": "Switzerland"
     }
   ],
@@ -190,10 +173,6 @@
   ],
   "languages": [
     {
-      "name": "Portuguese",
-      "level": "Native"
-    },
-    {
       "name": "English",
       "level": "Full Professional"
     },
@@ -202,8 +181,8 @@
       "level": "Limited Working"
     },
     {
-      "name": "German",
-      "level": "Elementary"
+      "name": "Portuguese",
+      "level": "Native"
     }
   ]
 }

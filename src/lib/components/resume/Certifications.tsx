@@ -23,13 +23,10 @@ export default function Certifications({ certifications }: Props) {
             className="border-b border-neutral-200 pb-4 last:border-b-0"
           >
             <div className="flex flex-col gap-1">
-              <Title tag="h3">{cert.degree}</Title>
-              <span className="text-neutral-600 dark:text-neutral-400">
-                {cert.year}
-              </span>
+              <span className="font-bold">{cert.degree}</span>
             </div>
             <p className="text-neutral-600 dark:text-neutral-400">
-              {cert.institution} - {cert.location}
+              {cert.institution} - {cert.location} - {cert.year}
             </p>
           </div>
         ))}
