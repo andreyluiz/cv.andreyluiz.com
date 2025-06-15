@@ -8,39 +8,17 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Full stack engineer with 9+ years of experience across the stack, specializing in Javascript frameworks, Python, and AWS. Enhanced user experience and drove business growth at multiple Swiss firms like Timeleap and SonarSource. Increased reliability from 20% to 100% by optimizing Bluetooth connectivity for rental stations. Launched apps on Google Play and Apple Store, expanding company's reach in different countries.",
+  "summary": "Full stack engineer with 12+ years of experience, specializing in JavaScript frameworks, TypeScript, Next.js, Python, and AWS. Worked on apps for Smart TVs and PS4, from development with React, to approval, and launch. Enhanced user experience and drove business growth at reputable Swiss firms like SonarSource and Scout24. Crafted production ready apps with React Native and launched on Google Play and Apple Store, expanding company's reach in different countries.",
   "skills": [
     {
       "domain": "Frontend",
       "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
     },
-    { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
+    { "domain": "Backend", "skills": ["Node.js", "Python"] },
     { "domain": "Databases", "skills": ["PostgreSQL", "MongoDB"] },
     { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
   ],
   "experience": [
-    {
-      "title": "Full Stack Engineer",
-      "company": "Timeleap",
-      "location": "Switzerland",
-      "period": {
-        "start": "July 2024",
-        "end": "January 2025"
-      },
-      "achievements": [
-        "Led the development of decentralized applications using SvelteKit and TypeScript, generating 50k+ CHF in revenue within the first months of operation.",
-        "Architected and developed a Phaser-based staking portal game, resulting in more than 600 players in the first week of release."
-      ],
-      "techStack": [
-        "SvelteKit",
-        "TypeScript",
-        "MongoDB",
-        "PostgreSQL",
-        "TailwindCSS",
-        "Phaser",
-        "AWS"
-      ]
-    },
     {
       "title": "Frontend Engineer",
       "company": "Sonar",
@@ -50,7 +28,7 @@
         "end": "June 2024"
       },
       "achievements": [
-        "Delivered three key features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
+        "Delivered three key features for SonarCloud's project section in React, integrating with RESTful APIs to enhance data retrieval and improve Clean Code Taxonomy integration and user education on coding best practices.",
         "Pioneered CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
         "Migrated SonarCloud's issues screen to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers."
       ],
@@ -94,7 +72,7 @@
         "end": "January 2020"
       },
       "achievements": [
-        "Conducted new features for the SkyQ application (British Sky Broadcasting), improving user experience and availability in all countries where the product was present.",
+        "Conducted new features for the SkyQ application (British Sky Broadcasting), utilizing Redux for state management and local storage for optimized performance, improving user experience and availability in all countries where the product was present.",
         "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
       ],
       "techStack": [
@@ -149,13 +127,22 @@
       "techStack": ["Angular.js", "JavaScript", "Git"]
     }
   ],
-  "certifications": [
+  "breaks": [
     {
-      "degree": "Rust Programming: Fundamental to Advanced with AI-Assisted Development",
-      "institution": "LinkedIn",
-      "year": "March 2025",
-      "location": "Switzerland"
-    },
+      "period": {
+        "start": "July 2024",
+        "end": "Present"
+      },
+      "achievements": [
+        "Handle a family transition and relocate to another canton to explore new opportunities.",
+        "Deepen expertise in Rust, Python, and .NET to help guide future career decisions.",
+        "Build personal full-stack projects including andreyluiz.com, cv.andreyluiz.com, and others, to keep sharp skills.",
+        "Study how AI is shaping the future of software development, applied to senior engineers.",
+        "Begin job search on January 2025 looking for long-term impactful opportunities."
+      ]
+    }
+  ],
+  "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",

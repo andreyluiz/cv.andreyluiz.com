@@ -14,7 +14,7 @@ export default function Experience({ experience }: Props) {
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
         {t("title")}
       </Title>
-      <div className="flex flex-col gap-6 print:gap-4">
+      <div className="flex flex-col gap-6 print:gap-3">
         {experience.map((exp, index) => (
           <div
             key={index}
@@ -43,7 +43,7 @@ export default function Experience({ experience }: Props) {
                 ))}
               </ul>
             )}
-            {exp.techStack.length > 0 && (
+            {exp.techStack?.length > 0 && (
               <div className="flex items-baseline">
                 <span className="font-bold">{t("tech_stack")}:</span>&nbsp;
                 <span className="text-neutral-600 dark:text-neutral-400">

@@ -9,6 +9,10 @@ interface Props {
 export default function Education({ education }: Props) {
   const t = useTranslations("resume.education");
 
+  if (!education || !education.length) {
+    return null;
+  }
+
   return (
     <section className="break-inside-avoid">
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">

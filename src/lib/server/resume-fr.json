@@ -8,39 +8,17 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Ingénieur full stack avec plus de 9 ans d'expérience dans le développement, spécialisé dans les frameworks JavaScript, Python et AWS. Amélioration de l'expérience utilisateur et stimulation de la croissance des entreprises dans plusieurs sociétés suisses comme Timeleap et SonarSource. Augmentation de la fiabilité de 20 % à 100 % en optimisant la connectivité Bluetooth pour les stations de location. Lancement d'applications sur Google Play et Apple Store, élargissant la portée de l'entreprise dans différents pays.",
+  "summary": "Ingénieur full stack avec plus de 12 ans d'expérience, spécialisé dans les frameworks JavaScript, TypeScript, Next.js, Python et AWS. A travaillé sur des applications pour Smart TVs et PS4, du développement avec React jusqu'à l'approbation et le lancement. A amélioré l'expérience utilisateur et stimulé la croissance des entreprises dans des sociétés suisses réputées comme SonarSource et Scout24. A développé des applications prêtes pour la production avec React Native et lancé sur Google Play et Apple Store, élargissant la portée de l'entreprise dans différents pays.",
   "skills": [
     {
       "domain": "Frontend",
       "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
     },
-    { "domain": "Backend", "skills": ["Node.js", "Python", "Rust"] },
-    { "domain": "Bases de Données", "skills": ["PostgreSQL", "MongoDB"] },
+    { "domain": "Backend", "skills": ["Node.js", "Python"] },
+    { "domain": "Bases de données", "skills": ["PostgreSQL", "MongoDB"] },
     { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
   ],
   "experience": [
-    {
-      "title": "Ingénieur Full Stack",
-      "company": "Timeleap",
-      "location": "Suisse",
-      "period": {
-        "start": "Juillet 2024",
-        "end": "Janvier 2025"
-      },
-      "achievements": [
-        "Dirigé le développement d'applications décentralisées utilisant SvelteKit et TypeScript, générant plus de 50k CHF de revenus dans les premiers mois d'exploitation.",
-        "Architecturé et développé un portail de staking basé sur Phaser, attirant plus de 600 joueurs dès la première semaine de lancement."
-      ],
-      "techStack": [
-        "SvelteKit",
-        "TypeScript",
-        "MongoDB",
-        "PostgreSQL",
-        "TailwindCSS",
-        "Phaser",
-        "AWS"
-      ]
-    },
     {
       "title": "Ingénieur Frontend",
       "company": "Sonar",
@@ -50,9 +28,9 @@
         "end": "Juin 2024"
       },
       "achievements": [
-        "Livré trois fonctionnalités clés pour la section projets de SonarCloud en React, améliorant l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de programmation.",
-        "Pionnier dans l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, optimisant l'efficacité des flux de travail et la collaboration inter-équipes.",
-        "Migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction pour l'amélioration des flux de travail quotidiens des développeurs."
+        "A livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération des données et optimiser l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
+        "A été pionnier dans l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, optimisant l'efficacité du flux de travail et la collaboration inter-équipes.",
+        "A migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour l'amélioration du flux de travail quotidien des développeurs."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -65,9 +43,9 @@
         "end": "Novembre 2022"
       },
       "achievements": [
-        "Amélioré la recherche sur carte et les processus de location de l'application Equip, réduisant le temps de développement du prototype de 3 mois.",
-        "Optimisé les capacités Bluetooth de l'application hybride pour la connexion avec les stations de location, augmentant la fiabilité de 20 % à 100 %.",
-        "Lancé l'application Equip sur Play Store et Apple Store, étendant la portée de l'entreprise dans trois pays."
+        "A amélioré la recherche sur carte et les processus de location de l'application Equip, réduisant le temps de développement du prototype de 3 mois.",
+        "A optimisé les capacités Bluetooth de l'application hybride pour la connexion avec les stations de location, augmentant la fiabilité de 20% à 100%.",
+        "A lancé l'application Equip sur Play Store et Apple Store, élargissant la portée de l'entreprise dans trois pays."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -80,8 +58,8 @@
         "end": "Septembre 2021"
       },
       "achievements": [
-        "Amélioré et refactorisé Anibis Messenger en utilisant React et TypeScript, recevant des réactions positives de la direction.",
-        "Migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100 % des utilisateurs dès le premier mois."
+        "A amélioré et refactorisé Anibis Messenger en utilisant React et TypeScript, obtenant des réactions positives de la direction.",
+        "A migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -94,8 +72,8 @@
         "end": "Janvier 2020"
       },
       "achievements": [
-        "Conduit de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), améliorant l'expérience utilisateur et la disponibilité dans tous les pays où le produit était présent.",
-        "Conçu et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en magasin."
+        "A développé de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant Redux pour la gestion d'état et le stockage local pour optimiser les performances, améliorant l'expérience utilisateur et la disponibilité dans tous les pays où le produit était présent.",
+        "A créé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, élargissant la portée du produit grâce à des lancements réussis sur le store."
       ],
       "techStack": [
         "React",
@@ -115,8 +93,8 @@
         "end": "Février 2018"
       },
       "achievements": [
-        "Dirigé la première application frontend de DataRisk en utilisant React et Redux, permettant aux trois premiers clients de tester le nouveau produit innovant basé sur l'apprentissage automatique.",
-        "Dirigé le développement frontend, collaborant avec les designers pour lancer le premier produit bêta de l'entreprise, sécurisant les premiers clients."
+        "A dirigé le développement initial de l'application frontend de DataRisk en utilisant React et Redux, permettant aux trois premiers clients de tester le nouveau produit innovant de machine learning.",
+        "A dirigé le développement frontend, collaborant avec les designers pour lancer le premier produit bêta de l'entreprise, sécurisant les premiers clients."
       ],
       "techStack": ["React", "Redux", "JavaScript", "Git"]
     },
@@ -129,8 +107,8 @@
         "end": "Décembre 2016"
       },
       "achievements": [
-        "Introduit des fonctionnalités clés en JavaScript et jQuery pour l'équipe Landing Pages, améliorant la qualité du produit et l'expérience client.",
-        "Migré l'éditeur de landing pages vers une interface WYSIWYG, améliorant l'ergonomie et la flexibilité de conception, recevant des retours positifs des clients dès les premières semaines de lancement."
+        "A introduit des fonctionnalités clés en JavaScript et jQuery pour l'équipe Landing Pages, améliorant la qualité du produit et l'expérience client.",
+        "A migré l'éditeur de landing pages vers une interface WYSIWYG, améliorant l'ergonomie et la flexibilité du design, et recevant des retours positifs des clients dès les premières semaines de lancement."
       ],
       "techStack": ["JavaScript", "jQuery", "Git"]
     },
@@ -143,19 +121,28 @@
         "end": "Décembre 2015"
       },
       "achievements": [
-        "Développé des fonctionnalités pour un plugin de gestion de tests JIRA en utilisant Angular.js, aidant Kanoah à sécuriser ses premiers clients internationaux.",
-        "Dirigé le développement frontend pour les suites de test, améliorant la compétitivité de Kanoah sur le marché."
+        "A développé des fonctionnalités pour un plugin de gestion de tests JIRA en utilisant Angular.js, aidant Kanoah à sécuriser ses premiers clients internationaux.",
+        "A dirigé le développement frontend pour les suites de tests, améliorant la compétitivité de Kanoah sur le marché."
       ],
       "techStack": ["Angular.js", "JavaScript", "Git"]
     }
   ],
-  "certifications": [
+  "breaks": [
     {
-      "degree": "Programmation Rust : Des Fondamentaux aux Concepts Avancés avec Développement Assisté par IA",
-      "institution": "LinkedIn",
-      "year": "Mars 2025",
-      "location": "Suisse"
-    },
+      "period": {
+        "start": "Juillet 2024",
+        "end": "Présent"
+      },
+      "achievements": [
+        "Gérer une transition familiale et déménager dans un autre canton pour explorer de nouvelles opportunités.",
+        "Approfondir l'expertise en Rust, Python et .NET pour guider les décisions futures de carrière.",
+        "Construire des projets personnels full-stack incluant andreyluiz.com, cv.andreyluiz.com et d'autres, pour maintenir les compétences à jour.",
+        "Étudier comment l'IA façonne l'avenir du développement logiciel, appliqué aux ingénieurs seniors.",
+        "Commencer la recherche d'emploi en janvier 2025 en cherchant des opportunités impactantes à long terme."
+      ]
+    }
+  ],
+  "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
@@ -178,7 +165,7 @@
     },
     {
       "name": "Français",
-      "level": "Maîtrise Limitée"
+      "level": "Connaissance Limitée"
     },
     {
       "name": "Portugais",
@@ -186,3 +173,4 @@
     }
   ]
 }
+

@@ -10,6 +10,10 @@
       "tech_stack": "Tech Stack",
       "title": "Professional Experience"
     },
+    "breaks": {
+      "title": "Career Breaks & Independent Projects",
+      "description": "Took a purposeful career break to:"
+    },
     "header": {
       "available": "Available",
       "email": "Email",

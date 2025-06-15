@@ -22,40 +22,44 @@ export default function Header({ name, title, contactInfo }: Props) {
           <Title tag="h2">{title}</Title>
         </div>
       </div>
-      <table className="mt-4 w-full">
-        <tbody>
-          <tr className="mb-2">
-            <td className="w-24 pr-2">
-              <span className="font-bold">{t("email")}:</span>
-            </td>
-            <td className="pr-6">{contactInfo.email}</td>
-            <td className="w-24 pr-2">
-              <span className="font-bold">{t("phone")}:</span>
-            </td>
-            <td>{contactInfo.phone}</td>
-          </tr>
-          <tr className="my-2">
-            <td className="w-24 pr-2">
-              <span className="font-bold">{t("location")}:</span>
-            </td>
-            <td className="pr-6">{contactInfo.location}</td>
-            <td className="w-24 pr-2">
+      <div className="mt-4 grid grid-cols-[auto_1fr] gap-x-24">
+        <div className="w-16">
+          <span className="font-bold">{t("email")}:</span>
+        </div>
+        <div>{contactInfo.email}</div>
+        <div className="w-16">
+          <span className="font-bold">{t("phone")}:</span>
+        </div>
+        <div>{contactInfo.phone}</div>
+
+        <div className="w-16">
+          <span className="font-bold">{t("location")}:</span>
+        </div>
+        <div>{contactInfo.location}</div>
+
+        {contactInfo.website && (
+          <>
+            <div className="w-16">
               <span className="font-bold">{t("website")}:</span>
-            </td>
-            <td>{contactInfo.website}</td>
-          </tr>
-          <tr className="mt-2">
-            <td className="w-24 pr-2">
+            </div>
+            <div>{contactInfo.website}</div>
+          </>
+        )}
+
+        {contactInfo.linkedin && (
+          <>
+            <div className="w-16">
               <span className="font-bold">{t("linkedin")}:</span>
-            </td>
-            <td className="pr-6">{contactInfo.linkedin}</td>
-            <td className="w-24 pr-2">
-              <span className="font-bold">{t("available")}:</span>
-            </td>
-            <td>{t("immediately")}</td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+            <div>{contactInfo.linkedin}</div>
+          </>
+        )}
+
+        <div className="w-16">
+          <span className="font-bold">{t("available")}:</span>
+        </div>
+        <div>{t("immediately")}</div>
+      </div>
     </header>
   );
 }

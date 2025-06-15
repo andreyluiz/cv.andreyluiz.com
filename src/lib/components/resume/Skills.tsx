@@ -9,6 +9,10 @@ interface Props {
 export default function Skills({ skills }: Props) {
   const t = useTranslations("resume.skills");
 
+  if (!skills || !skills.length) {
+    return null;
+  }
+
   return (
     <section>
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">

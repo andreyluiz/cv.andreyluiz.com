@@ -7,6 +7,7 @@ import { Variant } from "@/lib/types";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Select from "../ui/Select";
+import Break from "./Break";
 import Certifications from "./Certifications";
 import Education from "./Education";
 import Experience from "./Experience";
@@ -54,6 +55,7 @@ export default function ResumeContent({ initialResume }: Props) {
     contactInfo,
     skills,
     experience,
+    breaks,
     education,
     certifications,
     languages,
@@ -82,6 +84,7 @@ export default function ResumeContent({ initialResume }: Props) {
       <Summary summary={summary} />
       <Skills skills={skills} />
       <Experience experience={experience} />
+      <Break breaks={breaks} />
       <Certifications certifications={certifications} />
       <Education education={education} />
       <Projects projects={projects} />
