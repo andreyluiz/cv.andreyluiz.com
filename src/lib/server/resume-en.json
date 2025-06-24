@@ -8,7 +8,7 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Frontend developer with 12+ years of experience, specializing in JavaScript frameworks, TypeScript, React, and modern frontend technologies. Expert in both web and mobile development, with extensive experience in React Native for cross-platform applications. Worked on apps for Smart TVs and PS4, from development with React, to approval, and launch. Enhanced user experience and drove business growth at reputable Swiss firms like SonarSource and Scout24. Successfully developed and launched multiple React Native applications on Google Play and Apple Store, expanding company's reach in different countries.",
+  "summary": "Frontend developer with 12+ years of experience, specializing in TypeScript, React, and modern frontend technologies. Conveined apps for Smart TVs and PS4, from development with React, to approval, and launch. Enhanced user experience and drove business growth at reputable Swiss firms like SonarSource and Scout24. Developed and launched React Native applications on Google Play and Apple Store, expanding company's reach in different countries.",
   "skills": [
     {
       "domain": "Frontend",
@@ -45,7 +45,7 @@
       },
       "achievements": [
         "Delivered three key features for SonarCloud's project section in React, integrating with RESTful APIs to enhance data retrieval and improve Clean Code Taxonomy integration and user education on coding best practices.",
-        "Pioneered CaYC team's adoption of 8 critical features, streamlining workflow efficiency and cross-team collaboration.",
+        "Pioneered CaYC team's adoption of 8 critical features, using React and TypeScript, streamlining workflow efficiency and cross-team collaboration.",
         "Migrated SonarCloud's issues screen to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
@@ -59,15 +59,15 @@
         "end": "November 2022"
       },
       "achievements": [
-        "Enhanced Equip app's map search and rental processes, reducing prototype development time by 3 months.",
-        "Optimized Bluetooth capabilities of the hybrid app for connection with rental stations, increasing reliability from 20% to 100%.",
-        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in three countries."
+        "Enhanced Equip app's map search and rental processes, using Svelte and TypeScript, reducing prototype development time by 3 months.",
+        "Launched the Equip app on Play Store and Apple Store, expanding the company's reach in three countries.",
+        "Refactored the Equip app's codebase, relying on React Native and TypeScript for improved maintainability and scalability."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
     {
       "title": "Senior Front-end Developer",
-      "company": "Scout24 Schweiz AG",
+      "company": "Scout24",
       "location": "Switzerland",
       "period": {
         "start": "February 2020",
@@ -109,11 +109,10 @@
         "end": "January 2018"
       },
       "achievements": [
-        "Worked on multiple startups in Brazil as a Front-end Developer, such as Kanoah, DataRisk, and Resultados Digitais.",
+        "Developed on startups in Brazil, such as Kanoah, DataRisk, and Resultados Digitais, as a Front-end Developer.",
         "Championed important features for Kanoah Test Manager, a JIRA plugin for testing management, today part of Adaptavist.",
         "Conveined the first version of the WYSIWYG landing page editor for RD Station, at Resultados Digitais.",
-        "Developed from ground up the first draft of the machine learning platform for DataRisk.",
-        "Used technologies like React, Redux, JavaScript, Git, Angular.js, jQuery, and more."
+        "Developed from ground up the first draft of the machine learning platform for DataRisk."
       ],
       "techStack": [
         "React",
@@ -132,7 +131,7 @@
         "end": "Present"
       },
       "achievements": [
-        "Handle a family transition and relocate to another canton to explore new opportunities.",
+        "Take care of a family transition and relocate to another canton to explore new opportunities.",
         "Deepen expertise in Rust, Python, and .NET to help guide future career decisions.",
         "Build personal full-stack projects including andreyluiz.com, cv.andreyluiz.com, and others, to keep sharp skills.",
         "Study how AI is shaping the future of software development, applied to senior engineers.",
