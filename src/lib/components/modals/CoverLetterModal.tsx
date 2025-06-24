@@ -1,7 +1,7 @@
+import { useCallback, useEffect, useState } from "react";
 import Button from "@/lib/components/ui/Button";
 import { generateCoverLetter } from "@/lib/server/actions";
-import { Variant } from "@/lib/types";
-import { useCallback, useEffect, useState } from "react";
+import type { Variant } from "@/lib/types";
 import Modal from "./Modal";
 
 interface CoverLetterModalProps {
@@ -45,6 +45,10 @@ export default function CoverLetterModal({
     }
   }, [jobTitle, jobDescription, resumeData]);
 
+  const getCoverLetter = () => ({
+    __html: coverLetter,
+  });
+
   useEffect(() => {
     if (isOpen && !coverLetter) {
       generateNewCoverLetter();
@@ -68,7 +72,8 @@ export default function CoverLetterModal({
             <div className="prose max-w-none dark:prose-invert">
               <div
                 className="whitespace-pre-wrap"
-                dangerouslySetInnerHTML={{ __html: coverLetter }}
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: Comes from the AI, so it's safe
+                dangerouslySetInnerHTML={getCoverLetter()}
               />
             </div>
             <div className="flex justify-end gap-4">

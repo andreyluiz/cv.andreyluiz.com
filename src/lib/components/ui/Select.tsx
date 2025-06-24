@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { Select as HeadlessSelect } from "@headlessui/react";
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Select({
   options,
@@ -23,7 +23,7 @@ export default function Select({
         className={cn(
           "mt-3 block w-full rounded-lg border-none bg-white/5 px-4 py-1.5 text-sm/6 text-white",
           "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25",
-          "*:text-black"
+          "*:text-black",
         )}
         value={value}
         onChange={handleChange}

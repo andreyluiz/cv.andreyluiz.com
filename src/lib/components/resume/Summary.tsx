@@ -1,5 +1,5 @@
-import Title from "@/lib/components/ui/Title";
 import { useTranslations } from "next-intl";
+import Title from "@/lib/components/ui/Title";
 
 interface Props {
   summary: string;

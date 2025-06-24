@@ -1,11 +1,11 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { langsOptions } from "@/lib/lang";
 import { getResume } from "@/lib/server/actions";
-import { Variant } from "@/lib/types";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import type { Variant } from "@/lib/types";
 import Select from "../ui/Select";
 import Break from "./Break";
 import Certifications from "./Certifications";
@@ -29,6 +29,11 @@ export default function ResumeContent({ initialResume }: Props) {
   const { locale } = useParams();
   const router = useRouter();
 
+  const fetchResume = useCallback(async (lang: string) => {
+    const resume = await getResume(lang);
+    setCurrentResume(resume);
+  }, []);
+
   useEffect(() => {
     setHasTailoringFeature(
       localStorage.getItem("tailoring") === "true" ||
@@ -38,12 +43,7 @@ export default function ResumeContent({ initialResume }: Props) {
 
   useEffect(() => {
     fetchResume(locale as string);
-  }, [locale]);
-
-  const fetchResume = async (lang: string) => {
-    const resume = await getResume(lang);
-    setCurrentResume(resume);
-  };
+  }, [locale, fetchResume]);
 
   const handleLangChange = (locale: string) => {
     router.replace("/", { locale });

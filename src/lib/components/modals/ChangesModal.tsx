@@ -1,5 +1,5 @@
 import Button from "@/lib/components/ui/Button";
-import { Change } from "@/lib/types";
+import type { Change } from "@/lib/types";
 import Modal from "./Modal";
 
 interface ChangesModalProps {
@@ -38,9 +38,9 @@ export default function ChangesModal({
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700">
-                {changes.map((change, index) => (
+                {changes.map((change) => (
                   <tr
-                    key={index}
+                    key={change.field}
                     className="hover:bg-neutral-100 dark:hover:bg-neutral-700"
                   >
                     <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-neutral-800 dark:text-neutral-100">

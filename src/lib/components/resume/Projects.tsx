@@ -1,5 +1,5 @@
-import { Variant } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import type { Variant } from "@/lib/types";
 import Title from "../ui/Title";
 
 interface Props {
@@ -17,9 +17,9 @@ export default function Projects({ projects }: Props) {
         {t("title")}
       </Title>
       <div className="flex flex-col gap-4 print:gap-2">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div
-            key={index}
+            key={project.name}
             className="border-b border-neutral-200 pb-4 last:border-b-0"
           >
             <div className="flex flex-col gap-1">

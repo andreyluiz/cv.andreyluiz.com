@@ -1,6 +1,6 @@
-import Title from "@/lib/components/ui/Title";
-import { Variant } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import Title from "@/lib/components/ui/Title";
+import type { Variant } from "@/lib/types";
 
 interface Props {
   skills: Variant["skills"];

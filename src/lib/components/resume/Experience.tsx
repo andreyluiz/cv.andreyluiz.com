@@ -1,6 +1,6 @@
-import Title from "@/lib/components/ui/Title";
-import { Variant } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import Title from "@/lib/components/ui/Title";
+import type { Variant } from "@/lib/types";
 
 interface Props {
   experience: Variant["experience"];
@@ -15,9 +15,9 @@ export default function Experience({ experience }: Props) {
         {t("title")}
       </Title>
       <div className="flex flex-col gap-6 print:gap-3">
-        {experience.map((exp, index) => (
+        {experience.map((exp) => (
           <div
-            key={index}
+            key={exp.title}
             className="break-inside-avoid border-b border-neutral-300 pb-4 last:border-b-0 space-y-4 print:space-y-2"
           >
             <div className="flex items-baseline justify-between gap-2 print:gap-1">
@@ -36,8 +36,11 @@ export default function Experience({ experience }: Props) {
             </div>
             {exp.achievements.length > 0 && (
               <ul className="list-disc ml-4">
-                {exp.achievements.map((achievement, i) => (
-                  <li key={i} className="leading-relaxed print:leading-normal">
+                {exp.achievements.map((achievement) => (
+                  <li
+                    key={achievement}
+                    className="leading-relaxed print:leading-normal"
+                  >
                     {achievement}
                   </li>
                 ))}

@@ -1,6 +1,6 @@
 {
   "name": "Andrey Luiz",
-  "title": "Senior Full Stack Engineer",
+  "title": "Senior Frontend Developer",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
@@ -8,19 +8,35 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Full stack engineer with 12+ years of experience, specializing in JavaScript frameworks, TypeScript, Next.js, Python, and AWS. Worked on apps for Smart TVs and PS4, from development with React, to approval, and launch. Enhanced user experience and drove business growth at reputable Swiss firms like SonarSource and Scout24. Crafted production ready apps with React Native and launched on Google Play and Apple Store, expanding company's reach in different countries.",
+  "summary": "Frontend developer with 12+ years of experience, specializing in JavaScript frameworks, TypeScript, React, and modern frontend technologies. Expert in both web and mobile development, with extensive experience in React Native for cross-platform applications. Worked on apps for Smart TVs and PS4, from development with React, to approval, and launch. Enhanced user experience and drove business growth at reputable Swiss firms like SonarSource and Scout24. Successfully developed and launched multiple React Native applications on Google Play and Apple Store, expanding company's reach in different countries.",
   "skills": [
     {
       "domain": "Frontend",
-      "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
+      "skills": ["React", "TailwindCSS", "TypeScript", "Redux", "Phaser.js"]
     },
-    { "domain": "Backend", "skills": ["Node.js", "Python"] },
-    { "domain": "Databases", "skills": ["PostgreSQL", "MongoDB"] },
-    { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
+    {
+      "domain": "Mobile",
+      "skills": [
+        "React Native",
+        "Expo",
+        "iOS",
+        "Android",
+        "Apple Store",
+        "Google Play"
+      ]
+    },
+    {
+      "domain": "Full-Stack & Databases",
+      "skills": ["Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+    },
+    {
+      "domain": "Tools & Platforms",
+      "skills": ["Git", "AWS", "CI/CD", "Docker", "Supabase"]
+    }
   ],
   "experience": [
     {
-      "title": "Frontend Engineer",
+      "title": "Senior Front-end Developer",
       "company": "Sonar",
       "location": "Switzerland",
       "period": {
@@ -35,7 +51,7 @@
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
-      "title": "Full Stack Engineer",
+      "title": "Senior Full Stack Developer",
       "company": "Equip",
       "location": "Switzerland",
       "period": {
@@ -50,7 +66,7 @@
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
     {
-      "title": "Frontend Engineer",
+      "title": "Senior Front-end Developer",
       "company": "Scout24 Schweiz AG",
       "location": "Switzerland",
       "period": {
@@ -64,7 +80,7 @@
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
     {
-      "title": "Full Stack Engineer",
+      "title": "Senior Front-end Developer",
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
@@ -85,46 +101,28 @@
       ]
     },
     {
-      "title": "Frontend Engineer",
-      "company": "DataRisk",
-      "location": "Brazil",
-      "period": {
-        "start": "January 2017",
-        "end": "February 2018"
-      },
-      "achievements": [
-        "Spearheaded DataRisk's initial frontend application by leveraging React and Redux, enabling the first three first clients to test the new innovative machine learning product.",
-        "Led frontend development, collaborating with designers to launch the company's first beta product, securing initial customers."
-      ],
-      "techStack": ["React", "Redux", "JavaScript", "Git"]
-    },
-    {
-      "title": "Frontend Engineer",
-      "company": "Resultados Digitais",
-      "location": "Brazil",
-      "period": {
-        "start": "April 2016",
-        "end": "December 2016"
-      },
-      "achievements": [
-        "Introduced key features in JavaScript and jQuery for the Landing Pages team, enhancing product quality and customer experience.",
-        "Migrated the landing pages editor to a WYSIWYG interface, improving usability and design flexibility, and getting positive feedback from clients in the first weeks of release."
-      ],
-      "techStack": ["JavaScript", "jQuery", "Git"]
-    },
-    {
-      "title": "Frontend Developer",
-      "company": "Kanoah",
+      "title": "Front-end Developer",
+      "company": "Other companies",
       "location": "Brazil",
       "period": {
         "start": "June 2015",
-        "end": "December 2015"
+        "end": "January 2018"
       },
       "achievements": [
-        "Developed features for a JIRA testing management plugin using Angular.js, helping Kanoah secure the first international customers.",
-        "Led frontend development for testing suites, improving Kanoah's market competitiveness."
+        "Worked on multiple startups in Brazil as a Front-end Developer, such as Kanoah, DataRisk, and Resultados Digitais.",
+        "Championed important features for Kanoah Test Manager, a JIRA plugin for testing management, today part of Adaptavist.",
+        "Conveined the first version of the WYSIWYG landing page editor for RD Station, at Resultados Digitais.",
+        "Developed from ground up the first draft of the machine learning platform for DataRisk.",
+        "Used technologies like React, Redux, JavaScript, Git, Angular.js, jQuery, and more."
       ],
-      "techStack": ["Angular.js", "JavaScript", "Git"]
+      "techStack": [
+        "React",
+        "Redux",
+        "JavaScript",
+        "Git",
+        "Angular.js",
+        "jQuery"
+      ]
     }
   ],
   "breaks": [

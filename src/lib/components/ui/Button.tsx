@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
 import { Button as HeadlessButton } from "@headlessui/react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva("rounded-lg px-4 py-2", {
   variants: {

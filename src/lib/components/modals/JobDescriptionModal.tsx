@@ -1,5 +1,5 @@
+import { useEffect, useId, useState } from "react";
 import Button from "@/lib/components/ui/Button";
-import { useEffect, useState } from "react";
 import Modal from "./Modal";
 
 interface JobDescriptionModalProps {
@@ -8,7 +8,7 @@ interface JobDescriptionModalProps {
   onSubmit: (
     jobTitle: string,
     jobDescription: string,
-    aiInstructions: string
+    aiInstructions: string,
   ) => void;
   jobTitle: string;
   setJobTitle: (jobTitle: string) => void;
@@ -27,11 +27,15 @@ export default function JobDescriptionModal({
 }: JobDescriptionModalProps) {
   const [aiInstructions, setAiInstructions] = useState("");
 
+  const jobTitleId = useId();
+  const jobDescriptionId = useId();
+  const aiInstructionsId = useId();
+
   useEffect(() => {
     // Load AI instructions from localStorage when modal opens
     if (isOpen) {
       const savedInstructions = localStorage.getItem(
-        "resumeTailorInstructions"
+        "resumeTailorInstructions",
       );
       if (savedInstructions) {
         setAiInstructions(savedInstructions);
@@ -59,7 +63,7 @@ export default function JobDescriptionModal({
             Job Title
           </label>
           <input
-            id="jobTitle"
+            id={jobTitleId}
             type="text"
             className="w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
             value={jobTitle}
@@ -73,7 +77,7 @@ export default function JobDescriptionModal({
             Job Description
           </label>
           <textarea
-            id="jobDescription"
+            id={jobDescriptionId}
             className="h-64 w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
@@ -86,7 +90,7 @@ export default function JobDescriptionModal({
             AI Instructions (Optional)
           </label>
           <textarea
-            id="aiInstructions"
+            id={aiInstructionsId}
             className="h-32 w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
             value={aiInstructions}
             onChange={(e) => setAiInstructions(e.target.value)}

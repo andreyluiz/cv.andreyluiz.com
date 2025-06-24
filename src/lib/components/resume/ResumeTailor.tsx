@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import ChangesModal from "@/lib/components/modals/ChangesModal";
 import CoverLetterModal from "@/lib/components/modals/CoverLetterModal";
 import JobDescriptionModal from "@/lib/components/modals/JobDescriptionModal";
 import Button from "@/lib/components/ui/Button";
 import { tailorResume } from "@/lib/server/actions";
-import { Variant } from "@/lib/types";
-import { useState } from "react";
+import type { Variant } from "@/lib/types";
 
 interface Props {
   resumeData: Variant;
@@ -25,7 +25,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
   const handleJobDescriptionSubmit = async (
     jobTitle: string,
     jobDescription: string,
-    aiInstructions: string
+    aiInstructions: string,
   ) => {
     try {
       setIsLoading(true);
@@ -33,7 +33,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         jobTitle,
         jobDescription,
         resumeData,
-        aiInstructions
+        aiInstructions,
       );
       onResumeUpdate(tailoredResume);
       setIsTailored(true);

@@ -1,6 +1,6 @@
 {
   "name": "Andrey Luiz",
-  "title": "Ingénieur Full Stack Senior",
+  "title": "Développeur Frontend Senior",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
@@ -8,19 +8,35 @@
     "website": "andreyluiz.com",
     "linkedin": "linkedin.com/in/andreyluiz"
   },
-  "summary": "Ingénieur full stack avec plus de 12 ans d'expérience, spécialisé dans les frameworks JavaScript, TypeScript, Next.js, Python et AWS. A travaillé sur des applications pour Smart TVs et PS4, du développement avec React jusqu'à l'approbation et le lancement. A amélioré l'expérience utilisateur et stimulé la croissance des entreprises dans des sociétés suisses réputées comme SonarSource et Scout24. A développé des applications prêtes pour la production avec React Native et lancé sur Google Play et Apple Store, élargissant la portée de l'entreprise dans différents pays.",
+  "summary": "Développeur frontend avec plus de 12 ans d'expérience, spécialisé dans les frameworks JavaScript, TypeScript, React et les technologies frontend modernes. Expert en développement web et mobile, avec une vaste expérience en React Native pour les applications multiplateformes. A travaillé sur des applications pour Smart TVs et PS4, du développement avec React jusqu'à l'approbation et le lancement. A amélioré l'expérience utilisateur et stimulé la croissance des affaires dans des entreprises suisses réputées comme SonarSource et Scout24. A développé et lancé avec succès plusieurs applications React Native sur Google Play et Apple Store, étendant la portée de l'entreprise dans différents pays.",
   "skills": [
     {
       "domain": "Frontend",
-      "skills": ["React", "SvelteKit", "Next.js", "Phaser", "TailwindCSS"]
+      "skills": ["React", "TailwindCSS", "TypeScript", "Redux", "Phaser.js"]
     },
-    { "domain": "Backend", "skills": ["Node.js", "Python"] },
-    { "domain": "Bases de données", "skills": ["PostgreSQL", "MongoDB"] },
-    { "domain": "DevOps & Cloud", "skills": ["AWS", "Git", "CI/CD"] }
+    {
+      "domain": "Mobile",
+      "skills": [
+        "React Native",
+        "Expo",
+        "iOS",
+        "Android",
+        "Apple Store",
+        "Google Play"
+      ]
+    },
+    {
+      "domain": "Full-Stack & Bases de données",
+      "skills": ["Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+    },
+    {
+      "domain": "Outils & Plateformes",
+      "skills": ["Git", "AWS", "CI/CD", "Docker", "Supabase"]
+    }
   ],
   "experience": [
     {
-      "title": "Ingénieur Frontend",
+      "title": "Développeur Frontend Senior",
       "company": "Sonar",
       "location": "Suisse",
       "period": {
@@ -28,14 +44,14 @@
         "end": "Juin 2024"
       },
       "achievements": [
-        "A livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération des données et optimiser l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
-        "A été pionnier dans l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, optimisant l'efficacité du flux de travail et la collaboration inter-équipes.",
-        "A migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour l'amélioration du flux de travail quotidien des développeurs."
+        "A livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération de données et optimiser l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
+        "A été le pionnier de l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, rationalisant l'efficacité du flux de travail et la collaboration inter-équipes.",
+        "A migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour avoir amélioré le flux de travail quotidien des développeurs."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
-      "title": "Ingénieur Full Stack",
+      "title": "Développeur Full Stack Senior",
       "company": "Equip",
       "location": "Suisse",
       "period": {
@@ -45,12 +61,12 @@
       "achievements": [
         "A amélioré la recherche sur carte et les processus de location de l'application Equip, réduisant le temps de développement du prototype de 3 mois.",
         "A optimisé les capacités Bluetooth de l'application hybride pour la connexion avec les stations de location, augmentant la fiabilité de 20% à 100%.",
-        "A lancé l'application Equip sur Play Store et Apple Store, élargissant la portée de l'entreprise dans trois pays."
+        "A lancé l'application Equip sur Play Store et Apple Store, étendant la portée de l'entreprise dans trois pays."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
     {
-      "title": "Ingénieur Frontend",
+      "title": "Développeur Frontend Senior",
       "company": "Scout24 Schweiz AG",
       "location": "Suisse",
       "period": {
@@ -64,7 +80,7 @@
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
     {
-      "title": "Ingénieur Full Stack",
+      "title": "Développeur Full Stack Senior",
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
@@ -72,8 +88,8 @@
         "end": "Janvier 2020"
       },
       "achievements": [
-        "A développé de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant Redux pour la gestion d'état et le stockage local pour optimiser les performances, améliorant l'expérience utilisateur et la disponibilité dans tous les pays où le produit était présent.",
-        "A créé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, élargissant la portée du produit grâce à des lancements réussis sur le store."
+        "A mené de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant Redux pour la gestion d'état et le stockage local pour des performances optimisées, améliorant l'expérience utilisateur et la disponibilité dans tous les pays où le produit était présent.",
+        "A créé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en boutique."
       ],
       "techStack": [
         "React",
@@ -85,46 +101,28 @@
       ]
     },
     {
-      "title": "Ingénieur Frontend",
-      "company": "DataRisk",
-      "location": "Brésil",
-      "period": {
-        "start": "Janvier 2017",
-        "end": "Février 2018"
-      },
-      "achievements": [
-        "A dirigé le développement initial de l'application frontend de DataRisk en utilisant React et Redux, permettant aux trois premiers clients de tester le nouveau produit innovant de machine learning.",
-        "A dirigé le développement frontend, collaborant avec les designers pour lancer le premier produit bêta de l'entreprise, sécurisant les premiers clients."
-      ],
-      "techStack": ["React", "Redux", "JavaScript", "Git"]
-    },
-    {
-      "title": "Ingénieur Frontend",
-      "company": "Resultados Digitais",
-      "location": "Brésil",
-      "period": {
-        "start": "Avril 2016",
-        "end": "Décembre 2016"
-      },
-      "achievements": [
-        "A introduit des fonctionnalités clés en JavaScript et jQuery pour l'équipe Landing Pages, améliorant la qualité du produit et l'expérience client.",
-        "A migré l'éditeur de landing pages vers une interface WYSIWYG, améliorant l'ergonomie et la flexibilité du design, et recevant des retours positifs des clients dès les premières semaines de lancement."
-      ],
-      "techStack": ["JavaScript", "jQuery", "Git"]
-    },
-    {
-      "title": "Développeur Frontend",
-      "company": "Kanoah",
+      "title": "Développeur Front-end",
+      "company": "Autres entreprises",
       "location": "Brésil",
       "period": {
         "start": "Juin 2015",
-        "end": "Décembre 2015"
+        "end": "Janvier 2018"
       },
       "achievements": [
-        "A développé des fonctionnalités pour un plugin de gestion de tests JIRA en utilisant Angular.js, aidant Kanoah à sécuriser ses premiers clients internationaux.",
-        "A dirigé le développement frontend pour les suites de tests, améliorant la compétitivité de Kanoah sur le marché."
+        "A travaillé dans plusieurs startups au Brésil en tant que Développeur Frontend, comme Kanoah, DataRisk et Resultados Digitais.",
+        "A dirigé des fonctionnalités importantes pour Kanoah Test Manager, un plugin JIRA pour la gestion des tests, aujourd'hui partie d'Adaptavist.",
+        "A conçu la première version de l'éditeur WYSIWYG de pages d'atterrissage pour RD Station, chez Resultados Digitais.",
+        "A développé de zéro la première version de la plateforme d'apprentissage automatique pour DataRisk.",
+        "A utilisé des technologies comme React, Redux, JavaScript, Git, Angular.js, jQuery et plus encore."
       ],
-      "techStack": ["Angular.js", "JavaScript", "Git"]
+      "techStack": [
+        "React",
+        "Redux",
+        "JavaScript",
+        "Git",
+        "Angular.js",
+        "jQuery"
+      ]
     }
   ],
   "breaks": [
@@ -135,8 +133,8 @@
       },
       "achievements": [
         "Gérer une transition familiale et déménager dans un autre canton pour explorer de nouvelles opportunités.",
-        "Approfondir l'expertise en Rust, Python et .NET pour guider les décisions futures de carrière.",
-        "Construire des projets personnels full-stack incluant andreyluiz.com, cv.andreyluiz.com et d'autres, pour maintenir les compétences à jour.",
+        "Approfondir l'expertise en Rust, Python et .NET pour aider à orienter les futures décisions de carrière.",
+        "Construire des projets personnels full-stack incluant andreyluiz.com, cv.andreyluiz.com et d'autres, pour maintenir les compétences aiguisées.",
         "Étudier comment l'IA façonne l'avenir du développement logiciel, appliqué aux ingénieurs seniors.",
         "Commencer la recherche d'emploi en janvier 2025 en cherchant des opportunités impactantes à long terme."
       ]
@@ -165,7 +163,7 @@
     },
     {
       "name": "Français",
-      "level": "Connaissance Limitée"
+      "level": "Professionnel Complet"
     },
     {
       "name": "Portugais",
@@ -173,4 +171,3 @@
     }
   ]
 }
-

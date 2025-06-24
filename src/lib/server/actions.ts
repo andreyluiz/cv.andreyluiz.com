@@ -1,6 +1,6 @@
 "use server";
 
-import { Variant } from "../types";
+import type { Variant } from "../types";
 import {
   generateCoverLetter as generateCoverLetterWithOpenAI,
   tailorResume as tailorResumeWithOpenAI,
@@ -24,14 +24,14 @@ export async function tailorResume(
   jobTitle: string,
   jobDescription: string,
   currentResume: Variant,
-  aiInstructions: string
+  aiInstructions: string,
 ): Promise<Variant> {
   try {
     return await tailorResumeWithOpenAI(
       jobTitle,
       jobDescription,
       currentResume,
-      aiInstructions
+      aiInstructions,
     );
   } catch (error) {
     console.error("Error tailoring resume:", error);
@@ -42,13 +42,13 @@ export async function tailorResume(
 export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,
-  currentResume: Variant
+  currentResume: Variant,
 ): Promise<string | null> {
   try {
     return await generateCoverLetterWithOpenAI(
       jobTitle,
       jobDescription,
-      currentResume
+      currentResume,
     );
   } catch (error) {
     console.error("Error generating cover letter:", error);

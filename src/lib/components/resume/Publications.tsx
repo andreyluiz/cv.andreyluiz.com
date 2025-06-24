@@ -1,6 +1,6 @@
-import Title from "@/lib/components/ui/Title";
-import { Variant } from "@/lib/types";
 import { useTranslations } from "next-intl";
+import Title from "@/lib/components/ui/Title";
+import type { Variant } from "@/lib/types";
 
 interface Props {
   publications: Variant["publications"];
@@ -17,9 +17,9 @@ export default function Publications({ publications }: Props) {
         {t("title")}
       </Title>
       <div className="flex flex-col gap-4 print:gap-2">
-        {publications.map((pub, index) => (
+        {publications.map((pub) => (
           <div
-            key={index}
+            key={pub.title}
             className="border-b border-neutral-300 pb-4 last:border-b-0"
           >
             <a
