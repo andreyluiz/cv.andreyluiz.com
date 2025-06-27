@@ -18,10 +18,8 @@
       "available": "Disponible",
       "email": "E-mail",
       "immediately": "Immédiatement",
-      "linkedin": "LinkedIn",
       "location": "Localisation",
-      "phone": "Téléphone",
-      "website": "Site Web"
+      "phone": "Téléphone"
     },
     "languages": {
       "title": "Langues"
@@ -38,6 +36,9 @@
     },
     "summary": {
       "title": "Résumé"
+    },
+    "links": {
+      "title": "Liens"
     }
   }
 }

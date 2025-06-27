@@ -9,6 +9,10 @@ interface Props {
 export default function Break({ breaks }: Props) {
   const t = useTranslations("resume.breaks");
 
+  if (!breaks || breaks.length === 0) {
+    return null;
+  }
+
   return (
     <section>
       <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">

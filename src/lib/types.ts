@@ -2,6 +2,7 @@ export interface Variant {
   name: string;
   title: string;
   contactInfo: ContactInfo;
+  links: Link[];
   summary: string;
   skills: SkillDomain[];
   experience: Experience[];
@@ -30,6 +31,12 @@ export interface ContactInfo {
   location: string;
   website: string;
   linkedin: string;
+  github: string;
+}
+
+export interface Link {
+  name: string;
+  url: string;
 }
 
 export interface Experience {

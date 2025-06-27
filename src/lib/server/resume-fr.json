@@ -1,14 +1,26 @@
 {
   "name": "Andrey Luiz",
-  "title": "Développeur Frontend Senior",
+  "title": "Ingénieur Logiciel Senior",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Suisse",
-    "website": "andreyluiz.com",
-    "linkedin": "linkedin.com/in/andreyluiz"
+    "location": "Fribourg, Suisse"
   },
-  "summary": "Développeur frontend avec plus de 12 ans d'expérience, spécialisé en TypeScript, React et technologies frontend modernes. A conçu des applications pour Smart TVs et PS4, du développement avec React jusqu'à l'approbation et le lancement. A amélioré l'expérience utilisateur et stimulé la croissance commerciale au sein d'entreprises suisses réputées comme SonarSource et Scout24. A développé et lancé des applications React Native sur Google Play et l'Apple Store, étendant la portée de l'entreprise dans différents pays.",
+  "links": [
+    {
+      "name": "Site",
+      "url": "andreyluiz.com"
+    },
+    {
+      "name": "GitHub",
+      "url": "github.com/andreyluiz"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "linkedin.com/in/andreyluiz"
+    }
+  ],
+  "summary": "Ingénieur Logiciel Senior avec plus de 12 ans d'expérience dans le développement web et mobile, spécialisé dans React, TypeScript et les outils d'IA. A dirigé l'adoption de fonctionnalités critiques pour l'équipe CaYC de SonarCloud, optimisant l'efficacité du flux de travail. A développé des projets Web3, incluant un jeu alimenté par Web3 et un portefeuille React Native. Certifié AWS Cloud Practitioner.",
   "skills": [
     {
       "domain": "Frontend",
@@ -26,8 +38,12 @@
       ]
     },
     {
-      "domain": "Full-Stack & Bases de données",
-      "skills": ["Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+      "domain": "Full-Stack & Bases de Données",
+      "skills": ["Python", "FastAPI", "Flask", "Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+    },
+    {
+      "domain": "Outils d'IA",
+      "skills": ["Cursor", "Cline", "Gemini CLI", "Claude", "Gemini", "OpenAI", "ChatGPT"]
     },
     {
       "domain": "Outils & Plateformes",
@@ -36,7 +52,22 @@
   ],
   "experience": [
     {
-      "title": "Développeur Frontend Senior",
+      "title": "Ingénieur Full Stack",
+      "company": "Timeleap",
+      "location": "Suisse",
+      "period": {
+        "start": "Juillet 2024",
+        "end": "Janvier 2025"
+      },
+      "achievements": [
+        "Développé des projets Web3 utilisant SvelteKit, intégrant différents types de blockchains et contrats intelligents.",
+        "Implémenté une application portefeuille React Native pour un grand client indien, intégrant une blockchain personnalisée et sécurisant les premiers enjeux.",
+        "Créé un jeu utilisant Phaser.js pour un portail de staking, recevant des retours positifs du client et atteignant 600 joueurs le premier mois."
+      ],
+      "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
+    },
+    {
+      "title": "Développeur Front-end Senior",
       "company": "Sonar",
       "location": "Suisse",
       "period": {
@@ -44,9 +75,9 @@
         "end": "Juin 2024"
       },
       "achievements": [
-        "A livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération de données et optimiser l'intégration de la Taxonomie du Code Propre et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
-        "A été le pionnier de l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, rationalisant l'efficacité du flux de travail et la collaboration inter-équipes.",
-        "A migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour avoir amélioré le flux de travail quotidien des développeurs."
+        "Livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération de données et optimiser l'intégration de la Taxonomie Clean Code et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
+        "Pionnier de l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, utilisant React et TypeScript, optimisant l'efficacité du flux de travail et la collaboration inter-équipes.",
+        "Migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour l'amélioration du flux de travail quotidien des développeurs."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
@@ -59,28 +90,28 @@
         "end": "Novembre 2022"
       },
       "achievements": [
-        "A amélioré la recherche sur carte et les processus de location de l'application Equip, réduisant le temps de développement du prototype de 3 mois.",
-        "A optimisé les capacités Bluetooth de l'application hybride pour la connexion avec les stations de location, augmentant la fiabilité de 20% à 100%.",
-        "A lancé l'application Equip sur Play Store et Apple Store, étendant la portée de l'entreprise dans trois pays."
+        "Amélioré la recherche sur carte et les processus de location de l'app Equip, utilisant Svelte et TypeScript, réduisant le temps de développement de prototype de 3 mois.",
+        "Lancé l'app Equip sur le Play Store et l'Apple Store, étendant la portée de l'entreprise dans trois pays.",
+        "Refactorisé la base de code de l'app Equip en utilisant React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
     {
-      "title": "Développeur Frontend Senior",
-      "company": "Scout24 Schweiz AG",
+      "title": "Développeur Front-end Senior",
+      "company": "Scout24",
       "location": "Suisse",
       "period": {
         "start": "Février 2020",
         "end": "Septembre 2021"
       },
       "achievements": [
-        "A amélioré et refactorisé Anibis Messenger en utilisant React et TypeScript, obtenant des réactions positives de la direction.",
-        "A migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois."
+        "Amélioré et refactorisé Anibis Messenger en utilisant React et TypeScript, recevant des réactions positives de la direction.",
+        "Migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs le premier mois."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
     {
-      "title": "Développeur Full Stack Senior",
+      "title": "Développeur Front-end Senior",
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
@@ -88,8 +119,8 @@
         "end": "Janvier 2020"
       },
       "achievements": [
-        "A mené de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant Redux pour la gestion d'état et le stockage local pour des performances optimisées, améliorant l'expérience utilisateur et la disponibilité dans tous les pays où le produit était présent.",
-        "A créé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en boutique."
+        "Collaboré sur de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant React et Redux, améliorant les temps de chargement sur les anciennes TV de 20 à 1 seconde.",
+        "Rédigé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en store."
       ],
       "techStack": [
         "React",
@@ -109,11 +140,10 @@
         "end": "Janvier 2018"
       },
       "achievements": [
-        "A travaillé dans plusieurs startups au Brésil en tant que Développeur Frontend, comme Kanoah, DataRisk et Resultados Digitais.",
-        "A dirigé des fonctionnalités importantes pour Kanoah Test Manager, un plugin JIRA pour la gestion des tests, aujourd'hui partie d'Adaptavist.",
-        "A conçu la première version de l'éditeur WYSIWYG de pages d'atterrissage pour RD Station, chez Resultados Digitais.",
-        "A développé de zéro la première version de la plateforme d'apprentissage automatique pour DataRisk.",
-        "A utilisé des technologies comme React, Redux, JavaScript, Git, Angular.js, jQuery et plus encore."
+        "Développé dans des startups au Brésil, telles que Kanoah, DataRisk et Resultados Digitais, en tant que Développeur Front-end.",
+        "Championné des fonctionnalités importantes pour Kanoah Test, un plugin JIRA pour la gestion des tests, aujourd'hui partie d'Adaptavist, sécurisant le premier client international.",
+        "Conçu la première version de l'éditeur de landing page WYSIWYG pour RD Station, chez Resultados Digitais.",
+        "Conçu de zéro le premier brouillon de la plateforme d'apprentissage automatique pour DataRisk."
       ],
       "techStack": [
         "React",
@@ -125,21 +155,6 @@
       ]
     }
   ],
-  "breaks": [
-    {
-      "period": {
-        "start": "Juillet 2024",
-        "end": "Présent"
-      },
-      "achievements": [
-        "Gérer une transition familiale et déménager dans un autre canton pour explorer de nouvelles opportunités.",
-        "Approfondir l'expertise en Rust, Python et .NET pour aider à orienter les futures décisions de carrière.",
-        "Construire des projets personnels full-stack incluant andreyluiz.com, cv.andreyluiz.com et d'autres, pour maintenir les compétences aiguisées.",
-        "Étudier comment l'IA façonne l'avenir du développement logiciel, appliqué aux ingénieurs seniors.",
-        "Commencer la recherche d'emploi en janvier 2025 en cherchant des opportunités impactantes à long terme."
-      ]
-    }
-  ],
   "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
@@ -148,9 +163,20 @@
       "location": "Suisse"
     }
   ],
+  "projects": [
+    {
+      "name": "Bot Discord Taverna Central",
+      "description": "Un bot Discord pour le serveur Taverna Central, construit avec Node.js et Discord.js.",
+      "period": {
+        "start": "Janvier 2025",
+        "end": "Présent"
+      },
+      "techStack": ["Node.js", "Discord.js", "TypeScript"]
+    }
+  ],
   "education": [
     {
-      "degree": "Diplôme en Ingénierie et Développement de Logiciels",
+      "degree": "Diplôme en Ingénierie et Développement Logiciel",
       "institution": "Faculdade Unilagos",
       "year": "Décembre 2011",
       "location": "Brésil"
@@ -163,7 +189,7 @@
     },
     {
       "name": "Français",
-      "level": "Professionnel Complet"
+      "level": "Travail Limité"
     },
     {
       "name": "Portugais",

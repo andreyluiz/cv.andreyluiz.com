@@ -17,7 +17,7 @@ export default function Experience({ experience }: Props) {
       <div className="flex flex-col gap-6 print:gap-3">
         {experience.map((exp) => (
           <div
-            key={exp.title}
+            key={exp.title + exp.company + exp.location + exp.period.start}
             className="break-inside-avoid border-b border-neutral-300 pb-4 last:border-b-0 space-y-4 print:space-y-2"
           >
             <div className="flex items-baseline justify-between gap-2 print:gap-1">

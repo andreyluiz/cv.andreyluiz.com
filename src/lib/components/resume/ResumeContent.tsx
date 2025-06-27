@@ -13,6 +13,7 @@ import Education from "./Education";
 import Experience from "./Experience";
 import Header from "./Header";
 import Languages from "./Languages";
+import Links from "./Links";
 import Projects from "./Projects";
 import Publications from "./Publications";
 import ResumeTailor from "./ResumeTailor";
@@ -53,6 +54,7 @@ export default function ResumeContent({ initialResume }: Props) {
     name,
     title,
     contactInfo,
+    links,
     skills,
     experience,
     breaks,
@@ -81,6 +83,7 @@ export default function ResumeContent({ initialResume }: Props) {
         />
       </div>
       <Header name={name} title={title} contactInfo={contactInfo} />
+      <Links links={links} />
       <Summary summary={summary} />
       <Skills skills={skills} />
       <Experience experience={experience} />
