@@ -163,17 +163,6 @@
       "location": "Suisse"
     }
   ],
-  "projects": [
-    {
-      "name": "Bot Discord Taverna Central",
-      "description": "Un bot Discord pour le serveur Taverna Central, construit avec Node.js et Discord.js.",
-      "period": {
-        "start": "Janvier 2025",
-        "end": "Présent"
-      },
-      "techStack": ["Node.js", "Discord.js", "TypeScript"]
-    }
-  ],
   "education": [
     {
       "degree": "Diplôme en Ingénierie et Développement Logiciel",
