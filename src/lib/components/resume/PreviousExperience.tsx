@@ -10,7 +10,7 @@ export default function PreviousExperience({ experience }: Props) {
   const t = useTranslations("resume.experience");
 
   return (
-    <Section title={t("title")}>
+    <Section title={t("previousExperience")}>
       <div className="flex flex-col gap-3">
         {experience.map((exp) => (
           <div
