@@ -1,26 +1,15 @@
 {
   "name": "Andrey Luiz",
-  "title": "Ingénieur Logiciel Senior",
+  "title": "Ingénieur logiciel senior",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Suisse"
+    "location": "Fribourg, Suisse",
+    "github": "github.com/andreyluiz",
+    "linkedin": "linkedin.com/in/andreyluiz",
+    "website": "andreyluiz.com"
   },
-  "links": [
-    {
-      "name": "Site",
-      "url": "andreyluiz.com"
-    },
-    {
-      "name": "GitHub",
-      "url": "github.com/andreyluiz"
-    },
-    {
-      "name": "LinkedIn",
-      "url": "linkedin.com/in/andreyluiz"
-    }
-  ],
-  "summary": "Ingénieur Logiciel Senior avec plus de 12 ans d'expérience dans le développement web et mobile, spécialisé dans React, TypeScript et les outils d'IA. A dirigé l'adoption de fonctionnalités critiques pour l'équipe CaYC de SonarCloud, optimisant l'efficacité du flux de travail. A développé des projets Web3, incluant un jeu alimenté par Web3 et un portefeuille React Native. Certifié AWS Cloud Practitioner.",
+  "summary": "Ingénieur logiciel senior avec plus de 12 ans d'expérience en développement web et mobile, spécialisé en React, TypeScript et outils d'IA. A dirigé l'adoption de fonctionnalités critiques pour l'équipe CaYC de SonarCloud, optimisant l'efficacité des workflows. A développé des projets Web3, y compris un jeu basé sur Web3 et un portefeuille React Native. A obtenu la certification AWS Certified Cloud Practitioner.",
   "skills": [
     {
       "domain": "Frontend",
@@ -38,7 +27,7 @@
       ]
     },
     {
-      "domain": "Full-Stack & Bases de Données",
+      "domain": "Full-Stack & Bases de données",
       "skills": ["Python", "FastAPI", "Flask", "Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
     },
     {
@@ -52,75 +41,77 @@
   ],
   "experience": [
     {
-      "title": "Ingénieur Full Stack",
+      "title": "Ingénieur full-stack",
       "company": "Timeleap",
       "location": "Suisse",
       "period": {
-        "start": "Juillet 2024",
-        "end": "Janvier 2025"
+        "start": "Juil 2024",
+        "end": "Janv 2025"
       },
       "achievements": [
-        "Développé des projets Web3 utilisant SvelteKit, intégrant différents types de blockchains et contrats intelligents.",
-        "Implémenté une application portefeuille React Native pour un grand client indien, intégrant une blockchain personnalisée et sécurisant les premiers enjeux.",
-        "Créé un jeu utilisant Phaser.js pour un portail de staking, recevant des retours positifs du client et atteignant 600 joueurs le premier mois."
+        "Développement de projets Web3 avec SvelteKit, en intégrant divers types de blockchains et de contrats intelligents.",
+        "Mise en œuvre d'une application de portefeuille React Native pour un grand client indien, en l'intégrant à une blockchain sur mesure et en sécurisant les premiers enjeux.",
+        "Création d'un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et attirant 600 joueurs le premier mois."
       ],
       "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
     },
     {
-      "title": "Développeur Front-end Senior",
+      "title": "Développeur front-end senior",
       "company": "Sonar",
       "location": "Suisse",
       "period": {
-        "start": "Novembre 2022",
+        "start": "Nov 2022",
         "end": "Juin 2024"
       },
       "achievements": [
-        "Livré trois fonctionnalités clés pour la section projet de SonarCloud en React, intégrant des APIs RESTful pour améliorer la récupération de données et optimiser l'intégration de la Taxonomie Clean Code et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
-        "Pionnier de l'adoption de 8 fonctionnalités critiques par l'équipe CaYC, utilisant React et TypeScript, optimisant l'efficacité du flux de travail et la collaboration inter-équipes.",
-        "Migré l'écran des problèmes de SonarCloud vers MIUI en utilisant React, recevant des retours positifs de la direction senior pour l'amélioration du flux de travail quotidien des développeurs."
+        "Livraison de trois fonctionnalités clés pour la section projet de SonarCloud en React, en les intégrant avec des API RESTful pour améliorer la récupération des données et l'intégration de la taxonomie Clean Code, ainsi que la formation des utilisateurs aux meilleures pratiques de codage.",
+        "Pionnier de l'adoption par l'équipe CaYC de 8 fonctionnalités critiques, en utilisant React et TypeScript, optimisant l'efficacité des workflows et la collaboration inter-équipes.",
+        "Migration de l'écran des problèmes de SonarCloud vers MIUI avec React, recevant des retours positifs de la direction pour l'amélioration du workflow quotidien des développeurs."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
-      "title": "Développeur Full Stack Senior",
+      "title": "Développeur full-stack senior",
       "company": "Equip",
       "location": "Suisse",
       "period": {
         "start": "Juin 2021",
-        "end": "Novembre 2022"
+        "end": "Nov 2022"
       },
       "achievements": [
-        "Amélioré la recherche sur carte et les processus de location de l'app Equip, utilisant Svelte et TypeScript, réduisant le temps de développement de prototype de 3 mois.",
-        "Lancé l'app Equip sur le Play Store et l'Apple Store, étendant la portée de l'entreprise dans trois pays.",
-        "Refactorisé la base de code de l'app Equip en utilisant React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités."
+        "Amélioration des processus de recherche sur carte et de location de l'application Equip avec Svelte et TypeScript, réduisant le temps de développement des prototypes de 3 mois.",
+        "Lancement de l'application Equip sur le Play Store et l'Apple Store, étendant la portée de l'entreprise à trois pays.",
+        "Refactorisation de la base de code de l'application Equip avec React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
     {
-      "title": "Développeur Front-end Senior",
+      "title": "Développeur front-end senior",
       "company": "Scout24",
       "location": "Suisse",
       "period": {
-        "start": "Février 2020",
-        "end": "Septembre 2021"
+        "start": "Févr 2020",
+        "end": "Sept 2021"
       },
       "achievements": [
-        "Amélioré et refactorisé Anibis Messenger en utilisant React et TypeScript, recevant des réactions positives de la direction.",
-        "Migré les services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs le premier mois."
+        "Amélioration et refactorisation d'Anibis Messenger avec React et TypeScript, obtenant des réactions positives de la direction.",
+        "Migration des services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois.",
+        "A agi en tant que Scrum Master pour l'équipe, dirigeant les réunions quotidiennes et les sessions de planification de sprint, améliorant la collaboration et la productivité de l'équipe."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
     {
-      "title": "Développeur Front-end Senior",
+      "title": "Développeur front-end senior",
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
-        "start": "Février 2018",
-        "end": "Janvier 2020"
+        "start": "Févr 2018",
+        "end": "Janv 2020"
       },
       "achievements": [
-        "Collaboré sur de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting), utilisant React et Redux, améliorant les temps de chargement sur les anciennes TV de 20 à 1 seconde.",
-        "Rédigé et déployé des fonctionnalités clés pour SkyQ sur PlayStation 4, étendant la portée du produit via des lancements réussis en store."
+        "Collaboration sur de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting) avec React et Redux, améliorant les temps de chargement sur les anciens téléviseurs de 20 à 1 seconde.",
+        "Création et déploiement de fonctionnalités clés pour SkyQ sur PlayStation 4, élargissant la portée du produit grâce à des lancements réussis sur le store.",
+        "Création d'un outil interne en Python pour traiter les journaux des caméras de sécurité, améliorant l'analyse des données et la surveillance de la sécurité."
       ],
       "techStack": [
         "React",
@@ -132,53 +123,98 @@
       ]
     },
     {
-      "title": "Développeur Front-end",
-      "company": "Autres entreprises",
+      "title": "Développeur front-end",
+      "company": "DataRisk",
       "location": "Brésil",
+      "isPrevious": true,
       "period": {
-        "start": "Juin 2015",
-        "end": "Janvier 2018"
+        "start": "Janv 2017",
+        "end": "Févr 2018"
       },
       "achievements": [
-        "Développé dans des startups au Brésil, telles que Kanoah, DataRisk et Resultados Digitais, en tant que Développeur Front-end.",
-        "Championné des fonctionnalités importantes pour Kanoah Test, un plugin JIRA pour la gestion des tests, aujourd'hui partie d'Adaptavist, sécurisant le premier client international.",
-        "Conçu la première version de l'éditeur de landing page WYSIWYG pour RD Station, chez Resultados Digitais.",
-        "Conçu de zéro le premier brouillon de la plateforme d'apprentissage automatique pour DataRisk."
+        "Recherche et démarrage de l'application front-end principale de l'entreprise à partir de zéro avec React et Redux, lançant l'idée commerciale et la vision de l'entreprise, et rendant le premier produit de l'entreprise disponible pour des tests bêta par deux clients.",
+        "A joué un rôle crucial en tant que premier développeur front-end, collaborant étroitement avec un designer pour lancer l'application en phase de test bêta, une étape importante pour la croissance de l'entreprise."
+      ],
+      "techStack": ["JavaScript", "React", "Redux", "Git"]
+    },
+    {
+      "title": "Développeur front-end",
+      "company": "Resultados Digitais",
+      "location": "Brésil",
+      "isPrevious": true,
+      "period": {
+        "start": "Avr 2016",
+        "end": "Déc 2016"
+      },
+      "achievements": [
+        "Conception de fonctionnalités importantes en JavaScript et jQuery pour l'équipe des Landing Pages, garantissant la qualité et le support client.",
+        "Intégration de l'effort de migration de l'éditeur de pages de destination vers un éditeur WYSIWYG, améliorant l'expérience utilisateur lors de la création de pages de destination.",
+        "Collaboration aux décisions et actions pour le chapitre front-end de l'entreprise, en veillant toujours à ce que le développement front-end ait un avenir prometteur."
       ],
       "techStack": [
-        "React",
-        "Redux",
         "JavaScript",
+        "jQuery",
+        "Ruby on Rails",
         "Git",
-        "Angular.js",
-        "jQuery"
+        "Heroku"
       ]
+    },
+    {
+      "title": "Développeur front-end",
+      "company": "Kanoah",
+      "location": "Brésil",
+      "isPrevious": true,
+      "period": {
+        "start": "Juin 2015",
+        "end": "Déc 2015"
+      },
+      "achievements": [
+        "Mise en œuvre de fonctionnalités pour un plugin JIRA pour la gestion des tests avec Angular.js, apportant à l'entreprise ses premiers clients internationaux.",
+        "Direction du développement front-end de la fonctionnalité principale des suites de tests, permettant à l'entreprise de surpasser ses concurrents."
+      ],
+      "techStack": ["JavaScript", "Angular.js", "Git"]
+    },
+    {
+      "title": "Développeur full-stack",
+      "company": "Softplan",
+      "location": "Brésil",
+      "isPrevious": true,
+      "period": {
+        "start": "Mar 2014",
+        "end": "Juin 2015"
+      },
+      "achievements": [
+        "Conception de fonctionnalités critiques pour un outil de traitement de fichiers basé sur Java, améliorant directement les capacités d'analyse de données et renforçant la réputation de l'entreprise dans le domaine des logiciels financiers.",
+        "Création et optimisation de requêtes sur la base de données PostgreSQL pour une interrogation rapide des données.",
+        "Pionnier des interfaces riches en JavaScript et CSS, offrant aux utilisateurs une expérience plus intuitive et conviviale."
+      ],
+      "techStack": ["Java", "JavaScript", "SQL"]
     }
   ],
   "certifications": [
     {
-      "degree": "AWS Certified Cloud Practitioner",
+      "degree": "Certifié AWS Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "Octobre 2023",
+      "year": "Oct 2023",
       "location": "Suisse"
     }
   ],
   "education": [
     {
-      "degree": "Diplôme en Ingénierie et Développement Logiciel",
+      "degree": "Diplôme en génie logiciel et développement",
       "institution": "Faculdade Unilagos",
-      "year": "Décembre 2011",
+      "year": "Déc 2011",
       "location": "Brésil"
     }
   ],
   "languages": [
     {
       "name": "Anglais",
-      "level": "Professionnel Complet"
+      "level": "Professionnel complet"
     },
     {
       "name": "Français",
-      "level": "Travail Limité"
+      "level": "Professionnel limité"
     },
     {
       "name": "Portugais",

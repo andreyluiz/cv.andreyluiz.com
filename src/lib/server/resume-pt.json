@@ -4,23 +4,12 @@
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Suíça"
+    "location": "Fribourg, Suíça",
+    "github": "github.com/andreyluiz",
+    "linkedin": "linkedin.com/in/andreyluiz",
+    "website": "andreyluiz.com"
   },
-  "links": [
-    {
-      "name": "Website",
-      "url": "andreyluiz.com"
-    },
-    {
-      "name": "GitHub",
-      "url": "github.com/andreyluiz"
-    },
-    {
-      "name": "LinkedIn",
-      "url": "linkedin.com/in/andreyluiz"
-    }
-  ],
-  "summary": "Engenheiro de Software Sênior com mais de 12 anos de experiência em desenvolvimento web e mobile, focado em React, TypeScript e ferramentas de IA. Liderou a adoção de funcionalidades críticas para a equipe CaYC do SonarCloud, otimizando a eficiência do fluxo de trabalho. Desenvolveu projetos Web3, incluindo um jogo alimentado por Web3 e uma carteira React Native. Certificado AWS Cloud Practitioner.",
+  "summary": "Engenheiro de Software Sênior com mais de 12 anos de experiência em desenvolvimento web e mobile, com foco em React, TypeScript e ferramentas de IA. Liderou a adoção de recursos críticos para a equipe CaYC do SonarCloud, otimizando a eficiência do fluxo de trabalho. Desenvolveu projetos Web3, incluindo um jogo baseado em Web3 e uma carteira React Native. Obteve a certificação AWS Certified Cloud Practitioner.",
   "skills": [
     {
       "domain": "Frontend",
@@ -52,17 +41,17 @@
   ],
   "experience": [
     {
-      "title": "Engenheiro Full Stack",
+      "title": "Engenheiro Full-Stack",
       "company": "Timeleap",
       "location": "Suíça",
       "period": {
-        "start": "Julho 2024",
-        "end": "Janeiro 2025"
+        "start": "Jul 2024",
+        "end": "Jan 2025"
       },
       "achievements": [
-        "Desenvolveu projetos Web3 usando SvelteKit, integrando com diferentes tipos de blockchains e contratos inteligentes.",
-        "Implementou uma aplicação de carteira React Native para um grande cliente da Índia, integrando com uma blockchain personalizada e garantindo as primeiras apostas.",
-        "Criou um jogo usando Phaser.js para um portal de staking, recebendo feedback positivo do cliente e alcançando 600 jogadores no primeiro mês."
+        "Desenvolveu projetos Web3 usando SvelteKit, integrando com vários tipos de blockchains e contratos inteligentes.",
+        "Implementou um aplicativo de carteira React Native para um grande cliente da Índia, integrando com uma blockchain personalizada e garantindo as primeiras stakes.",
+        "Criou um jogo usando Phaser.js para um portal de staking, obtendo feedback positivo do cliente e garantindo 600 jogadores no primeiro mês."
       ],
       "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
     },
@@ -71,28 +60,28 @@
       "company": "Sonar",
       "location": "Suíça",
       "period": {
-        "start": "Novembro 2022",
-        "end": "Junho 2024"
+        "start": "Nov 2022",
+        "end": "Jun 2024"
       },
       "achievements": [
-        "Entregou três funcionalidades-chave para a seção de projeto do SonarCloud em React, integrando com APIs RESTful para melhorar a recuperação de dados e otimizar a integração da Taxonomia Clean Code e educação dos usuários sobre melhores práticas de codificação.",
-        "Pioneiro na adoção de 8 funcionalidades críticas pela equipe CaYC, usando React e TypeScript, otimizando a eficiência do fluxo de trabalho e colaboração entre equipes.",
-        "Migrou a tela de problemas do SonarCloud para MIUI usando React, recebendo feedback positivo da liderança sênior por melhorar o fluxo de trabalho diário dos desenvolvedores."
+        "Entregou três recursos principais para a seção de projetos do SonarCloud em React, integrando com APIs RESTful para aprimorar a recuperação de dados e melhorar a integração da Taxonomia de Código Limpo e a educação do usuário sobre as melhores práticas de codificação.",
+        "Foi pioneiro na adoção de 8 recursos críticos pela equipe CaYC, usando React e TypeScript, otimizando a eficiência do fluxo de trabalho e a colaboração entre equipes.",
+        "Migrou a tela de issues do SonarCloud para MIUI usando React, recebendo feedback positivo da liderança sênior por melhorar o fluxo de trabalho diário dos desenvolvedores."
       ],
       "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
     },
     {
-      "title": "Desenvolvedor Full Stack Sênior",
+      "title": "Desenvolvedor Full-Stack Sênior",
       "company": "Equip",
       "location": "Suíça",
       "period": {
-        "start": "Junho 2021",
-        "end": "Novembro 2022"
+        "start": "Jun 2021",
+        "end": "Nov 2022"
       },
       "achievements": [
-        "Melhorou a busca no mapa e processos de aluguel do app Equip, usando Svelte e TypeScript, reduzindo o tempo de desenvolvimento de protótipo em 3 meses.",
-        "Lançou o app Equip na Play Store e Apple Store, expandindo o alcance da empresa em três países.",
-        "Refatorou a base de código do app Equip usando React Native e TypeScript, reduzindo o tempo de iteração em novas funcionalidades."
+        "Aprimorou os processos de pesquisa de mapa e aluguel do aplicativo Equip, usando Svelte e TypeScript, reduzindo o tempo de desenvolvimento de protótipos em 3 meses.",
+        "Lançou o aplicativo Equip na Play Store e na Apple Store, expandindo o alcance da empresa em três países.",
+        "Refatorou a base de código do aplicativo Equip usando React Native e TypeScript, reduzindo o tempo para iterar em novos recursos."
       ],
       "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
     },
@@ -101,12 +90,13 @@
       "company": "Scout24",
       "location": "Suíça",
       "period": {
-        "start": "Fevereiro 2020",
-        "end": "Setembro 2021"
+        "start": "Fev 2020",
+        "end": "Set 2021"
       },
       "achievements": [
-        "Melhorou e refatorou o Anibis Messenger usando React e TypeScript, recebendo reações positivas da gerência.",
-        "Migrou os serviços de mensageria do Twilio para Sendbird, garantindo adoção completa por 100% dos usuários no primeiro mês."
+        "Aprimorou e refatorou o Anibis Messenger usando React e TypeScript, obtendo reações positivas da gerência.",
+        "Migrou os serços de mensagens da Twilio para a Sendbird, garantindo a adoção total por 100% dos usuários no primeiro mês.",
+        "Atuou como Scrum Master para a equipe, liderando standups diários e sessões de planejamento de sprint, melhorando a colaboração e a produtividade da equipe."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -115,12 +105,13 @@
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
-        "start": "Fevereiro 2018",
-        "end": "Janeiro 2020"
+        "start": "Fev 2018",
+        "end": "Jan 2020"
       },
       "achievements": [
-        "Colaborou em novas funcionalidades para a aplicação SkyQ (British Sky Broadcasting), usando React e Redux, melhorando os tempos de carregamento em TVs antigas de 20 para 1 segundo.",
-        "Escreveu e implantou funcionalidades-chave para SkyQ no PlayStation 4, expandindo o alcance do produto através de lançamentos bem-sucedidos na loja."
+        "Colaborou em novos recursos para o aplicativo SkyQ (British Sky Broadcasting), usando React e Redux, melhorando os tempos de carregamento em TVs antigas de 20 para 1 segundo.",
+        "Criou e implantou recursos importantes para o SkyQ no PlayStation 4, expandindo o alcance do produto por meio de lançamentos bem-sucedidos na loja.",
+        "Criou uma ferramenta interna em Python para processar logs de câmeras de segurança, aprimorando a análise de dados e o monitoramento de segurança."
       ],
       "techStack": [
         "React",
@@ -133,33 +124,78 @@
     },
     {
       "title": "Desenvolvedor Front-end",
-      "company": "Outras empresas",
+      "company": "DataRisk",
       "location": "Brasil",
+      "isPrevious": true,
       "period": {
-        "start": "Junho 2015",
-        "end": "Janeiro 2018"
+        "start": "Jan 2017",
+        "end": "Fev 2018"
       },
       "achievements": [
-        "Desenvolveu em startups no Brasil, como Kanoah, DataRisk e Resultados Digitais, como Desenvolvedor Front-end.",
-        "Defendeu funcionalidades importantes para o Kanoah Test, um plugin JIRA para gestão de testes, hoje parte da Adaptavist, garantindo o primeiro cliente internacional.",
-        "Concebeu a primeira versão do editor de landing page WYSIWYG para RD Station, na Resultados Digitais.",
-        "Concebeu do zero o primeiro rascunho da plataforma de machine learning para DataRisk."
+        "Pesquisou e iniciou o principal aplicativo de front-end da empresa do zero usando React e Redux, iniciando a ideia de negócio e a visão da empresa e disponibilizando o primeiro produto da empresa para teste beta por dois clientes.",
+        "Desempenhou um papel crucial como o primeiro desenvolvedor de front-end, colaborando de perto com um designer para lançar o aplicativo em teste beta, um marco significativo para o crescimento da empresa."
+      ],
+      "techStack": ["JavaScript", "React", "Redux", "Git"]
+    },
+    {
+      "title": "Desenvolvedor Front-end",
+      "company": "Resultados Digitais",
+      "location": "Brasil",
+      "isPrevious": true,
+      "period": {
+        "start": "Abr 2016",
+        "end": "Dez 2016"
+      },
+      "achievements": [
+        "Concebeu recursos importantes em JavaScript e jQuery para a equipe de Landing Pages, garantindo a qualidade e o suporte ao cliente.",
+        "Integrou o esforço para migrar o editor de landing pages para um editor WYSIWYG, melhorando a experiência do usuário na criação de landing pages.",
+        "Colaborou com decisões e ações para o capítulo de front-end da empresa, sempre garantindo que o desenvolvimento de front-end tivesse um futuro brilhante pela frente."
       ],
       "techStack": [
-        "React",
-        "Redux",
         "JavaScript",
+        "jQuery",
+        "Ruby on Rails",
         "Git",
-        "Angular.js",
-        "jQuery"
+        "Heroku"
       ]
+    },
+    {
+      "title": "Desenvolvedor Front-end",
+      "company": "Kanoah",
+      "location": "Brasil",
+      "isPrevious": true,
+      "period": {
+        "start": "Jun 2015",
+        "end": "Dez 2015"
+      },
+      "achievements": [
+        "Implementou recursos para um plugin do JIRA para gerenciamento de testes usando Angular.js, dando à empresa os primeiros clientes internacionais.",
+        "Liderou o desenvolvimento de front-end do principal recurso de suítes de teste, permitindo que a empresa superasse os concorrentes."
+      ],
+      "techStack": ["JavaScript", "Angular.js", "Git"]
+    },
+    {
+      "title": "Desenvolvedor Full-Stack",
+      "company": "Softplan",
+      "location": "Brasil",
+      "isPrevious": true,
+      "period": {
+        "start": "Mar 2014",
+        "end": "Jun 2015"
+      },
+      "achievements": [
+        "Projetou recursos críticos para uma ferramenta de processamento de arquivos baseada em Java, aprimorando diretamente as capacidades de análise de dados e impulsionando a reputação da empresa em software financeiro.",
+        "Criou e otimizou consultas no banco de dados PostgreSQL para consulta rápida de dados.",
+        "Foi pioneiro em interfaces ricas em JavaScript e CSS, proporcionando aos usuários uma experiência mais intuitiva e amigável."
+      ],
+      "techStack": ["Java", "JavaScript", "SQL"]
     }
   ],
   "certifications": [
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "Outubro 2023",
+      "year": "Out 2023",
       "location": "Suíça"
     }
   ],
@@ -167,7 +203,7 @@
     {
       "degree": "Diploma em Engenharia e Desenvolvimento de Software",
       "institution": "Faculdade Unilagos",
-      "year": "Dezembro 2011",
+      "year": "Dez 2011",
       "location": "Brasil"
     }
   ],
@@ -178,7 +214,7 @@
     },
     {
       "name": "Francês",
-      "level": "Trabalho Limitado"
+      "level": "Profissional Limitado"
     },
     {
       "name": "Português",
