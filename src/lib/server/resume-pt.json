@@ -28,11 +28,28 @@
     },
     {
       "domain": "Full-Stack & Bancos de Dados",
-      "skills": ["Python", "FastAPI", "Flask", "Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+      "skills": [
+        "Python",
+        "FastAPI",
+        "Flask",
+        "Node.js",
+        "Next.js",
+        "SvelteKit",
+        "MongoDB",
+        "PostgreSQL"
+      ]
     },
     {
       "domain": "Ferramentas de IA",
-      "skills": ["Cursor", "Cline", "Gemini CLI", "Claude", "Gemini", "OpenAI", "ChatGPT"]
+      "skills": [
+        "Cursor",
+        "Cline",
+        "Gemini CLI",
+        "Claude",
+        "Gemini",
+        "OpenAI",
+        "ChatGPT"
+      ]
     },
     {
       "domain": "Ferramentas & Plataformas",
@@ -53,7 +70,15 @@
         "Implementou um aplicativo de carteira React Native para um grande cliente da Índia, integrando com uma blockchain personalizada e garantindo as primeiras stakes.",
         "Criou um jogo usando Phaser.js para um portal de staking, obtendo feedback positivo do cliente e garantindo 600 jogadores no primeiro mês."
       ],
-      "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
+      "techStack": [
+        "SvelteKit",
+        "React Native",
+        "Phaser.js",
+        "Node.js",
+        "TypeScript",
+        "Git",
+        "AWS"
+      ]
     },
     {
       "title": "Desenvolvedor Front-end Sênior",
@@ -151,13 +176,7 @@
         "Integrou o esforço para migrar o editor de landing pages para um editor WYSIWYG, melhorando a experiência do usuário na criação de landing pages.",
         "Colaborou com decisões e ações para o capítulo de front-end da empresa, sempre garantindo que o desenvolvimento de front-end tivesse um futuro brilhante pela frente."
       ],
-      "techStack": [
-        "JavaScript",
-        "jQuery",
-        "Ruby on Rails",
-        "Git",
-        "Heroku"
-      ]
+      "techStack": ["JavaScript", "jQuery", "Ruby on Rails", "Git", "Heroku"]
     },
     {
       "title": "Desenvolvedor Front-end",

@@ -28,11 +28,28 @@
     },
     {
       "domain": "Full-Stack & Databases",
-      "skills": ["Python", "FastAPI", "Flask", "Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+      "skills": [
+        "Python",
+        "FastAPI",
+        "Flask",
+        "Node.js",
+        "Next.js",
+        "SvelteKit",
+        "MongoDB",
+        "PostgreSQL"
+      ]
     },
     {
       "domain": "AI Tools",
-      "skills": ["Cursor", "Cline", "Gemini CLI", "Claude", "Gemini", "OpenAI", "ChatGPT"]
+      "skills": [
+        "Cursor",
+        "Cline",
+        "Gemini CLI",
+        "Claude",
+        "Gemini",
+        "OpenAI",
+        "ChatGPT"
+      ]
     },
     {
       "domain": "Tools & Platforms",
@@ -53,7 +70,15 @@
         "Implemented a React Native wallet application for a big client from India, integrating with a custom made blockchain and securing the first stakes.",
         "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month."
       ],
-      "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
+      "techStack": [
+        "SvelteKit",
+        "React Native",
+        "Phaser.js",
+        "Node.js",
+        "TypeScript",
+        "Git",
+        "AWS"
+      ]
     },
     {
       "title": "Senior Front-end Developer",
@@ -151,13 +176,7 @@
         "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages.",
         "Collaborated with decisions and actions for the front end chapter of the company, always ensuring the front end development had a bright future ahead."
       ],
-      "techStack": [
-        "JavaScript",
-        "jQuery",
-        "Ruby on Rails",
-        "Git",
-        "Heroku"
-      ]
+      "techStack": ["JavaScript", "jQuery", "Ruby on Rails", "Git", "Heroku"]
     },
     {
       "title": "Front-end Developer",

@@ -28,11 +28,28 @@
     },
     {
       "domain": "Full-Stack & Bases de données",
-      "skills": ["Python", "FastAPI", "Flask", "Node.js", "Next.js", "SvelteKit", "MongoDB", "PostgreSQL"]
+      "skills": [
+        "Python",
+        "FastAPI",
+        "Flask",
+        "Node.js",
+        "Next.js",
+        "SvelteKit",
+        "MongoDB",
+        "PostgreSQL"
+      ]
     },
     {
       "domain": "Outils d'IA",
-      "skills": ["Cursor", "Cline", "Gemini CLI", "Claude", "Gemini", "OpenAI", "ChatGPT"]
+      "skills": [
+        "Cursor",
+        "Cline",
+        "Gemini CLI",
+        "Claude",
+        "Gemini",
+        "OpenAI",
+        "ChatGPT"
+      ]
     },
     {
       "domain": "Outils & Plateformes",
@@ -53,7 +70,15 @@
         "Mise en œuvre d'une application de portefeuille React Native pour un grand client indien, en l'intégrant à une blockchain sur mesure et en sécurisant les premiers enjeux.",
         "Création d'un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et attirant 600 joueurs le premier mois."
       ],
-      "techStack": ["SvelteKit", "React Native", "Phaser.js", "Node.js", "TypeScript", "Git", "AWS"]
+      "techStack": [
+        "SvelteKit",
+        "React Native",
+        "Phaser.js",
+        "Node.js",
+        "TypeScript",
+        "Git",
+        "AWS"
+      ]
     },
     {
       "title": "Développeur front-end senior",
@@ -151,13 +176,7 @@
         "Intégration de l'effort de migration de l'éditeur de pages de destination vers un éditeur WYSIWYG, améliorant l'expérience utilisateur lors de la création de pages de destination.",
         "Collaboration aux décisions et actions pour le chapitre front-end de l'entreprise, en veillant toujours à ce que le développement front-end ait un avenir prometteur."
       ],
-      "techStack": [
-        "JavaScript",
-        "jQuery",
-        "Ruby on Rails",
-        "Git",
-        "Heroku"
-      ]
+      "techStack": ["JavaScript", "jQuery", "Ruby on Rails", "Git", "Heroku"]
     },
     {
       "title": "Développeur front-end",

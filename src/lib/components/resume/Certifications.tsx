@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import Title from "@/lib/components/ui/Title";
 import type { Variant } from "@/lib/types";
 import { Section } from "../ui/Section";
 

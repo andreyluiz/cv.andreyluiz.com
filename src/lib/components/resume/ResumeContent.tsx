@@ -79,12 +79,12 @@ export default function ResumeContent({ initialResume }: Props) {
           />
         )}
         <div className="flex items-center justify-center gap-2">
-        <Select
-          options={langsOptions}
-          value={locale as string}
-          onChange={handleLangChange}
-        />
-        <ThemeSwitcher />
+          <Select
+            options={langsOptions}
+            value={locale as string}
+            onChange={handleLangChange}
+          />
+          <ThemeSwitcher />
         </div>
       </div>
       <Header name={name} title={title} summary={summary} />

@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import type React from "react";
 import type { PropsWithChildren } from "react";
+import { cn } from "@/lib/utils";
 
 const titleVariants = cva("text-neutral-800 dark:text-neutral-100", {
   variants: {

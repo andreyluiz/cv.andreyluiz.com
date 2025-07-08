@@ -27,9 +27,7 @@ export default function Header({ name, title, summary }: Props) {
             <Title tag="h2">{title}</Title>
           </div>
         </div>
-        <div className="mt-4">
-          {summary}
-        </div>
+        <div className="mt-4">{summary}</div>
       </div>
     </header>
   );

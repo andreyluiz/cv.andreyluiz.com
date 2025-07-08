@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import type { Variant } from "@/lib/types";
 import { Section } from "../ui/Section";
-import Title from "../ui/Title";
 
 interface Props {
   projects: Variant["projects"];
