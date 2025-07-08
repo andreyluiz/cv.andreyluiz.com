@@ -45,8 +45,8 @@
       "company": "Timeleap",
       "location": "Switzerland",
       "period": {
-        "start": "July 2024",
-        "end": "January 2025"
+        "start": "Jul 2024",
+        "end": "Jan 2025"
       },
       "achievements": [
         "Developed Web3 projects using SvelteKit, integrating with many types of blockchains and smart contracts.",
@@ -60,8 +60,8 @@
       "company": "Sonar",
       "location": "Switzerland",
       "period": {
-        "start": "November 2022",
-        "end": "June 2024"
+        "start": "Nov 2022",
+        "end": "Jun 2024"
       },
       "achievements": [
         "Delivered three key features for SonarCloud's project section in React, integrating with RESTful APIs to enhance data retrieval and improve Clean Code Taxonomy integration and user education on coding best practices.",
@@ -75,8 +75,8 @@
       "company": "Equip",
       "location": "Switzerland",
       "period": {
-        "start": "June 2021",
-        "end": "November 2022"
+        "start": "Jun 2021",
+        "end": "Nov 2022"
       },
       "achievements": [
         "Enhanced Equip app's map search and rental processes, using Svelte and TypeScript, reducing prototype development time by 3 months.",
@@ -90,8 +90,8 @@
       "company": "Scout24",
       "location": "Switzerland",
       "period": {
-        "start": "February 2020",
-        "end": "September 2021"
+        "start": "Feb 2020",
+        "end": "Sep 2021"
       },
       "achievements": [
         "Enhanced and refactored Anibis Messenger using React and TypeScript, getting positive reactions from management.",
@@ -105,8 +105,8 @@
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
-        "start": "February 2018",
-        "end": "January 2020"
+        "start": "Feb 2018",
+        "end": "Jan 2020"
       },
       "achievements": [
         "Collaborated on new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
@@ -128,8 +128,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "January 2017",
-        "end": "February 2018"
+        "start": "Jan 2017",
+        "end": "Feb 2018"
       },
       "achievements": [
         "Researched and started the company's main front end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
@@ -143,8 +143,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "April 2016",
-        "end": "December 2016"
+        "start": "Apr 2016",
+        "end": "Dec 2016"
       },
       "achievements": [
         "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
@@ -165,7 +165,7 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "June 2015",
+        "start": "Jun 2015",
         "end": "Dec 2015"
       },
       "achievements": [
@@ -180,8 +180,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "March 2014",
-        "end": "June 2015"
+        "start": "Mar 2014",
+        "end": "Jun 2015"
       },
       "achievements": [
         "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
@@ -195,7 +195,7 @@
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "October 2023",
+      "year": "Oct 2023",
       "location": "Switzerland"
     }
   ],
@@ -203,7 +203,7 @@
     {
       "degree": "Diploma in Software Engineering and Development",
       "institution": "Faculdade Unilagos",
-      "year": "December 2011",
+      "year": "Dec 2011",
       "location": "Brazil"
     }
   ],
