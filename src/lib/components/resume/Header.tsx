@@ -1,5 +1,5 @@
-import Title from "@/lib/components/ui/Title";
 import Image from "next/image";
+import Title from "@/lib/components/ui/Title";
 
 interface Props {
   name: string;

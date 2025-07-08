@@ -1,12 +1,13 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { langsOptions } from "@/lib/lang";
 import { getResume } from "@/lib/server/actions";
 import type { Variant } from "@/lib/types";
-import { useParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
 import Select from "../ui/Select";
+import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import Break from "./Break";
 import Certifications from "./Certifications";
 import ContactInfo from "./ContactInfo";
@@ -65,8 +66,8 @@ export default function ResumeContent({ initialResume }: Props) {
     projects,
   } = currentResume;
 
-  const recentExperiences = experience.filter(exp => !exp.isPrevious);
-  const previousExperiences = experience.filter(exp => exp.isPrevious);
+  const recentExperiences = experience.filter((exp) => !exp.isPrevious);
+  const previousExperiences = experience.filter((exp) => exp.isPrevious);
 
   return (
     <main className="mx-auto max-w-[210mm] w-[210mm] space-y-6 bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 p-[10mm] print:p-0">
@@ -77,11 +78,14 @@ export default function ResumeContent({ initialResume }: Props) {
             onResumeUpdate={setCurrentResume}
           />
         )}
+        <div className="flex items-center justify-center gap-2">
         <Select
           options={langsOptions}
           value={locale as string}
           onChange={handleLangChange}
         />
+        <ThemeSwitcher />
+        </div>
       </div>
       <Header name={name} title={title} summary={summary} />
       <ContactInfo contactInfo={contactInfo} />
