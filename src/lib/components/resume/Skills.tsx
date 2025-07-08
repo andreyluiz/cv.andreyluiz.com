@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Title from "@/lib/components/ui/Title";
 import type { Variant } from "@/lib/types";
+import { Section } from "../ui/Section";
 
 interface Props {
   skills: Variant["skills"];
@@ -14,16 +15,10 @@ export default function Skills({ skills }: Props) {
   }
 
   return (
-    <section>
-      <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        {t("title")}
-      </Title>
+    <Section title={t("title")}>
       <ul className="list-disc ml-4 dark:text-neutral-300">
         {skills.map((skill) => (
-          <li
-            key={skill.domain}
-            className="leading-relaxed print:leading-normal"
-          >
+          <li key={skill.domain} className="leading-normal">
             <span className="font-bold">{skill.domain}:</span>{" "}
             <span className="text-neutral-600 dark:text-neutral-400">
               {skill.skills?.join(", ")}
@@ -31,6 +26,6 @@ export default function Skills({ skills }: Props) {
           </li>
         ))}
       </ul>
-    </section>
+    </Section>
   );
 }

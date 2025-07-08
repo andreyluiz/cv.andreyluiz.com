@@ -1,17 +1,13 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
 import Title from "@/lib/components/ui/Title";
-import type { Variant } from "@/lib/types";
+import Image from "next/image";
 
 interface Props {
   name: string;
   title: string;
-  contactInfo: Variant["contactInfo"];
+  summary: string;
 }
 
-export default function Header({ name, title, contactInfo }: Props) {
-  const t = useTranslations("resume.header");
-
+export default function Header({ name, title, summary }: Props) {
   return (
     <header className="flex items-center justify-between gap-8">
       <Image
@@ -31,25 +27,8 @@ export default function Header({ name, title, contactInfo }: Props) {
             <Title tag="h2">{title}</Title>
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-[auto_1fr] gap-x-24">
-          <div className="w-16">
-            <span className="font-bold">{t("email")}:</span>
-          </div>
-          <div>{contactInfo.email}</div>
-          <div className="w-16">
-            <span className="font-bold">{t("phone")}:</span>
-          </div>
-          <div>{contactInfo.phone}</div>
-
-          <div className="w-16">
-            <span className="font-bold">{t("location")}:</span>
-          </div>
-          <div>{contactInfo.location}</div>
-
-          <div className="w-16">
-            <span className="font-bold">{t("available")}:</span>
-          </div>
-          <div>{t("immediately")}</div>
+        <div className="mt-4">
+          {summary}
         </div>
       </div>
     </header>

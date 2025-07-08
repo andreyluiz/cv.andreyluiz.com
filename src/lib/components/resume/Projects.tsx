@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import type { Variant } from "@/lib/types";
+import { Section } from "../ui/Section";
 import Title from "../ui/Title";
 
 interface Props {
@@ -12,15 +13,12 @@ export default function Projects({ projects }: Props) {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <section className="break-inside-avoid">
-      <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        {t("title")}
-      </Title>
-      <div className="flex flex-col gap-4 print:gap-2">
+    <Section title={t("title")}>
+      <div className="flex flex-col gap-2">
         {projects.map((project) => (
           <div
             key={project.name}
-            className="border-b border-neutral-200 pb-4 last:border-b-0"
+            className="not-last:border-b border-neutral-200 not-last:pb-4"
           >
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-center gap-2">
@@ -44,6 +42,6 @@ export default function Projects({ projects }: Props) {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

@@ -4,22 +4,11 @@
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Switzerland"
+    "location": "Fribourg, Switzerland",
+    "github": "github.com/andreyluiz",
+    "linkedin": "linkedin.com/in/andreyluiz",
+    "website": "andreyluiz.com"
   },
-  "links": [
-    {
-      "name": "Website",
-      "url": "andreyluiz.com"
-    },
-    {
-      "name": "GitHub",
-      "url": "github.com/andreyluiz"
-    },
-    {
-      "name": "LinkedIn",
-      "url": "linkedin.com/in/andreyluiz"
-    }
-  ],
   "summary": "Senior Software Engineer with 12+ years of experience in web and mobile development, focused on React, TypeScript, and AI tools. Led the adoption of critical features for SonarCloud's CaYC team, streamlining workflow efficiency. Developed Web3 projects, including a Web3 powered game, and a React Native wallet. Earned AWS Certified Cloud Practitioner certification.",
   "skills": [
     {
@@ -106,7 +95,8 @@
       },
       "achievements": [
         "Enhanced and refactored Anibis Messenger using React and TypeScript, getting positive reactions from management.",
-        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month."
+        "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month.",
+        "Acted as a Scrum Master for the team, leading daily standups and sprint planning sessions, improving team collaboration and productivity."
       ],
       "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
     },
@@ -120,7 +110,8 @@
       },
       "achievements": [
         "Collaborated on new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
-        "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases."
+        "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases.",
+        "Crafted an internal tool in Python to process security camera logs, enhancing data analysis and security monitoring."
       ],
       "techStack": [
         "React",
@@ -133,26 +124,71 @@
     },
     {
       "title": "Front-end Developer",
-      "company": "Other companies",
+      "company": "DataRisk",
       "location": "Brazil",
+      "isPrevious": true,
       "period": {
-        "start": "June 2015",
-        "end": "January 2018"
+        "start": "January 2017",
+        "end": "February 2018"
       },
       "achievements": [
-        "Developed on startups in Brazil, such as Kanoah, DataRisk, and Resultados Digitais, as a Front-end Developer.",
-        "Championed important features for Kanoah Test, a JIRA plugin for testing management, today part of Adaptavist, securing the first international client.",
-        "Conveined the first version of the WYSIWYG landing page editor for RD Station, at Resultados Digitais.",
-        "Conceived from ground up the first draft of the machine learning platform for DataRisk."
+        "Researched and started the company's main front end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
+        "Played a crucial role as the first front-end developer, collaborating closely with a designer to launch the application into beta testing, a significant milestone for the company's growth."
+      ],
+      "techStack": ["JavaScript", "React", "Redux", "Git"]
+    },
+    {
+      "title": "Front-end Developer",
+      "company": "Resultados Digitais",
+      "location": "Brazil",
+      "isPrevious": true,
+      "period": {
+        "start": "April 2016",
+        "end": "December 2016"
+      },
+      "achievements": [
+        "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
+        "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages.",
+        "Collaborated with decisions and actions for the front end chapter of the company, always ensuring the front end development had a bright future ahead."
       ],
       "techStack": [
-        "React",
-        "Redux",
         "JavaScript",
+        "jQuery",
+        "Ruby on Rails",
         "Git",
-        "Angular.js",
-        "jQuery"
+        "Heroku"
       ]
+    },
+    {
+      "title": "Front-end Developer",
+      "company": "Kanoah",
+      "location": "Brazil",
+      "isPrevious": true,
+      "period": {
+        "start": "June 2015",
+        "end": "Dec 2015"
+      },
+      "achievements": [
+        "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company the first international customers.",
+        "Led the front end development of the core feature of testing suites, allowing the company to outperform competitors."
+      ],
+      "techStack": ["JavaScript", "Angular.js", "Git"]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Softplan",
+      "location": "Brazil",
+      "isPrevious": true,
+      "period": {
+        "start": "March 2014",
+        "end": "June 2015"
+      },
+      "achievements": [
+        "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
+        "Created and optimized queries on PostgreSQL database for fast data querying.",
+        "Pioneered on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
+      ],
+      "techStack": ["Java", "JavaScript", "SQL"]
     }
   ],
   "certifications": [

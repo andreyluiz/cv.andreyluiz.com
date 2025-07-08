@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
+import type { Metadata } from "next";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`antialiased bg-neutral-200 dark:bg-neutral-800 text-md print:text-sm font-sans`}
+        className={`antialiased bg-neutral-200 dark:bg-neutral-800 text-[10pt] font-sans`}
       >
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

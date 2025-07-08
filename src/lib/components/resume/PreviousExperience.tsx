@@ -6,7 +6,7 @@ interface Props {
   experience: Variant["experience"];
 }
 
-export default function Experience({ experience }: Props) {
+export default function PreviousExperience({ experience }: Props) {
   const t = useTranslations("resume.experience");
 
   return (
@@ -15,7 +15,7 @@ export default function Experience({ experience }: Props) {
         {experience.map((exp) => (
           <div
             key={exp.title + exp.company + exp.location + exp.period.start}
-            className="break-inside-avoid not-last:border-b border-neutral-300 not-last:pb-4 space-y-2"
+            className="break-inside-avoid space-y-2"
           >
             <div className="flex items-baseline justify-between gap-1">
               <div className="flex items-baseline gap-0.5">
@@ -31,23 +31,6 @@ export default function Experience({ experience }: Props) {
                 {exp.period.start} - {exp.period.end}
               </div>
             </div>
-            {exp.achievements.length > 0 && (
-              <ul className="list-disc ml-4">
-                {exp.achievements.map((achievement) => (
-                  <li key={achievement} className="leading-normal">
-                    {achievement}
-                  </li>
-                ))}
-              </ul>
-            )}
-            {exp.techStack?.length > 0 && (
-              <div className="flex items-baseline">
-                <span className="font-bold">{t("tech_stack")}:</span>&nbsp;
-                <span className="text-neutral-600 dark:text-neutral-400">
-                  {exp.techStack.join(", ")}
-                </span>
-              </div>
-            )}
           </div>
         ))}
       </div>

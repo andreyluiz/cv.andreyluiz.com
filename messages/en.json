@@ -8,18 +8,21 @@
     },
     "experience": {
       "tech_stack": "Tech Stack",
-      "title": "Professional Experience"
+      "title": "Professional Experience",
+      "previousExperience": "Previous Experience"
     },
     "breaks": {
       "title": "Career Breaks & Independent Projects",
       "description": "Took a purposeful career break to:"
     },
-    "header": {
-      "available": "Available",
+    "contactInfo": {
+      "title": "Contact Info",
       "email": "Email",
-      "immediately": "Immediately",
       "location": "Location",
-      "phone": "Phone"
+      "phone": "Phone",
+      "linkedin": "LinkedIn",
+      "github": "Github",
+      "website": "Website"
     },
     "languages": {
       "title": "Languages"
@@ -32,13 +35,10 @@
       "title": "Publications"
     },
     "skills": {
-      "title": "Core Skills"
+      "title": "Skills"
     },
     "summary": {
       "title": "Summary"
-    },
-    "links": {
-      "title": "Links"
     }
   }
 }

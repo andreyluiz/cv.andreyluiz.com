@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Title from "@/lib/components/ui/Title";
 import type { Variant } from "@/lib/types";
+import { Section } from "../ui/Section";
 
 interface Props {
   certifications: Variant["certifications"];
@@ -12,15 +13,12 @@ export default function Certifications({ certifications }: Props) {
   if (!certifications?.length) return null;
 
   return (
-    <section className="break-inside-avoid">
-      <Title tag="h2" className="mb-4 border-b-2 border-neutral-300 pb-2">
-        {t("title")}
-      </Title>
-      <div className="flex flex-col gap-4 print:gap-2">
+    <Section title={t("title")}>
+      <div className="flex flex-col gap-2">
         {certifications.map((cert) => (
           <div
             key={cert.degree}
-            className="border-b border-neutral-200 pb-4 last:border-b-0"
+            className="not-last:border-b border-neutral-200 not-last:pb-4"
           >
             <div className="flex flex-col gap-1">
               <span className="font-bold">{cert.degree}</span>
@@ -31,6 +29,6 @@ export default function Certifications({ certifications }: Props) {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

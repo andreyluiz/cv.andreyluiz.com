@@ -2,12 +2,12 @@
 
 @page {
   size: A4;
-  margin: 16mm 16mm 16mm 16mm;
+  margin: 10mm;
 }
 
 @media print {
   body {
     font-family: "Arial", sans-serif;
-    font-size: 12pt;
+    font-size: 10pt;
   }
 }

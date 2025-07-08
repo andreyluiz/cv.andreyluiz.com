@@ -8,18 +8,21 @@
     },
     "experience": {
       "tech_stack": "Stack Technologique",
-      "title": "Expérience Professionnelle"
+      "title": "Expérience Professionnelle",
+      "previousExperience": "Expérience Précédente"
     },
     "breaks": {
       "title": "Carrière Breaks & Projets Indépendants",
       "description": "Pris une pause de carrière pour:"
     },
-    "header": {
-      "available": "Disponible",
-      "email": "E-mail",
-      "immediately": "Immédiatement",
-      "location": "Localisation",
-      "phone": "Téléphone"
+    "contactInfo": {
+      "title": "Information de Contact",
+      "email": "Email",
+      "location": "Place",
+      "phone": "Téléphone",
+      "linkedin": "LinkedIn",
+      "github": "Github",
+      "website": "Site web"
     },
     "languages": {
       "title": "Langues"
@@ -36,9 +39,6 @@
     },
     "summary": {
       "title": "Résumé"
-    },
-    "links": {
-      "title": "Liens"
     }
   }
 }
