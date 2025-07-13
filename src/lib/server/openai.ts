@@ -104,6 +104,12 @@ Return the modified resume in the exact same JSON structure as the input, but wi
                       type: "array",
                       items: { type: "string" },
                     },
+                    isPrevious: {
+                      type: "boolean",
+                      description:
+                        "Indicates if this experience should be displayed on the Previous Experiences section.",
+                      default: false,
+                    }
                   },
                   required: [
                     "title",

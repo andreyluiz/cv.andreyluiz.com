@@ -91,7 +91,7 @@ export default function ResumeContent({ initialResume }: Props) {
       <ContactInfo contactInfo={contactInfo} />
       <Skills skills={skills} />
       <Experience experience={recentExperiences} />
-      <PreviousExperience experience={previousExperiences} />
+      {previousExperiences.length && <PreviousExperience experience={previousExperiences} />}
       <Break breaks={breaks} />
       <Certifications certifications={certifications} />
       <Education education={education} />
