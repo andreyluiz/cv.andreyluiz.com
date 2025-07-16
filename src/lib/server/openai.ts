@@ -55,6 +55,12 @@ Return the modified resume in the exact same JSON structure as the input, but wi
               summary: {
                 type: "string",
               },
+              generalSkills: {
+                type: "array",
+                items: {
+                  type: "string",
+                },
+              },
               skills: {
                 type: "array",
                 items: {
@@ -161,6 +167,12 @@ Return the modified resume in the exact same JSON structure as the input, but wi
                     url: { type: "string" },
                   },
                   required: ["title", "location", "url"],
+                },
+              },
+              personalityTraits: {
+                type: "array",
+                items: {
+                  type: "string",
                 },
               },
               changes: {

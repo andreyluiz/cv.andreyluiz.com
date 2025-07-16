@@ -9,8 +9,10 @@ import ContactInfo from "./ContactInfo";
 import Controls from "./Controls";
 import Education from "./Education";
 import Experience from "./Experience";
+import GeneralSkills from "./GeneralSkills";
 import Header from "./Header";
 import Languages from "./Languages";
+import PersonalityTraits from "./PersonalityTraits";
 import PreviousExperience from "./PreviousExperience";
 import Projects from "./Projects";
 import Publications from "./Publications";
@@ -46,6 +48,8 @@ export default function ResumeContent({ initialResume }: Props) {
     publications,
     summary,
     projects,
+    generalSkills,
+    personalityTraits,
   } = currentResume;
 
   const recentExperiences = experience.filter((exp) => !exp.isPrevious);
@@ -60,15 +64,17 @@ export default function ResumeContent({ initialResume }: Props) {
       <hr className="border-neutral-200 dark:border-neutral-700" />
       <Header name={name} title={title} summary={summary} />
       <ContactInfo contactInfo={contactInfo} />
-      <Skills skills={skills} />
+      <GeneralSkills skills={generalSkills} />
       <Experience experience={recentExperiences} />
       {previousExperiences.length ? (
         <PreviousExperience experience={previousExperiences} />
       ) : null}
+      <Skills skills={skills} />
       <Certifications certifications={certifications} />
       <Education education={education} />
       <Projects projects={projects} />
       <Publications publications={publications} />
+      <PersonalityTraits traits={personalityTraits} />
       <Languages languages={languages} />
     </main>
   );

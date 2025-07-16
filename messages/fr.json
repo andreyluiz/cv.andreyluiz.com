@@ -35,10 +35,16 @@
       "title": "Publications"
     },
     "skills": {
-      "title": "Compétences Principales"
+      "title": "Compétences Techniques"
+    },
+    "generalSkills": {
+      "title": "Compétences Générales"
     },
     "summary": {
       "title": "Résumé"
+    },
+    "personalityTraits": {
+      "title": "Traits de Personnalité"
     }
   }
 }

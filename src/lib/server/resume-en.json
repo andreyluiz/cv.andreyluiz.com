@@ -1,6 +1,6 @@
 {
   "name": "Andrey Luiz",
-  "title": "Senior Software Engineer",
+  "title": "Lead Software Engineer",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
@@ -9,7 +9,16 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com"
   },
-  "summary": "Senior Software Engineer with 12+ years of experience in web and mobile development, focused on React, TypeScript, and AI tools. Led the adoption of critical features for SonarCloud's CaYC team, streamlining workflow efficiency. Developed Web3 projects, including a Web3 powered game, and a React Native wallet. Earned AWS Certified Cloud Practitioner certification.",
+  "summary": "I am a Lead Software Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. My industry background spans SaaS, Web3, and Sports, always working closely with Product Owners with my innovative and result-driven vision. I'm looking for a position of Lead Software Engineer or Senior Software Engineer, where I can leverage my expertise in software development and leadership to drive team results and product value.",
+  "generalSkills": [
+    "Develop scalable and maintainable full-stack applications",
+    "Design appealing and functional mobile applications",
+    "Build user interfaces with great UX",
+    "Collaborate effectively within cross-functional Agile teams",
+    "Advocate for user-centered design approaches",
+    "Mentor and guide junior developers",
+    "Drive metrics and key performance indicators (KPIs) to measure success"
+  ],
   "skills": [
     {
       "domain": "Frontend",
@@ -35,6 +44,7 @@
         "Node.js",
         "Next.js",
         "SvelteKit",
+        "Java",
         "MongoDB",
         "PostgreSQL"
       ]
@@ -69,15 +79,6 @@
         "Developed Web3 projects using SvelteKit, integrating with many types of blockchains and smart contracts.",
         "Implemented a React Native wallet application for a big client from India, integrating with a custom made blockchain and securing the first stakes.",
         "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month."
-      ],
-      "techStack": [
-        "SvelteKit",
-        "React Native",
-        "Phaser.js",
-        "Node.js",
-        "TypeScript",
-        "Git",
-        "AWS"
       ]
     },
     {
@@ -92,8 +93,7 @@
         "Delivered three key features for SonarCloud's project section in React, integrating with RESTful APIs to enhance data retrieval and improve Clean Code Taxonomy integration and user education on coding best practices.",
         "Pioneered CaYC team's adoption of 8 critical features, using React and TypeScript, streamlining workflow efficiency and cross-team collaboration.",
         "Migrated SonarCloud's issues screen to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers."
-      ],
-      "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
+      ]
     },
     {
       "title": "Senior Full Stack Developer",
@@ -107,8 +107,7 @@
         "Enhanced Equip app's map search and rental processes, using Svelte and TypeScript, reducing prototype development time by 3 months.",
         "Released the Equip app on Play Store and Apple Store, expanding the company's reach in three countries.",
         "Refactored the Equip app's codebase using React Native and TypeScript, reducing the time to iterate on new features."
-      ],
-      "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
+      ]
     },
     {
       "title": "Senior Front-end Developer",
@@ -122,8 +121,7 @@
         "Enhanced and refactored Anibis Messenger using React and TypeScript, getting positive reactions from management.",
         "Migrated messaging services from Twilio to Sendbird, ensuring full adoption by 100% of users in the first month.",
         "Acted as a Scrum Master for the team, leading daily standups and sprint planning sessions, improving team collaboration and productivity."
-      ],
-      "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
+      ]
     },
     {
       "title": "Senior Front-end Developer",
@@ -137,14 +135,6 @@
         "Collaborated on new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
         "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases.",
         "Crafted an internal tool in Python to process security camera logs, enhancing data analysis and security monitoring."
-      ],
-      "techStack": [
-        "React",
-        "Redux",
-        "PostgreSQL",
-        "TypeScript",
-        "Git",
-        "Python"
       ]
     },
     {
@@ -159,8 +149,7 @@
       "achievements": [
         "Researched and started the company's main front end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
         "Played a crucial role as the first front-end developer, collaborating closely with a designer to launch the application into beta testing, a significant milestone for the company's growth."
-      ],
-      "techStack": ["JavaScript", "React", "Redux", "Git"]
+      ]
     },
     {
       "title": "Front-end Developer",
@@ -175,8 +164,7 @@
         "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
         "Integrated the effort to migrate the landing pages editor to a WYSIWYG editor, improving the user experience while creating landing pages.",
         "Collaborated with decisions and actions for the front end chapter of the company, always ensuring the front end development had a bright future ahead."
-      ],
-      "techStack": ["JavaScript", "jQuery", "Ruby on Rails", "Git", "Heroku"]
+      ]
     },
     {
       "title": "Front-end Developer",
@@ -190,8 +178,7 @@
       "achievements": [
         "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company the first international customers.",
         "Led the front end development of the core feature of testing suites, allowing the company to outperform competitors."
-      ],
-      "techStack": ["JavaScript", "Angular.js", "Git"]
+      ]
     },
     {
       "title": "Full Stack Developer",
@@ -206,8 +193,7 @@
         "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
         "Created and optimized queries on PostgreSQL database for fast data querying.",
         "Pioneered on JavaScript and CSS rich interfaces, giving users a more intuitive and user-friendly experience."
-      ],
-      "techStack": ["Java", "JavaScript", "SQL"]
+      ]
     }
   ],
   "certifications": [
@@ -220,8 +206,8 @@
   ],
   "education": [
     {
-      "degree": "Diploma in Software Engineering and Development",
-      "institution": "Faculdade Unilagos",
+      "degree": "Bachelor in Software Engineering and Development",
+      "institution": "Unilagos University",
       "year": "Dec 2011",
       "location": "Brazil"
     }
@@ -239,5 +225,17 @@
       "name": "Portuguese",
       "level": "Native"
     }
+  ],
+  "personalityTraits": [
+    "Ambitious",
+    "Calm",
+    "Focused",
+    "Reliable",
+    "Self-directed",
+    "Quick learner",
+    "Solution-oriented",
+    "Respectful",
+    "Responsible",
+    "Communicative"
   ]
 }

@@ -3,6 +3,7 @@ export interface Variant {
   title: string;
   contactInfo: ContactInfo;
   summary: string;
+  generalSkills: string[];
   skills: SkillDomain[];
   experience: Experience[];
   projects?: Project[];
@@ -10,6 +11,7 @@ export interface Variant {
   certifications: Certification[];
   languages: Language[];
   publications: Publication[];
+  personalityTraits: string[];
   changes: Change[];
 }
 

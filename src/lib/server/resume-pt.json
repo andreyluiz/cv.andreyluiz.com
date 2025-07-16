@@ -1,6 +1,6 @@
 {
   "name": "Andrey Luiz",
-  "title": "Engenheiro de Software Sênior",
+  "title": "Engenheiro de Software Líder",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
@@ -9,7 +9,16 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com"
   },
-  "summary": "Engenheiro de Software Sênior com mais de 12 anos de experiência em desenvolvimento web e mobile, com foco em React, TypeScript e ferramentas de IA. Liderou a adoção de recursos críticos para a equipe CaYC do SonarCloud, otimizando a eficiência do fluxo de trabalho. Desenvolveu projetos Web3, incluindo um jogo baseado em Web3 e uma carteira React Native. Obteve a certificação AWS Certified Cloud Practitioner.",
+  "summary": "Sou um Engenheiro de Software Líder com mais de 14 anos de experiência em desenvolvimento de software, focado principalmente na qualidade e valor para o cliente. Minha experiência na indústria abrange SaaS, Web3 e Esportes, sempre trabalhando em estreita colaboração com Product Owners com minha visão inovadora e orientada a resultados. Procuro uma posição de Engenheiro de Software Líder ou Engenheiro de Software Sênior, onde possa alavancar minha experiência em desenvolvimento de software e liderança para impulsionar os resultados da equipe e o valor do produto.",
+  "generalSkills": [
+    "Desenvolver aplicações full-stack escaláveis e de fácil manutenção",
+    "Projetar aplicações móveis atraentes e funcionais",
+    "Construir interfaces de usuário com ótima UX",
+    "Colaborar eficazmente em equipes ágeis multifuncionais",
+    "Defender abordagens de design centradas no usuário",
+    "Orientar e guiar desenvolvedores juniores",
+    "Impulsionar métricas e indicadores-chave de desempenho (KPIs) para medir o sucesso"
+  ],
   "skills": [
     {
       "domain": "Frontend",
@@ -35,6 +44,7 @@
         "Node.js",
         "Next.js",
         "SvelteKit",
+        "Java",
         "MongoDB",
         "PostgreSQL"
       ]
@@ -69,15 +79,6 @@
         "Desenvolveu projetos Web3 usando SvelteKit, integrando com vários tipos de blockchains e contratos inteligentes.",
         "Implementou um aplicativo de carteira React Native para um grande cliente da Índia, integrando com uma blockchain personalizada e garantindo as primeiras stakes.",
         "Criou um jogo usando Phaser.js para um portal de staking, obtendo feedback positivo do cliente e garantindo 600 jogadores no primeiro mês."
-      ],
-      "techStack": [
-        "SvelteKit",
-        "React Native",
-        "Phaser.js",
-        "Node.js",
-        "TypeScript",
-        "Git",
-        "AWS"
       ]
     },
     {
@@ -92,8 +93,7 @@
         "Entregou três recursos principais para a seção de projetos do SonarCloud em React, integrando com APIs RESTful para aprimorar a recuperação de dados e melhorar a integração da Taxonomia de Código Limpo e a educação do usuário sobre as melhores práticas de codificação.",
         "Foi pioneiro na adoção de 8 recursos críticos pela equipe CaYC, usando React e TypeScript, otimizando a eficiência do fluxo de trabalho e a colaboração entre equipes.",
         "Migrou a tela de issues do SonarCloud para MIUI usando React, recebendo feedback positivo da liderança sênior por melhorar o fluxo de trabalho diário dos desenvolvedores."
-      ],
-      "techStack": ["React", "TypeScript", "TailwindCSS", "Git", "AWS"]
+      ]
     },
     {
       "title": "Desenvolvedor Full-Stack Sênior",
@@ -107,8 +107,7 @@
         "Aprimorou os processos de pesquisa de mapa e aluguel do aplicativo Equip, usando Svelte e TypeScript, reduzindo o tempo de desenvolvimento de protótipos em 3 meses.",
         "Lançou o aplicativo Equip na Play Store e na Apple Store, expandindo o alcance da empresa em três países.",
         "Refatorou a base de código do aplicativo Equip usando React Native e TypeScript, reduzindo o tempo para iterar em novos recursos."
-      ],
-      "techStack": ["Meteor.js", "Svelte", "MongoDB", "Git", "AWS", "Cordova"]
+      ]
     },
     {
       "title": "Desenvolvedor Front-end Sênior",
@@ -122,8 +121,7 @@
         "Aprimorou e refatorou o Anibis Messenger usando React e TypeScript, obtendo reações positivas da gerência.",
         "Migrou os serços de mensagens da Twilio para a Sendbird, garantindo a adoção total por 100% dos usuários no primeiro mês.",
         "Atuou como Scrum Master para a equipe, liderando standups diários e sessões de planejamento de sprint, melhorando a colaboração e a produtividade da equipe."
-      ],
-      "techStack": ["React", "Redux", "TypeScript", "Git", "AWS"]
+      ]
     },
     {
       "title": "Desenvolvedor Front-end Sênior",
@@ -137,14 +135,6 @@
         "Colaborou em novos recursos para o aplicativo SkyQ (British Sky Broadcasting), usando React e Redux, melhorando os tempos de carregamento em TVs antigas de 20 para 1 segundo.",
         "Criou e implantou recursos importantes para o SkyQ no PlayStation 4, expandindo o alcance do produto por meio de lançamentos bem-sucedidos na loja.",
         "Criou uma ferramenta interna em Python para processar logs de câmeras de segurança, aprimorando a análise de dados e o monitoramento de segurança."
-      ],
-      "techStack": [
-        "React",
-        "Redux",
-        "PostgreSQL",
-        "TypeScript",
-        "Git",
-        "Python"
       ]
     },
     {
@@ -159,8 +149,7 @@
       "achievements": [
         "Pesquisou e iniciou o principal aplicativo de front-end da empresa do zero usando React e Redux, iniciando a ideia de negócio e a visão da empresa e disponibilizando o primeiro produto da empresa para teste beta por dois clientes.",
         "Desempenhou um papel crucial como o primeiro desenvolvedor de front-end, colaborando de perto com um designer para lançar o aplicativo em teste beta, um marco significativo para o crescimento da empresa."
-      ],
-      "techStack": ["JavaScript", "React", "Redux", "Git"]
+      ]
     },
     {
       "title": "Desenvolvedor Front-end",
@@ -175,8 +164,7 @@
         "Concebeu recursos importantes em JavaScript e jQuery para a equipe de Landing Pages, garantindo a qualidade e o suporte ao cliente.",
         "Integrou o esforço para migrar o editor de landing pages para um editor WYSIWYG, melhorando a experiência do usuário na criação de landing pages.",
         "Colaborou com decisões e ações para o capítulo de front-end da empresa, sempre garantindo que o desenvolvimento de front-end tivesse um futuro brilhante pela frente."
-      ],
-      "techStack": ["JavaScript", "jQuery", "Ruby on Rails", "Git", "Heroku"]
+      ]
     },
     {
       "title": "Desenvolvedor Front-end",
@@ -190,8 +178,7 @@
       "achievements": [
         "Implementou recursos para um plugin do JIRA para gerenciamento de testes usando Angular.js, dando à empresa os primeiros clientes internacionais.",
         "Liderou o desenvolvimento de front-end do principal recurso de suítes de teste, permitindo que a empresa superasse os concorrentes."
-      ],
-      "techStack": ["JavaScript", "Angular.js", "Git"]
+      ]
     },
     {
       "title": "Desenvolvedor Full-Stack",
@@ -206,8 +193,7 @@
         "Projetou recursos críticos para uma ferramenta de processamento de arquivos baseada em Java, aprimorando diretamente as capacidades de análise de dados e impulsionando a reputação da empresa em software financeiro.",
         "Criou e otimizou consultas no banco de dados PostgreSQL para consulta rápida de dados.",
         "Foi pioneiro em interfaces ricas em JavaScript e CSS, proporcionando aos usuários uma experiência mais intuitiva e amigável."
-      ],
-      "techStack": ["Java", "JavaScript", "SQL"]
+      ]
     }
   ],
   "certifications": [
@@ -220,8 +206,8 @@
   ],
   "education": [
     {
-      "degree": "Diploma em Engenharia e Desenvolvimento de Software",
-      "institution": "Faculdade Unilagos",
+      "degree": "Bacharel em Engenharia e Desenvolvimento de Software",
+      "institution": "Universidade Unilagos",
       "year": "Dez 2011",
       "location": "Brasil"
     }
@@ -239,5 +225,17 @@
       "name": "Português",
       "level": "Nativo"
     }
+  ],
+  "personalityTraits": [
+    "Ambicioso",
+    "Calmo",
+    "Focado",
+    "Confiável",
+    "Autodirigido",
+    "Aprendiz rápido",
+    "Orientado a soluções",
+    "Respeitoso",
+    "Responsável",
+    "Comunicativo"
   ]
 }

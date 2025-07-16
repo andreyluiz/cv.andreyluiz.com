@@ -35,10 +35,16 @@
       "title": "Publications"
     },
     "skills": {
-      "title": "Skills"
+      "title": "Technical Skills"
+    },
+    "generalSkills": {
+      "title": "General Skills"
     },
     "summary": {
       "title": "Summary"
+    },
+    "personalityTraits": {
+      "title": "Personality Traits"
     }
   }
 }
