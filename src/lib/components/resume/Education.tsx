@@ -21,15 +21,31 @@ export default function Education({ education }: Props) {
             key={edu.degree}
             className="not-last:border-b border-neutral-200 not-last:pb-4"
           >
-            <div className="flex flex-col gap-1">
-              <span className="font-bold">{edu.degree}</span>
-              <span className="text-neutral-600 dark:text-neutral-400">
+            <div className="flex items-baseline justify-between gap-1">
+              <div className="flex items-baseline gap-0.5">
+                <span>
+                  <span className="font-bold">{edu.degree}</span>
+                  <span className="text-neutral-600 dark:text-neutral-400">
+                    &nbsp;- {edu.institution}, {edu.location}
+                  </span>
+                </span>
+              </div>
+              <div className="text-neutral-600 dark:text-neutral-400">
                 {edu.year}
-              </span>
+              </div>
             </div>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              {edu.institution} - {edu.location}
-            </p>
+            <ul className="list-disc list-outside ml-4">
+            {edu.gpa && (
+              <li className="text-neutral-600 dark:text-neutral-400">
+                <span className="font-bold">{t("gpa")}:</span> {edu.gpa}
+              </li>
+            )}
+            {edu.topics && (
+              <li className="text-neutral-600 dark:text-neutral-400">
+                <span className="font-bold">{t("topics")}:</span> {edu.topics}
+              </li>
+            )}
+            </ul>
           </div>
         ))}
       </div>

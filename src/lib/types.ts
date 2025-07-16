@@ -62,6 +62,8 @@ export interface Education {
   institution: string;
   year: string;
   location: string;
+  gpa?: string;
+  topics?: string;
 }
 
 export interface Certification {

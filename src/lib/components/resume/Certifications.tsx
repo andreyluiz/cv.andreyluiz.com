@@ -15,16 +15,18 @@ export default function Certifications({ certifications }: Props) {
     <Section title={t("title")}>
       <div className="flex flex-col gap-2">
         {certifications.map((cert) => (
-          <div
-            key={cert.degree}
-            className="not-last:border-b border-neutral-200 not-last:pb-4"
-          >
-            <div className="flex flex-col gap-1">
-              <span className="font-bold">{cert.degree}</span>
+          <div className="flex items-baseline justify-between gap-1" key={cert.degree + cert.institution + cert.location + cert.year}>
+            <div className="flex items-baseline gap-0.5">
+              <span>
+                <span className="font-bold">{cert.degree}</span>
+                <span className="text-neutral-600 dark:text-neutral-400">
+                  &nbsp;- {cert.institution}, {cert.location}
+                </span>
+              </span>
             </div>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              {cert.institution} - {cert.location} - {cert.year}
-            </p>
+            <div className="text-neutral-600 dark:text-neutral-400">
+              {cert.year}
+            </div>
           </div>
         ))}
       </div>

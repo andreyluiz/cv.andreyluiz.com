@@ -9,13 +9,10 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com"
   },
-  "summary": "I am a Lead Software Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. My industry background spans SaaS, Web3, and Sports, always working closely with Product Owners with my innovative and result-driven vision. I'm looking for a position of Lead Software Engineer or Senior Software Engineer, where I can leverage my expertise in software development and leadership to drive team results and product value.",
+  "summary": "Lead Software Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. Industry background spanning SaaS, Web3, and Sports, always working closely with Product Owners with an innovative and result-driven vision. Looking for a position of Lead Software Engineer or Senior Software Engineer, to leverage expertise in software development and leadership to drive team results and product value.",
   "generalSkills": [
     "Develop scalable and maintainable full-stack applications",
-    "Design appealing and functional mobile applications",
-    "Build user interfaces with great UX",
-    "Collaborate effectively within cross-functional Agile teams",
-    "Advocate for user-centered design approaches",
+    "Collaborate within cross-functional Agile teams",
     "Mentor and guide junior developers",
     "Drive metrics and key performance indicators (KPIs) to measure success"
   ],
@@ -78,7 +75,8 @@
       "achievements": [
         "Developed Web3 projects using SvelteKit, integrating with many types of blockchains and smart contracts.",
         "Implemented a React Native wallet application for a big client from India, integrating with a custom made blockchain and securing the first stakes.",
-        "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month."
+        "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month.",
+        "Mentored Junior developers, guiding in best practices and code quality, enhancing team productivity and code maintainability."
       ]
     },
     {
@@ -90,9 +88,11 @@
         "end": "Jun 2024"
       },
       "achievements": [
-        "Delivered three key features for SonarCloud's project section in React, integrating with RESTful APIs to enhance data retrieval and improve Clean Code Taxonomy integration and user education on coding best practices.",
-        "Pioneered CaYC team's adoption of 8 critical features, using React and TypeScript, streamlining workflow efficiency and cross-team collaboration.",
-        "Migrated SonarCloud's issues screen to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers."
+        "Delivered many critical features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
+        "Migrated SonarCloud's issues screen, a critical feature, to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers.",
+        "Pioneered CaYC team's adoption of more than 10 critical features, using React and TypeScript, ensuring user education and achieving proper project configuration in less than 4 months.",
+        "Delivered full coverage tests for each and every feature, to improve code reliability and confidence in deployments, raising coverage close to 90%.",
+        "Driven team autonomy on a horizontal hierarchy, fostering a culture of collaboration and innovation, and improving team dynamics."
       ]
     },
     {
@@ -100,13 +100,16 @@
       "company": "Equip",
       "location": "Switzerland",
       "period": {
-        "start": "Jun 2021",
+        "start": "Sep 2021",
         "end": "Nov 2022"
       },
       "achievements": [
-        "Enhanced Equip app's map search and rental processes, using Svelte and TypeScript, reducing prototype development time by 3 months.",
-        "Released the Equip app on Play Store and Apple Store, expanding the company's reach in three countries.",
-        "Refactored the Equip app's codebase using React Native and TypeScript, reducing the time to iterate on new features."
+        "Led the Equip app prototype development using Svelte and Meteor.js, improving reliability and performance, and reducing prototype development time by 3 months.",
+        "Enhanced Equip app's map search and rental processes, improving reliability and securing the first test users.",
+        "Released Equip app on Play Store and Apple Store, expanding the company's reach in three countries.",
+        "Refactored the Equip app's codebase using React Native and TypeScript, reducing the time to iterate on new features.",
+        "Decided on Equip app's best practices and architecture, ensuring code quality and maintainability, and improving product reliability.",
+        "Collaborated closely with the Product Owner to ensure the product met user needs and business goals, enhancing product value and user satisfaction."
       ]
     },
     {
@@ -132,8 +135,8 @@
         "end": "Jan 2020"
       },
       "achievements": [
-        "Collaborated on new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
-        "Authored and deployed key features for SkyQ on PlayStation 4, expanding product reach via successful store releases.",
+        "Formulated new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
+        "Authored and deployed critical features for SkyQ on PlayStation 4, expanding product reach and user satisfaction with successful store releases.",
         "Crafted an internal tool in Python to process security camera logs, enhancing data analysis and security monitoring."
       ]
     },
@@ -147,8 +150,9 @@
         "end": "Feb 2018"
       },
       "achievements": [
-        "Researched and started the company's main front end application from scratch using React and Redux, starting the company's business idea and vision, and making the company's first product available for beta testing by two customers.",
-        "Played a crucial role as the first front-end developer, collaborating closely with a designer to launch the application into beta testing, a significant milestone for the company's growth."
+        "Researched and started the company's main front end application from scratch using React and Redux, kick starting the company's business idea and vision.",
+        "Partnered back-end developers to create a reliable application, making the company's first product available for beta testing by two customers.",
+        "Played a crucial role as the first front-end developer, collaborating closely with a designer to expand the application's beta testing, a significant milestone for the company's growth."
       ]
     },
     {
@@ -209,7 +213,8 @@
       "degree": "Bachelor in Software Engineering and Development",
       "institution": "Unilagos University",
       "year": "Dec 2011",
-      "location": "Brazil"
+      "location": "Brazil",
+      "topics": "Applied Mathematics, Algorithms, Machine Learning, Distributed Computing, Software Development, Web Development, Database Management, Project Management, UML"
     }
   ],
   "languages": [
@@ -231,7 +236,6 @@
     "Calm",
     "Focused",
     "Reliable",
-    "Self-directed",
     "Quick learner",
     "Solution-oriented",
     "Respectful",

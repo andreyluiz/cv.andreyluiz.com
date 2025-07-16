@@ -4,7 +4,9 @@
       "title": "Certificações"
     },
     "education": {
-      "title": "Educação"
+      "title": "Educação",
+      "gpa": "GPA",
+      "topics": "Tópicos"
     },
     "experience": {
       "tech_stack": "Stack Tecnológica",
@@ -38,7 +40,7 @@
       "title": "Habilidades Técnicas"
     },
     "generalSkills": {
-      "title": "Habilidades Gerais"
+      "title": "Habilidades Principais"
     },
     "summary": {
       "title": "Resumo"

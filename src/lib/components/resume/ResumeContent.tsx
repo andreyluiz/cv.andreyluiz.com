@@ -61,7 +61,7 @@ export default function ResumeContent({ initialResume }: Props) {
         currentResume={currentResume}
         setCurrentResume={setCurrentResume}
       />
-      <hr className="border-neutral-200 dark:border-neutral-700" />
+      <hr className="border-neutral-200 dark:border-neutral-700 print:hidden" />
       <Header name={name} title={title} summary={summary} />
       <ContactInfo contactInfo={contactInfo} />
       <GeneralSkills skills={generalSkills} />

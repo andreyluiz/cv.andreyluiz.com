@@ -1,6 +1,6 @@
 {
   "name": "Andrey Luiz",
-  "title": "Ingénieur logiciel principal",
+  "title": "Ingénieur Logiciel Lead",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
@@ -9,15 +9,12 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com"
   },
-  "summary": "Je suis un ingénieur logiciel principal avec plus de 14 ans d'expérience en développement logiciel, principalement axé sur la qualité et la valeur pour le client. Mon expérience industrielle couvre le SaaS, le Web3 et le Sport, travaillant toujours en étroite collaboration avec les Product Owners avec ma vision innovante et axée sur les résultats. Je recherche un poste d'ingénieur logiciel principal ou d'ingénieur logiciel senior, où je peux tirer parti de mon expertise en développement logiciel et de mon leadership pour stimuler les résultats de l'équipe et la valeur du produit.",
+  "summary": "Ingénieur Logiciel Lead avec plus de 14 ans d'expérience en développement logiciel, principalement axé sur la qualité et la valeur pour le client. Expérience dans les secteurs SaaS, Web3 et Sport, travaillant toujours en étroite collaboration avec les Product Owners avec une vision innovante et axée sur les résultats. À la recherche d'un poste d'Ingénieur Logiciel Principal ou d'Ingénieur Logiciel Senior, pour mettre à profit l'expertise en développement logiciel et en leadership afin de stimuler les résultats de l'équipe et la valeur du produit.",
   "generalSkills": [
     "Développer des applications full-stack évolutives et maintenables",
-    "Concevoir des applications mobiles attrayantes et fonctionnelles",
-    "Construire des interfaces utilisateur avec une excellente UX",
-    "Collaborer efficacement au sein d'équipes agiles interfonctionnelles",
-    "Plaider pour des approches de conception centrées sur l'utilisateur",
+    "Collaborer au sein d'équipes Agile interfonctionnelles",
     "Encadrer et guider les développeurs juniors",
-    "Piloter les métriques et les indicateurs clés de performance (KPI) pour mesurer le succès"
+    "Piloter les indicateurs clés de performance (KPI) pour mesurer le succès"
   ],
   "skills": [
     {
@@ -36,7 +33,7 @@
       ]
     },
     {
-      "domain": "Full-Stack & Bases de données",
+      "domain": "Full-Stack & Bases de Données",
       "skills": [
         "Python",
         "FastAPI",
@@ -50,7 +47,7 @@
       ]
     },
     {
-      "domain": "Outils d'IA",
+      "domain": "Outils IA",
       "skills": [
         "Cursor",
         "Cline",
@@ -68,21 +65,22 @@
   ],
   "experience": [
     {
-      "title": "Ingénieur full-stack",
+      "title": "Ingénieur Full Stack",
       "company": "Timeleap",
       "location": "Suisse",
       "period": {
         "start": "Juil 2024",
-        "end": "Janv 2025"
+        "end": "Jan 2025"
       },
       "achievements": [
-        "Développement de projets Web3 avec SvelteKit, en intégrant divers types de blockchains et de contrats intelligents.",
-        "Mise en œuvre d'une application de portefeuille React Native pour un grand client indien, en l'intégrant à une blockchain sur mesure et en sécurisant les premiers enjeux.",
-        "Création d'un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et attirant 600 joueurs le premier mois."
+        "Développé des projets Web3 avec SvelteKit, intégrant divers blockchains et smart contracts.",
+        "Implémenté une application portefeuille React Native pour un grand client indien, intégrant une blockchain personnalisée et sécurisant les premiers investissements.",
+        "Créé un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et 600 joueurs le premier mois.",
+        "Encadré des développeurs juniors, promouvant les bonnes pratiques et la qualité du code, améliorant la productivité et la maintenabilité."
       ]
     },
     {
-      "title": "Développeur front-end senior",
+      "title": "Développeur Front-end Senior",
       "company": "Sonar",
       "location": "Suisse",
       "period": {
@@ -90,69 +88,75 @@
         "end": "Juin 2024"
       },
       "achievements": [
-        "Livraison de trois fonctionnalités clés pour la section projet de SonarCloud en React, en les intégrant avec des API RESTful pour améliorer la récupération des données et améliorer l'intégration de la taxonomie Clean Code et l'éducation des utilisateurs sur les meilleures pratiques de codage.",
-        "Pionnier de l'adoption par l'équipe CaYC de 8 fonctionnalités critiques, en utilisant React et TypeScript, optimisant l'efficacité des workflows et la collaboration inter-équipes.",
-        "Migration de l'écran des problèmes de SonarCloud vers MIUI avec React, recevant des retours positifs de la direction pour l'amélioration du workflow quotidien des développeurs."
+        "Livré de nombreuses fonctionnalités critiques pour la section projet de SonarCloud en React, améliorant l'intégration Clean Code Taxonomy et l'éducation des utilisateurs.",
+        "Migré l'écran des problèmes de SonarCloud vers MIUI avec React, recevant des retours positifs de la direction pour l'amélioration du flux de travail.",
+        "Pionnier dans l'adoption de plus de 10 fonctionnalités critiques par l'équipe CaYC, utilisant React et TypeScript, assurant l'éducation des utilisateurs et une configuration correcte du projet en moins de 4 mois.",
+        "Fourniture de tests complets pour chaque fonctionnalité, améliorant la fiabilité du code et la confiance lors des déploiements, atteignant près de 90% de couverture.",
+        "Favorisé l'autonomie de l'équipe dans une hiérarchie horizontale, encourageant la collaboration et l'innovation, et améliorant la dynamique d'équipe."
       ]
     },
     {
-      "title": "Développeur full-stack senior",
+      "title": "Développeur Full Stack Senior",
       "company": "Equip",
       "location": "Suisse",
       "period": {
-        "start": "Juin 2021",
+        "start": "Sep 2021",
         "end": "Nov 2022"
       },
       "achievements": [
-        "Amélioration des processus de recherche sur carte et de location de l'application Equip avec Svelte et TypeScript, réduisant le temps de développement des prototypes de 3 mois.",
-        "Lancement de l'application Equip sur le Play Store et l'Apple Store, étendant la portée de l'entreprise à trois pays.",
-        "Refactorisation de la base de code de l'application Equip avec React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités."
+        "Dirigé le développement du prototype de l'application Equip avec Svelte et Meteor.js, améliorant la fiabilité et la performance, réduisant le temps de développement de 3 mois.",
+        "Amélioré la recherche cartographique et les processus de location de l'application Equip, assurant la fiabilité et obtenant les premiers utilisateurs tests.",
+        "Publié l'application Equip sur Play Store et Apple Store, élargissant la portée de l'entreprise dans trois pays.",
+        "Refondu le code de l'application Equip avec React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités.",
+        "Défini les meilleures pratiques et l'architecture de l'application Equip, assurant la qualité et la maintenabilité du code.",
+        "Collaboré étroitement avec le Product Owner pour répondre aux besoins des utilisateurs et aux objectifs commerciaux, augmentant la valeur produit et la satisfaction utilisateur."
       ]
     },
     {
-      "title": "Développeur front-end senior",
+      "title": "Développeur Front-end Senior",
       "company": "Scout24",
       "location": "Suisse",
       "period": {
-        "start": "Févr 2020",
-        "end": "Sept 2021"
+        "start": "Fév 2020",
+        "end": "Sep 2021"
       },
       "achievements": [
-        "Amélioration et refactorisation d'Anibis Messenger avec React et TypeScript, obtenant des réactions positives de la direction.",
-        "Migration des services de messagerie de Twilio vers Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois.",
-        "A agi en tant que Scrum Master pour l'équipe, dirigeant les réunions quotidiennes et les sessions de planification de sprint, améliorant la collaboration et la productivité de l'équipe."
+        "Amélioré et refondu Anibis Messenger avec React et TypeScript, recevant des réactions positives de la direction.",
+        "Migré les services de messagerie de Twilio à Sendbird, assurant une adoption complète par 100% des utilisateurs dès le premier mois.",
+        "Agit en tant que Scrum Master, dirigeant les réunions quotidiennes et la planification des sprints, améliorant la collaboration et la productivité de l'équipe."
       ]
     },
     {
-      "title": "Développeur front-end senior",
+      "title": "Développeur Front-end Senior",
       "company": "Integer Consulting",
       "location": "Portugal",
       "period": {
-        "start": "Févr 2018",
-        "end": "Janv 2020"
+        "start": "Fév 2018",
+        "end": "Jan 2020"
       },
       "achievements": [
-        "Collaboration sur de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting) avec React et Redux, améliorant les temps de chargement sur les anciens téléviseurs de 20 à 1 seconde.",
-        "Création et déploiement de fonctionnalités clés pour SkyQ sur PlayStation 4, élargissant la portée du produit grâce à des lancements réussis sur le store.",
-        "Création d'un outil interne en Python pour traiter les journaux des caméras de sécurité, améliorant l'analyse des données et la surveillance de la sécurité."
+        "Conçu de nouvelles fonctionnalités pour l'application SkyQ (British Sky Broadcasting) avec React et Redux, améliorant les temps de chargement sur les anciennes TV de 20 à 1 seconde.",
+        "Développé et déployé des fonctionnalités critiques pour SkyQ sur PlayStation 4, élargissant la portée du produit et la satisfaction utilisateur.",
+        "Créé un outil interne en Python pour traiter les logs de caméras de sécurité, améliorant l'analyse des données et la surveillance."
       ]
     },
     {
-      "title": "Développeur front-end",
+      "title": "Développeur Front-end",
       "company": "DataRisk",
       "location": "Brésil",
       "isPrevious": true,
       "period": {
-        "start": "Janv 2017",
-        "end": "Févr 2018"
+        "start": "Jan 2017",
+        "end": "Fév 2018"
       },
       "achievements": [
-        "Recherche et démarrage de l'application front-end principale de l'entreprise à partir de zéro avec React et Redux, lançant l'idée commerciale et la vision de l'entreprise, et rendant le premier produit de l'entreprise disponible pour des tests bêta par deux clients.",
-        "A joué un rôle crucial en tant que premier développeur front-end, collaborant étroitement avec un designer pour lancer l'application en phase de test bêta, une étape importante pour la croissance de l'entreprise."
+        "Recherche et démarrage de l'application frontale principale de l'entreprise à partir de zéro avec React et Redux, lançant l'idée et la vision de l'entreprise.",
+        "Collaboration avec les développeurs back-end pour créer une application fiable, rendant le premier produit disponible pour des tests bêta par deux clients.",
+        "Joué un rôle clé en tant que premier développeur front-end, collaborant étroitement avec un designer pour élargir les tests bêta, une étape importante pour la croissance de l'entreprise."
       ]
     },
     {
-      "title": "Développeur front-end",
+      "title": "Développeur Front-end",
       "company": "Resultados Digitais",
       "location": "Brésil",
       "isPrevious": true,
@@ -161,13 +165,13 @@
         "end": "Déc 2016"
       },
       "achievements": [
-        "Conception de fonctionnalités importantes en JavaScript et jQuery pour l'équipe des Landing Pages, garantissant la qualité et le support client.",
-        "Intégration de l'effort de migration de l'éditeur de pages de destination vers un éditeur WYSIWYG, améliorant l'expérience utilisateur lors de la création de pages de destination.",
-        "Collaboration aux décisions et actions pour le chapitre front-end de l'entreprise, en veillant toujours à ce que le développement front-end ait un avenir prometteur."
+        "Conçu des fonctionnalités importantes en JavaScript et jQuery pour l'équipe Landing Pages, assurant la qualité et le support client.",
+        "Participé à la migration de l'éditeur de pages d'atterrissage vers un éditeur WYSIWYG, améliorant l'expérience utilisateur.",
+        "Contribué aux décisions et actions pour le chapitre front-end de l'entreprise, assurant un avenir prometteur au développement front-end."
       ]
     },
     {
-      "title": "Développeur front-end",
+      "title": "Développeur Front-end",
       "company": "Kanoah",
       "location": "Brésil",
       "isPrevious": true,
@@ -176,12 +180,12 @@
         "end": "Déc 2015"
       },
       "achievements": [
-        "Mise en œuvre de fonctionnalités pour un plugin JIRA pour la gestion des tests avec Angular.js, apportant à l'entreprise ses premiers clients internationaux.",
-        "Direction du développement front-end de la fonctionnalité principale des suites de tests, permettant à l'entreprise de surpasser ses concurrents."
+        "Implémenté des fonctionnalités pour un plugin JIRA de gestion de tests avec Angular.js, obtenant les premiers clients internationaux.",
+        "Dirigé le développement front-end de la fonctionnalité principale de gestion de tests, permettant à l'entreprise de surpasser ses concurrents."
       ]
     },
     {
-      "title": "Développeur full-stack",
+      "title": "Développeur Full Stack",
       "company": "Softplan",
       "location": "Brésil",
       "isPrevious": true,
@@ -190,15 +194,15 @@
         "end": "Juin 2015"
       },
       "achievements": [
-        "Conception de fonctionnalités critiques pour un outil de traitement de fichiers basé sur Java, améliorant directement les capacités d'analyse de données et renforçant la réputation de l'entreprise dans le domaine des logiciels financiers.",
-        "Création et optimisation de requêtes sur la base de données PostgreSQL pour une interrogation rapide des données.",
-        "Pionnier des interfaces riches en JavaScript et CSS, offrant aux utilisateurs une expérience plus intuitive et conviviale."
+        "Conçu des fonctionnalités critiques pour un outil de traitement de fichiers basé sur Java, améliorant directement les capacités d'analyse de données et la réputation de l'entreprise dans les logiciels financiers.",
+        "Créé et optimisé des requêtes sur la base de données PostgreSQL pour des recherches rapides.",
+        "Innové sur des interfaces riches en JavaScript et CSS, offrant aux utilisateurs une expérience plus intuitive et conviviale."
       ]
     }
   ],
   "certifications": [
     {
-      "degree": "Certifié AWS Cloud Practitioner",
+      "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
       "year": "Oct 2023",
       "location": "Suisse"
@@ -206,10 +210,11 @@
   ],
   "education": [
     {
-      "degree": "Baccalauréat en génie logiciel et développement",
+      "degree": "Licence en Ingénierie et Développement Logiciel",
       "institution": "Université Unilagos",
       "year": "Déc 2011",
-      "location": "Brésil"
+      "location": "Brésil",
+      "topics": "Mathématiques appliquées, Algorithmes, Apprentissage automatique, Calcul distribué, Développement logiciel, Développement web, Gestion de bases de données, Gestion de projet, UML"
     }
   ],
   "languages": [
@@ -219,7 +224,7 @@
     },
     {
       "name": "Français",
-      "level": "Professionnel limité"
+      "level": "Compétence professionnelle limitée"
     },
     {
       "name": "Portugais",
@@ -231,9 +236,8 @@
     "Calme",
     "Concentré",
     "Fiable",
-    "Autonome",
-    "Capable d'apprendre",
-    "Orienté solutions",
+    "Apprend vite",
+    "Orienté solution",
     "Respectueux",
     "Responsable",
     "Communicatif"

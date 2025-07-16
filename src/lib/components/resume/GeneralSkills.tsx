@@ -10,7 +10,7 @@ export default function GeneralSkills({ skills }: Props) {
 
   return (
     <Section title={t("title")}>
-      <ul className="list-disc list-inside">
+      <ul className="list-disc list-outisde ml-4">
         {skills.map((skill) => (
           <li key={skill}>{skill}</li>
         ))}
