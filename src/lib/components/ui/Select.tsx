@@ -1,4 +1,5 @@
 import { Select as HeadlessSelect } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import type { ChangeEvent } from "react";
 import { cn } from "@/lib/utils";
 
@@ -21,8 +22,8 @@ export default function Select({
     <div className={cn("relative", className)}>
       <HeadlessSelect
         className={cn(
-          "block w-full rounded-lg border-none bg-white/5 px-4 py-1.5 text-sm/6 text-white",
-          "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/25",
+          "block w-full appearance-none rounded-lg border-none bg-gray-200 px-4 py-1.5 pr-8 text-sm/6 text-black dark:bg-white/5 dark:text-white",
+          "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-black/25 dark:data-focus:outline-white/25",
           "*:text-black",
         )}
         value={value}
@@ -34,6 +35,10 @@ export default function Select({
           </option>
         ))}
       </HeadlessSelect>
+      <ChevronDownIcon
+        className="pointer-events-none absolute right-2.5 top-2.5 size-4 fill-black/60 dark:fill-white/60"
+        aria-hidden="true"
+      />
     </div>
   );
 }
