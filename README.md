@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI-Powered CV Tailor
+
+This project is a highly customizable, AI-powered CV tailor that helps you adapt your resume to specific job descriptions. It's built with Next.js, Tailwind CSS, and OpenAI, and it's designed to be easily forked and adapted to your own needs.
+
+## Features
+
+- **AI-Powered Resume Tailoring:** Automatically tailors your resume to specific job descriptions using the OpenAI API.
+- **Cover Letter Generation:** Generates a cover letter based on your resume and the job description.
+- **Multi-language Support:** Supports multiple languages, with English, French, and Portuguese included by default.
+- **Light and Dark Themes:** Includes a theme switcher for light and dark modes.
+- **Print-friendly:** The resume is designed to be easily printed.
+- **Easy to Customize:** The project is designed to be easily forked and adapted to your own needs.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- [Node.js](https://nodejs.org/en/) (v18 or higher)
+- [Bun](https://bun.sh/)
+
+### Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/cv.andreyluiz.com.git
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   bun install
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   bun run dev
+   ```
+
+## Customization
+
+### Resume Data
+
+The resume data is stored in JSON files in the `src/lib/server` directory. You can update these files with your own information.
+
+- `resume-en.json`: English version of the resume.
+- `resume-fr.json`: French version of the resume.
+- `resume-pt.json`: Portuguese version of the resume.
+
+### Languages
+
+The project uses `next-intl` for internationalization. You can add new languages by creating a new JSON file in the `messages` directory and updating the `src/i18n/routing.ts` file.
+
+### Theme
+
+The project uses Tailwind v4 for styling. You can customize the theme by updating the `src/app/globals.css` file.
+
+## Project Structure
+
+```
+.
+├── .next
+├── messages
+│   ├── en.json
+│   ├── fr.json
+│   └── pt.json
+├── public
+│   └── profile.png
+├── src
+│   ├── app
+│   │   ├── [locale]
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── favicon.ico
+│   │   └── globals.css
+│   ├── i18n
+│   │   ├── navigation.ts
+│   │   ├── request.ts
+│   │   └── routing.ts
+│   ├── lib
+│   │   ├── components
+│   │   │   ├── modals
+│   │   │   ├── providers
+│   │   │   ├── resume
+│   │   │   └── ui
+│   │   ├── server
+│   │   │   ├── actions.ts
+│   │   │   ├── openai.ts
+│   │   │   ├── resume-en.json
+│   │   │   ├── resume-fr.json
+│   │   │   └── resume-pt.json
+│   │   ├── api.ts
+│   │   ├── lang.ts
+│   │   ├── store.ts
+│   │   ├── types.ts
+│   │   └── utils.ts
+│   └── middleware.ts
+├── .gitignore
+├── biome.json
+├── bun.lock
+├── next.config.ts
+├── package.json
+├── postcss.config.mjs
+├── README.md
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **`messages`**: Contains the JSON files for internationalization.
+- **`public`**: Contains the public assets, such as the profile picture.
+- **`src/app`**: Contains the main application code, including the layout and pages.
+- **`src/i18n`**: Contains the configuration for `next-intl`.
+- **`src/lib/components`**: Contains the React components.
+- **`src/lib/server`**: Contains the server-side code, including the OpenAI API integration and the resume data.
+- **`src/lib/store.ts`**: Contains the Zustand store for client-side state management.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+You can deploy the project to any hosting provider that supports Next.js, such as Vercel or Netlify.
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions are welcome! Please open an issue or submit a pull request if you have any ideas or suggestions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
