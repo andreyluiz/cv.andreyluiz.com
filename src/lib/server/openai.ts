@@ -1,26 +1,15 @@
 import OpenAI from "openai";
 import type { Variant } from "../types";
 
-// This file is now used by the server, so we use the server-side environment variable
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-if (!OPENAI_API_KEY) {
-  console.error(
-    "OpenAI API key is not set. Please set OPENAI_API_KEY in your .env file.",
-  );
-}
-
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: OPENAI_API_KEY,
-});
-
 export async function tailorResume(
   jobTitle: string,
   jobDescription: string,
   currentResume: Variant,
   aiInstructions: string,
+  apiKey: string,
 ) {
+  const openai = new OpenAI({ apiKey });
+
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4.1-2025-04-14",
@@ -109,7 +98,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
                       description:
                         "Indicates if this experience should be displayed on the Previous Experiences section.",
                       default: false,
-                    }
+                    },
                   },
                   required: [
                     "title",
@@ -203,7 +192,6 @@ Return the modified resume in the exact same JSON structure as the input, but wi
       temperature: 0.7,
     });
 
-    // Extract the function call result
     const functionCall = response.choices[0].message.function_call;
 
     if (!functionCall || functionCall.name !== "tailor_resume") {
@@ -212,13 +200,11 @@ Return the modified resume in the exact same JSON structure as the input, but wi
       );
     }
 
-    // Parse the function call arguments
     const tailoredResumeData = JSON.parse(functionCall.arguments);
 
-    // Create a complete Variant object by combining the tailored data with the original personalInfo and languages
     const tailoredResume = {
-      ...currentResume, // Keep the original personalInfo and languages
-      ...tailoredResumeData, // Override with the tailored data
+      ...currentResume,
+      ...tailoredResumeData,
     };
 
     return tailoredResume;
@@ -232,7 +218,10 @@ export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,
   currentResume: Variant,
+  apiKey: string,
 ) {
+  const openai = new OpenAI({ apiKey });
+
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4.1-2025-04-14",

@@ -6,6 +6,7 @@ import CoverLetterModal from "@/lib/components/modals/CoverLetterModal";
 import JobDescriptionModal from "@/lib/components/modals/JobDescriptionModal";
 import Button from "@/lib/components/ui/Button";
 import { tailorResume } from "@/lib/server/actions";
+import { useStore } from "@/lib/store";
 import type { Variant } from "@/lib/types";
 
 interface Props {
@@ -19,8 +20,9 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
   const [isCoverLetterModalOpen, setIsCoverLetterModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [jobDescription, setJobDescription] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
+  const [jobTitle, setJobTitle] = useState(resumeData.title || "");
   const [isTailored, setIsTailored] = useState(false);
+  const { apiKey } = useStore();
 
   const handleJobDescriptionSubmit = async (
     jobTitle: string,
@@ -34,6 +36,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         jobDescription,
         resumeData,
         aiInstructions,
+        apiKey,
       );
       onResumeUpdate(tailoredResume);
       setIsTailored(true);
@@ -47,20 +50,21 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
 
   return (
     <>
-      <div className="flex gap-2">
-        <Button onClick={() => setIsModalOpen(true)}>
+      <div className="flex items-end gap-2">
+        <Button onClick={() => setIsModalOpen(true)} disabled={!apiKey}>
           {isTailored ? "Resume Tailored" : "Tailor Resume"}
         </Button>
         {isTailored && (
-          <>
-            <Button onClick={() => setIsChangesModalOpen(true)}>
-              What changed?
-            </Button>
-            <Button onClick={() => setIsCoverLetterModalOpen(true)}>
-              Generate Cover Letter
-            </Button>
-          </>
+          <Button onClick={() => setIsChangesModalOpen(true)}>
+            What changed?
+          </Button>
         )}
+        <Button
+          onClick={() => setIsCoverLetterModalOpen(true)}
+          disabled={!apiKey}
+        >
+          Generate Cover Letter
+        </Button>
       </div>
 
       <JobDescriptionModal
@@ -85,6 +89,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         jobTitle={jobTitle}
         jobDescription={jobDescription}
         resumeData={resumeData}
+        apiKey={apiKey}
       />
 
       {isLoading && (

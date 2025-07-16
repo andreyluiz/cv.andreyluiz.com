@@ -1,8 +1,12 @@
+import { KeyIcon } from "@heroicons/react/24/outline";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { langsOptions } from "@/lib/lang";
+import { useStore } from "@/lib/store";
 import type { Variant } from "@/lib/types";
+import ApiKeyModal from "../modals/ApiKeyModal";
+import Button from "../ui/Button";
 import Select from "../ui/Select";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import ResumeTailor from "./ResumeTailor";
@@ -13,30 +17,41 @@ interface Props {
 }
 
 export default function Controls({ currentResume, setCurrentResume }: Props) {
-  const [hasTailoringFeature, setHasTailoringFeature] = useState(false);
+  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
   const router = useRouter();
   const { locale } = useParams();
-
-  useEffect(() => {
-    setHasTailoringFeature(
-      localStorage.getItem("tailoring") === "true" ||
-        process.env.NODE_ENV === "development",
-    );
-  }, []);
+  const { apiKey } = useStore();
 
   const handleLangChange = (locale: string) => {
     router.replace("/", { locale });
   };
 
   return (
-    <div className="flex justify-between items-center gap-4 print:hidden">
-      {hasTailoringFeature && (
+    <div className="flex items-center justify-between gap-4 print:hidden">
+      <div className="flex items-center gap-2">
         <ResumeTailor
           resumeData={currentResume}
           onResumeUpdate={setCurrentResume}
         />
-      )}
+      </div>
       <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center gap-2">
+          {!apiKey && (
+            <span className="text-xs text-red-500">Set your API key</span>
+          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsApiKeyModalOpen(true)}
+          >
+            <KeyIcon className="size-5" />
+            <span
+              className={`absolute right-1 top-1 block h-2 w-2 rounded-full ${
+                apiKey ? "bg-green-500" : "bg-red-500"
+              }`}
+            />
+          </Button>
+        </div>
         <Select
           options={langsOptions}
           value={locale as string}
@@ -44,6 +59,10 @@ export default function Controls({ currentResume, setCurrentResume }: Props) {
         />
         <ThemeSwitcher />
       </div>
+      <ApiKeyModal
+        isOpen={isApiKeyModalOpen}
+        onClose={() => setIsApiKeyModalOpen(false)}
+      />
     </div>
   );
 }

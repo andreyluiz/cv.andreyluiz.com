@@ -10,6 +10,7 @@ interface CoverLetterModalProps {
   jobTitle: string;
   jobDescription: string;
   resumeData: Variant;
+  apiKey: string;
 }
 
 export default function CoverLetterModal({
@@ -18,6 +19,7 @@ export default function CoverLetterModal({
   jobTitle,
   jobDescription,
   resumeData,
+  apiKey,
 }: CoverLetterModalProps) {
   const [coverLetter, setCoverLetter] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +33,7 @@ export default function CoverLetterModal({
         jobTitle,
         jobDescription,
         resumeData,
+        apiKey,
       );
       if (newCoverLetter) {
         setCoverLetter(newCoverLetter);
@@ -43,7 +46,7 @@ export default function CoverLetterModal({
     } finally {
       setIsLoading(false);
     }
-  }, [jobTitle, jobDescription, resumeData]);
+  }, [jobTitle, jobDescription, resumeData, apiKey]);
 
   const getCoverLetter = () => ({
     __html: coverLetter,

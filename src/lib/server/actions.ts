@@ -25,6 +25,7 @@ export async function tailorResume(
   jobDescription: string,
   currentResume: Variant,
   aiInstructions: string,
+  apiKey: string,
 ): Promise<Variant> {
   try {
     return await tailorResumeWithOpenAI(
@@ -32,6 +33,7 @@ export async function tailorResume(
       jobDescription,
       currentResume,
       aiInstructions,
+      apiKey,
     );
   } catch (error) {
     console.error("Error tailoring resume:", error);
@@ -43,12 +45,14 @@ export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,
   currentResume: Variant,
+  apiKey: string,
 ): Promise<string | null> {
   try {
     return await generateCoverLetterWithOpenAI(
       jobTitle,
       jobDescription,
       currentResume,
+      apiKey,
     );
   } catch (error) {
     console.error("Error generating cover letter:", error);
