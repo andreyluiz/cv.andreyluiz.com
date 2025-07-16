@@ -8,7 +8,6 @@ import { getResume } from "@/lib/server/actions";
 import type { Variant } from "@/lib/types";
 import Select from "../ui/Select";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
-import Break from "./Break";
 import Certifications from "./Certifications";
 import ContactInfo from "./ContactInfo";
 import Education from "./Education";
@@ -57,7 +56,6 @@ export default function ResumeContent({ initialResume }: Props) {
     contactInfo,
     skills,
     experience,
-    breaks,
     education,
     certifications,
     languages,
@@ -92,7 +90,6 @@ export default function ResumeContent({ initialResume }: Props) {
       <Skills skills={skills} />
       <Experience experience={recentExperiences} />
       {previousExperiences.length ? <PreviousExperience experience={previousExperiences} /> : null}
-      <Break breaks={breaks} />
       <Certifications certifications={certifications} />
       <Education education={education} />
       <Projects projects={projects} />

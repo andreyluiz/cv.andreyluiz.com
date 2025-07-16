@@ -5,7 +5,6 @@ export interface Variant {
   summary: string;
   skills: SkillDomain[];
   experience: Experience[];
-  breaks: Break[];
   projects?: Project[];
   education: Education[];
   certifications: Certification[];
@@ -44,14 +43,6 @@ export interface Experience {
   };
   achievements: string[];
   techStack: string[];
-}
-
-export interface Break {
-  period: {
-    start: string;
-    end: string;
-  };
-  achievements: string[];
 }
 
 export interface Project {
