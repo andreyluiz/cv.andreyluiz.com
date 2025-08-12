@@ -1,17 +1,27 @@
 {
   "name": "Andrey Luiz",
-  "title": "Ingénieur Logiciel Senior | Tech Lead",
+  "title": "Ingénieur Logiciel Senior",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Suisse",
+    "location": "Route de la Gruyère 21, 1700 Fribourg, Suisse",
     "github": "github.com/andreyluiz",
     "linkedin": "linkedin.com/in/andreyluiz",
-    "website": "andreyluiz.com"
+    "website": "andreyluiz.com",
+    "age": "33 ans",
+    "nationality": "Brésilien",
+    "permit": "Permis B"
   },
-  "summary": "Ingénieur Logiciel avec plus de 14 ans d'expérience en développement logiciel, principalement axé sur la qualité et la valeur pour le client. Expérience dans les secteurs SaaS, Web3 et Sport, travaillant toujours en étroite collaboration avec les Product Owners avec une vision innovante et axée sur les résultats. À la recherche d'un poste de Tech Lead ou d'Ingénieur Logiciel Senior, pour mettre à profit l'expertise en développement logiciel et en leadership afin de stimuler les résultats de l'équipe et la valeur du produit.",
+  "summary": "Ingénieur Logiciel avec plus de 14 ans d'expérience en développement logiciel, principalement axé sur la qualité et la valeur pour le client. Expérience dans les secteurs SaaS, Web3 et Sport, travaillant toujours en étroite collaboration avec les Product Owners avec une vision innovante et axée sur les résultats. À la recherche d'un poste de Tech Lead ou d'Ingénieur Mobile, pour mettre à profit l'expertise en développement logiciel et en leadership afin de stimuler les résultats de l'équipe et la valeur du produit.",
+  "qualities": [
+    "Ambitieux",
+    "Orienté solution",
+    "Fiable",
+    "Responsable",
+    "Concentré"
+  ],
   "generalSkills": [
-    "Développer des applications full-stack évolutives et maintenables",
+    "Concevoir des applications mobiles attrayantes et performantes",
     "Collaborer au sein d'équipes Agile interfonctionnelles",
     "Encadrer et guider les développeurs juniors",
     "Piloter les indicateurs clés de performance (KPI) pour mesurer le succès"
@@ -75,8 +85,7 @@
       "achievements": [
         "Développé des projets Web3 avec SvelteKit, intégrant divers blockchains et smart contracts.",
         "Implémenté une application portefeuille React Native pour un grand client indien, intégrant une blockchain personnalisée et sécurisant les premiers investissements.",
-        "Créé un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et 600 joueurs le premier mois.",
-        "Encadré des développeurs juniors, promouvant les bonnes pratiques et la qualité du code, améliorant la productivité et la maintenabilité."
+        "Créé un jeu avec Phaser.js pour un portail de staking, recevant des retours positifs du client et 600 joueurs le premier mois."
       ]
     },
     {
@@ -89,7 +98,6 @@
       },
       "achievements": [
         "Livré de nombreuses fonctionnalités critiques pour la section projet de SonarCloud en React, améliorant l'intégration Clean Code Taxonomy et l'éducation des utilisateurs.",
-        "Migré l'écran des problèmes de SonarCloud vers MIUI avec React, recevant des retours positifs de la direction pour l'amélioration du flux de travail.",
         "Pionnier dans l'adoption de plus de 10 fonctionnalités critiques par l'équipe CaYC, utilisant React et TypeScript, assurant l'éducation des utilisateurs et une configuration correcte du projet en moins de 4 mois.",
         "Fourniture de tests complets pour chaque fonctionnalité, améliorant la fiabilité du code et la confiance lors des déploiements, atteignant près de 90% de couverture.",
         "Favorisé l'autonomie de l'équipe dans une hiérarchie horizontale, encourageant la collaboration et l'innovation, et améliorant la dynamique d'équipe."
@@ -108,7 +116,6 @@
         "Amélioré la recherche cartographique et les processus de location de l'application Equip, assurant la fiabilité et obtenant les premiers utilisateurs tests.",
         "Publié l'application Equip sur Play Store et Apple Store, élargissant la portée de l'entreprise dans trois pays.",
         "Refondu le code de l'application Equip avec React Native et TypeScript, réduisant le temps d'itération sur les nouvelles fonctionnalités.",
-        "Défini les meilleures pratiques et l'architecture de l'application Equip, assurant la qualité et la maintenabilité du code.",
         "Collaboré étroitement avec le Product Owner pour répondre aux besoins des utilisateurs et aux objectifs commerciaux, augmentant la valeur produit et la satisfaction utilisateur."
       ]
     },
@@ -130,6 +137,7 @@
       "title": "Développeur Front-end Senior",
       "company": "Integer Consulting",
       "location": "Portugal",
+      "isPrevious": true,
       "period": {
         "start": "Fév 2018",
         "end": "Jan 2020"
@@ -189,6 +197,7 @@
       "company": "Softplan",
       "location": "Brésil",
       "isPrevious": true,
+      "isHidden": true,
       "period": {
         "start": "Mar 2014",
         "end": "Juin 2015"
@@ -220,15 +229,15 @@
   "languages": [
     {
       "name": "Anglais",
-      "level": "Professionnel complet"
+      "level": "C2"
     },
     {
       "name": "Français",
-      "level": "Compétence professionnelle limitée"
+      "level": "B2"
     },
     {
       "name": "Portugais",
-      "level": "Natif"
+      "level": "C2"
     }
   ],
   "personalityTraits": [

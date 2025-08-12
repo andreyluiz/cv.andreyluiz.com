@@ -1,15 +1,25 @@
 {
   "name": "Andrey Luiz",
-  "title": "Senior Software Engineer | Tech Lead",
+  "title": "Senior Software Engineer",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Fribourg, Switzerland",
+    "location": "Route de la Gruyère 21, 1700 Fribourg, Switzerland",
     "github": "github.com/andreyluiz",
     "linkedin": "linkedin.com/in/andreyluiz",
-    "website": "andreyluiz.com"
+    "website": "andreyluiz.com",
+    "age": "33 years old",
+    "nationality": "Brazilian",
+    "permit": "B Permit"
   },
   "summary": "Senior Software Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. Industry background spanning SaaS, Web3, and Sports, always working closely with Product Owners with an innovative and result-driven vision. Looking for a position of Tech Lead or Senior Software Engineer, to leverage expertise in software development and leadership to drive team results and product value.",
+  "qualities": [
+    "Ambitious",
+    "Solution-oriented",
+    "Reliable",
+    "Responsible",
+    "Focused"
+  ],
   "generalSkills": [
     "Develop scalable and maintainable full-stack applications",
     "Collaborate within cross-functional Agile teams",
@@ -75,8 +85,7 @@
       "achievements": [
         "Developed Web3 projects using SvelteKit, integrating with many types of blockchains and smart contracts.",
         "Implemented a React Native wallet application for a big client from India, integrating with a custom made blockchain and securing the first stakes.",
-        "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month.",
-        "Mentored Junior developers, guiding in best practices and code quality, enhancing team productivity and code maintainability."
+        "Crafted a game using Phaser.js for a staking portal, getting positive feedback from the client and granting 600 players in the first month."
       ]
     },
     {
@@ -89,7 +98,6 @@
       },
       "achievements": [
         "Delivered many critical features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
-        "Migrated SonarCloud's issues screen, a critical feature, to MIUI using React, receiving positive feedback from senior leadership for improving the daily workflow of developers.",
         "Pioneered CaYC team's adoption of more than 10 critical features, using React and TypeScript, ensuring user education and achieving proper project configuration in less than 4 months.",
         "Delivered full coverage tests for each and every feature, to improve code reliability and confidence in deployments, raising coverage close to 90%.",
         "Driven team autonomy on a horizontal hierarchy, fostering a culture of collaboration and innovation, and improving team dynamics."
@@ -108,7 +116,6 @@
         "Enhanced Equip app's map search and rental processes, improving reliability and securing the first test users.",
         "Released Equip app on Play Store and Apple Store, expanding the company's reach in three countries.",
         "Refactored the Equip app's codebase using React Native and TypeScript, reducing the time to iterate on new features.",
-        "Decided on Equip app's best practices and architecture, ensuring code quality and maintainability, and improving product reliability.",
         "Collaborated closely with the Product Owner to ensure the product met user needs and business goals, enhancing product value and user satisfaction."
       ]
     },
@@ -130,6 +137,7 @@
       "title": "Senior Front-end Developer",
       "company": "Integer Consulting",
       "location": "Portugal",
+      "isPrevious": true,
       "period": {
         "start": "Feb 2018",
         "end": "Jan 2020"
@@ -189,6 +197,7 @@
       "company": "Softplan",
       "location": "Brazil",
       "isPrevious": true,
+      "isHidden": true,
       "period": {
         "start": "Mar 2014",
         "end": "Jun 2015"
@@ -220,15 +229,15 @@
   "languages": [
     {
       "name": "English",
-      "level": "Full Professional"
+      "level": "C2"
     },
     {
       "name": "French",
-      "level": "Limited Working"
+      "level": "B2"
     },
     {
       "name": "Portuguese",
-      "level": "Native"
+      "level": "C2"
     }
   ],
   "personalityTraits": [

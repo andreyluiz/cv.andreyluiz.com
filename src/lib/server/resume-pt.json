@@ -1,15 +1,25 @@
 {
   "name": "Andrey Luiz",
-  "title": "Engenheiro de Software Sênior | Tech Lead",
+  "title": "Engenheiro de Software Sênior",
   "contactInfo": {
     "email": "andreyluiz.developer@gmail.com",
     "phone": "+41 76 503 86 65",
-    "location": "Friburgo, Suíça",
+    "location": "Route de la Gruyère 21, 1700 Fribourg, Suíça",
     "github": "github.com/andreyluiz",
     "linkedin": "linkedin.com/in/andreyluiz",
-    "website": "andreyluiz.com"
+    "website": "andreyluiz.com",
+    "age": "33 anos",
+    "nationality": "Brasileiro",
+    "permit": "Permisso B"
   },
   "summary": "Engenheiro de Software com mais de 14 anos de experiência em desenvolvimento de software, focado principalmente em qualidade e valor para o cliente. Experiência em SaaS, Web3 e Esportes, sempre trabalhando próximo a Product Owners com uma visão inovadora e orientada a resultados. Buscando uma posição de Tech Lead ou Engenheiro de Software Sênior para alavancar expertise em desenvolvimento e liderança para impulsionar resultados da equipe e valor do produto.",
+  "qualities": [
+    "Ambicioso",
+    "Orientado a solução",
+    "Fiável",
+    "Responsável",
+    "Focado"
+  ],
   "generalSkills": [
     "Desenvolver aplicações full-stack escaláveis e de fácil manutenção",
     "Colaborar em equipes ágeis multifuncionais",
@@ -75,8 +85,7 @@
       "achievements": [
         "Desenvolveu projetos Web3 usando SvelteKit, integrando com diversos blockchains e smart contracts.",
         "Implementou um aplicativo de carteira em React Native para um grande cliente da Índia, integrando com uma blockchain personalizada e garantindo os primeiros investimentos.",
-        "Criou um jogo usando Phaser.js para um portal de staking, recebendo feedback positivo do cliente e alcançando 600 jogadores no primeiro mês.",
-        "Mentorou desenvolvedores juniores, promovendo boas práticas e qualidade de código, aumentando a produtividade e a manutenção da equipe."
+        "Criou um jogo usando Phaser.js para um portal de staking, recebendo feedback positivo do cliente e alcançando 600 jogadores no primeiro mês."
       ]
     },
     {
@@ -89,7 +98,6 @@
       },
       "achievements": [
         "Entregou diversas funcionalidades críticas para a seção de projetos do SonarCloud em React, melhorando a integração do Clean Code Taxonomy e a educação dos usuários.",
-        "Migrou a tela de issues do SonarCloud para MIUI usando React, recebendo feedback positivo da liderança sênior por melhorar o fluxo de trabalho diário dos desenvolvedores.",
         "Pioneirou a adoção de mais de 10 funcionalidades críticas pela equipe CaYC, usando React e TypeScript, garantindo a educação dos usuários e a configuração adequada do projeto em menos de 4 meses.",
         "Entregou testes completos para cada funcionalidade, melhorando a confiabilidade do código e a confiança nos deploys, elevando a cobertura para quase 90%.",
         "Promoveu a autonomia da equipe em uma hierarquia horizontal, incentivando a colaboração e inovação, e melhorando a dinâmica do time."
@@ -108,7 +116,6 @@
         "Aprimorou a busca no mapa e processos de aluguel do app Equip, garantindo confiabilidade e conquistando os primeiros usuários de teste.",
         "Lançou o app Equip na Play Store e Apple Store, expandindo o alcance da empresa em três países.",
         "Refatorou o código do app Equip usando React Native e TypeScript, reduzindo o tempo de iteração em novas funcionalidades.",
-        "Definiu as melhores práticas e arquitetura do app Equip, garantindo qualidade e manutenção do código.",
         "Colaborou de perto com o Product Owner para garantir que o produto atendesse às necessidades dos usuários e objetivos do negócio, aumentando o valor do produto e a satisfação do usuário."
       ]
     },
@@ -130,6 +137,7 @@
       "title": "Desenvolvedor Front-end Sênior",
       "company": "Integer Consulting",
       "location": "Portugal",
+      "isPrevious": true,
       "period": {
         "start": "Fev 2018",
         "end": "Jan 2020"
@@ -189,6 +197,7 @@
       "company": "Softplan",
       "location": "Brasil",
       "isPrevious": true,
+      "isHidden": true,
       "period": {
         "start": "Mar 2014",
         "end": "Jun 2015"
@@ -220,15 +229,15 @@
   "languages": [
     {
       "name": "Inglês",
-      "level": "Profissional completo"
+      "level": "C2"
     },
     {
       "name": "Francês",
-      "level": "Competência profissional limitada"
+      "level": "B2"
     },
     {
       "name": "Português",
-      "level": "Nativo"
+      "level": "C2"
     }
   ],
   "personalityTraits": [

@@ -9,10 +9,12 @@ interface Props {
 export default function Experience({ experience }: Props) {
   const t = useTranslations("resume.experience");
 
+  const visibleExperiences = experience.filter((exp) => !exp.isHidden);
+
   return (
     <Section title={t("title")}>
       <div className="flex flex-col gap-3">
-        {experience.map((exp) => (
+        {visibleExperiences.map((exp) => (
           <div
             key={exp.title + exp.company + exp.location + exp.period.start}
             className="break-inside-avoid not-last:border-b border-neutral-300 not-last:pb-4 space-y-2"
@@ -30,7 +32,7 @@ export default function Experience({ experience }: Props) {
                 {exp.period.start} - {exp.period.end}
               </div>
             </div>
-            {exp.achievements.length > 0 && (
+            {exp.achievements.length > 0 && !exp.isPrevious && (
               <ul className="list-disc ml-4">
                 {exp.achievements.map((achievement) => (
                   <li key={achievement} className="leading-normal">

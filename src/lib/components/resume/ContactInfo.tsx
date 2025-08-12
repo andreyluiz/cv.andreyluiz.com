@@ -28,13 +28,16 @@ export default function ContactInfo({ contactInfo }: Props) {
 
   return (
     <Section title={t("title")}>
-      <ul className="grid grid-cols-2 gap-x-24">
+      <ul className="grid grid-cols-2">
         <ContactItem item={contactInfo.email} icon="mdi:email" />
-        <ContactItem item={contactInfo.website} icon="mdi:web" />
         <ContactItem item={contactInfo.location} icon="mdi:map-marker" />
-        <ContactItem item={contactInfo.github} icon="mdi:github" />
         <ContactItem item={contactInfo.phone} icon="mdi:phone" />
         <ContactItem item={contactInfo.linkedin} icon="mdi:linkedin" />
+        <ContactItem item={contactInfo.github} icon="mdi:github" />
+        <ContactItem item={contactInfo.website} icon="mdi:web" />
+        <ContactItem item={contactInfo.age.toString()} icon="mdi:calendar" />
+        <ContactItem item={contactInfo.nationality} icon="mdi:flag" />
+        <ContactItem item={contactInfo.permit} icon="mdi:passport" />
       </ul>
     </Section>
   );
