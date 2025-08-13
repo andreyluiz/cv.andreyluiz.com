@@ -94,3 +94,9 @@ export interface ModelOption {
   provider: string;
   isFree: boolean;
 }
+
+export interface CoverLetterInputs {
+  jobPosition: string;
+  companyDescription: string;
+  jobDescription: string;
+}
