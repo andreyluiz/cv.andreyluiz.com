@@ -15,7 +15,10 @@ export default function Certifications({ certifications }: Props) {
     <Section title={t("title")}>
       <div className="flex flex-col gap-2">
         {certifications.map((cert) => (
-          <div className="flex items-baseline justify-between gap-1" key={cert.degree + cert.institution + cert.location + cert.year}>
+          <div
+            className="flex items-baseline justify-between gap-1"
+            key={cert.degree + cert.institution + cert.location + cert.year}
+          >
             <div className="flex items-baseline gap-0.5">
               <span>
                 <span className="font-bold">{cert.degree}</span>

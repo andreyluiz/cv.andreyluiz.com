@@ -22,7 +22,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
   const [jobDescription, setJobDescription] = useState("");
   const [jobTitle, setJobTitle] = useState(resumeData.title || "");
   const [isTailored, setIsTailored] = useState(false);
-  const { apiKey } = useStore();
+  const { apiKey, selectedModel } = useStore();
 
   const handleJobDescriptionSubmit = async (
     jobTitle: string,
@@ -37,12 +37,17 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         resumeData,
         aiInstructions,
         apiKey,
+        selectedModel,
       );
       onResumeUpdate(tailoredResume);
       setIsTailored(true);
     } catch (error) {
       console.error("Error tailoring resume:", error);
-      alert("Failed to tailor resume. Please try again.");
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to tailor resume with OpenRouter. Please check your API key and selected model, then try again.";
+      alert(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -90,6 +95,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         jobDescription={jobDescription}
         resumeData={resumeData}
         apiKey={apiKey}
+        selectedModel={selectedModel}
       />
 
       {isLoading && (

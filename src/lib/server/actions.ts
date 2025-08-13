@@ -26,6 +26,7 @@ export async function tailorResume(
   currentResume: Variant,
   aiInstructions: string,
   apiKey: string,
+  selectedModel: string,
 ): Promise<Variant> {
   try {
     return await tailorResumeWithOpenAI(
@@ -34,10 +35,17 @@ export async function tailorResume(
       currentResume,
       aiInstructions,
       apiKey,
+      selectedModel,
     );
   } catch (error) {
     console.error("Error tailoring resume:", error);
-    throw new Error("Failed to tailor resume. Please try again.");
+    // Re-throw the OpenRouter-specific error message if available
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(
+      "Failed to tailor resume with OpenRouter. Please check your API key and selected model, then try again.",
+    );
   }
 }
 
@@ -46,6 +54,7 @@ export async function generateCoverLetter(
   jobDescription: string,
   currentResume: Variant,
   apiKey: string,
+  selectedModel: string,
 ): Promise<string | null> {
   try {
     return await generateCoverLetterWithOpenAI(
@@ -53,9 +62,16 @@ export async function generateCoverLetter(
       jobDescription,
       currentResume,
       apiKey,
+      selectedModel,
     );
   } catch (error) {
     console.error("Error generating cover letter:", error);
-    throw new Error("Failed to generate cover letter. Please try again.");
+    // Re-throw the OpenRouter-specific error message if available
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error(
+      "Failed to generate cover letter with OpenRouter. Please check your API key and selected model, then try again.",
+    );
   }
 }

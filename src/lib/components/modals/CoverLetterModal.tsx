@@ -11,6 +11,7 @@ interface CoverLetterModalProps {
   jobDescription: string;
   resumeData: Variant;
   apiKey: string;
+  selectedModel: string;
 }
 
 export default function CoverLetterModal({
@@ -20,6 +21,7 @@ export default function CoverLetterModal({
   jobDescription,
   resumeData,
   apiKey,
+  selectedModel,
 }: CoverLetterModalProps) {
   const [coverLetter, setCoverLetter] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -34,19 +36,26 @@ export default function CoverLetterModal({
         jobDescription,
         resumeData,
         apiKey,
+        selectedModel,
       );
       if (newCoverLetter) {
         setCoverLetter(newCoverLetter);
       } else {
-        setError("Failed to generate cover letter. Please try again.");
+        setError(
+          "Failed to generate cover letter with OpenRouter. Please try again.",
+        );
       }
     } catch (error) {
-      setError("Failed to generate cover letter. Please try again.");
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to generate cover letter with OpenRouter. Please check your API key and selected model, then try again.";
+      setError(errorMessage);
       console.error("Error generating cover letter:", error);
     } finally {
       setIsLoading(false);
     }
-  }, [jobTitle, jobDescription, resumeData, apiKey]);
+  }, [jobTitle, jobDescription, resumeData, apiKey, selectedModel]);
 
   const getCoverLetter = () => ({
     __html: coverLetter,

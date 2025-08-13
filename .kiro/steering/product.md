@@ -9,9 +9,11 @@ This is an AI-powered CV tailor application that helps users adapt their resumes
 - **Print Optimization**: Resume layouts optimized for printing and PDF generation
 
 ## Target Users
+
 Professionals looking to customize their resumes for specific job applications, with support for multiple languages and markets.
 
 ## Key Features
+
 - Real-time resume editing and preview
 - AI-powered content suggestions and modifications
 - Responsive design with print-friendly layouts

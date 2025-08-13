@@ -43,30 +43,35 @@ public/                   # Static assets
 ## Architecture Patterns
 
 ### Component Organization
+
 - **UI Components**: Generic, reusable components in `src/lib/components/ui/`
 - **Feature Components**: Domain-specific components in `src/lib/components/resume/`
 - **Modal Components**: Dialog components in `src/lib/components/modals/`
 - **Provider Components**: Context providers in `src/lib/components/providers/`
 
 ### Data Flow
+
 - **Resume Data**: Static JSON files in `src/lib/server/` by locale
 - **Client State**: Zustand store for API keys and UI state
 - **Server Actions**: AI operations and data processing in `src/lib/server/actions.ts`
 - **Types**: Centralized TypeScript definitions in `src/lib/types.ts`
 
 ### Internationalization
+
 - **Routing**: Locale-based routing with `[locale]` dynamic segments
 - **Messages**: Translation files in `messages/` directory
 - **Configuration**: i18n setup in `src/i18n/` directory
 - **Supported Locales**: `en`, `fr`, `pt` (easily extensible)
 
 ## File Naming Conventions
+
 - **Components**: PascalCase (e.g., `ResumeContent.tsx`)
 - **Utilities**: camelCase (e.g., `utils.ts`)
 - **Types**: camelCase with descriptive names (e.g., `types.ts`)
 - **Server files**: kebab-case for data files (e.g., `resume-en.json`)
 
 ## Import Patterns
+
 - Use `@/` alias for imports from `src/` directory
 - Group imports: external libraries, then internal modules
 - Prefer named exports over default exports for utilities

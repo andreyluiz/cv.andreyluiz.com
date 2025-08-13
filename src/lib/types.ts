@@ -11,9 +11,9 @@ export interface Variant {
   education: Education[];
   certifications: Certification[];
   languages: Language[];
-  publications: Publication[];
+  publications?: Publication[];
   personalityTraits: string[];
-  changes: Change[];
+  changes?: Change[];
 }
 
 export interface Change {
@@ -33,7 +33,7 @@ export interface ContactInfo {
   website: string;
   linkedin: string;
   github: string;
-  age: number;
+  age: string;
   nationality: string;
   permit: string;
 }
@@ -86,4 +86,11 @@ export interface Publication {
   title: string;
   location: string;
   url: string;
+}
+
+export interface ModelOption {
+  id: string;
+  name: string;
+  provider: string;
+  isFree: boolean;
 }

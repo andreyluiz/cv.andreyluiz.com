@@ -32,11 +32,29 @@ This project is a highly customizable, AI-powered CV tailor that helps you adapt
    bun install
    ```
 
-3. **Run the development server:**
+3. **Set up environment variables:**
+
+   Copy the example environment file and update it with your configuration:
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Update the `NEXT_PUBLIC_SITE_URL` in `.env.local` if needed. For development, the default `http://localhost:3000` should work fine.
+
+4. **Run the development server:**
 
    ```bash
    bun run dev
    ```
+
+## Environment Variables
+
+The application uses the following environment variables:
+
+- `NEXT_PUBLIC_SITE_URL`: The URL of your site, used for OpenRouter HTTP-Referer header. Defaults to `http://localhost:3000` for development.
+
+For production deployment, make sure to set `NEXT_PUBLIC_SITE_URL` to your actual domain (e.g., `https://yourdomain.com`).
 
 ## Customization
 

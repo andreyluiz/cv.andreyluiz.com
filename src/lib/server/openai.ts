@@ -1,5 +1,110 @@
 import OpenAI from "openai";
+import { AVAILABLE_MODELS, getFreeModels } from "../models";
 import type { Variant } from "../types";
+
+interface ErrorLike {
+  message?: string;
+  code?: number | string;
+  status?: number | string;
+  toString?: () => string;
+}
+
+/**
+ * Creates OpenRouter-specific error messages with helpful suggestions
+ */
+function createOpenRouterError(error: unknown, selectedModel: string): Error {
+  const errorLike = error as ErrorLike;
+  const errorMessage =
+    errorLike?.message ||
+    errorLike?.toString?.() ||
+    String(error) ||
+    "Unknown error";
+  const errorCode = errorLike?.code || errorLike?.status;
+
+  // Model unavailable or not found
+  if (
+    errorMessage.includes("model") &&
+    (errorMessage.includes("not found") ||
+      errorMessage.includes("unavailable") ||
+      errorMessage.includes("does not exist"))
+  ) {
+    const currentModel = AVAILABLE_MODELS.find((m) => m.id === selectedModel);
+    const freeModels = getFreeModels();
+    const alternativeModels = AVAILABLE_MODELS.filter(
+      (m) => m.id !== selectedModel,
+    ).slice(0, 3);
+
+    let suggestion = "";
+    if (freeModels.length > 0) {
+      suggestion = `Try one of these free alternatives: ${freeModels.map((m) => m.name).join(", ")}`;
+    } else if (alternativeModels.length > 0) {
+      suggestion = `Try one of these alternatives: ${alternativeModels.map((m) => m.name).join(", ")}`;
+    }
+
+    return new Error(
+      `The selected model "${currentModel?.name || selectedModel}" is currently unavailable on OpenRouter. ${suggestion}`,
+    );
+  }
+
+  // Authentication errors
+  if (
+    errorCode === 401 ||
+    errorMessage.includes("unauthorized") ||
+    errorMessage.includes("invalid api key")
+  ) {
+    return new Error(
+      "Invalid OpenRouter API key. Please check your API key in the settings and ensure it's active on your OpenRouter account.",
+    );
+  }
+
+  // Rate limiting
+  if (
+    errorCode === 429 ||
+    errorMessage.includes("rate limit") ||
+    errorMessage.includes("too many requests")
+  ) {
+    const freeModels = getFreeModels();
+    const suggestion =
+      freeModels.length > 0
+        ? ` Try switching to a free model like ${freeModels[0].name} to avoid rate limits.`
+        : "";
+    return new Error(
+      `OpenRouter rate limit exceeded.${suggestion} Please wait a moment before trying again.`,
+    );
+  }
+
+  // Insufficient credits/quota
+  if (
+    errorMessage.includes("insufficient") ||
+    errorMessage.includes("quota") ||
+    errorMessage.includes("credits")
+  ) {
+    const freeModels = getFreeModels();
+    const suggestion =
+      freeModels.length > 0
+        ? ` Try switching to a free model like ${freeModels.map((m) => m.name).join(" or ")}.`
+        : "";
+    return new Error(
+      `Insufficient OpenRouter credits or quota exceeded.${suggestion} Please check your OpenRouter account balance.`,
+    );
+  }
+
+  // Network/connection errors
+  if (
+    errorMessage.includes("network") ||
+    errorMessage.includes("connection") ||
+    errorMessage.includes("timeout")
+  ) {
+    return new Error(
+      "Network error connecting to OpenRouter. Please check your internet connection and try again.",
+    );
+  }
+
+  // Generic OpenRouter error
+  return new Error(
+    `OpenRouter API error: ${errorMessage}. Please try again or select a different model.`,
+  );
+}
 
 export async function tailorResume(
   jobTitle: string,
@@ -7,12 +112,21 @@ export async function tailorResume(
   currentResume: Variant,
   aiInstructions: string,
   apiKey: string,
+  selectedModel: string,
 ) {
-  const openai = new OpenAI({ apiKey });
+  const openai = new OpenAI({
+    apiKey,
+    baseURL: "https://openrouter.ai/api/v1",
+    defaultHeaders: {
+      "HTTP-Referer":
+        process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+      "X-Title": "CV Tailor App",
+    },
+  });
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4.1-2025-04-14",
+      model: selectedModel,
       messages: [
         {
           role: "system",
@@ -222,7 +336,7 @@ Return the modified resume in the exact same JSON structure as the input, but wi
     return tailoredResume;
   } catch (error) {
     console.error("Error tailoring resume:", error);
-    throw error;
+    throw createOpenRouterError(error, selectedModel);
   }
 }
 
@@ -231,12 +345,21 @@ export async function generateCoverLetter(
   jobDescription: string,
   currentResume: Variant,
   apiKey: string,
+  selectedModel: string,
 ) {
-  const openai = new OpenAI({ apiKey });
+  const openai = new OpenAI({
+    apiKey,
+    baseURL: "https://openrouter.ai/api/v1",
+    defaultHeaders: {
+      "HTTP-Referer":
+        process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+      "X-Title": "CV Tailor App",
+    },
+  });
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-4.1-2025-04-14",
+      model: selectedModel,
       messages: [
         {
           role: "system",
@@ -277,6 +400,6 @@ The cover letter should be written in a professional tone and should be tailored
     return response.choices[0].message.content;
   } catch (error) {
     console.error("Error generating cover letter:", error);
-    throw error;
+    throw createOpenRouterError(error, selectedModel);
   }
 }
