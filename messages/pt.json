@@ -48,5 +48,31 @@
     "personalityTraits": {
       "title": "Traços de Personalidade"
     }
+  },
+  "coverLetter": {
+    "form": {
+      "optional": "opcional",
+      "generating": "Gerando...",
+      "generate": "Gerar Carta de Apresentação",
+      "infoBox": {
+        "title": "Candidatura Espontânea",
+        "description": "Deixe o título do cargo e a descrição do cargo em branco para criar uma carta de apresentação de candidatura espontânea que foca no seu interesse pela empresa."
+      },
+      "jobPosition": {
+        "label": "Cargo Pretendido",
+        "placeholder": "ex. Engenheiro de Software Sênior"
+      },
+      "companyDescription": {
+        "label": "Descrição da Empresa",
+        "placeholder": "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá..."
+      },
+      "jobDescription": {
+        "label": "Descrição do Cargo",
+        "placeholder": "Cole a descrição do cargo aqui ou descreva os requisitos da função..."
+      },
+      "validation": {
+        "companyDescriptionRequired": "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada."
+      }
+    }
   }
 }

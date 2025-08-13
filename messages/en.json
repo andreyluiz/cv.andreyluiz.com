@@ -48,5 +48,31 @@
     "personalityTraits": {
       "title": "Personality Traits"
     }
+  },
+  "coverLetter": {
+    "form": {
+      "optional": "optional",
+      "generating": "Generating...",
+      "generate": "Generate Cover Letter",
+      "infoBox": {
+        "title": "Spontaneous Application",
+        "description": "Leave job title and job description empty to create a spontaneous application cover letter that focuses on your interest in the company."
+      },
+      "jobPosition": {
+        "label": "Job Position",
+        "placeholder": "e.g., Senior Software Engineer"
+      },
+      "companyDescription": {
+        "label": "Company Description",
+        "placeholder": "Tell us about the company, its mission, values, products, or what interests you about working there..."
+      },
+      "jobDescription": {
+        "label": "Job Description",
+        "placeholder": "Paste the job description here or describe the role requirements..."
+      },
+      "validation": {
+        "companyDescriptionRequired": "Company description is required to generate a personalized cover letter."
+      }
+    }
   }
 }

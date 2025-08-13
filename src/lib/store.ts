@@ -22,14 +22,16 @@ export const useStore = create<StoreState>()(
       coverLetterInputs: null,
       setApiKey: (apiKey) => set({ apiKey }),
       setSelectedModel: (model) => set({ selectedModel: model }),
-      setCoverLetter: (letter, inputs) => set({ 
-        generatedCoverLetter: letter, 
-        coverLetterInputs: inputs 
-      }),
-      clearCoverLetter: () => set({ 
-        generatedCoverLetter: null, 
-        coverLetterInputs: null 
-      }),
+      setCoverLetter: (letter, inputs) =>
+        set({
+          generatedCoverLetter: letter,
+          coverLetterInputs: inputs,
+        }),
+      clearCoverLetter: () =>
+        set({
+          generatedCoverLetter: null,
+          coverLetterInputs: null,
+        }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)

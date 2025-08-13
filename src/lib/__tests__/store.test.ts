@@ -104,7 +104,7 @@ describe("Store", () => {
 
     it("should update existing cover letter and inputs", () => {
       const { setCoverLetter } = useStore.getState();
-      
+
       // Set initial values
       const initialLetter = "Initial letter";
       const initialInputs: CoverLetterInputs = {
@@ -148,7 +148,7 @@ describe("Store", () => {
   describe("clearCoverLetter", () => {
     it("should clear cover letter and inputs when clearCoverLetter is called", () => {
       const { setCoverLetter, clearCoverLetter } = useStore.getState();
-      
+
       // First set some data
       const testLetter = "Test letter";
       const testInputs: CoverLetterInputs = {
@@ -172,7 +172,7 @@ describe("Store", () => {
 
     it("should handle clearing when already null", () => {
       const { clearCoverLetter } = useStore.getState();
-      
+
       // Ensure initial state is null
       expect(useStore.getState().generatedCoverLetter).toBeNull();
       expect(useStore.getState().coverLetterInputs).toBeNull();
@@ -202,7 +202,8 @@ describe("Store", () => {
     });
 
     it("should maintain cover letter state with other state updates", () => {
-      const { setApiKey, setSelectedModel, setCoverLetter } = useStore.getState();
+      const { setApiKey, setSelectedModel, setCoverLetter } =
+        useStore.getState();
 
       const testApiKey = "sk-test-123";
       const testModel = "google/gemini-2.0-flash-exp:free";

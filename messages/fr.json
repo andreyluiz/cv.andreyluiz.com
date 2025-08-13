@@ -48,5 +48,31 @@
     "personalityTraits": {
       "title": "Traits de Personnalité"
     }
+  },
+  "coverLetter": {
+    "form": {
+      "optional": "optionnel",
+      "generating": "Génération...",
+      "generate": "Générer la Lettre de Motivation",
+      "infoBox": {
+        "title": "Candidature Spontanée",
+        "description": "Laissez le titre du poste et la description du poste vides pour créer une lettre de motivation de candidature spontanée qui se concentre sur votre intérêt pour l'entreprise."
+      },
+      "jobPosition": {
+        "label": "Poste Visé",
+        "placeholder": "ex. Ingénieur Logiciel Senior"
+      },
+      "companyDescription": {
+        "label": "Description de l'Entreprise",
+        "placeholder": "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler..."
+      },
+      "jobDescription": {
+        "label": "Description du Poste",
+        "placeholder": "Collez la description du poste ici ou décrivez les exigences du rôle..."
+      },
+      "validation": {
+        "companyDescriptionRequired": "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée."
+      }
+    }
   }
 }

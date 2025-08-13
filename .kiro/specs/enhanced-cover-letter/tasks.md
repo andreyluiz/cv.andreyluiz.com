@@ -7,7 +7,7 @@
   - Write unit tests for new store functionality
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 2. Create CoverLetterInputForm component
+- [x] 2. Create CoverLetterInputForm component
   - Build form component with job position, company description, and job description fields
   - Implement form validation requiring company description
   - Add information box explaining spontaneous applications
