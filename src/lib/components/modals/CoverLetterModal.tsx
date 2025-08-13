@@ -1,3 +1,4 @@
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import { generateCoverLetter } from "@/lib/server/actions";
@@ -25,6 +26,7 @@ export default function CoverLetterModal({
   selectedModel,
 }: CoverLetterModalProps) {
   const t = useTranslations("coverLetter.modal");
+  const { locale } = useParams();
   const { generatedCoverLetter, coverLetterInputs, setCoverLetter } =
     useStore();
 
@@ -55,6 +57,8 @@ export default function CoverLetterModal({
           resumeData,
           apiKey,
           selectedModel,
+          inputs.companyDescription || "",
+          Array.isArray(locale) ? locale[0] : locale || "en",
         );
 
         if (newCoverLetter) {
@@ -72,7 +76,7 @@ export default function CoverLetterModal({
         console.error("Error generating cover letter:", error);
       }
     },
-    [resumeData, apiKey, selectedModel, setCoverLetter, t],
+    [resumeData, apiKey, selectedModel, setCoverLetter, t, locale],
   );
 
   const handleFormSubmit = (inputs: CoverLetterInputs) => {

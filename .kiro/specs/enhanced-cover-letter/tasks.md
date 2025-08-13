@@ -31,7 +31,7 @@
   - Write unit tests for modal state transitions and workflow
   - _Requirements: 1.1, 1.4, 4.2, 4.3_
 
-- [ ] 5. Update AI service with enhanced prompting
+- [x] 5. Update AI service with enhanced prompting
   - Modify generateCoverLetter function to accept company information
   - Implement enhanced system prompt with structured format requirements
   - Add support for spontaneous applications when job details are missing

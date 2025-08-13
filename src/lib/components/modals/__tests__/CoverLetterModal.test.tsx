@@ -13,6 +13,11 @@ vi.mock("@/lib/store");
 // Mock the server actions
 vi.mock("@/lib/server/actions");
 
+// Mock Next.js navigation hooks
+vi.mock("next/navigation", () => ({
+  useParams: () => ({ locale: "en" }),
+}));
+
 // Mock child components
 vi.mock("../CoverLetterInputForm", () => ({
   default: ({ initialInputs, onSubmit, isLoading }: any) => (
@@ -210,6 +215,8 @@ describe("CoverLetterModal", () => {
         defaultResumeData,
         "test-api-key",
         "test-model",
+        "Test Company",
+        "en",
       );
     });
 
@@ -288,6 +295,8 @@ describe("CoverLetterModal", () => {
         defaultResumeData,
         "test-api-key",
         "test-model",
+        "Test Company",
+        "en",
       );
 
       await waitFor(() => {
@@ -420,6 +429,8 @@ describe("CoverLetterModal", () => {
         defaultResumeData,
         "test-api-key",
         "test-model",
+        mockInputs.companyDescription,
+        "en",
       );
     });
 

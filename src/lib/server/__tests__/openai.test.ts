@@ -331,6 +331,8 @@ describe("OpenRouter Client", () => {
         mockResume,
         mockApiKey,
         mockSelectedModel,
+        "Test Company Description",
+        "en",
       );
 
       expect(mockCreate).toHaveBeenCalledWith({
@@ -338,16 +340,14 @@ describe("OpenRouter Client", () => {
         messages: expect.arrayContaining([
           expect.objectContaining({
             role: "system",
-            content: expect.stringContaining(
-              "You are a professional cover letter writer",
-            ),
+            content: expect.stringContaining("professional cover letter writer"),
           }),
           expect.objectContaining({
             role: "user",
             content: expect.stringContaining(mockJobTitle),
           }),
         ]),
-        max_tokens: 1000,
+        max_tokens: 1500,
         temperature: 0.7,
       });
     });
@@ -371,6 +371,8 @@ describe("OpenRouter Client", () => {
         mockResume,
         mockApiKey,
         mockSelectedModel,
+        "Test Company Description",
+        "en",
       );
 
       expect(result).toBe(coverLetterContent);

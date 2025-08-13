@@ -346,6 +346,8 @@ export async function generateCoverLetter(
   currentResume: Variant,
   apiKey: string,
   selectedModel: string,
+  companyDescription?: string,
+  language?: string,
 ) {
   const openai = new OpenAI({
     apiKey,
@@ -357,47 +359,124 @@ export async function generateCoverLetter(
     },
   });
 
+  // Determine if this is a spontaneous application
+  const isSpontaneousApplication = !jobTitle.trim() || !jobDescription.trim();
+
+  // Set target language (default to English if not specified)
+  const targetLanguage = language || "en";
+  const languageMap: Record<string, string> = {
+    en: "English",
+    fr: "French",
+    pt: "Portuguese",
+  };
+  const languageName = languageMap[targetLanguage] || "English";
+
+  // Get current date for cover letter title
+  const currentDate = new Date();
+  const formattedDate = new Intl.DateTimeFormat(
+    targetLanguage === "en" ? "en-US" : targetLanguage,
+    {
+      year: "numeric",
+      month: "long",
+    },
+  ).format(currentDate);
+
   try {
+    const systemPrompt = `You are a professional cover letter writer specialized in creating compelling, structured cover letters. Your task is to write a cover letter in ${languageName} that follows this EXACT structure:
+
+REQUIRED STRUCTURE:
+1. **Header**: Candidate's name and complete contact information (email, phone, location) at the top left
+2. **Company Information**: Company contact information aligned to the right (if available from company description)
+3. **Title**: ${
+      isSpontaneousApplication
+        ? `A bold title: "Spontaneous Application - [Company Name] - ${formattedDate}"`
+        : `A bold title: "Cover letter for position ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+    }
+4. **Salutation**: Professional greeting addressing the hiring manager
+5. **Company Flattery Paragraph**: A paragraph highlighting the company's values, mission, ${isSpontaneousApplication ? "specific departments, technologies, or business models that interest the candidate" : "and how they align with the role"}
+6. **Candidate Skills Paragraph**: Detailed paragraph about the candidate's relevant experience and skills
+7. **Collaboration Vision Paragraph**: How the candidate envisions collaborating with the company
+8. **Interview Request**: Professional closing requesting an interview opportunity
+9. **Sign-off**: Professional closing with candidate's name
+
+CRITICAL REQUIREMENTS:
+- Write ONLY in ${languageName}
+- Use information provided about the candidate (no fabrication or augmentation)
+- ${isSpontaneousApplication ? "Focus on company-specific interests and general fit since no specific job details are provided" : "Tailor content to match the specific job requirements"}
+- Maintain professional, engaging tone without buzzwords
+- Include specific examples from the candidate's background
+- Ensure proper business letter formatting
+- Use HTML formatting for structure (headers, paragraphs, bold text)
+
+CONTENT GUIDELINES:
+- Be sincere and impactful without being overly enthusiastic
+- Base all claims on actual resume content
+- Show genuine interest in the company and role
+- Include a compelling call to action
+- Maintain professional formality appropriate for business correspondence`;
+
+    const userPrompt = `Please generate a cover letter with the following information:
+
+${
+  isSpontaneousApplication
+    ? `**SPONTANEOUS APPLICATION**
+Company Information: ${companyDescription || "Not specified"}
+Note: This is a spontaneous application - no specific job title or description provided.`
+    : `**JOB APPLICATION**
+Job Title: ${jobTitle}
+Job Description: ${jobDescription}
+Company Information: ${companyDescription || "Not specified"}`
+}
+
+**Candidate's Resume:**
+${JSON.stringify(currentResume, null, 2)}
+
+**Additional Context:**
+- Target Language: ${languageName}
+- Date: ${formattedDate}
+- Application Type: ${isSpontaneousApplication ? "Spontaneous Application" : "Specific Position Application"}
+
+Please generate a complete, properly formatted cover letter following the exact structure specified above.`;
+
     const response = await openai.chat.completions.create({
       model: selectedModel,
       messages: [
         {
           role: "system",
-          content: `You are a professional cover letter writer. Your task is to write a compelling cover letter that:
-1. Highlights the candidate's relevant experience and skills that match the job requirements
-2. Demonstrates enthusiasm for the role and company
-3. Shows how the candidate's background aligns with the job description
-4. Maintains a professional and engaging tone
-5. Is concise and well-structured
-6. Includes a clear call to action
-7. Doesn't include any augmentations, or lies about the candidate's skills or experiences.
-
-The cover letter MUST have this format:
-
-- Name and contact information
-- A greeting
-- A first paragraph highlighting how the candidate's background aligns with the job description, and how they are a great fit for the role. This paragraph should be short, and should be impactful, without buzz words, but with enthusiasm.
-- A second paragraph explaining the background of the candidate and accomplishments that are relevant to the job description. This paragraph should be longer, and should be more detailed. No augmentations or lies. Just the facts.
-- A third paragraph with other relevant information that might help the candidate stand out from other candidates. This paragraph should be short.
-- The last paragraph should be a call to action, asking the recipient to schedule an interview with the candidate. This paragraph should be short. It also should be sincere and impactful, but without buzz words.
-- Finally, the cover letter should finish with a greeting and the candidate's name.
-
-The cover letter should be written in a professional tone and should be tailored to the specific job description.`,
+          content: systemPrompt,
         },
         {
           role: "user",
-          content: `Job Title: ${jobTitle}\nJob Description:\n${jobDescription}\n\nCandidate's Resume:\n${JSON.stringify(
-            currentResume,
-            null,
-            2,
-          )}`,
+          content: userPrompt,
         },
       ],
-      max_tokens: 1000,
+      max_tokens: 1500,
       temperature: 0.7,
     });
 
-    return response.choices[0].message.content;
+    const generatedContent = response.choices[0].message.content;
+
+    // Validate that content was generated
+    if (!generatedContent || generatedContent.trim().length === 0) {
+      throw new Error("AI generated empty cover letter content");
+    }
+
+    // Basic validation for required structure elements
+    const requiredElements = [
+      currentResume.contactInfo?.email || currentResume.personalInfo?.email,
+      currentResume.contactInfo?.phone || currentResume.personalInfo?.phone,
+      currentResume.name || currentResume.personalInfo?.name,
+    ];
+
+    const hasContactInfo = requiredElements.some(
+      (element) => element && generatedContent.includes(element),
+    );
+
+    if (!hasContactInfo) {
+      console.warn("Generated cover letter may be missing contact information");
+    }
+
+    return generatedContent;
   } catch (error) {
     console.error("Error generating cover letter:", error);
     throw createOpenRouterError(error, selectedModel);

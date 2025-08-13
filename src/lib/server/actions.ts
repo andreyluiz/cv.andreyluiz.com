@@ -55,6 +55,8 @@ export async function generateCoverLetter(
   currentResume: Variant,
   apiKey: string,
   selectedModel: string,
+  companyDescription?: string,
+  language?: string,
 ): Promise<string | null> {
   try {
     return await generateCoverLetterWithOpenAI(
@@ -63,6 +65,8 @@ export async function generateCoverLetter(
       currentResume,
       apiKey,
       selectedModel,
+      companyDescription,
+      language,
     );
   } catch (error) {
     console.error("Error generating cover letter:", error);
