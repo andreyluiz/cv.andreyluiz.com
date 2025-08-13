@@ -40,7 +40,7 @@
   - Write unit tests for prompt generation and content validation
   - _Requirements: 2.1, 2.2, 2.4, 2.5, 2.6, 3.1, 3.2, 3.3, 6.1, 6.2, 6.3, 6.4, 6.5_
 
-- [ ] 6. Update server actions for enhanced cover letter generation
+- [x] 6. Update server actions for enhanced cover letter generation
   - Modify generateCoverLetter server action to accept new parameters
   - Add error handling for new input validation scenarios
   - Ensure proper error propagation to client components
