@@ -76,6 +76,32 @@
     },
     "display": {
       "regenerate": "Gerar Novamente"
+    },
+    "modal": {
+      "titles": {
+        "input": "Gerar Carta de Apresentação",
+        "generating": "Gerando Carta de Apresentação",
+        "display": "Carta de Apresentação",
+        "error": "Falha na Geração",
+        "default": "Carta de Apresentação"
+      },
+      "generating": {
+        "message": "Criando sua carta de apresentação personalizada...",
+        "subtitle": "Isso pode levar alguns momentos"
+      },
+      "error": {
+        "title": "Algo deu errado"
+      },
+      "errors": {
+        "generationFailed": "Falha ao gerar carta de apresentação. Por favor, tente novamente.",
+        "apiError": "Falha ao gerar carta de apresentação. Por favor, verifique sua chave da API e modelo selecionado, então tente novamente."
+      },
+      "actions": {
+        "editInputs": "Editar Entradas",
+        "close": "Fechar",
+        "retry": "Tentar Novamente",
+        "cancel": "Cancelar"
+      }
     }
   }
 }

@@ -76,6 +76,32 @@
     },
     "display": {
       "regenerate": "Regenerate"
+    },
+    "modal": {
+      "titles": {
+        "input": "Generate Cover Letter",
+        "generating": "Generating Cover Letter",
+        "display": "Cover Letter",
+        "error": "Generation Failed",
+        "default": "Cover Letter"
+      },
+      "generating": {
+        "message": "Creating your personalized cover letter...",
+        "subtitle": "This may take a few moments"
+      },
+      "error": {
+        "title": "Something went wrong"
+      },
+      "errors": {
+        "generationFailed": "Failed to generate cover letter. Please try again.",
+        "apiError": "Failed to generate cover letter. Please check your API key and selected model, then try again."
+      },
+      "actions": {
+        "editInputs": "Edit Inputs",
+        "close": "Close",
+        "retry": "Try Again",
+        "cancel": "Cancel"
+      }
     }
   }
 }

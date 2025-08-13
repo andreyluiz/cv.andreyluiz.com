@@ -76,6 +76,32 @@
     },
     "display": {
       "regenerate": "Régénérer"
+    },
+    "modal": {
+      "titles": {
+        "input": "Générer une Lettre de Motivation",
+        "generating": "Génération de la Lettre de Motivation",
+        "display": "Lettre de Motivation",
+        "error": "Échec de la Génération",
+        "default": "Lettre de Motivation"
+      },
+      "generating": {
+        "message": "Création de votre lettre de motivation personnalisée...",
+        "subtitle": "Cela peut prendre quelques instants"
+      },
+      "error": {
+        "title": "Quelque chose s'est mal passé"
+      },
+      "errors": {
+        "generationFailed": "Échec de la génération de la lettre de motivation. Veuillez réessayer.",
+        "apiError": "Échec de la génération de la lettre de motivation. Veuillez vérifier votre clé API et le modèle sélectionné, puis réessayer."
+      },
+      "actions": {
+        "editInputs": "Modifier les Entrées",
+        "close": "Fermer",
+        "retry": "Réessayer",
+        "cancel": "Annuler"
+      }
     }
   }
 }
