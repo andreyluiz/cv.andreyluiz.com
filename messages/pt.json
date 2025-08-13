@@ -73,6 +73,9 @@
       "validation": {
         "companyDescriptionRequired": "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada."
       }
+    },
+    "display": {
+      "regenerate": "Gerar Novamente"
     }
   }
 }

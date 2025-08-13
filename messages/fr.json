@@ -73,6 +73,9 @@
       "validation": {
         "companyDescriptionRequired": "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée."
       }
+    },
+    "display": {
+      "regenerate": "Régénérer"
     }
   }
 }

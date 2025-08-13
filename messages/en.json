@@ -73,6 +73,9 @@
       "validation": {
         "companyDescriptionRequired": "Company description is required to generate a personalized cover letter."
       }
+    },
+    "display": {
+      "regenerate": "Regenerate"
     }
   }
 }
