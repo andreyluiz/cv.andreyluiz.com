@@ -39,7 +39,7 @@
   - Update error messages in both server actions and client components
   - _Requirements: 3.4, 4.3_
 
-- [ ] 7. Create unit tests for new functionality
+- [x] 7. Create unit tests for new functionality
   - Write tests for store model selection functionality
   - Test ApiKeyModal component with model dropdown
   - Test OpenRouter client configuration and API calls
@@ -58,7 +58,7 @@
   - Provide fallback to localhost for development
   - _Requirements: 3.5_
 
-- [ ] 10. Integration testing and validation
+- [x] 10. Integration testing and validation
   - Test complete user flow from model selection to AI response generation
   - Verify model selection persistence across browser sessions
   - Test error scenarios with invalid API keys and unavailable models
