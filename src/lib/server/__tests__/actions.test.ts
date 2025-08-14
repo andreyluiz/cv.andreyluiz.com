@@ -29,12 +29,6 @@ describe("Server Actions", () => {
       nationality: "American",
       permit: "US Citizen",
     },
-    personalInfo: {
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+1234567890",
-      location: "San Francisco, CA",
-    },
     summary: "Experienced software engineer",
     qualities: ["Problem-solving"],
     generalSkills: ["JavaScript", "Python"],
@@ -59,6 +53,7 @@ describe("Server Actions", () => {
         name: "Project A",
         description: "A web application",
         techStack: ["React"],
+        period: { start: "2023", end: "2024" },
       },
     ],
     education: [
@@ -72,8 +67,8 @@ describe("Server Actions", () => {
     certifications: [],
     languages: [
       {
-        language: "English",
-        proficiency: "Native",
+        name: "English",
+        level: "Native",
       },
     ],
     publications: [],
@@ -145,8 +140,7 @@ describe("Server Actions", () => {
       it("should throw error when resume lacks name", async () => {
         const resumeWithoutName = {
           ...mockResume,
-          name: undefined,
-          personalInfo: { ...mockResume.personalInfo!, name: undefined },
+          name: "",
         };
 
         await expect(
@@ -157,25 +151,32 @@ describe("Server Actions", () => {
             defaultParams.apiKey,
             defaultParams.selectedModel,
           )
-        ).rejects.toThrow("Resume must contain at least a name and email address to generate a cover letter.");
+        ).rejects.toThrow("Resume must contain at least a name to generate a cover letter.");
       });
 
-      it("should throw error when resume lacks email", async () => {
-        const resumeWithoutEmail = {
+      it("should warn when resume lacks location but still generate cover letter", async () => {
+        const resumeWithoutLocation = {
           ...mockResume,
-          contactInfo: { ...mockResume.contactInfo!, email: undefined },
-          personalInfo: { ...mockResume.personalInfo!, email: undefined },
+          contactInfo: { ...mockResume.contactInfo!, location: "" },
         };
+        
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-        await expect(
-          generateCoverLetter(
-            defaultParams.jobTitle,
-            defaultParams.jobDescription,
-            resumeWithoutEmail as any,
-            defaultParams.apiKey,
-            defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Resume must contain at least a name and email address to generate a cover letter.");
+        const result = await generateCoverLetter(
+          defaultParams.jobTitle,
+          defaultParams.jobDescription,
+          resumeWithoutLocation as any,
+          defaultParams.apiKey,
+          defaultParams.selectedModel,
+        );
+        
+        expect(result).toBe("Generated cover letter");
+        expect(consoleSpy).toHaveBeenCalledWith(
+          "Resume is missing location information for the cover letter header."
+        );
+        
+        consoleSpy.mockRestore();
       });
 
       it("should throw error for spontaneous application without company description", async () => {

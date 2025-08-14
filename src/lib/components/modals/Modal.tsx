@@ -16,8 +16,8 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-800">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 p-4 overflow-y-auto">
+      <div className="w-full min-w-[800px] max-w-4xl rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-800 my-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold">{title}</h2>
           <button

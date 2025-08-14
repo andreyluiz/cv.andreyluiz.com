@@ -22,10 +22,10 @@ export default function CoverLetterDisplay({
   return (
     <div className="flex flex-col gap-6">
       {/* Cover Letter Content */}
-      <div className="min-h-[500px] rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:min-h-0 print:border-none print:bg-white print:p-0 print:shadow-none">
+      <div className="max-h-[75vh] overflow-y-auto rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:max-h-none print:overflow-visible print:border-none print:bg-white print:p-0 print:shadow-none">
         <div className="mx-auto max-w-4xl">
           <div
-            className="cover-letter-content whitespace-pre-wrap font-serif text-base leading-relaxed text-gray-900 selection:bg-blue-100 dark:text-gray-100 print:font-serif print:text-black print:text-sm print:leading-normal"
+            className="cover-letter-content whitespace-pre-wrap font-sans text-base leading-relaxed text-gray-900 selection:bg-blue-100 dark:text-gray-100 print:font-sans print:text-black print:text-sm print:leading-normal"
             // biome-ignore lint/security/noDangerouslySetInnerHtml: Content comes from AI generation and is safe
             dangerouslySetInnerHTML={getCoverLetterHTML()}
           />
@@ -47,7 +47,7 @@ export default function CoverLetterDisplay({
       <style jsx global>{`
         /* Screen typography improvements */
         .cover-letter-content {
-          line-height: 1.7;
+          line-height: 1.5;
           font-feature-settings: "liga" 1, "kern" 1;
           text-rendering: optimizeLegibility;
           -webkit-font-smoothing: antialiased;
@@ -55,7 +55,7 @@ export default function CoverLetterDisplay({
         }
 
         .cover-letter-content p {
-          margin-bottom: 1.25rem;
+          margin-bottom: 0.5rem;
           text-align: justify;
           hyphens: auto;
           -webkit-hyphens: auto;
@@ -63,12 +63,16 @@ export default function CoverLetterDisplay({
           -ms-hyphens: auto;
         }
 
+        .cover-letter-content p + p {
+          margin-top: 0.25rem;
+        }
+
         .cover-letter-content h1,
         .cover-letter-content h2,
         .cover-letter-content h3 {
           font-weight: 600;
-          margin-bottom: 0.75rem;
-          margin-top: 1.5rem;
+          margin-bottom: 0.5rem;
+          margin-top: 1rem;
           letter-spacing: -0.025em;
         }
 
@@ -93,7 +97,43 @@ export default function CoverLetterDisplay({
         .cover-letter-content .salutation,
         .cover-letter-content .closing,
         .cover-letter-content .signature-line {
-          margin-bottom: 1.5rem;
+          margin-bottom: 0.75rem;
+        }
+
+        /* Address blocks - target specific classes */
+        .cover-letter-content .sender-address,
+        .cover-letter-content .recipient-address {
+          line-height: 1.2;
+        }
+
+        .cover-letter-content .sender-address *,
+        .cover-letter-content .recipient-address * {
+          margin-bottom: 0.1rem !important;
+          line-height: 1.2;
+        }
+
+        /* Cover letter title styling */
+        .cover-letter-content .cover-letter-title {
+          font-weight: 600;
+          text-align: left;
+          margin: 1rem 0;
+        }
+
+        /* Other section styling */
+        .cover-letter-content .salutation {
+          margin-bottom: 0.75rem;
+        }
+
+        .cover-letter-content .company-paragraph,
+        .cover-letter-content .skills-paragraph,
+        .cover-letter-content .collaboration-paragraph,
+        .cover-letter-content .interview-request {
+          margin-bottom: 0.75rem;
+        }
+
+        .cover-letter-content .closing-signature {
+          margin-top: 1.5rem;
+          font-weight: 500;
         }
 
         .cover-letter-content .subject-line {
@@ -102,20 +142,20 @@ export default function CoverLetterDisplay({
         }
 
         .cover-letter-content .closing {
-          margin-top: 2rem;
+          margin-top: 1rem;
         }
 
         .cover-letter-content .signature-line {
-          margin-top: 3rem;
+          margin-top: 1.5rem;
           font-weight: 500;
         }
 
         /* Print-specific optimizations */
         @media print {
           .cover-letter-content {
-            font-family: "Times New Roman", "Times", serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
             font-size: 12pt !important;
-            line-height: 1.6 !important;
+            line-height: 1.4 !important;
             color: black !important;
             max-width: none !important;
             margin: 0 !important;
@@ -127,18 +167,22 @@ export default function CoverLetterDisplay({
           }
 
           .cover-letter-content p {
-            margin-bottom: 12pt;
+            margin-bottom: 6pt;
             text-align: left;
             orphans: 2;
             widows: 2;
+          }
+
+          .cover-letter-content p + p {
+            margin-top: 2pt;
           }
 
           .cover-letter-content h1,
           .cover-letter-content h2,
           .cover-letter-content h3 {
             font-weight: bold;
-            margin-bottom: 6pt;
-            margin-top: 12pt;
+            margin-bottom: 4pt;
+            margin-top: 8pt;
             page-break-after: avoid;
             page-break-inside: avoid;
           }
@@ -158,36 +202,69 @@ export default function CoverLetterDisplay({
           /* Business letter print formatting */
           .cover-letter-content .sender-address {
             text-align: left;
-            margin-bottom: 24pt;
+            margin-bottom: 12pt;
+            line-height: 1.1;
           }
 
           .cover-letter-content .recipient-address {
             text-align: left;
-            margin-bottom: 24pt;
+            margin-bottom: 12pt;
+            line-height: 1.1;
+          }
+
+          /* Address blocks - reduce internal spacing for print */
+          .cover-letter-content .sender-address *,
+          .cover-letter-content .recipient-address * {
+            margin-bottom: 1pt !important;
+            line-height: 1.1;
+          }
+
+          /* Cover letter title print styling */
+          .cover-letter-content .cover-letter-title {
+            font-weight: bold;
+            text-align: left;
+            margin: 8pt 0;
+          }
+
+          /* Other section print styling */
+          .cover-letter-content .salutation {
+            margin-bottom: 6pt;
+          }
+
+          .cover-letter-content .company-paragraph,
+          .cover-letter-content .skills-paragraph,
+          .cover-letter-content .collaboration-paragraph,
+          .cover-letter-content .interview-request {
+            margin-bottom: 6pt;
+          }
+
+          .cover-letter-content .closing-signature {
+            margin-top: 18pt;
+            font-weight: bold;
           }
 
           .cover-letter-content .date-line {
             text-align: right;
-            margin-bottom: 24pt;
+            margin-bottom: 12pt;
           }
 
           .cover-letter-content .subject-line {
             font-weight: bold;
-            margin-bottom: 12pt;
+            margin-bottom: 6pt;
             text-decoration: underline;
           }
 
           .cover-letter-content .salutation {
-            margin-bottom: 12pt;
+            margin-bottom: 6pt;
           }
 
           .cover-letter-content .closing {
-            margin-top: 24pt;
-            margin-bottom: 48pt;
+            margin-top: 12pt;
+            margin-bottom: 24pt;
           }
 
           .cover-letter-content .signature-line {
-            margin-top: 36pt;
+            margin-top: 18pt;
           }
 
           /* Prevent awkward page breaks */

@@ -76,14 +76,17 @@ export async function generateCoverLetter(
   }
 
   // Validate resume has minimum required information
-  const resumeName = currentResume.name || currentResume.personalInfo?.name;
-  const resumeEmail =
-    currentResume.contactInfo?.email || currentResume.personalInfo?.email;
+  const resumeName = currentResume.name;
+  const resumeLocation = currentResume.contactInfo?.location;
 
-  if (!resumeName || !resumeEmail) {
+  if (!resumeName) {
     throw new Error(
-      "Resume must contain at least a name and email address to generate a cover letter.",
+      "Resume must contain at least a name to generate a cover letter.",
     );
+  }
+
+  if (!resumeLocation) {
+    console.warn("Resume is missing location information for the cover letter header.");
   }
 
   // For spontaneous applications, company description is required

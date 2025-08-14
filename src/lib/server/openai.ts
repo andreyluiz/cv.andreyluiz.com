@@ -384,36 +384,66 @@ export async function generateCoverLetter(
   try {
     const systemPrompt = `You are a professional cover letter writer specialized in creating compelling, structured cover letters. Your task is to write a cover letter in ${languageName} that follows this EXACT structure:
 
-REQUIRED STRUCTURE:
-1. **Header**: Candidate's name and complete contact information (email, phone, location) at the top left
-2. **Company Information**: Company contact information aligned to the right (if available from company description)
-3. **Title**: ${
+REQUIRED STRUCTURE WITH SPECIFIC CSS CLASSES:
+1. **Header**: <div class="sender-address">ONLY candidate's name and address (street address/location) - NO email, phone, or other contact details</div>
+2. **Company Information**: <div class="recipient-address">Company contact information aligned to the right (if available from company description)</div>
+3. **Title**: <div class="cover-letter-title">${
       isSpontaneousApplication
-        ? `A bold title: "Spontaneous Application - [Company Name] - ${formattedDate}"`
-        : `A bold title: "Cover letter for position ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
-    }
-4. **Salutation**: Professional greeting addressing the hiring manager
-5. **Company Flattery Paragraph**: A paragraph highlighting the company's values, mission, ${isSpontaneousApplication ? "specific departments, technologies, or business models that interest the candidate" : "and how they align with the role"}
-6. **Candidate Skills Paragraph**: Detailed paragraph about the candidate's relevant experience and skills
-7. **Collaboration Vision Paragraph**: How the candidate envisions collaborating with the company
-8. **Interview Request**: Professional closing requesting an interview opportunity
-9. **Sign-off**: Professional closing with candidate's name
+        ? `A bold title in ${languageName}: ${
+            targetLanguage === 'fr' 
+              ? `"Candidature spontanée - [Company Name] - ${formattedDate}"`
+              : targetLanguage === 'pt'
+              ? `"Candidatura espontânea - [Company Name] - ${formattedDate}"`
+              : `"Spontaneous Application - [Company Name] - ${formattedDate}"`
+          }`
+        : `A bold title in ${languageName}: ${
+            targetLanguage === 'fr'
+              ? `"Lettre de motivation pour le poste ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+              : targetLanguage === 'pt'
+              ? `"Carta de apresentação para o cargo ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+              : `"Cover letter for position ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+          }`
+    }</div>
+4. **Salutation**: <div class="salutation">Professional greeting addressing the hiring manager</div>
+5. **Company Flattery Paragraph**: <div class="company-paragraph">A paragraph highlighting the company's values, mission, ${isSpontaneousApplication ? "specific departments, technologies, or business models that interest the candidate" : "and how they align with the role"}</div>
+6. **Candidate Skills Paragraph**: <div class="skills-paragraph">Detailed paragraph about the candidate's relevant experience and skills</div>
+7. **Collaboration Vision Paragraph**: <div class="collaboration-paragraph">How the candidate envisions collaborating with the company</div>
+8. **Interview Request**: <div class="interview-request">Professional closing requesting an interview opportunity</div>
+9. **Sign-off**: <div class="closing-signature">Professional closing with candidate's name</div>
 
-CRITICAL REQUIREMENTS:
+CRITICAL FORMATTING REQUIREMENTS:
 - Write ONLY in ${languageName}
+- Return ONLY the formatted HTML content - NO code blocks, NO \`\`\`html tags, NO markdown formatting
+- MANDATORY: Use the exact CSS classes specified above for each section:
+  - sender-address (for candidate's name and address)
+  - recipient-address (for company information) 
+  - cover-letter-title (for the title)
+  - salutation (for greeting)
+  - company-paragraph (for company information paragraph)
+  - skills-paragraph (for candidate skills paragraph)
+  - collaboration-paragraph (for collaboration vision)
+  - interview-request (for interview request)
+  - closing-signature (for sign-off)
+- Use HTML tags directly: <h1>, <h2>, <h3>, <p>, <strong>, <br> etc.
+- The response should start immediately with HTML content
 - Use information provided about the candidate (no fabrication or augmentation)
 - ${isSpontaneousApplication ? "Focus on company-specific interests and general fit since no specific job details are provided" : "Tailor content to match the specific job requirements"}
 - Maintain professional, engaging tone without buzzwords
 - Include specific examples from the candidate's background
 - Ensure proper business letter formatting
-- Use HTML formatting for structure (headers, paragraphs, bold text)
+
+CONTACT INFO RESTRICTIONS:
+- Header must contain ONLY: candidate name and address/location
+- DO NOT include: email, phone number, LinkedIn, GitHub, website, or any other contact details
+- If resume contains email/phone, ignore them for the header
 
 CONTENT GUIDELINES:
 - Be sincere and impactful without being overly enthusiastic
 - Base all claims on actual resume content
 - Show genuine interest in the company and role
 - Include a compelling call to action
-- Maintain professional formality appropriate for business correspondence`;
+- Maintain professional formality appropriate for business correspondence
+- Generate complete, full-length cover letter content (not abbreviated or truncated)`;
 
     const userPrompt = `Please generate a cover letter with the following information:
 
@@ -436,7 +466,16 @@ ${JSON.stringify(currentResume, null, 2)}
 - Date: ${formattedDate}
 - Application Type: ${isSpontaneousApplication ? "Spontaneous Application" : "Specific Position Application"}
 
-Please generate a complete, properly formatted cover letter following the exact structure specified above.`;
+IMPORTANT: Generate a complete, full-length cover letter following the exact structure specified above. 
+
+FORMATTING REQUIREMENTS:
+- Return ONLY HTML content (no code blocks, no \`\`\`html tags)
+- Start response immediately with HTML tags
+- Include ONLY name and address in header (NO email, phone, LinkedIn, etc.)
+- Generate complete paragraphs (not truncated or abbreviated)
+- Use proper HTML formatting throughout
+
+Please generate the cover letter now.`;
 
     const response = await openai.chat.completions.create({
       model: selectedModel,
@@ -450,7 +489,7 @@ Please generate a complete, properly formatted cover letter following the exact 
           content: userPrompt,
         },
       ],
-      max_tokens: 1500,
+      max_tokens: 3000,
       temperature: 0.7,
     });
 
@@ -461,19 +500,18 @@ Please generate a complete, properly formatted cover letter following the exact 
       throw new Error("AI generated empty cover letter content");
     }
 
-    // Basic validation for required structure elements
-    const requiredElements = [
-      currentResume.contactInfo?.email || currentResume.personalInfo?.email,
-      currentResume.contactInfo?.phone || currentResume.personalInfo?.phone,
-      currentResume.name || currentResume.personalInfo?.name,
-    ];
+    // Basic validation for required structure elements (name and location)
+    const candidateName = currentResume.name;
+    const candidateLocation = currentResume.contactInfo?.location;
+    
+    const requiredElements = [candidateName, candidateLocation].filter(Boolean);
 
-    const hasContactInfo = requiredElements.some(
+    const hasRequiredInfo = requiredElements.some(
       (element) => element && generatedContent.includes(element),
     );
 
-    if (!hasContactInfo) {
-      console.warn("Generated cover letter may be missing contact information");
+    if (!hasRequiredInfo) {
+      console.warn("Generated cover letter may be missing required information (name or address)");
     }
 
     return generatedContent;
