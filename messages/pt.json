@@ -79,7 +79,11 @@
       }
     },
     "display": {
-      "regenerate": "Gerar Novamente"
+      "regenerate": "Gerar Novamente",
+      "regenerateAriaLabel": "Gerar novamente carta de apresentação com as mesmas informações",
+      "content": {
+        "ariaLabel": "Conteúdo da carta de apresentação gerada"
+      }
     },
     "modal": {
       "titles": {

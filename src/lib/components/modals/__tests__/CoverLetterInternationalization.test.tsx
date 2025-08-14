@@ -35,24 +35,34 @@ const englishMessages = {
       jobPosition: {
         label: "Job Position",
         placeholder: "e.g., Senior Software Engineer",
+        helperText: "Leave empty for a spontaneous application cover letter",
       },
       companyDescription: {
         label: "Company Description",
         placeholder:
           "Tell us about the company, its mission, values, products, or what interests you about working there...",
+        helperText:
+          "Required. Help the AI understand what you know about the company",
       },
       jobDescription: {
         label: "Job Description",
         placeholder:
           "Paste the job description here or describe the role requirements...",
+        helperText:
+          "Optional. Include specific requirements to tailor the cover letter",
       },
       validation: {
         companyDescriptionRequired:
           "Company description is required to generate a personalized cover letter.",
+        errorAnnouncement: "Form validation error",
       },
     },
     display: {
       regenerate: "Regenerate",
+      regenerateAriaLabel: "Regenerate cover letter with same inputs",
+      content: {
+        ariaLabel: "Generated cover letter content",
+      },
     },
     modal: {
       titles: {
@@ -65,6 +75,7 @@ const englishMessages = {
       generating: {
         message: "Creating your personalized cover letter...",
         subtitle: "This may take a few moments",
+        ariaLabel: "Cover letter is being generated",
       },
       error: {
         title: "Something went wrong",
@@ -79,6 +90,10 @@ const englishMessages = {
         close: "Close",
         retry: "Try Again",
         cancel: "Cancel",
+        editInputsAriaLabel: "Go back to edit cover letter inputs",
+        closeAriaLabel: "Close cover letter modal",
+        retryAriaLabel: "Try generating the cover letter again",
+        cancelAriaLabel: "Cancel and close modal",
       },
     },
   },
@@ -98,24 +113,35 @@ const frenchMessages = {
       jobPosition: {
         label: "Poste Visé",
         placeholder: "ex. Ingénieur Logiciel Senior",
+        helperText: "Laissez vide pour une candidature spontanée",
       },
       companyDescription: {
         label: "Description de l'Entreprise",
         placeholder:
           "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler...",
+        helperText:
+          "Obligatoire. Aidez l'IA à comprendre ce que vous savez sur l'entreprise",
       },
       jobDescription: {
         label: "Description du Poste",
         placeholder:
           "Collez la description du poste ici ou décrivez les exigences du rôle...",
+        helperText:
+          "Optionnel. Incluez des exigences spécifiques pour adapter la lettre",
       },
       validation: {
         companyDescriptionRequired:
           "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+        errorAnnouncement: "Erreur de validation du formulaire",
       },
     },
     display: {
       regenerate: "Régénérer",
+      regenerateAriaLabel:
+        "Régénérer la lettre de motivation avec les mêmes paramètres",
+      content: {
+        ariaLabel: "Contenu de la lettre de motivation générée",
+      },
     },
     modal: {
       titles: {
@@ -128,6 +154,7 @@ const frenchMessages = {
       generating: {
         message: "Création de votre lettre de motivation personnalisée...",
         subtitle: "Cela peut prendre quelques instants",
+        ariaLabel: "La lettre de motivation est en cours de génération",
       },
       error: {
         title: "Quelque chose s'est mal passé",
@@ -143,6 +170,11 @@ const frenchMessages = {
         close: "Fermer",
         retry: "Réessayer",
         cancel: "Annuler",
+        editInputsAriaLabel:
+          "Retourner à l'édition des entrées de lettre de motivation",
+        closeAriaLabel: "Fermer la boîte de dialogue de lettre de motivation",
+        retryAriaLabel: "Réessayer de générer la lettre de motivation",
+        cancelAriaLabel: "Annuler et fermer la boîte de dialogue",
       },
     },
   },
@@ -162,24 +194,35 @@ const portugueseMessages = {
       jobPosition: {
         label: "Cargo Pretendido",
         placeholder: "ex. Engenheiro de Software Sênior",
+        helperText: "Deixe vazio para candidatura espontânea",
       },
       companyDescription: {
         label: "Descrição da Empresa",
         placeholder:
           "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá...",
+        helperText:
+          "Obrigatório. Ajude a IA a entender o que você sabe sobre a empresa",
       },
       jobDescription: {
         label: "Descrição do Cargo",
         placeholder:
           "Cole a descrição do cargo aqui ou descreva os requisitos da função...",
+        helperText:
+          "Opcional. Inclua requisitos específicos para personalizar a carta",
       },
       validation: {
         companyDescriptionRequired:
           "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+        errorAnnouncement: "Erro de validação do formulário",
       },
     },
     display: {
       regenerate: "Gerar Novamente",
+      regenerateAriaLabel:
+        "Gerar novamente carta de apresentação com as mesmas informações",
+      content: {
+        ariaLabel: "Conteúdo da carta de apresentação gerada",
+      },
     },
     modal: {
       titles: {
@@ -192,6 +235,7 @@ const portugueseMessages = {
       generating: {
         message: "Criando sua carta de apresentação personalizada...",
         subtitle: "Isso pode levar alguns momentos",
+        ariaLabel: "A carta de apresentação está sendo gerada",
       },
       error: {
         title: "Algo deu errado",
@@ -207,6 +251,11 @@ const portugueseMessages = {
         close: "Fechar",
         retry: "Tentar Novamente",
         cancel: "Cancelar",
+        editInputsAriaLabel:
+          "Voltar para editar as entradas da carta de apresentação",
+        closeAriaLabel: "Fechar modal da carta de apresentação",
+        retryAriaLabel: "Tentar gerar a carta de apresentação novamente",
+        cancelAriaLabel: "Cancelar e fechar modal",
       },
     },
   },

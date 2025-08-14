@@ -9,6 +9,10 @@ const mockMessages = {
   coverLetter: {
     display: {
       regenerate: "Regenerate",
+      regenerateAriaLabel: "Regenerate cover letter with same inputs",
+      content: {
+        ariaLabel: "Generated cover letter content",
+      },
     },
   },
 };

@@ -79,7 +79,11 @@
       }
     },
     "display": {
-      "regenerate": "Régénérer"
+      "regenerate": "Régénérer",
+      "regenerateAriaLabel": "Régénérer la lettre de motivation avec les mêmes paramètres",
+      "content": {
+        "ariaLabel": "Contenu de la lettre de motivation générée"
+      }
     },
     "modal": {
       "titles": {

@@ -22,7 +22,11 @@ export default function CoverLetterDisplay({
   return (
     <div className="flex flex-col gap-6">
       {/* Cover Letter Content */}
-      <div className="max-h-[75vh] overflow-y-auto rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:max-h-none print:overflow-visible print:border-none print:bg-white print:p-0 print:shadow-none">
+      <div
+        className="max-h-[75vh] overflow-y-auto rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:max-h-none print:overflow-visible print:border-none print:bg-white print:p-0 print:shadow-none"
+        role="document"
+        aria-label={t("content.ariaLabel")}
+      >
         <div className="mx-auto max-w-4xl">
           <div
             className="cover-letter-content whitespace-pre-wrap font-sans text-base leading-relaxed text-gray-900 selection:bg-blue-100 dark:text-gray-100 print:font-sans print:text-black print:text-sm print:leading-normal"
@@ -38,6 +42,7 @@ export default function CoverLetterDisplay({
           onClick={onRegenerate}
           variant="secondary"
           className="min-w-[120px]"
+          aria-label={t("regenerateAriaLabel")}
         >
           {t("regenerate")}
         </Button>

@@ -19,16 +19,21 @@ const mockMessages = {
       jobPosition: {
         label: "Job Position",
         placeholder: "e.g., Senior Software Engineer",
+        helperText: "Leave empty for a spontaneous application cover letter",
       },
       companyDescription: {
         label: "Company Description",
         placeholder:
           "Tell us about the company, its mission, values, products, or what interests you about working there...",
+        helperText:
+          "Required. Help the AI understand what you know about the company",
       },
       jobDescription: {
         label: "Job Description",
         placeholder:
           "Paste the job description here or describe the role requirements...",
+        helperText:
+          "Optional. Include specific requirements to tailor the cover letter",
       },
       validation: {
         companyDescriptionRequired:

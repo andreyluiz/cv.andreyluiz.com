@@ -79,7 +79,11 @@
       }
     },
     "display": {
-      "regenerate": "Regenerate"
+      "regenerate": "Regenerate",
+      "regenerateAriaLabel": "Regenerate cover letter with same inputs",
+      "content": {
+        "ariaLabel": "Generated cover letter content"
+      }
     },
     "modal": {
       "titles": {
