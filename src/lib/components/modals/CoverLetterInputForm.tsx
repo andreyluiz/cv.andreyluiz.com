@@ -62,7 +62,6 @@ export default function CoverLetterInputForm({
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">

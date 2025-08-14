@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { generateCoverLetter, tailorResume, getResume } from "../actions";
 import type { Variant } from "../../types";
+import { generateCoverLetter, getResume, tailorResume } from "../actions";
 
 // Mock the OpenAI functions
 vi.mock("../openai", () => ({
@@ -11,7 +11,8 @@ vi.mock("../openai", () => ({
 const mockGenerateCoverLetterWithOpenAI = vi.fn();
 const mockTailorResumeWithOpenAI = vi.fn();
 
-vi.mocked(await import("../openai")).generateCoverLetter = mockGenerateCoverLetterWithOpenAI;
+vi.mocked(await import("../openai")).generateCoverLetter =
+  mockGenerateCoverLetterWithOpenAI;
 vi.mocked(await import("../openai")).tailorResume = mockTailorResumeWithOpenAI;
 
 describe("Server Actions", () => {
@@ -97,8 +98,10 @@ describe("Server Actions", () => {
             null as any,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Resume data is required to generate a cover letter.");
+          ),
+        ).rejects.toThrow(
+          "Resume data is required to generate a cover letter.",
+        );
       });
 
       it("should throw error when API key is empty", async () => {
@@ -109,8 +112,10 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             "",
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("API key is required to generate a cover letter. Please configure your API key in settings.");
+          ),
+        ).rejects.toThrow(
+          "API key is required to generate a cover letter. Please configure your API key in settings.",
+        );
       });
 
       it("should throw error when API key is only whitespace", async () => {
@@ -121,8 +126,10 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             "   ",
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("API key is required to generate a cover letter. Please configure your API key in settings.");
+          ),
+        ).rejects.toThrow(
+          "API key is required to generate a cover letter. Please configure your API key in settings.",
+        );
       });
 
       it("should throw error when selected model is empty", async () => {
@@ -133,8 +140,10 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             "",
-          )
-        ).rejects.toThrow("Model selection is required to generate a cover letter. Please select a model in settings.");
+          ),
+        ).rejects.toThrow(
+          "Model selection is required to generate a cover letter. Please select a model in settings.",
+        );
       });
 
       it("should throw error when resume lacks name", async () => {
@@ -150,18 +159,24 @@ describe("Server Actions", () => {
             resumeWithoutName as any,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Resume must contain at least a name to generate a cover letter.");
+          ),
+        ).rejects.toThrow(
+          "Resume must contain at least a name to generate a cover letter.",
+        );
       });
 
       it("should warn when resume lacks location but still generate cover letter", async () => {
         const resumeWithoutLocation = {
           ...mockResume,
-          contactInfo: { ...mockResume.contactInfo!, location: "" },
+          contactInfo: { ...mockResume.contactInfo, location: "" },
         };
-        
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
-        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
+        const consoleSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {});
 
         const result = await generateCoverLetter(
           defaultParams.jobTitle,
@@ -170,12 +185,12 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
         );
-        
+
         expect(result).toBe("Generated cover letter");
         expect(consoleSpy).toHaveBeenCalledWith(
-          "Resume is missing location information for the cover letter header."
+          "Resume is missing location information for the cover letter header.",
         );
-        
+
         consoleSpy.mockRestore();
       });
 
@@ -188,12 +203,16 @@ describe("Server Actions", () => {
             defaultParams.apiKey,
             defaultParams.selectedModel,
             "", // Empty company description
-          )
-        ).rejects.toThrow("Company description is required for spontaneous applications. Please provide information about the company you're applying to.");
+          ),
+        ).rejects.toThrow(
+          "Company description is required for spontaneous applications. Please provide information about the company you're applying to.",
+        );
       });
 
       it("should allow spontaneous application with company description", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
 
         const result = await generateCoverLetter(
           "", // Empty job title
@@ -202,7 +221,7 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Great tech company",
-          "en"
+          "en",
         );
 
         expect(result).toBe("Generated cover letter");
@@ -213,14 +232,16 @@ describe("Server Actions", () => {
           "test-api-key",
           "test-model",
           "Great tech company",
-          "en"
+          "en",
         );
       });
     });
 
     describe("input sanitization", () => {
       it("should trim whitespace from all string inputs", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
 
         await generateCoverLetter(
           "  Frontend Developer  ",
@@ -229,7 +250,7 @@ describe("Server Actions", () => {
           "  api-key  ",
           "  model-name  ",
           "  Company desc  ",
-          "  en  "
+          "  en  ",
         );
 
         expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
@@ -239,19 +260,21 @@ describe("Server Actions", () => {
           "api-key",
           "model-name",
           "Company desc",
-          "en"
+          "en",
         );
       });
 
       it("should handle undefined optional parameters gracefully", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
 
         const result = await generateCoverLetter(
           defaultParams.jobTitle,
           defaultParams.jobDescription,
           defaultParams.currentResume,
           defaultParams.apiKey,
-          defaultParams.selectedModel
+          defaultParams.selectedModel,
           // No companyDescription or language
         );
 
@@ -263,13 +286,17 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "",
-          "en"
+          "en",
         );
       });
 
       it("should default to English for unsupported language", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
-        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
+        const consoleSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {});
 
         await generateCoverLetter(
           defaultParams.jobTitle,
@@ -278,11 +305,11 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Company description",
-          "unsupported-lang"
+          "unsupported-lang",
         );
 
         expect(consoleSpy).toHaveBeenCalledWith(
-          'Unsupported language "unsupported-lang", defaulting to English'
+          'Unsupported language "unsupported-lang", defaulting to English',
         );
         expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
           expect.any(String),
@@ -291,18 +318,20 @@ describe("Server Actions", () => {
           expect.any(String),
           expect.any(String),
           expect.any(String),
-          "en" // Should default to en
+          "en", // Should default to en
         );
 
         consoleSpy.mockRestore();
       });
 
       it("should accept supported languages", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
 
         for (const lang of ["en", "fr", "pt"]) {
           vi.clearAllMocks();
-          
+
           await generateCoverLetter(
             defaultParams.jobTitle,
             defaultParams.jobDescription,
@@ -310,7 +339,7 @@ describe("Server Actions", () => {
             defaultParams.apiKey,
             defaultParams.selectedModel,
             "Company description",
-            lang
+            lang,
           );
 
           expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
@@ -320,7 +349,7 @@ describe("Server Actions", () => {
             expect.any(String),
             expect.any(String),
             expect.any(String),
-            lang
+            lang,
           );
         }
       });
@@ -337,8 +366,10 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("The AI service returned an empty response. Please try again or select a different model.");
+          ),
+        ).rejects.toThrow(
+          "The AI service returned an empty response. Please try again or select a different model.",
+        );
       });
 
       it("should throw error when AI returns empty string", async () => {
@@ -351,13 +382,17 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("The AI service returned an empty response. Please try again or select a different model.");
+          ),
+        ).rejects.toThrow(
+          "The AI service returned an empty response. Please try again or select a different model.",
+        );
       });
 
       it("should warn when cover letter is unusually short", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Short");
-        const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+        const consoleSpy = vi
+          .spyOn(console, "warn")
+          .mockImplementation(() => {});
 
         const result = await generateCoverLetter(
           defaultParams.jobTitle,
@@ -369,7 +404,7 @@ describe("Server Actions", () => {
 
         expect(result).toBe("Short");
         expect(consoleSpy).toHaveBeenCalledWith(
-          "Generated cover letter appears to be unusually short, this may indicate an issue with the AI response"
+          "Generated cover letter appears to be unusually short, this may indicate an issue with the AI response",
         );
 
         consoleSpy.mockRestore();
@@ -393,7 +428,9 @@ describe("Server Actions", () => {
 
     describe("enhanced error handling", () => {
       it("should provide specific error for API key issues", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("Invalid API key provided"));
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("Invalid API key provided"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -402,12 +439,16 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.");
+          ),
+        ).rejects.toThrow(
+          "Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.",
+        );
       });
 
       it("should provide specific error for rate limiting", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("Rate limit exceeded"));
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("Rate limit exceeded"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -416,12 +457,16 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Rate limit exceeded. Please wait a moment before trying again, or consider switching to a free model.");
+          ),
+        ).rejects.toThrow(
+          "Rate limit exceeded. Please wait a moment before trying again, or consider switching to a free model.",
+        );
       });
 
       it("should provide specific error for model unavailability", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("Model not found"));
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("Model not found"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -430,12 +475,16 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("The selected AI model is currently unavailable. Please try a different model from the settings.");
+          ),
+        ).rejects.toThrow(
+          "The selected AI model is currently unavailable. Please try a different model from the settings.",
+        );
       });
 
       it("should provide specific error for quota issues", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("Insufficient credits"));
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("Insufficient credits"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -444,12 +493,16 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Insufficient credits or quota exceeded. Please check your OpenRouter account balance or switch to a free model.");
+          ),
+        ).rejects.toThrow(
+          "Insufficient credits or quota exceeded. Please check your OpenRouter account balance or switch to a free model.",
+        );
       });
 
       it("should provide specific error for empty content", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("AI generated empty cover letter content"));
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("AI generated empty cover letter content"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -458,8 +511,10 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("The AI service did not generate any content. This may be due to content filtering or model issues. Please try again with different inputs or a different model.");
+          ),
+        ).rejects.toThrow(
+          "The AI service did not generate any content. This may be due to content filtering or model issues. Please try again with different inputs or a different model.",
+        );
       });
 
       it("should re-throw well-formatted errors", async () => {
@@ -473,7 +528,7 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
+          ),
         ).rejects.toThrow("Custom well-formatted error message");
       });
 
@@ -487,13 +542,19 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
-        ).rejects.toThrow("Failed to generate cover letter. Please check your API key and selected model, then try again.");
+          ),
+        ).rejects.toThrow(
+          "Failed to generate cover letter. Please check your API key and selected model, then try again.",
+        );
       });
 
       it("should log all errors for debugging", async () => {
-        const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(new Error("Test error"));
+        const consoleSpy = vi
+          .spyOn(console, "error")
+          .mockImplementation(() => {});
+        mockGenerateCoverLetterWithOpenAI.mockRejectedValue(
+          new Error("Test error"),
+        );
 
         await expect(
           generateCoverLetter(
@@ -502,17 +563,22 @@ describe("Server Actions", () => {
             defaultParams.currentResume,
             defaultParams.apiKey,
             defaultParams.selectedModel,
-          )
+          ),
         ).rejects.toThrow();
 
-        expect(consoleSpy).toHaveBeenCalledWith("Error generating cover letter:", expect.any(Error));
+        expect(consoleSpy).toHaveBeenCalledWith(
+          "Error generating cover letter:",
+          expect.any(Error),
+        );
         consoleSpy.mockRestore();
       });
     });
 
     describe("successful execution", () => {
       it("should call OpenAI function with correct parameters", async () => {
-        mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Generated cover letter");
+        mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
+          "Generated cover letter",
+        );
 
         const result = await generateCoverLetter(
           defaultParams.jobTitle,
@@ -521,7 +587,7 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Company description",
-          "fr"
+          "fr",
         );
 
         expect(result).toBe("Generated cover letter");
@@ -532,7 +598,7 @@ describe("Server Actions", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Company description",
-          "fr"
+          "fr",
         );
       });
     });
@@ -610,7 +676,7 @@ describe("Server Actions", () => {
           defaultParams.aiInstructions,
           defaultParams.apiKey,
           defaultParams.selectedModel,
-        )
+        ),
       ).rejects.toThrow("Tailoring failed");
     });
 
@@ -625,12 +691,16 @@ describe("Server Actions", () => {
           defaultParams.aiInstructions,
           defaultParams.apiKey,
           defaultParams.selectedModel,
-        )
-      ).rejects.toThrow("Failed to tailor resume with OpenRouter. Please check your API key and selected model, then try again.");
+        ),
+      ).rejects.toThrow(
+        "Failed to tailor resume with OpenRouter. Please check your API key and selected model, then try again.",
+      );
     });
 
     it("should log errors for debugging", async () => {
-      const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+      const consoleSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
       mockTailorResumeWithOpenAI.mockRejectedValue(new Error("Test error"));
 
       await expect(
@@ -641,10 +711,13 @@ describe("Server Actions", () => {
           defaultParams.aiInstructions,
           defaultParams.apiKey,
           defaultParams.selectedModel,
-        )
+        ),
       ).rejects.toThrow();
 
-      expect(consoleSpy).toHaveBeenCalledWith("Error tailoring resume:", expect.any(Error));
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Error tailoring resume:",
+        expect.any(Error),
+      );
       consoleSpy.mockRestore();
     });
   });

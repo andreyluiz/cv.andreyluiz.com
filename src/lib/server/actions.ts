@@ -86,7 +86,9 @@ export async function generateCoverLetter(
   }
 
   if (!resumeLocation) {
-    console.warn("Resume is missing location information for the cover letter header.");
+    console.warn(
+      "Resume is missing location information for the cover letter header.",
+    );
   }
 
   // For spontaneous applications, company description is required

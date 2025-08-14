@@ -25,7 +25,12 @@ vi.mock("../../modals/JobDescriptionModal", () => ({
     isOpen ? (
       <div data-testid="job-description-modal">
         <h2>Job Description Modal</h2>
-        <button type="button" onClick={() => onSubmit("Test Job", "Test Description", "AI Instructions")}>
+        <button
+          type="button"
+          onClick={() =>
+            onSubmit("Test Job", "Test Description", "AI Instructions")
+          }
+        >
           Submit Job Description
         </button>
         <button type="button" onClick={onClose}>
@@ -269,7 +274,9 @@ describe("ResumeTailor Integration Tests", () => {
       const closeButton = screen.getByText("Close Cover Letter Modal");
       await user.click(closeButton);
 
-      expect(screen.queryByTestId("cover-letter-modal")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("cover-letter-modal"),
+      ).not.toBeInTheDocument();
     });
 
     it("should pass correct props to cover letter modal", async () => {
@@ -448,7 +455,11 @@ describe("ResumeTailor Integration Tests", () => {
       });
 
       rerender(
-        <NextIntlClientProvider locale="en" messages={mockMessages} timeZone="UTC">
+        <NextIntlClientProvider
+          locale="en"
+          messages={mockMessages}
+          timeZone="UTC"
+        >
           <ResumeTailor {...defaultProps} />
         </NextIntlClientProvider>,
       );
@@ -482,7 +493,9 @@ describe("ResumeTailor Integration Tests", () => {
       const closeButton = screen.getByText("Close Cover Letter Modal");
       await user.click(closeButton);
 
-      expect(screen.queryByTestId("cover-letter-modal")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("cover-letter-modal"),
+      ).not.toBeInTheDocument();
     });
 
     it("should handle multiple modal interactions", async () => {
@@ -500,7 +513,9 @@ describe("ResumeTailor Integration Tests", () => {
         const closeButton = screen.getByText("Close Cover Letter Modal");
         await user.click(closeButton);
 
-        expect(screen.queryByTestId("cover-letter-modal")).not.toBeInTheDocument();
+        expect(
+          screen.queryByTestId("cover-letter-modal"),
+        ).not.toBeInTheDocument();
       }
     });
   });

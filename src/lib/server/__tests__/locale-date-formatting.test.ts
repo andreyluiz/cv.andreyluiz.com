@@ -43,7 +43,7 @@ describe("Locale-specific Date Formatting", () => {
 
   it("should handle locale mapping correctly", () => {
     const currentDate = new Date();
-    
+
     // Test English locale mapping
     const englishDate = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -98,9 +98,22 @@ describe("Locale-specific Date Formatting", () => {
   it("should handle edge cases for different months", () => {
     // Test with different months
     const testCases = [
-      { date: new Date("2024-03-15"), expected: { en: "March 2024", fr: "mars 2024", pt: "março de 2024" } },
-      { date: new Date("2024-07-15"), expected: { en: "July 2024", fr: "juillet 2024", pt: "julho de 2024" } },
-      { date: new Date("2024-12-15"), expected: { en: "December 2024", fr: "décembre 2024", pt: "dezembro de 2024" } }
+      {
+        date: new Date("2024-03-15"),
+        expected: { en: "March 2024", fr: "mars 2024", pt: "março de 2024" },
+      },
+      {
+        date: new Date("2024-07-15"),
+        expected: { en: "July 2024", fr: "juillet 2024", pt: "julho de 2024" },
+      },
+      {
+        date: new Date("2024-12-15"),
+        expected: {
+          en: "December 2024",
+          fr: "décembre 2024",
+          pt: "dezembro de 2024",
+        },
+      },
     ];
 
     testCases.forEach(({ date, expected }) => {

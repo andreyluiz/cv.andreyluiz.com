@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { generateCoverLetter } from "../openai";
 import type { Variant } from "../../types";
+import { generateCoverLetter } from "../openai";
 
 // Mock OpenAI
 const mockCreate = vi.fn();
@@ -29,12 +29,6 @@ describe("Enhanced Cover Letter Generation", () => {
       nationality: "American",
       permit: "US Citizen",
     },
-    personalInfo: {
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phone: "+1-555-0123",
-      location: "San Francisco, CA",
-    },
     summary: "Experienced software engineer with 5+ years of experience",
     qualities: ["Problem-solving", "Team leadership"],
     generalSkills: ["JavaScript", "Python", "React"],
@@ -50,7 +44,10 @@ describe("Enhanced Cover Letter Generation", () => {
         company: "Tech Corp",
         location: "San Francisco, CA",
         period: { start: "2021", end: "Present" },
-        achievements: ["Led team of 5 developers", "Increased performance by 40%"],
+        achievements: [
+          "Led team of 5 developers",
+          "Increased performance by 40%",
+        ],
         techStack: ["React", "Node.js", "AWS"],
       },
     ],
@@ -59,6 +56,7 @@ describe("Enhanced Cover Letter Generation", () => {
         name: "E-commerce Platform",
         description: "Built scalable e-commerce solution",
         techStack: ["React", "Node.js", "MongoDB"],
+        period: { start: "2023", end: "2024" },
       },
     ],
     education: [
@@ -72,8 +70,8 @@ describe("Enhanced Cover Letter Generation", () => {
     certifications: [],
     languages: [
       {
-        language: "English",
-        proficiency: "Native",
+        name: "English",
+        level: "Native",
       },
     ],
     publications: [],
@@ -122,7 +120,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Amazing Tech Company focused on innovation",
-        "en"
+        "en",
       );
 
       expect(mockCreate).toHaveBeenCalledWith(
@@ -135,10 +133,12 @@ describe("Enhanced Cover Letter Generation", () => {
             }),
             expect.objectContaining({
               role: "user",
-              content: expect.stringContaining("Amazing Tech Company focused on innovation"),
+              content: expect.stringContaining(
+                "Amazing Tech Company focused on innovation",
+              ),
             }),
           ]),
-        })
+        }),
       );
 
       expect(result).toContain("john.doe@example.com");
@@ -174,7 +174,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Tech Startup Inc working on AI solutions",
-        "en"
+        "en",
       );
 
       expect(mockCreate).toHaveBeenCalledWith(
@@ -182,14 +182,16 @@ describe("Enhanced Cover Letter Generation", () => {
           messages: expect.arrayContaining([
             expect.objectContaining({
               role: "system",
-              content: expect.stringContaining("Focus on company-specific interests and general fit"),
+              content: expect.stringContaining(
+                "Focus on company-specific interests and general fit",
+              ),
             }),
             expect.objectContaining({
               role: "user",
               content: expect.stringContaining("SPONTANEOUS APPLICATION"),
             }),
           ]),
-        })
+        }),
       );
 
       expect(result).toContain("Spontaneous Application");
@@ -225,7 +227,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Entreprise technologique française",
-        "fr"
+        "fr",
       );
 
       expect(mockCreate).toHaveBeenCalledWith(
@@ -236,7 +238,7 @@ describe("Enhanced Cover Letter Generation", () => {
               content: expect.stringContaining("French"),
             }),
           ]),
-        })
+        }),
       );
 
       expect(result).toContain("Lettre de motivation");
@@ -269,7 +271,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Empresa brasileira de tecnologia",
-        "pt"
+        "pt",
       );
 
       expect(mockCreate).toHaveBeenCalledWith(
@@ -284,7 +286,7 @@ describe("Enhanced Cover Letter Generation", () => {
               content: expect.stringContaining("Portuguese"),
             }),
           ]),
-        })
+        }),
       );
     });
   });
@@ -314,7 +316,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Test Company",
-        "en"
+        "en",
       );
 
       expect(result).toContain("john.doe@example.com");
@@ -343,14 +345,14 @@ describe("Enhanced Cover Letter Generation", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Test Company",
-          "en"
-        )
+          "en",
+        ),
       ).rejects.toThrow("AI generated empty cover letter content");
     });
 
     it("should log warning for missing contact information", async () => {
       const consoleSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
-      
+
       const mockResponse = {
         choices: [
           {
@@ -373,11 +375,11 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Test Company",
-        "en"
+        "en",
       );
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        "Generated cover letter may be missing contact information"
+        "Generated cover letter may be missing contact information",
       );
 
       consoleSpy.mockRestore();
@@ -405,7 +407,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Test Company",
-        "en"
+        "en",
       );
 
       const systemPrompt = mockCreate.mock.calls[0][0].messages[0].content;
@@ -441,12 +443,14 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Test Company",
-        "en"
+        "en",
       );
 
       const systemPrompt = mockCreate.mock.calls[0][0].messages[0].content;
 
-      expect(systemPrompt).toContain("Spontaneous Application - [Company Name]");
+      expect(systemPrompt).toContain(
+        "Spontaneous Application - [Company Name]",
+      );
     });
   });
 
@@ -463,8 +467,8 @@ describe("Enhanced Cover Letter Generation", () => {
           defaultParams.apiKey,
           defaultParams.selectedModel,
           "Test Company",
-          "en"
-        )
+          "en",
+        ),
       ).rejects.toThrow();
     });
 
@@ -487,7 +491,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.currentResume,
         defaultParams.apiKey,
         defaultParams.selectedModel,
-        "Test Company"
+        "Test Company",
         // No language parameter
       );
 
@@ -515,7 +519,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.jobDescription,
         defaultParams.currentResume,
         defaultParams.apiKey,
-        defaultParams.selectedModel
+        defaultParams.selectedModel,
         // No company description
       );
 
@@ -543,7 +547,7 @@ describe("Enhanced Cover Letter Generation", () => {
         defaultParams.apiKey,
         defaultParams.selectedModel,
         "Test Company",
-        "en"
+        "en",
       );
 
       const userPrompt = mockCreate.mock.calls[0][0].messages[1].content;

@@ -4,8 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useStore } from "@/lib/store";
 import type { CoverLetterInputs, Variant } from "@/lib/types";
-import CoverLetterInputForm from "../CoverLetterInputForm";
 import CoverLetterDisplay from "../CoverLetterDisplay";
+import CoverLetterInputForm from "../CoverLetterInputForm";
 import CoverLetterModal from "../CoverLetterModal";
 
 // Mock the store
@@ -29,26 +29,30 @@ const englishMessages = {
       generate: "Generate Cover Letter",
       infoBox: {
         title: "Spontaneous Application",
-        description: "Leave job title and job description empty to create a spontaneous application cover letter that focuses on your interest in the company."
+        description:
+          "Leave job title and job description empty to create a spontaneous application cover letter that focuses on your interest in the company.",
       },
       jobPosition: {
         label: "Job Position",
-        placeholder: "e.g., Senior Software Engineer"
+        placeholder: "e.g., Senior Software Engineer",
       },
       companyDescription: {
         label: "Company Description",
-        placeholder: "Tell us about the company, its mission, values, products, or what interests you about working there..."
+        placeholder:
+          "Tell us about the company, its mission, values, products, or what interests you about working there...",
       },
       jobDescription: {
         label: "Job Description",
-        placeholder: "Paste the job description here or describe the role requirements..."
+        placeholder:
+          "Paste the job description here or describe the role requirements...",
       },
       validation: {
-        companyDescriptionRequired: "Company description is required to generate a personalized cover letter."
-      }
+        companyDescriptionRequired:
+          "Company description is required to generate a personalized cover letter.",
+      },
     },
     display: {
-      regenerate: "Regenerate"
+      regenerate: "Regenerate",
     },
     modal: {
       titles: {
@@ -56,27 +60,28 @@ const englishMessages = {
         generating: "Generating Cover Letter",
         display: "Cover Letter",
         error: "Generation Failed",
-        default: "Cover Letter"
+        default: "Cover Letter",
       },
       generating: {
         message: "Creating your personalized cover letter...",
-        subtitle: "This may take a few moments"
+        subtitle: "This may take a few moments",
       },
       error: {
-        title: "Something went wrong"
+        title: "Something went wrong",
       },
       errors: {
         generationFailed: "Failed to generate cover letter. Please try again.",
-        apiError: "Failed to generate cover letter. Please check your API key and selected model, then try again."
+        apiError:
+          "Failed to generate cover letter. Please check your API key and selected model, then try again.",
       },
       actions: {
         editInputs: "Edit Inputs",
         close: "Close",
         retry: "Try Again",
-        cancel: "Cancel"
-      }
-    }
-  }
+        cancel: "Cancel",
+      },
+    },
+  },
 };
 
 const frenchMessages = {
@@ -87,26 +92,30 @@ const frenchMessages = {
       generate: "Générer la Lettre de Motivation",
       infoBox: {
         title: "Candidature Spontanée",
-        description: "Laissez le titre du poste et la description du poste vides pour créer une lettre de motivation de candidature spontanée qui se concentre sur votre intérêt pour l'entreprise."
+        description:
+          "Laissez le titre du poste et la description du poste vides pour créer une lettre de motivation de candidature spontanée qui se concentre sur votre intérêt pour l'entreprise.",
       },
       jobPosition: {
         label: "Poste Visé",
-        placeholder: "ex. Ingénieur Logiciel Senior"
+        placeholder: "ex. Ingénieur Logiciel Senior",
       },
       companyDescription: {
         label: "Description de l'Entreprise",
-        placeholder: "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler..."
+        placeholder:
+          "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler...",
       },
       jobDescription: {
         label: "Description du Poste",
-        placeholder: "Collez la description du poste ici ou décrivez les exigences du rôle..."
+        placeholder:
+          "Collez la description du poste ici ou décrivez les exigences du rôle...",
       },
       validation: {
-        companyDescriptionRequired: "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée."
-      }
+        companyDescriptionRequired:
+          "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+      },
     },
     display: {
-      regenerate: "Régénérer"
+      regenerate: "Régénérer",
     },
     modal: {
       titles: {
@@ -114,27 +123,29 @@ const frenchMessages = {
         generating: "Génération de la Lettre de Motivation",
         display: "Lettre de Motivation",
         error: "Échec de la Génération",
-        default: "Lettre de Motivation"
+        default: "Lettre de Motivation",
       },
       generating: {
         message: "Création de votre lettre de motivation personnalisée...",
-        subtitle: "Cela peut prendre quelques instants"
+        subtitle: "Cela peut prendre quelques instants",
       },
       error: {
-        title: "Quelque chose s'est mal passé"
+        title: "Quelque chose s'est mal passé",
       },
       errors: {
-        generationFailed: "Échec de la génération de la lettre de motivation. Veuillez réessayer.",
-        apiError: "Échec de la génération de la lettre de motivation. Veuillez vérifier votre clé API et le modèle sélectionné, puis réessayer."
+        generationFailed:
+          "Échec de la génération de la lettre de motivation. Veuillez réessayer.",
+        apiError:
+          "Échec de la génération de la lettre de motivation. Veuillez vérifier votre clé API et le modèle sélectionné, puis réessayer.",
       },
       actions: {
         editInputs: "Modifier les Entrées",
         close: "Fermer",
         retry: "Réessayer",
-        cancel: "Annuler"
-      }
-    }
-  }
+        cancel: "Annuler",
+      },
+    },
+  },
 };
 
 const portugueseMessages = {
@@ -145,26 +156,30 @@ const portugueseMessages = {
       generate: "Gerar Carta de Apresentação",
       infoBox: {
         title: "Candidatura Espontânea",
-        description: "Deixe o título do cargo e a descrição do cargo em branco para criar uma carta de apresentação de candidatura espontânea que foca no seu interesse pela empresa."
+        description:
+          "Deixe o título do cargo e a descrição do cargo em branco para criar uma carta de apresentação de candidatura espontânea que foca no seu interesse pela empresa.",
       },
       jobPosition: {
         label: "Cargo Pretendido",
-        placeholder: "ex. Engenheiro de Software Sênior"
+        placeholder: "ex. Engenheiro de Software Sênior",
       },
       companyDescription: {
         label: "Descrição da Empresa",
-        placeholder: "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá..."
+        placeholder:
+          "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá...",
       },
       jobDescription: {
         label: "Descrição do Cargo",
-        placeholder: "Cole a descrição do cargo aqui ou descreva os requisitos da função..."
+        placeholder:
+          "Cole a descrição do cargo aqui ou descreva os requisitos da função...",
       },
       validation: {
-        companyDescriptionRequired: "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada."
-      }
+        companyDescriptionRequired:
+          "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+      },
     },
     display: {
-      regenerate: "Gerar Novamente"
+      regenerate: "Gerar Novamente",
     },
     modal: {
       titles: {
@@ -172,30 +187,36 @@ const portugueseMessages = {
         generating: "Gerando Carta de Apresentação",
         display: "Carta de Apresentação",
         error: "Falha na Geração",
-        default: "Carta de Apresentação"
+        default: "Carta de Apresentação",
       },
       generating: {
         message: "Criando sua carta de apresentação personalizada...",
-        subtitle: "Isso pode levar alguns momentos"
+        subtitle: "Isso pode levar alguns momentos",
       },
       error: {
-        title: "Algo deu errado"
+        title: "Algo deu errado",
       },
       errors: {
-        generationFailed: "Falha ao gerar carta de apresentação. Por favor, tente novamente.",
-        apiError: "Falha ao gerar carta de apresentação. Por favor, verifique sua chave da API e modelo selecionado, então tente novamente."
+        generationFailed:
+          "Falha ao gerar carta de apresentação. Por favor, tente novamente.",
+        apiError:
+          "Falha ao gerar carta de apresentação. Por favor, verifique sua chave da API e modelo selecionado, então tente novamente.",
       },
       actions: {
         editInputs: "Editar Entradas",
         close: "Fechar",
         retry: "Tentar Novamente",
-        cancel: "Cancelar"
-      }
-    }
-  }
+        cancel: "Cancelar",
+      },
+    },
+  },
 };
 
-const renderWithLocale = (component: React.ReactElement, locale: string, messages: any) => {
+const renderWithLocale = (
+  component: React.ReactElement,
+  locale: string,
+  messages: any,
+) => {
   return render(
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
       {component}
@@ -293,7 +314,7 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
       expect(screen.getByText("Spontaneous Application")).toBeInTheDocument();
@@ -312,14 +333,18 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
       expect(screen.getByText("Candidature Spontanée")).toBeInTheDocument();
       expect(screen.getByText("Poste Visé")).toBeInTheDocument();
-      expect(screen.getByText("Description de l'Entreprise")).toBeInTheDocument();
+      expect(
+        screen.getByText("Description de l'Entreprise"),
+      ).toBeInTheDocument();
       expect(screen.getByText("Description du Poste")).toBeInTheDocument();
-      expect(screen.getByText("Générer la Lettre de Motivation")).toBeInTheDocument();
+      expect(
+        screen.getByText("Générer la Lettre de Motivation"),
+      ).toBeInTheDocument();
       expect(screen.getAllByText(/optionnel/)).toHaveLength(2);
     });
 
@@ -331,14 +356,16 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
       expect(screen.getByText("Candidatura Espontânea")).toBeInTheDocument();
       expect(screen.getByText("Cargo Pretendido")).toBeInTheDocument();
       expect(screen.getByText("Descrição da Empresa")).toBeInTheDocument();
       expect(screen.getByText("Descrição do Cargo")).toBeInTheDocument();
-      expect(screen.getByText("Gerar Carta de Apresentação")).toBeInTheDocument();
+      expect(
+        screen.getByText("Gerar Carta de Apresentação"),
+      ).toBeInTheDocument();
       expect(screen.getAllByText(/opcional/)).toHaveLength(2);
     });
 
@@ -353,13 +380,17 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
       const submitButton = screen.getByText("Generate Cover Letter");
       await user.click(submitButton);
 
-      expect(screen.getByText("Company description is required to generate a personalized cover letter.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "Company description is required to generate a personalized cover letter.",
+        ),
+      ).toBeInTheDocument();
       unmount();
 
       // Test French validation
@@ -370,13 +401,19 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
-      const submitButtonFr = screen.getByText("Générer la Lettre de Motivation");
+      const submitButtonFr = screen.getByText(
+        "Générer la Lettre de Motivation",
+      );
       await user.click(submitButtonFr);
 
-      expect(screen.getByText("La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+        ),
+      ).toBeInTheDocument();
       unmountFr();
 
       // Test Portuguese validation
@@ -387,13 +424,17 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
       const submitButtonPt = screen.getByText("Gerar Carta de Apresentação");
       await user.click(submitButtonPt);
 
-      expect(screen.getByText("A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+        ),
+      ).toBeInTheDocument();
     });
 
     it("should show loading state in the correct language", () => {
@@ -405,7 +446,7 @@ describe("Cover Letter Internationalization", () => {
           isLoading={true}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
       expect(screen.getByText("Generating...")).toBeInTheDocument();
@@ -419,7 +460,7 @@ describe("Cover Letter Internationalization", () => {
           isLoading={true}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
       expect(screen.getByText("Génération...")).toBeInTheDocument();
@@ -433,7 +474,7 @@ describe("Cover Letter Internationalization", () => {
           isLoading={true}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
       expect(screen.getByText("Gerando...")).toBeInTheDocument();
@@ -449,7 +490,7 @@ describe("Cover Letter Internationalization", () => {
           onRegenerate={mockOnRegenerate}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
       expect(screen.getByText("Regenerate")).toBeInTheDocument();
@@ -463,7 +504,7 @@ describe("Cover Letter Internationalization", () => {
           onRegenerate={mockOnRegenerate}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
       expect(screen.getByText("Régénérer")).toBeInTheDocument();
@@ -477,7 +518,7 @@ describe("Cover Letter Internationalization", () => {
           onRegenerate={mockOnRegenerate}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
       expect(screen.getByText("Gerar Novamente")).toBeInTheDocument();
@@ -497,30 +538,38 @@ describe("Cover Letter Internationalization", () => {
       renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
-      expect(screen.getByRole("heading", { name: "Generate Cover Letter" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "Generate Cover Letter" }),
+      ).toBeInTheDocument();
     });
 
     it("should render modal titles in French", () => {
       renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
-      expect(screen.getByRole("heading", { name: "Générer une Lettre de Motivation" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", {
+          name: "Générer une Lettre de Motivation",
+        }),
+      ).toBeInTheDocument();
     });
 
     it("should render modal titles in Portuguese", () => {
       renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
-      expect(screen.getByRole("heading", { name: "Gerar Carta de Apresentação" })).toBeInTheDocument();
+      expect(
+        screen.getByRole("heading", { name: "Gerar Carta de Apresentação" }),
+      ).toBeInTheDocument();
     });
 
     it("should show different phase titles correctly across languages", () => {
@@ -534,7 +583,7 @@ describe("Cover Letter Internationalization", () => {
       const { unmount } = renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
       expect(screen.getByText("Cover Letter")).toBeInTheDocument();
@@ -543,7 +592,7 @@ describe("Cover Letter Internationalization", () => {
       const { unmount: unmountFr } = renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
       expect(screen.getByText("Lettre de Motivation")).toBeInTheDocument();
@@ -552,7 +601,7 @@ describe("Cover Letter Internationalization", () => {
       renderWithLocale(
         <CoverLetterModal {...defaultModalProps} />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
       expect(screen.getByText("Carta de Apresentação")).toBeInTheDocument();
@@ -569,11 +618,17 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
-      expect(screen.getByPlaceholderText("e.g., Senior Software Engineer")).toBeInTheDocument();
-      expect(screen.getByPlaceholderText("Tell us about the company, its mission, values, products, or what interests you about working there...")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("e.g., Senior Software Engineer"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText(
+          "Tell us about the company, its mission, values, products, or what interests you about working there...",
+        ),
+      ).toBeInTheDocument();
       unmount();
 
       // French placeholders
@@ -584,11 +639,17 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
-      expect(screen.getByPlaceholderText("ex. Ingénieur Logiciel Senior")).toBeInTheDocument();
-      expect(screen.getByPlaceholderText("Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler...")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("ex. Ingénieur Logiciel Senior"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText(
+          "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler...",
+        ),
+      ).toBeInTheDocument();
       unmountFr();
 
       // Portuguese placeholders
@@ -599,11 +660,17 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
-      expect(screen.getByPlaceholderText("ex. Engenheiro de Software Sênior")).toBeInTheDocument();
-      expect(screen.getByPlaceholderText("Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá...")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("ex. Engenheiro de Software Sênior"),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText(
+          "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá...",
+        ),
+      ).toBeInTheDocument();
     });
   });
 
@@ -617,10 +684,14 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "en",
-        englishMessages
+        englishMessages,
       );
 
-      expect(screen.getByText("Leave job title and job description empty to create a spontaneous application cover letter that focuses on your interest in the company.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "Leave job title and job description empty to create a spontaneous application cover letter that focuses on your interest in the company.",
+        ),
+      ).toBeInTheDocument();
       unmount();
 
       // French info box
@@ -631,10 +702,14 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "fr",
-        frenchMessages
+        frenchMessages,
       );
 
-      expect(screen.getByText("Laissez le titre du poste et la description du poste vides pour créer une lettre de motivation de candidature spontanée qui se concentre sur votre intérêt pour l'entreprise.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "Laissez le titre du poste et la description du poste vides pour créer une lettre de motivation de candidature spontanée qui se concentre sur votre intérêt pour l'entreprise.",
+        ),
+      ).toBeInTheDocument();
       unmountFr();
 
       // Portuguese info box
@@ -645,10 +720,14 @@ describe("Cover Letter Internationalization", () => {
           isLoading={false}
         />,
         "pt",
-        portugueseMessages
+        portugueseMessages,
       );
 
-      expect(screen.getByText("Deixe o título do cargo e a descrição do cargo em branco para criar uma carta de apresentação de candidatura espontânea que foca no seu interesse pela empresa.")).toBeInTheDocument();
+      expect(
+        screen.getByText(
+          "Deixe o título do cargo e a descrição do cargo em branco para criar uma carta de apresentação de candidatura espontânea que foca no seu interesse pela empresa.",
+        ),
+      ).toBeInTheDocument();
     });
   });
 });

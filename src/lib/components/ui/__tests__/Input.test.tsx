@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import Input from "../Input";
 
 describe("Input", () => {
@@ -11,13 +11,7 @@ describe("Input", () => {
   });
 
   it("should render with label and input", () => {
-    render(
-      <Input
-        label="Test Label"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+    render(<Input label="Test Label" value="" onChange={mockOnChange} />);
 
     expect(screen.getByText("Test Label")).toBeInTheDocument();
     expect(screen.getByRole("textbox")).toBeInTheDocument();
@@ -30,7 +24,7 @@ describe("Input", () => {
         value=""
         onChange={mockOnChange}
         required
-      />
+      />,
     );
 
     expect(screen.getByText("*")).toBeInTheDocument();
@@ -43,7 +37,7 @@ describe("Input", () => {
         value=""
         onChange={mockOnChange}
         error="This field is required"
-      />
+      />,
     );
 
     expect(screen.getByText("This field is required")).toBeInTheDocument();
@@ -51,14 +45,8 @@ describe("Input", () => {
 
   it("should call onChange when typing", async () => {
     const user = userEvent.setup();
-    
-    render(
-      <Input
-        label="Test Field"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+
+    render(<Input label="Test Field" value="" onChange={mockOnChange} />);
 
     const input = screen.getByRole("textbox");
     await user.type(input, "test");
@@ -70,13 +58,7 @@ describe("Input", () => {
   });
 
   it("should have proper styling classes including padding", () => {
-    render(
-      <Input
-        label="Test Field"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+    render(<Input label="Test Field" value="" onChange={mockOnChange} />);
 
     const input = screen.getByRole("textbox");
     expect(input).toHaveClass("p-4"); // Verify padding is applied

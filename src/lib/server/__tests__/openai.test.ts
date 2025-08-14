@@ -340,7 +340,9 @@ describe("OpenRouter Client", () => {
         messages: expect.arrayContaining([
           expect.objectContaining({
             role: "system",
-            content: expect.stringContaining("professional cover letter writer"),
+            content: expect.stringContaining(
+              "professional cover letter writer",
+            ),
           }),
           expect.objectContaining({
             role: "user",

@@ -390,18 +390,18 @@ REQUIRED STRUCTURE WITH SPECIFIC CSS CLASSES:
 3. **Title**: <div class="cover-letter-title">${
       isSpontaneousApplication
         ? `A bold title in ${languageName}: ${
-            targetLanguage === 'fr' 
+            targetLanguage === "fr"
               ? `"Candidature spontanée - [Company Name] - ${formattedDate}"`
-              : targetLanguage === 'pt'
-              ? `"Candidatura espontânea - [Company Name] - ${formattedDate}"`
-              : `"Spontaneous Application - [Company Name] - ${formattedDate}"`
+              : targetLanguage === "pt"
+                ? `"Candidatura espontânea - [Company Name] - ${formattedDate}"`
+                : `"Spontaneous Application - [Company Name] - ${formattedDate}"`
           }`
         : `A bold title in ${languageName}: ${
-            targetLanguage === 'fr'
+            targetLanguage === "fr"
               ? `"Lettre de motivation pour le poste ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
-              : targetLanguage === 'pt'
-              ? `"Carta de apresentação para o cargo ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
-              : `"Cover letter for position ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+              : targetLanguage === "pt"
+                ? `"Carta de apresentação para o cargo ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
+                : `"Cover letter for position ${jobTitle} - [website/source where job was found] - ${formattedDate}"`
           }`
     }</div>
 4. **Salutation**: <div class="salutation">Professional greeting addressing the hiring manager</div>
@@ -503,7 +503,7 @@ Please generate the cover letter now.`;
     // Basic validation for required structure elements (name and location)
     const candidateName = currentResume.name;
     const candidateLocation = currentResume.contactInfo?.location;
-    
+
     const requiredElements = [candidateName, candidateLocation].filter(Boolean);
 
     const hasRequiredInfo = requiredElements.some(
@@ -511,7 +511,9 @@ Please generate the cover letter now.`;
     );
 
     if (!hasRequiredInfo) {
-      console.warn("Generated cover letter may be missing required information (name or address)");
+      console.warn(
+        "Generated cover letter may be missing required information (name or address)",
+      );
     }
 
     return generatedContent;

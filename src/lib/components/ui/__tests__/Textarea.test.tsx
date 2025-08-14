@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import Textarea from "../Textarea";
 
 describe("Textarea", () => {
@@ -11,13 +11,7 @@ describe("Textarea", () => {
   });
 
   it("should render with label and textarea", () => {
-    render(
-      <Textarea
-        label="Test Label"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+    render(<Textarea label="Test Label" value="" onChange={mockOnChange} />);
 
     expect(screen.getByText("Test Label")).toBeInTheDocument();
     expect(screen.getByRole("textbox")).toBeInTheDocument();
@@ -30,7 +24,7 @@ describe("Textarea", () => {
         value=""
         onChange={mockOnChange}
         required
-      />
+      />,
     );
 
     expect(screen.getByText("*")).toBeInTheDocument();
@@ -43,7 +37,7 @@ describe("Textarea", () => {
         value=""
         onChange={mockOnChange}
         error="This field is required"
-      />
+      />,
     );
 
     expect(screen.getByText("This field is required")).toBeInTheDocument();
@@ -51,14 +45,8 @@ describe("Textarea", () => {
 
   it("should call onChange when typing", async () => {
     const user = userEvent.setup();
-    
-    render(
-      <Textarea
-        label="Test Field"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+
+    render(<Textarea label="Test Field" value="" onChange={mockOnChange} />);
 
     const textarea = screen.getByRole("textbox");
     await user.type(textarea, "test");
@@ -70,13 +58,7 @@ describe("Textarea", () => {
   });
 
   it("should have proper styling classes including padding", () => {
-    render(
-      <Textarea
-        label="Test Field"
-        value=""
-        onChange={mockOnChange}
-      />
-    );
+    render(<Textarea label="Test Field" value="" onChange={mockOnChange} />);
 
     const textarea = screen.getByRole("textbox");
     expect(textarea).toHaveClass("p-4"); // Verify padding is applied
@@ -86,12 +68,7 @@ describe("Textarea", () => {
 
   it("should set correct number of rows", () => {
     render(
-      <Textarea
-        label="Test Field"
-        value=""
-        onChange={mockOnChange}
-        rows={8}
-      />
+      <Textarea label="Test Field" value="" onChange={mockOnChange} rows={8} />,
     );
 
     const textarea = screen.getByRole("textbox");

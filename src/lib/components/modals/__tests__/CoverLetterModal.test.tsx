@@ -102,16 +102,29 @@ describe("CoverLetterModal", () => {
   const mockedUseStore = vi.mocked(useStore);
 
   const defaultResumeData: Variant = {
-    personalInfo: {
-      name: "John Doe",
+    name: "John Doe",
+    title: "Software Engineer",
+    contactInfo: {
       email: "john@example.com",
       phone: "+1234567890",
       location: "City, Country",
+      website: "",
+      linkedin: "",
+      github: "",
+      age: "",
+      nationality: "",
+      permit: "",
     },
-    experiences: [],
-    educations: [],
+    summary: "Experienced software engineer",
+    qualities: [],
+    generalSkills: [],
     skills: [],
+    experience: [],
+    projects: [],
+    education: [],
+    certifications: [],
     languages: [],
+    publications: [],
     personalityTraits: [],
   };
 
