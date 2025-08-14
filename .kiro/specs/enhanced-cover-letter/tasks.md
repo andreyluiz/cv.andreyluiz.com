@@ -47,14 +47,14 @@
   - Write unit tests for server action parameter handling
   - _Requirements: 1.2, 1.4, 6.2_
 
-- [ ] 7. Update ResumeTailor component integration
+- [x] 7. Update ResumeTailor component integration
   - Modify cover letter button click handler to use enhanced modal
   - Remove dependency on existing job title and description state
   - Ensure proper API key and model validation
   - Write integration tests for button interaction and modal opening
   - _Requirements: 1.1_
 
-- [ ] 8. Add internationalization support
+- [x] 8. Add internationalization support
   - Add translation keys for new UI text and form labels
   - Update translation files (en.json, fr.json, pt.json) with new strings
   - Ensure information box text is properly localized

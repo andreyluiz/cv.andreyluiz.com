@@ -66,7 +66,7 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
         )}
         <Button
           onClick={() => setIsCoverLetterModalOpen(true)}
-          disabled={!apiKey}
+          disabled={!apiKey || !selectedModel}
         >
           Generate Cover Letter
         </Button>
@@ -91,8 +91,6 @@ export default function ResumeTailor({ resumeData, onResumeUpdate }: Props) {
       <CoverLetterModal
         isOpen={isCoverLetterModalOpen}
         onClose={() => setIsCoverLetterModalOpen(false)}
-        jobTitle={jobTitle}
-        jobDescription={jobDescription}
         resumeData={resumeData}
         apiKey={apiKey}
         selectedModel={selectedModel}

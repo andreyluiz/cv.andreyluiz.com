@@ -77,8 +77,8 @@ describe("CoverLetterInputForm", () => {
     it("should show optional indicator for job position and description", () => {
       renderWithIntl(<CoverLetterInputForm {...defaultProps} />);
 
-      expect(screen.getByText("Job Position")).toBeInTheDocument();
-      expect(screen.getAllByText(/optional/)).toHaveLength(2);
+      expect(screen.getByText(/Job Position.*optional/)).toBeInTheDocument();
+      expect(screen.getByText(/Job Description.*optional/)).toBeInTheDocument();
     });
 
     it("should render information box about spontaneous applications", () => {

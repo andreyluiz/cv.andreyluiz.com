@@ -1,5 +1,7 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/lib/components/ui/Button";
+import Input from "@/lib/components/ui/Input";
+import Textarea from "@/lib/components/ui/Textarea";
 import Modal from "./Modal";
 
 interface JobDescriptionModalProps {
@@ -27,10 +29,6 @@ export default function JobDescriptionModal({
 }: JobDescriptionModalProps) {
   const [aiInstructions, setAiInstructions] = useState("");
 
-  const jobTitleId = useId();
-  const jobDescriptionId = useId();
-  const aiInstructionsId = useId();
-
   useEffect(() => {
     // Load AI instructions from localStorage when modal opens
     if (isOpen) {
@@ -57,47 +55,33 @@ export default function JobDescriptionModal({
         Enter the job title and paste the job description below to tailor your
         resume for this position.
       </p>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="jobTitle" className="mb-2 block font-medium">
-            Job Title
-          </label>
-          <input
-            id={jobTitleId}
-            type="text"
-            className="w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
-            placeholder="Enter the job title..."
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="jobDescription" className="mb-2 block font-medium">
-            Job Description
-          </label>
-          <textarea
-            id={jobDescriptionId}
-            className="h-64 w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-            placeholder="Paste the job description here..."
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="aiInstructions" className="mb-2 block font-medium">
-            AI Instructions (Optional)
-          </label>
-          <textarea
-            id={aiInstructionsId}
-            className="h-32 w-full rounded-lg border border-neutral-300 p-4 dark:border-neutral-600 dark:bg-neutral-700"
-            value={aiInstructions}
-            onChange={(e) => setAiInstructions(e.target.value)}
-            placeholder="Add specific instructions for the AI model (e.g., focus on certain skills, emphasize particular experiences)..."
-          />
-        </div>
-        <div className="flex justify-end gap-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="Job Title"
+          value={jobTitle}
+          onChange={setJobTitle}
+          placeholder="Enter the job title..."
+          required
+        />
+
+        <Textarea
+          label="Job Description"
+          value={jobDescription}
+          onChange={setJobDescription}
+          placeholder="Paste the job description here..."
+          required
+          rows={16}
+        />
+
+        <Textarea
+          label="AI Instructions (Optional)"
+          value={aiInstructions}
+          onChange={setAiInstructions}
+          placeholder="Add specific instructions for the AI model (e.g., focus on certain skills, emphasize particular experiences)..."
+          rows={8}
+        />
+
+        <div className="flex justify-end gap-4 pt-2">
           <Button type="button" onClick={onClose} variant="secondary">
             Cancel
           </Button>

@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useState } from "react";
 import Button from "@/lib/components/ui/Button";
+import Input from "@/lib/components/ui/Input";
+import Textarea from "@/lib/components/ui/Textarea";
 import type { CoverLetterInputs } from "@/lib/types";
 
 interface CoverLetterInputFormProps {
@@ -15,7 +17,6 @@ export default function CoverLetterInputForm({
   isLoading,
 }: CoverLetterInputFormProps) {
   const t = useTranslations("coverLetter.form");
-  const formId = useId();
 
   const [formData, setFormData] = useState<CoverLetterInputs>({
     jobPosition: initialInputs?.jobPosition || "",
@@ -61,10 +62,6 @@ export default function CoverLetterInputForm({
     }
   };
 
-  const jobPositionId = `${formId}-jobPosition`;
-  const companyDescriptionId = `${formId}-companyDescription`;
-  const jobDescriptionId = `${formId}-jobDescription`;
-  const companyDescriptionErrorId = `${formId}-companyDescription-error`;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -96,87 +93,30 @@ export default function CoverLetterInputForm({
       </div>
 
       <div className="space-y-4">
-        <div>
-          <label
-            htmlFor={jobPositionId}
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            {t("jobPosition.label")}
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-1">
-              ({t("optional")})
-            </span>
-          </label>
-          <input
-            type="text"
-            id={jobPositionId}
-            name="jobPosition"
-            value={formData.jobPosition}
-            onChange={(e) => handleInputChange("jobPosition", e.target.value)}
-            placeholder={t("jobPosition.placeholder")}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
-          />
-        </div>
+        <Input
+          label={`${t("jobPosition.label")} (${t("optional")})`}
+          value={formData.jobPosition}
+          onChange={(value) => handleInputChange("jobPosition", value)}
+          placeholder={t("jobPosition.placeholder")}
+        />
 
-        <div>
-          <label
-            htmlFor={companyDescriptionId}
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            {t("companyDescription.label")}
-            <span className="text-red-500 ml-1">*</span>
-          </label>
-          <textarea
-            id={companyDescriptionId}
-            name="companyDescription"
-            rows={4}
-            value={formData.companyDescription}
-            onChange={(e) =>
-              handleInputChange("companyDescription", e.target.value)
-            }
-            placeholder={t("companyDescription.placeholder")}
-            className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 ${
-              validationErrors.companyDescription
-                ? "border-red-300 focus:border-red-500"
-                : "border-gray-300 focus:border-blue-500"
-            } dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400`}
-            aria-describedby={
-              validationErrors.companyDescription
-                ? companyDescriptionErrorId
-                : undefined
-            }
-          />
-          {validationErrors.companyDescription && (
-            <p
-              id={companyDescriptionErrorId}
-              className="mt-2 text-sm text-red-600 dark:text-red-400"
-            >
-              {validationErrors.companyDescription}
-            </p>
-          )}
-        </div>
+        <Textarea
+          label={t("companyDescription.label")}
+          value={formData.companyDescription}
+          onChange={(value) => handleInputChange("companyDescription", value)}
+          placeholder={t("companyDescription.placeholder")}
+          required
+          rows={4}
+          error={validationErrors.companyDescription}
+        />
 
-        <div>
-          <label
-            htmlFor={jobDescriptionId}
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-          >
-            {t("jobDescription.label")}
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-1">
-              ({t("optional")})
-            </span>
-          </label>
-          <textarea
-            id={jobDescriptionId}
-            name="jobDescription"
-            rows={4}
-            value={formData.jobDescription}
-            onChange={(e) =>
-              handleInputChange("jobDescription", e.target.value)
-            }
-            placeholder={t("jobDescription.placeholder")}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
-          />
-        </div>
+        <Textarea
+          label={`${t("jobDescription.label")} (${t("optional")})`}
+          value={formData.jobDescription}
+          onChange={(value) => handleInputChange("jobDescription", value)}
+          placeholder={t("jobDescription.placeholder")}
+          rows={4}
+        />
       </div>
 
       <div className="flex justify-end gap-4">
