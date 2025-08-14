@@ -60,18 +60,22 @@
       },
       "jobPosition": {
         "label": "Cargo Pretendido",
-        "placeholder": "ex. Engenheiro de Software Sênior"
+        "placeholder": "ex. Engenheiro de Software Sênior",
+        "helperText": "Deixe vazio para uma carta de apresentação espontânea"
       },
       "companyDescription": {
         "label": "Descrição da Empresa",
-        "placeholder": "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá..."
+        "placeholder": "Conte-nos sobre a empresa, sua missão, valores, produtos, ou o que te interessa em trabalhar lá...",
+        "helperText": "Obrigatório. Ajude a IA a entender o que você sabe sobre a empresa"
       },
       "jobDescription": {
         "label": "Descrição do Cargo",
-        "placeholder": "Cole a descrição do cargo aqui ou descreva os requisitos da função..."
+        "placeholder": "Cole a descrição do cargo aqui ou descreva os requisitos da função...",
+        "helperText": "Opcional. Inclua requisitos específicos para personalizar a carta"
       },
       "validation": {
-        "companyDescriptionRequired": "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada."
+        "companyDescriptionRequired": "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+        "errorAnnouncement": "Erro de validação do formulário"
       }
     },
     "display": {
@@ -87,7 +91,8 @@
       },
       "generating": {
         "message": "Criando sua carta de apresentação personalizada...",
-        "subtitle": "Isso pode levar alguns momentos"
+        "subtitle": "Isso pode levar alguns momentos",
+        "ariaLabel": "Geração de carta de apresentação em progresso"
       },
       "error": {
         "title": "Algo deu errado"
@@ -100,7 +105,11 @@
         "editInputs": "Editar Entradas",
         "close": "Fechar",
         "retry": "Tentar Novamente",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "editInputsAriaLabel": "Voltar para editar as informações da carta de apresentação",
+        "closeAriaLabel": "Fechar janela da carta de apresentação",
+        "retryAriaLabel": "Tentar gerar a carta de apresentação novamente",
+        "cancelAriaLabel": "Cancelar e fechar a janela"
       }
     }
   }

@@ -1,6 +1,6 @@
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { generateCoverLetter } from "@/lib/server/actions";
 import { useStore } from "@/lib/store";
 import type { CoverLetterInputs, Variant } from "@/lib/types";
@@ -33,6 +33,11 @@ export default function CoverLetterModal({
   const [currentPhase, setCurrentPhase] = useState<ModalPhase>("input");
   const [error, setError] = useState<string | null>(null);
 
+  // Focus management refs
+  const generatingStatusRef = useRef<HTMLOutputElement>(null);
+  const displayActionsRef = useRef<HTMLDivElement>(null);
+  const retryButtonRef = useRef<HTMLButtonElement>(null);
+
   // Determine initial phase when modal opens
   useEffect(() => {
     if (isOpen) {
@@ -44,6 +49,29 @@ export default function CoverLetterModal({
       setError(null);
     }
   }, [isOpen, generatedCoverLetter, coverLetterInputs]);
+
+  // Focus management for phase transitions
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Small delay to allow DOM updates to complete
+    const focusTimeout = setTimeout(() => {
+      switch (currentPhase) {
+        case "generating":
+          generatingStatusRef.current?.focus();
+          break;
+        case "error":
+          retryButtonRef.current?.focus();
+          break;
+        case "display":
+          displayActionsRef.current?.focus();
+          break;
+        // No focus change needed for input phase as it's handled by Modal component
+      }
+    }, 100);
+
+    return () => clearTimeout(focusTimeout);
+  }, [currentPhase, isOpen]);
 
   const generateNewCoverLetter = useCallback(
     async (inputs: CoverLetterInputs) => {
@@ -129,15 +157,24 @@ export default function CoverLetterModal({
 
       case "generating":
         return (
-          <div className="flex flex-col items-center justify-center gap-4 py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <output
+            ref={generatingStatusRef}
+            className="flex flex-col items-center justify-center gap-4 py-12"
+            tabIndex={-1}
+            aria-live="polite"
+            aria-label={t("generating.ariaLabel")}
+          >
+            <div
+              className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
+              aria-hidden="true"
+            ></div>
             <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
               {t("generating.message")}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               {t("generating.subtitle")}
             </p>
-          </div>
+          </output>
         );
 
       case "display":
@@ -152,18 +189,24 @@ export default function CoverLetterModal({
               inputs={coverLetterInputs}
               onRegenerate={handleRegenerate}
             />
-            <div className="flex justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div
+              ref={displayActionsRef}
+              className="flex justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+              tabIndex={-1}
+            >
               <button
                 type="button"
                 onClick={handleEditInputs}
-                className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                aria-label={t("actions.editInputsAriaLabel")}
               >
                 {t("actions.editInputs")}
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={t("actions.closeAriaLabel")}
               >
                 {t("actions.close")}
               </button>
@@ -203,16 +246,19 @@ export default function CoverLetterModal({
             </div>
             <div className="flex gap-3">
               <button
+                ref={retryButtonRef}
                 type="button"
                 onClick={handleRetry}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={t("actions.retryAriaLabel")}
               >
                 {t("actions.retry")}
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors"
+                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                aria-label={t("actions.cancelAriaLabel")}
               >
                 {t("actions.cancel")}
               </button>

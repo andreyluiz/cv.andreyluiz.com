@@ -60,18 +60,22 @@
       },
       "jobPosition": {
         "label": "Poste Visé",
-        "placeholder": "ex. Ingénieur Logiciel Senior"
+        "placeholder": "ex. Ingénieur Logiciel Senior",
+        "helperText": "Laissez vide pour une lettre de motivation de candidature spontanée"
       },
       "companyDescription": {
         "label": "Description de l'Entreprise",
-        "placeholder": "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler..."
+        "placeholder": "Parlez-nous de l'entreprise, sa mission, ses valeurs, ses produits, ou ce qui vous intéresse dans le fait d'y travailler...",
+        "helperText": "Obligatoire. Aidez l'IA à comprendre ce que vous savez de l'entreprise"
       },
       "jobDescription": {
         "label": "Description du Poste",
-        "placeholder": "Collez la description du poste ici ou décrivez les exigences du rôle..."
+        "placeholder": "Collez la description du poste ici ou décrivez les exigences du rôle...",
+        "helperText": "Optionnel. Incluez des exigences spécifiques pour adapter la lettre"
       },
       "validation": {
-        "companyDescriptionRequired": "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée."
+        "companyDescriptionRequired": "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+        "errorAnnouncement": "Erreur de validation du formulaire"
       }
     },
     "display": {
@@ -87,7 +91,8 @@
       },
       "generating": {
         "message": "Création de votre lettre de motivation personnalisée...",
-        "subtitle": "Cela peut prendre quelques instants"
+        "subtitle": "Cela peut prendre quelques instants",
+        "ariaLabel": "Génération de lettre de motivation en cours"
       },
       "error": {
         "title": "Quelque chose s'est mal passé"
@@ -100,7 +105,11 @@
         "editInputs": "Modifier les Entrées",
         "close": "Fermer",
         "retry": "Réessayer",
-        "cancel": "Annuler"
+        "cancel": "Annuler",
+        "editInputsAriaLabel": "Retourner modifier les informations de la lettre de motivation",
+        "closeAriaLabel": "Fermer la fenêtre de lettre de motivation",
+        "retryAriaLabel": "Réessayer de générer la lettre de motivation",
+        "cancelAriaLabel": "Annuler et fermer la fenêtre"
       }
     }
   }

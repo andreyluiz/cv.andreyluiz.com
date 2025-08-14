@@ -60,18 +60,22 @@
       },
       "jobPosition": {
         "label": "Job Position",
-        "placeholder": "e.g., Senior Software Engineer"
+        "placeholder": "e.g., Senior Software Engineer",
+        "helperText": "Leave empty for a spontaneous application cover letter"
       },
       "companyDescription": {
         "label": "Company Description",
-        "placeholder": "Tell us about the company, its mission, values, products, or what interests you about working there..."
+        "placeholder": "Tell us about the company, its mission, values, products, or what interests you about working there...",
+        "helperText": "Required. Help the AI understand what you know about the company"
       },
       "jobDescription": {
         "label": "Job Description",
-        "placeholder": "Paste the job description here or describe the role requirements..."
+        "placeholder": "Paste the job description here or describe the role requirements...",
+        "helperText": "Optional. Include specific requirements to tailor the cover letter"
       },
       "validation": {
-        "companyDescriptionRequired": "Company description is required to generate a personalized cover letter."
+        "companyDescriptionRequired": "Company description is required to generate a personalized cover letter.",
+        "errorAnnouncement": "Form validation error"
       }
     },
     "display": {
@@ -87,7 +91,8 @@
       },
       "generating": {
         "message": "Creating your personalized cover letter...",
-        "subtitle": "This may take a few moments"
+        "subtitle": "This may take a few moments",
+        "ariaLabel": "Cover letter generation in progress"
       },
       "error": {
         "title": "Something went wrong"
@@ -100,7 +105,11 @@
         "editInputs": "Edit Inputs",
         "close": "Close",
         "retry": "Try Again",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "editInputsAriaLabel": "Go back to edit cover letter inputs",
+        "closeAriaLabel": "Close cover letter modal",
+        "retryAriaLabel": "Try generating the cover letter again",
+        "cancelAriaLabel": "Cancel and close modal"
       }
     }
   }
