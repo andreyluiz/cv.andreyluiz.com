@@ -10,6 +10,8 @@ describe("Store", () => {
       selectedModel: "openai/gpt-4.1-mini",
       generatedCoverLetter: null,
       coverLetterInputs: null,
+      hideBullets: false,
+      layoutMode: 'single',
     });
   });
 
@@ -32,6 +34,16 @@ describe("Store", () => {
     it("should have null coverLetterInputs initially", () => {
       const { coverLetterInputs } = useStore.getState();
       expect(coverLetterInputs).toBeNull();
+    });
+
+    it("should have single layout mode initially", () => {
+      const { layoutMode } = useStore.getState();
+      expect(layoutMode).toBe('single');
+    });
+
+    it("should have hideBullets false initially", () => {
+      const { hideBullets } = useStore.getState();
+      expect(hideBullets).toBe(false);
     });
   });
 
@@ -223,6 +235,71 @@ describe("Store", () => {
       expect(state.selectedModel).toBe(testModel);
       expect(state.generatedCoverLetter).toBe(testLetter);
       expect(state.coverLetterInputs).toEqual(testInputs);
+    });
+  });
+
+  describe("setLayoutMode", () => {
+    it("should update layoutMode when setLayoutMode is called", () => {
+      const { setLayoutMode } = useStore.getState();
+
+      setLayoutMode('two-column');
+
+      const { layoutMode } = useStore.getState();
+      expect(layoutMode).toBe('two-column');
+    });
+
+    it("should handle switching between layout modes", () => {
+      const { setLayoutMode } = useStore.getState();
+
+      // Start with single
+      expect(useStore.getState().layoutMode).toBe('single');
+
+      // Switch to two-column
+      setLayoutMode('two-column');
+      expect(useStore.getState().layoutMode).toBe('two-column');
+
+      // Switch back to single
+      setLayoutMode('single');
+      expect(useStore.getState().layoutMode).toBe('single');
+    });
+
+    it("should maintain layout mode with other state updates", () => {
+      const { setLayoutMode, setApiKey, setHideBullets } = useStore.getState();
+
+      setLayoutMode('two-column');
+      setApiKey('test-key');
+      setHideBullets(true);
+
+      const state = useStore.getState();
+      expect(state.layoutMode).toBe('two-column');
+      expect(state.apiKey).toBe('test-key');
+      expect(state.hideBullets).toBe(true);
+    });
+  });
+
+  describe("setHideBullets", () => {
+    it("should update hideBullets when setHideBullets is called", () => {
+      const { setHideBullets } = useStore.getState();
+
+      setHideBullets(true);
+
+      const { hideBullets } = useStore.getState();
+      expect(hideBullets).toBe(true);
+    });
+
+    it("should handle toggling hideBullets", () => {
+      const { setHideBullets } = useStore.getState();
+
+      // Start with false
+      expect(useStore.getState().hideBullets).toBe(false);
+
+      // Set to true
+      setHideBullets(true);
+      expect(useStore.getState().hideBullets).toBe(true);
+
+      // Set back to false
+      setHideBullets(false);
+      expect(useStore.getState().hideBullets).toBe(false);
     });
   });
 });

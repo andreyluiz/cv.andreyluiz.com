@@ -8,11 +8,13 @@ interface StoreState {
   generatedCoverLetter: string | null;
   coverLetterInputs: CoverLetterInputs | null;
   hideBullets: boolean;
+  layoutMode: 'single' | 'two-column';
   setApiKey: (apiKey: string) => void;
   setSelectedModel: (model: string) => void;
   setCoverLetter: (letter: string, inputs: CoverLetterInputs) => void;
   clearCoverLetter: () => void;
   setHideBullets: (hideBullets: boolean) => void;
+  setLayoutMode: (mode: 'single' | 'two-column') => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -23,6 +25,7 @@ export const useStore = create<StoreState>()(
       generatedCoverLetter: null,
       coverLetterInputs: null,
       hideBullets: false,
+      layoutMode: 'single', // Default to single column for backward compatibility
       setApiKey: (apiKey) => set({ apiKey }),
       setSelectedModel: (model) => set({ selectedModel: model }),
       setCoverLetter: (letter, inputs) =>
@@ -36,6 +39,7 @@ export const useStore = create<StoreState>()(
           coverLetterInputs: null,
         }),
       setHideBullets: (hideBullets) => set({ hideBullets }),
+      setLayoutMode: (mode) => set({ layoutMode: mode }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)
