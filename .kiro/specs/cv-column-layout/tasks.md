@@ -31,7 +31,7 @@
   - Accept resumeData prop and distribute content to left/right columns
   - _Requirements: 2.2, 2.4, 3.1, 3.2, 5.1, 5.3_
 
-- [ ] 5. Create LeftColumn component for personal information
+- [x] 5. Create LeftColumn component for personal information
   - Create `LeftColumn.tsx` component with flex column layout
   - Include ProfileImage, ContactInfo, and Languages components
   - Use consistent spacing with `flex flex-col gap-6`
