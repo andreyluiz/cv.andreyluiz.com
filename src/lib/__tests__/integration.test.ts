@@ -37,7 +37,6 @@ describe("OpenRouter Integration Tests", () => {
       website: "johndoe.dev",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer with 5 years of experience",
     generalSkills: ["JavaScript", "TypeScript", "React"],

@@ -28,7 +28,6 @@ describe("Error Scenarios Integration Tests", () => {
       website: "johndoe.dev",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer",
     generalSkills: ["JavaScript", "TypeScript"],
@@ -107,7 +106,7 @@ describe("Error Scenarios Integration Tests", () => {
           "openai/gpt-4.1-mini",
         ),
       ).rejects.toThrow(
-        "Invalid OpenRouter API key. Please check your API key in the settings and ensure it's active on your OpenRouter account.",
+        "Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.",
       );
     });
 
@@ -247,7 +246,7 @@ describe("Error Scenarios Integration Tests", () => {
           "sk-valid-key",
           "qwen/qwq-32b",
         ),
-      ).rejects.toThrow(/rate limit exceeded.*Please wait a moment/);
+      ).rejects.toThrow(/Rate limit exceeded.*Please wait a moment/);
     });
   });
 

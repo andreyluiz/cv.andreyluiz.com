@@ -85,7 +85,9 @@ describe("UI Integration Tests", () => {
       ).toBeInTheDocument();
 
       // Step 2: Enter API key
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.type(apiKeyInput, "sk-or-test-key-123456");
       expect(apiKeyInput).toHaveValue("sk-or-test-key-123456");
 
@@ -143,7 +145,9 @@ describe("UI Integration Tests", () => {
       rerender(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Verify existing values are loaded
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       const modelSelect = screen.getByRole("combobox");
 
       expect(apiKeyInput).toHaveValue("sk-existing-key");
@@ -156,7 +160,9 @@ describe("UI Integration Tests", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Make changes
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.type(apiKeyInput, "sk-temp-key");
 
       const modelSelect = screen.getByRole("combobox");
@@ -245,11 +251,15 @@ describe("UI Integration Tests", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Check form labels
-      expect(screen.getByLabelText("OpenRouter API Key")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("Enter your OpenRouter API key"),
+      ).toBeInTheDocument();
       expect(screen.getByText("AI Model")).toBeInTheDocument();
 
       // Check input attributes
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       expect(apiKeyInput).toHaveAttribute("type", "password");
       expect(apiKeyInput).toHaveAttribute(
         "placeholder",
@@ -268,7 +278,9 @@ describe("UI Integration Tests", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Test that form elements can be focused
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       const modelSelect = screen.getByRole("combobox");
       const cancelButton = screen.getByText("Cancel");
       const saveButton = screen.getByText("Save");
@@ -322,9 +334,9 @@ describe("UI Integration Tests", () => {
       rerender(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Verify UI reflects updated store state
-      expect(screen.getByLabelText("OpenRouter API Key")).toHaveValue(
-        "sk-updated-key",
-      );
+      expect(
+        screen.getByPlaceholderText("Enter your OpenRouter API key"),
+      ).toHaveValue("sk-updated-key");
       expect(screen.getByRole("combobox")).toHaveValue(
         "google/gemini-2.0-flash-exp:free",
       );
@@ -336,7 +348,9 @@ describe("UI Integration Tests", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Make changes but don't save
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.type(apiKeyInput, "sk-temp-key");
 
       const modelSelect = screen.getByRole("combobox");
@@ -368,7 +382,9 @@ describe("UI Integration Tests", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
       // Clear API key input (if it had a value)
-      const apiKeyInput = screen.getByLabelText("OpenRouter API Key");
+      const apiKeyInput = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.clear(apiKeyInput);
 
       // Save with empty key

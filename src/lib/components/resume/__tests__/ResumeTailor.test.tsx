@@ -136,7 +136,6 @@ describe("ResumeTailor Integration Tests", () => {
       github: "github.com/johndoe",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer",
     qualities: ["Problem-solving"],

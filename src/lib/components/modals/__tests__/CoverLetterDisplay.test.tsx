@@ -88,7 +88,9 @@ describe("CoverLetterDisplay", () => {
       renderWithIntl(<CoverLetterDisplay {...defaultProps} />);
 
       expect(
-        screen.getByRole("button", { name: "Regenerate" }),
+        screen.getByRole("button", {
+          name: "Regenerate cover letter with same inputs",
+        }),
       ).toBeInTheDocument();
     });
 
@@ -99,8 +101,7 @@ describe("CoverLetterDisplay", () => {
       expect(contentDiv).toHaveClass(
         "cover-letter-content",
         "whitespace-pre-wrap",
-        "font-serif",
-        "text-base",
+        "font-sans",
         "leading-relaxed",
       );
     });
@@ -108,9 +109,9 @@ describe("CoverLetterDisplay", () => {
     it("should have print-friendly container styling", () => {
       renderWithIntl(<CoverLetterDisplay {...defaultProps} />);
 
-      const container = document.querySelector(".min-h-\\[500px\\]");
+      const container = document.querySelector("[role='document']");
       expect(container).toHaveClass(
-        "print:min-h-0",
+        "print:max-h-none",
         "print:border-none",
         "print:bg-white",
         "print:p-0",
@@ -143,7 +144,9 @@ describe("CoverLetterDisplay", () => {
       renderWithIntl(<CoverLetterDisplay {...defaultProps} content="" />);
 
       expect(
-        screen.getByRole("button", { name: "Regenerate" }),
+        screen.getByRole("button", {
+          name: "Regenerate cover letter with same inputs",
+        }),
       ).toBeInTheDocument();
     });
 
@@ -169,7 +172,7 @@ Line 3 with spacing
       renderWithIntl(<CoverLetterDisplay {...defaultProps} />);
 
       const regenerateButton = screen.getByRole("button", {
-        name: "Regenerate",
+        name: "Regenerate cover letter with same inputs",
       });
       await user.click(regenerateButton);
 
@@ -180,7 +183,7 @@ Line 3 with spacing
       renderWithIntl(<CoverLetterDisplay {...defaultProps} />);
 
       const regenerateButton = screen.getByRole("button", {
-        name: "Regenerate",
+        name: "Regenerate cover letter with same inputs",
       });
       expect(regenerateButton).toHaveClass("min-w-[120px]");
     });
@@ -233,7 +236,7 @@ Line 3 with spacing
 
       const contentDiv = document.querySelector(".cover-letter-content");
       expect(contentDiv).toHaveClass(
-        "print:font-serif",
+        "print:font-sans",
         "print:text-black",
         "print:text-sm",
         "print:leading-normal",
@@ -296,7 +299,9 @@ Line 3 with spacing
       );
 
       expect(
-        screen.getByRole("button", { name: "Regenerate" }),
+        screen.getByRole("button", {
+          name: "Regenerate cover letter with same inputs",
+        }),
       ).toBeInTheDocument();
     });
 
@@ -313,7 +318,9 @@ Line 3 with spacing
 
       // Should render without crashing
       expect(
-        screen.getByRole("button", { name: "Regenerate" }),
+        screen.getByRole("button", {
+          name: "Regenerate cover letter with same inputs",
+        }),
       ).toBeInTheDocument();
     });
   });

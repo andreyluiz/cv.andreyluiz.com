@@ -28,7 +28,6 @@ describe("Server Actions", () => {
       github: "github.com/johndoe",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer",
     qualities: ["Problem-solving"],
@@ -172,7 +171,7 @@ describe("Server Actions", () => {
         };
 
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am writing to express my interest in this position. My experience and skills make me a great candidate for this role. I look forward to hearing from you.",
         );
         const consoleSpy = vi
           .spyOn(console, "warn")
@@ -186,7 +185,9 @@ describe("Server Actions", () => {
           defaultParams.selectedModel,
         );
 
-        expect(result).toBe("Generated cover letter");
+        expect(result).toBe(
+          "Dear Hiring Manager, I am writing to express my interest in this position. My experience and skills make me a great candidate for this role. I look forward to hearing from you.",
+        );
         expect(consoleSpy).toHaveBeenCalledWith(
           "Resume is missing location information for the cover letter header.",
         );
@@ -211,7 +212,7 @@ describe("Server Actions", () => {
 
       it("should allow spontaneous application with company description", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am excited to apply to your company. My background in software engineering aligns well with your team's needs. I would welcome the opportunity to contribute to your organization.",
         );
 
         const result = await generateCoverLetter(
@@ -224,7 +225,9 @@ describe("Server Actions", () => {
           "en",
         );
 
-        expect(result).toBe("Generated cover letter");
+        expect(result).toBe(
+          "Dear Hiring Manager, I am excited to apply to your company. My background in software engineering aligns well with your team's needs. I would welcome the opportunity to contribute to your organization.",
+        );
         expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
           "",
           "",
@@ -240,7 +243,7 @@ describe("Server Actions", () => {
     describe("input sanitization", () => {
       it("should trim whitespace from all string inputs", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Team, I am writing to express my strong interest in the position. My skills and experience make me an ideal candidate. I look forward to discussing how I can contribute to your team.",
         );
 
         await generateCoverLetter(
@@ -266,7 +269,7 @@ describe("Server Actions", () => {
 
       it("should handle undefined optional parameters gracefully", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am pleased to submit my application for this role. My professional background and technical skills align perfectly with your requirements. I am eager to contribute to your organization.",
         );
 
         const result = await generateCoverLetter(
@@ -278,7 +281,9 @@ describe("Server Actions", () => {
           // No companyDescription or language
         );
 
-        expect(result).toBe("Generated cover letter");
+        expect(result).toBe(
+          "Dear Hiring Manager, I am pleased to submit my application for this role. My professional background and technical skills align perfectly with your requirements. I am eager to contribute to your organization.",
+        );
         expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
           defaultParams.jobTitle,
           defaultParams.jobDescription,
@@ -292,7 +297,7 @@ describe("Server Actions", () => {
 
       it("should default to English for unsupported language", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am thrilled to apply for this position. My diverse skill set and passion for technology make me a strong candidate. I would love to discuss my qualifications further.",
         );
         const consoleSpy = vi
           .spyOn(console, "warn")
@@ -326,7 +331,7 @@ describe("Server Actions", () => {
 
       it("should accept supported languages", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am writing to express my interest in joining your team. My experience and dedication make me well-suited for this role. I am excited about the opportunity to contribute.",
         );
 
         for (const lang of ["en", "fr", "pt"]) {
@@ -388,30 +393,25 @@ describe("Server Actions", () => {
         );
       });
 
-      it("should warn when cover letter is unusually short", async () => {
+      it("should throw error when cover letter content is too short", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue("Short");
-        const consoleSpy = vi
-          .spyOn(console, "warn")
-          .mockImplementation(() => {});
 
-        const result = await generateCoverLetter(
-          defaultParams.jobTitle,
-          defaultParams.jobDescription,
-          defaultParams.currentResume,
-          defaultParams.apiKey,
-          defaultParams.selectedModel,
+        await expect(
+          generateCoverLetter(
+            defaultParams.jobTitle,
+            defaultParams.jobDescription,
+            defaultParams.currentResume,
+            defaultParams.apiKey,
+            defaultParams.selectedModel,
+          ),
+        ).rejects.toThrow(
+          "The AI generated an invalid cover letter: Content too short. Please try again with a different model or adjust your input.",
         );
-
-        expect(result).toBe("Short");
-        expect(consoleSpy).toHaveBeenCalledWith(
-          "Generated cover letter appears to be unusually short, this may indicate an issue with the AI response",
-        );
-
-        consoleSpy.mockRestore();
       });
 
       it("should return valid cover letter without warnings", async () => {
-        const longCoverLetter = "A".repeat(200); // Valid length
+        const longCoverLetter =
+          "Dear Hiring Manager, I am writing to express my strong interest in this position at your company. My extensive experience in software development and my passion for creating innovative solutions make me an ideal candidate for this role. I have worked on numerous projects that demonstrate my ability to work effectively in team environments and deliver high-quality results on time.";
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(longCoverLetter);
 
         const result = await generateCoverLetter(
@@ -577,7 +577,7 @@ describe("Server Actions", () => {
     describe("successful execution", () => {
       it("should call OpenAI function with correct parameters", async () => {
         mockGenerateCoverLetterWithOpenAI.mockResolvedValue(
-          "Generated cover letter",
+          "Dear Hiring Manager, I am delighted to apply for this opportunity. My professional experience and technical expertise align well with your needs. I am confident I can make a valuable contribution to your team.",
         );
 
         const result = await generateCoverLetter(
@@ -590,7 +590,9 @@ describe("Server Actions", () => {
           "fr",
         );
 
-        expect(result).toBe("Generated cover letter");
+        expect(result).toBe(
+          "Dear Hiring Manager, I am delighted to apply for this opportunity. My professional experience and technical expertise align well with your needs. I am confident I can make a valuable contribution to your team.",
+        );
         expect(mockGenerateCoverLetterWithOpenAI).toHaveBeenCalledWith(
           defaultParams.jobTitle,
           defaultParams.jobDescription,

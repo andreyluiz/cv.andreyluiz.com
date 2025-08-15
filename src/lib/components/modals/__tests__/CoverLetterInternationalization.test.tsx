@@ -54,6 +54,7 @@ const englishMessages = {
       validation: {
         companyDescriptionRequired:
           "Company description is required to generate a personalized cover letter.",
+        needAtLeastCompanyInfo: "Please provide at least company information.",
         errorAnnouncement: "Form validation error",
       },
     },
@@ -132,6 +133,8 @@ const frenchMessages = {
       validation: {
         companyDescriptionRequired:
           "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+        needAtLeastCompanyInfo:
+          "Veuillez fournir au moins les informations sur l'entreprise.",
         errorAnnouncement: "Erreur de validation du formulaire",
       },
     },
@@ -213,6 +216,8 @@ const portugueseMessages = {
       validation: {
         companyDescriptionRequired:
           "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+        needAtLeastCompanyInfo:
+          "Por favor, forneça pelo menos informações sobre a empresa.",
         errorAnnouncement: "Erro de validação do formulário",
       },
     },
@@ -291,7 +296,6 @@ describe("Cover Letter Internationalization", () => {
       github: "github.com/johndoe",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer",
     qualities: ["Problem-solving"],
@@ -367,9 +371,11 @@ describe("Cover Letter Internationalization", () => {
       );
 
       expect(screen.getByText("Spontaneous Application")).toBeInTheDocument();
-      expect(screen.getByText("Job Position")).toBeInTheDocument();
+      expect(screen.getByText("Job Position (optional)")).toBeInTheDocument();
       expect(screen.getByText("Company Description")).toBeInTheDocument();
-      expect(screen.getByText("Job Description")).toBeInTheDocument();
+      expect(
+        screen.getByText("Job Description (optional)"),
+      ).toBeInTheDocument();
       expect(screen.getByText("Generate Cover Letter")).toBeInTheDocument();
       expect(screen.getAllByText(/optional/)).toHaveLength(2);
     });
@@ -386,11 +392,13 @@ describe("Cover Letter Internationalization", () => {
       );
 
       expect(screen.getByText("Candidature Spontanée")).toBeInTheDocument();
-      expect(screen.getByText("Poste Visé")).toBeInTheDocument();
+      expect(screen.getByText("Poste Visé (optionnel)")).toBeInTheDocument();
       expect(
         screen.getByText("Description de l'Entreprise"),
       ).toBeInTheDocument();
-      expect(screen.getByText("Description du Poste")).toBeInTheDocument();
+      expect(
+        screen.getByText("Description du Poste (optionnel)"),
+      ).toBeInTheDocument();
       expect(
         screen.getByText("Générer la Lettre de Motivation"),
       ).toBeInTheDocument();
@@ -409,9 +417,13 @@ describe("Cover Letter Internationalization", () => {
       );
 
       expect(screen.getByText("Candidatura Espontânea")).toBeInTheDocument();
-      expect(screen.getByText("Cargo Pretendido")).toBeInTheDocument();
+      expect(
+        screen.getByText("Cargo Pretendido (opcional)"),
+      ).toBeInTheDocument();
       expect(screen.getByText("Descrição da Empresa")).toBeInTheDocument();
-      expect(screen.getByText("Descrição do Cargo")).toBeInTheDocument();
+      expect(
+        screen.getByText("Descrição do Cargo (opcional)"),
+      ).toBeInTheDocument();
       expect(
         screen.getByText("Gerar Carta de Apresentação"),
       ).toBeInTheDocument();

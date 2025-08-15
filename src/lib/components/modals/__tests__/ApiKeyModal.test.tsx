@@ -72,13 +72,11 @@ describe("ApiKeyModal", () => {
     it("should render API key input field", () => {
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
-      const input = screen.getByLabelText("OpenRouter API Key");
-      expect(input).toBeInTheDocument();
-      expect(input).toHaveAttribute("type", "password");
-      expect(input).toHaveAttribute(
-        "placeholder",
+      const input = screen.getByPlaceholderText(
         "Enter your OpenRouter API key",
       );
+      expect(input).toBeInTheDocument();
+      expect(input).toHaveAttribute("type", "password");
     });
 
     it("should render model selection dropdown", () => {
@@ -106,7 +104,9 @@ describe("ApiKeyModal", () => {
 
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
-      const input = screen.getByLabelText("OpenRouter API Key");
+      const input = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       expect(input).toHaveValue("sk-existing-key-123");
     });
 
@@ -130,7 +130,9 @@ describe("ApiKeyModal", () => {
       const user = userEvent.setup();
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
-      const input = screen.getByLabelText("OpenRouter API Key");
+      const input = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.type(input, "sk-new-key-456");
 
       expect(input).toHaveValue("sk-new-key-456");
@@ -150,7 +152,9 @@ describe("ApiKeyModal", () => {
       const user = userEvent.setup();
       render(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
-      const input = screen.getByLabelText("OpenRouter API Key");
+      const input = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       await user.type(input, "sk-test-key-789");
 
       const saveButton = screen.getByText("Save");
@@ -213,7 +217,9 @@ describe("ApiKeyModal", () => {
 
       rerender(<ApiKeyModal isOpen={true} onClose={mockOnClose} />);
 
-      const input = screen.getByLabelText("OpenRouter API Key");
+      const input = screen.getByPlaceholderText(
+        "Enter your OpenRouter API key",
+      );
       expect(input).toHaveValue("sk-updated-key");
     });
   });

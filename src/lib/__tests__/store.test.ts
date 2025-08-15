@@ -11,7 +11,7 @@ describe("Store", () => {
       generatedCoverLetter: null,
       coverLetterInputs: null,
       hideBullets: false,
-      layoutMode: 'single',
+      layoutMode: "single",
     });
   });
 
@@ -38,7 +38,7 @@ describe("Store", () => {
 
     it("should have single layout mode initially", () => {
       const { layoutMode } = useStore.getState();
-      expect(layoutMode).toBe('single');
+      expect(layoutMode).toBe("single");
     });
 
     it("should have hideBullets false initially", () => {
@@ -242,37 +242,37 @@ describe("Store", () => {
     it("should update layoutMode when setLayoutMode is called", () => {
       const { setLayoutMode } = useStore.getState();
 
-      setLayoutMode('two-column');
+      setLayoutMode("two-column");
 
       const { layoutMode } = useStore.getState();
-      expect(layoutMode).toBe('two-column');
+      expect(layoutMode).toBe("two-column");
     });
 
     it("should handle switching between layout modes", () => {
       const { setLayoutMode } = useStore.getState();
 
       // Start with single
-      expect(useStore.getState().layoutMode).toBe('single');
+      expect(useStore.getState().layoutMode).toBe("single");
 
       // Switch to two-column
-      setLayoutMode('two-column');
-      expect(useStore.getState().layoutMode).toBe('two-column');
+      setLayoutMode("two-column");
+      expect(useStore.getState().layoutMode).toBe("two-column");
 
       // Switch back to single
-      setLayoutMode('single');
-      expect(useStore.getState().layoutMode).toBe('single');
+      setLayoutMode("single");
+      expect(useStore.getState().layoutMode).toBe("single");
     });
 
     it("should maintain layout mode with other state updates", () => {
       const { setLayoutMode, setApiKey, setHideBullets } = useStore.getState();
 
-      setLayoutMode('two-column');
-      setApiKey('test-key');
+      setLayoutMode("two-column");
+      setApiKey("test-key");
       setHideBullets(true);
 
       const state = useStore.getState();
-      expect(state.layoutMode).toBe('two-column');
-      expect(state.apiKey).toBe('test-key');
+      expect(state.layoutMode).toBe("two-column");
+      expect(state.apiKey).toBe("test-key");
       expect(state.hideBullets).toBe(true);
     });
   });

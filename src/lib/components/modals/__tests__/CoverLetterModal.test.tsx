@@ -113,7 +113,6 @@ describe("CoverLetterModal", () => {
       github: "",
       age: "",
       nationality: "",
-      permit: "",
     },
     summary: "Experienced software engineer",
     qualities: [],

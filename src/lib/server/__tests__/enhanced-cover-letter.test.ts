@@ -27,7 +27,6 @@ describe("Enhanced Cover Letter Generation", () => {
       github: "github.com/johndoe",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced software engineer with 5+ years of experience",
     qualities: ["Problem-solving", "Team leadership"],
@@ -379,7 +378,7 @@ describe("Enhanced Cover Letter Generation", () => {
       );
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        "Generated cover letter may be missing contact information",
+        "Generated cover letter may be missing required information (name or address)",
       );
 
       consoleSpy.mockRestore();
@@ -412,7 +411,9 @@ describe("Enhanced Cover Letter Generation", () => {
 
       const systemPrompt = mockCreate.mock.calls[0][0].messages[0].content;
 
-      expect(systemPrompt).toContain("REQUIRED STRUCTURE:");
+      expect(systemPrompt).toContain(
+        "REQUIRED STRUCTURE WITH SPECIFIC CSS CLASSES:",
+      );
       expect(systemPrompt).toContain("Header");
       expect(systemPrompt).toContain("Company Information");
       expect(systemPrompt).toContain("Salutation");

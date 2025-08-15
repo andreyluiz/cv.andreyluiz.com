@@ -64,7 +64,6 @@ describe("OpenRouter Client", () => {
       github: "https://github.com/johndoe",
       age: "30",
       nationality: "American",
-      permit: "US Citizen",
     },
     summary: "Experienced developer",
     qualities: ["Problem solver"],
@@ -349,7 +348,7 @@ describe("OpenRouter Client", () => {
             content: expect.stringContaining(mockJobTitle),
           }),
         ]),
-        max_tokens: 1500,
+        max_tokens: 3000,
         temperature: 0.7,
       });
     });
