@@ -7,7 +7,7 @@
   - Set default layout mode to 'single' for backward compatibility
   - _Requirements: 1.3, 1.4_
 
-- [ ] 2. Create LayoutToggle component with accessibility support
+- [x] 2. Create LayoutToggle component with accessibility support
   - Create new component in `src/lib/components/ui/LayoutToggle.tsx`
   - Implement toggle button with icons for single/two-column layouts
   - Add proper ARIA labels and keyboard navigation support
@@ -15,7 +15,7 @@
   - Add hover states and visual feedback for user interactions
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 3. Extract ProfileImage component from Header
+- [x] 3. Extract ProfileImage component from Header
   - Create new `ProfileImage.tsx` component in resume components directory
   - Move profile image logic from Header component to new component
   - Maintain existing styling and responsive behavior
@@ -23,7 +23,7 @@
   - Ensure component works in both layout modes
   - _Requirements: 2.1_
 
-- [ ] 4. Create TwoColumnLayout component with Tailwind Grid
+- [x] 4. Create TwoColumnLayout component with Tailwind Grid
   - Create `TwoColumnLayout.tsx` component in resume components directory
   - Implement responsive grid using Tailwind classes: `grid grid-cols-1 md:grid-cols-[minmax(200px,1fr)_2fr]`
   - Add proper gap spacing and alignment with `gap-6 md:gap-8 items-start`
