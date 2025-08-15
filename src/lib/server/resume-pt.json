@@ -9,10 +9,9 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com",
     "age": "33 anos",
-    "nationality": "Brasileiro",
-    "permit": "Permisso B"
+    "nationality": "Brasileiro, Permisso B"
   },
-  "summary": "Engenheiro de Software com mais de 14 anos de experiência em desenvolvimento de software, focado principalmente em qualidade e valor para o cliente. Experiência em SaaS, Web3 e Esportes, sempre trabalhando próximo a Product Owners com uma visão inovadora e orientada a resultados. Buscando uma posição de Tech Lead ou Engenheiro de Software Sênior para alavancar expertise em desenvolvimento e liderança para impulsionar resultados da equipe e valor do produto.",
+  "summary": "Engenheiro com mais de 14 anos de experiência em desenvolvimento de software, focado principalmente em qualidade e valor para o cliente. Eu trabalhei em SaaS, Web3 e Esportes, sempre próximo a Product Owners com uma visão inovadora e orientada ao cliente para impulsionar resultados da equipe e valor do produto.",
   "qualities": [
     "Ambicioso",
     "Orientado a solução",
@@ -79,8 +78,8 @@
       "company": "Timeleap",
       "location": "Suíça",
       "period": {
-        "start": "Jul 2024",
-        "end": "Jan 2025"
+        "start": "2024",
+        "end": "2025"
       },
       "achievements": [
         "Desenvolveu projetos Web3 usando SvelteKit, integrando com diversos blockchains e smart contracts.",
@@ -93,8 +92,8 @@
       "company": "Sonar",
       "location": "Suíça",
       "period": {
-        "start": "Nov 2022",
-        "end": "Jun 2024"
+        "start": "2022",
+        "end": "2024"
       },
       "achievements": [
         "Entregou diversas funcionalidades críticas para a seção de projetos do SonarCloud em React, melhorando a integração do Clean Code Taxonomy e a educação dos usuários.",
@@ -108,8 +107,8 @@
       "company": "Equip",
       "location": "Suíça",
       "period": {
-        "start": "Set 2021",
-        "end": "Nov 2022"
+        "start": "2021",
+        "end": "2022"
       },
       "achievements": [
         "Liderou o desenvolvimento do protótipo do app Equip usando Svelte e Meteor.js, melhorando a confiabilidade e performance, reduzindo o tempo de desenvolvimento em 3 meses.",
@@ -124,8 +123,8 @@
       "company": "Scout24",
       "location": "Suíça",
       "period": {
-        "start": "Fev 2020",
-        "end": "Set 2021"
+        "start": "2020",
+        "end": "2021"
       },
       "achievements": [
         "Aprimorou e refatorou o Anibis Messenger usando React e TypeScript, recebendo reações positivas da gerência.",
@@ -139,8 +138,8 @@
       "location": "Portugal",
       "isPrevious": true,
       "period": {
-        "start": "Fev 2018",
-        "end": "Jan 2020"
+        "start": "2018",
+        "end": "2020"
       },
       "achievements": [
         "Formulou novas funcionalidades para o aplicativo SkyQ (British Sky Broadcasting) usando React e Redux, melhorando o tempo de carregamento em TVs antigas de 20 para 1 segundo.",
@@ -154,8 +153,8 @@
       "location": "Brasil",
       "isPrevious": true,
       "period": {
-        "start": "Jan 2017",
-        "end": "Fev 2018"
+        "start": "2017",
+        "end": "2018"
       },
       "achievements": [
         "Pesquisou e iniciou o principal aplicativo front-end da empresa do zero usando React e Redux, impulsionando a ideia e visão do negócio.",
@@ -169,8 +168,8 @@
       "location": "Brasil",
       "isPrevious": true,
       "period": {
-        "start": "Abr 2016",
-        "end": "Dez 2016"
+        "start": "2016",
+        "end": "2016"
       },
       "achievements": [
         "Concebeu funcionalidades importantes em JavaScript e jQuery para o time de Landing Pages, garantindo qualidade e suporte ao cliente.",
@@ -184,8 +183,8 @@
       "location": "Brasil",
       "isPrevious": true,
       "period": {
-        "start": "Jun 2015",
-        "end": "Dez 2015"
+        "start": "2015",
+        "end": "2015"
       },
       "achievements": [
         "Implementou funcionalidades para um plugin JIRA de gestão de testes usando Angular.js, conquistando os primeiros clientes internacionais.",
@@ -199,8 +198,8 @@
       "isPrevious": true,
       "isHidden": true,
       "period": {
-        "start": "Mar 2014",
-        "end": "Jun 2015"
+        "start": "2014",
+        "end": "2015"
       },
       "achievements": [
         "Engenhou funcionalidades críticas para uma ferramenta de processamento de arquivos baseada em Java, melhorando diretamente a análise de dados e a reputação da empresa em software financeiro.",
@@ -213,7 +212,7 @@
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "Out 2023",
+      "year": "2023",
       "location": "Suíça"
     }
   ],
@@ -221,7 +220,7 @@
     {
       "degree": "Bacharel em Engenharia e Desenvolvimento de Software",
       "institution": "Universidade Unilagos",
-      "year": "Dez 2011",
+      "year": "2011",
       "location": "Brasil",
       "topics": "Matemática Aplicada, Algoritmos, Aprendizado de Máquina, Computação Distribuída, Desenvolvimento de Software, Desenvolvimento Web, Gerenciamento de Banco de Dados, Gerenciamento de Projetos, UML"
     }

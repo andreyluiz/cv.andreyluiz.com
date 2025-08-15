@@ -9,10 +9,9 @@
     "linkedin": "linkedin.com/in/andreyluiz",
     "website": "andreyluiz.com",
     "age": "33 years old",
-    "nationality": "Brazilian",
-    "permit": "B Permit"
+    "nationality": "Brazilian, B Permit"
   },
-  "summary": "Senior Software Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. Industry background spanning SaaS, Web3, and Sports, always working closely with Product Owners with an innovative and result-driven vision. Looking for a position of Tech Lead or Senior Software Engineer, to leverage expertise in software development and leadership to drive team results and product value.",
+  "summary": "Senior Engineer with over 14 years of experience in software development, primarily focused in quality and value for the client. My work spans SaaS, Web3, and Sports, always working closely with Product Owners with an innovative and client-focused vision to drive team results and product value.",
   "qualities": [
     "Ambitious",
     "Solution-oriented",
@@ -79,8 +78,8 @@
       "company": "Timeleap",
       "location": "Switzerland",
       "period": {
-        "start": "Jul 2024",
-        "end": "Jan 2025"
+        "start": "2024",
+        "end": "2025"
       },
       "achievements": [
         "Developed Web3 projects using SvelteKit, integrating with many types of blockchains and smart contracts.",
@@ -93,8 +92,8 @@
       "company": "Sonar",
       "location": "Switzerland",
       "period": {
-        "start": "Nov 2022",
-        "end": "Jun 2024"
+        "start": "2022",
+        "end": "2024"
       },
       "achievements": [
         "Delivered many critical features for SonarCloud's project section in React, improving Clean Code Taxonomy integration and user education on coding best practices.",
@@ -108,8 +107,8 @@
       "company": "Equip",
       "location": "Switzerland",
       "period": {
-        "start": "Sep 2021",
-        "end": "Nov 2022"
+        "start": "2021",
+        "end": "2022"
       },
       "achievements": [
         "Led the Equip app prototype development using Svelte and Meteor.js, improving reliability and performance, and reducing prototype development time by 3 months.",
@@ -124,8 +123,8 @@
       "company": "Scout24",
       "location": "Switzerland",
       "period": {
-        "start": "Feb 2020",
-        "end": "Sep 2021"
+        "start": "2020",
+        "end": "2021"
       },
       "achievements": [
         "Enhanced and refactored Anibis Messenger using React and TypeScript, getting positive reactions from management.",
@@ -139,8 +138,8 @@
       "location": "Portugal",
       "isPrevious": true,
       "period": {
-        "start": "Feb 2018",
-        "end": "Jan 2020"
+        "start": "2018",
+        "end": "2020"
       },
       "achievements": [
         "Formulated new features for the SkyQ application (British Sky Broadcasting), using React and Redux, improving load times on old TVs from 20 to 1 second.",
@@ -154,8 +153,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "Jan 2017",
-        "end": "Feb 2018"
+        "start": "2017",
+        "end": "2018"
       },
       "achievements": [
         "Researched and started the company's main front end application from scratch using React and Redux, kick starting the company's business idea and vision.",
@@ -169,8 +168,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "Apr 2016",
-        "end": "Dec 2016"
+        "start": "2016",
+        "end": "2016"
       },
       "achievements": [
         "Conceived important features in JavaScript and jQuery for the Landing Pages squad, ensuring quality and customer support.",
@@ -184,8 +183,8 @@
       "location": "Brazil",
       "isPrevious": true,
       "period": {
-        "start": "Jun 2015",
-        "end": "Dec 2015"
+        "start": "2015",
+        "end": "2015"
       },
       "achievements": [
         "Implemented features for a JIRA plugin for testing management using Angular.js, giving the company the first international customers.",
@@ -199,8 +198,8 @@
       "isPrevious": true,
       "isHidden": true,
       "period": {
-        "start": "Mar 2014",
-        "end": "Jun 2015"
+        "start": "2014",
+        "end": "2015"
       },
       "achievements": [
         "Engineered critical features for a Java-based file processing tool, directly enhancing data analysis capabilities and boosting the company's reputation in financial software.",
@@ -213,7 +212,7 @@
     {
       "degree": "AWS Certified Cloud Practitioner",
       "institution": "Amazon Web Services",
-      "year": "Oct 2023",
+      "year": "2023",
       "location": "Switzerland"
     }
   ],
@@ -221,7 +220,7 @@
     {
       "degree": "Bachelor in Software Engineering and Development",
       "institution": "Unilagos University",
-      "year": "Dec 2011",
+      "year": "2011",
       "location": "Brazil",
       "topics": "Applied Mathematics, Algorithms, Machine Learning, Distributed Computing, Software Development, Web Development, Database Management, Project Management, UML"
     }
