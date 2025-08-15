@@ -31,6 +31,9 @@ export default function CoverLetterInputForm({
 
   const [validationErrors, setValidationErrors] = useState<{
     companyDescription?: string;
+    jobPosition?: string;
+    jobDescription?: string;
+    general?: string;
   }>({});
 
   const [announcedErrors, setAnnouncedErrors] = useState<Set<string>>(
@@ -43,20 +46,58 @@ export default function CoverLetterInputForm({
       [field]: value,
     }));
 
-    // Clear validation error when user starts typing
-    if (field === "companyDescription" && value.trim()) {
-      setValidationErrors((prev) => ({
-        ...prev,
-        companyDescription: undefined,
-      }));
+    // Clear validation errors when user starts typing
+    if (value.trim() !== formData[field].trim()) {
+      setValidationErrors((prev) => {
+        const newErrors = { ...prev };
+
+        // Clear field-specific error
+        if (field in newErrors) {
+          delete newErrors[field as keyof typeof newErrors];
+        }
+
+        // Clear general error if any field is being modified
+        if (field === "companyDescription" && value.trim() && prev.general) {
+          delete newErrors.general;
+        }
+
+        return newErrors;
+      });
     }
   };
 
   const validateForm = (): boolean => {
-    const errors: { companyDescription?: string } = {};
+    const errors: {
+      companyDescription?: string;
+      jobPosition?: string;
+      jobDescription?: string;
+      general?: string;
+    } = {};
 
+    // Required field validation
     if (!formData.companyDescription.trim()) {
       errors.companyDescription = t("validation.companyDescriptionRequired");
+    } else if (formData.companyDescription.trim().length < 10) {
+      errors.companyDescription = t("validation.companyDescriptionTooShort");
+    } else if (formData.companyDescription.trim().length > 2000) {
+      errors.companyDescription = t("validation.companyDescriptionTooLong");
+    }
+
+    // Optional field validation
+    if (formData.jobPosition.trim().length > 100) {
+      errors.jobPosition = t("validation.jobPositionTooLong");
+    }
+
+    if (formData.jobDescription.trim().length > 5000) {
+      errors.jobDescription = t("validation.jobDescriptionTooLong");
+    }
+
+    // Cross-field validation
+    if (!formData.jobPosition.trim() && !formData.jobDescription.trim()) {
+      // This is allowed for spontaneous applications, but we should warn the user
+      if (!formData.companyDescription.trim()) {
+        errors.general = t("validation.needAtLeastCompanyInfo");
+      }
     }
 
     setValidationErrors(errors);
@@ -135,6 +176,36 @@ export default function CoverLetterInputForm({
           </div>
         </section>
 
+        {/* General Error Display */}
+        {validationErrors.general && (
+          <div
+            className="rounded-lg bg-red-50 p-4 dark:bg-red-900/20"
+            role="alert"
+          >
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg
+                  className="h-5 w-5 text-red-400"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-red-800 dark:text-red-200">
+                  {validationErrors.general}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <fieldset className="space-y-4" aria-labelledby={fieldsTitleId}>
           <legend id={fieldsTitleId} className="sr-only">
             Cover Letter Information
@@ -146,6 +217,7 @@ export default function CoverLetterInputForm({
             onChange={(value) => handleInputChange("jobPosition", value)}
             placeholder={t("jobPosition.placeholder")}
             helperText={t("jobPosition.helperText")}
+            error={validationErrors.jobPosition}
             aria-describedby="job-position-help"
           />
 
@@ -168,6 +240,7 @@ export default function CoverLetterInputForm({
             placeholder={t("jobDescription.placeholder")}
             rows={4}
             helperText={t("jobDescription.helperText")}
+            error={validationErrors.jobDescription}
             aria-describedby="job-description-help"
           />
         </fieldset>

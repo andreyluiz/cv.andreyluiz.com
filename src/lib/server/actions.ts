@@ -9,6 +9,112 @@ import resumeEnglish from "./resume-en.json";
 import resumeFrench from "./resume-fr.json";
 import resumePortuguese from "./resume-pt.json";
 
+interface ValidationResult {
+  isValid: boolean;
+  reason?: string;
+  severity?: "low" | "medium" | "high";
+}
+
+function validateCoverLetterContent(content: string): ValidationResult {
+  const trimmedContent = content.trim();
+
+  // Check for completely empty content
+  if (!trimmedContent) {
+    return { isValid: false, reason: "Content is empty", severity: "high" };
+  }
+
+  // Check minimum reasonable length
+  if (trimmedContent.length < 50) {
+    return { isValid: false, reason: "Content too short", severity: "high" };
+  }
+
+  // Check for maximum reasonable length (cover letters shouldn't be extremely long)
+  if (trimmedContent.length > 10000) {
+    return {
+      isValid: false,
+      reason: "Content unusually long",
+      severity: "medium",
+    };
+  }
+
+  // Check for malformed HTML/formatting issues
+  const htmlTagCount = (content.match(/<[^>]*>/g) || []).length;
+  const openingTags = (content.match(/<[^/>][^>]*>/g) || []).length;
+  const closingTags = (content.match(/<\/[^>]*>/g) || []).length;
+
+  // If there are HTML tags, check basic structure
+  if (htmlTagCount > 0) {
+    // Check for severely mismatched tags (allowing some flexibility)
+    if (Math.abs(openingTags - closingTags) > 3) {
+      return {
+        isValid: false,
+        reason: "Malformed HTML structure",
+        severity: "medium",
+      };
+    }
+
+    // Check for unclosed paragraph tags or similar structural issues
+    const paragraphsOpen = (content.match(/<p[^>]*>/g) || []).length;
+    const paragraphsClose = (content.match(/<\/p>/g) || []).length;
+    if (paragraphsOpen > 0 && Math.abs(paragraphsOpen - paragraphsClose) > 1) {
+      return {
+        isValid: false,
+        reason: "Malformed paragraph structure",
+        severity: "medium",
+      };
+    }
+  }
+
+  // Check for suspicious patterns that might indicate corrupted AI output
+  const suspiciousPatterns = [
+    /\[.*?\]/g, // Unexpanded placeholders like [Company Name]
+    /{{.*?}}/g, // Template variables that weren't replaced
+    /undefined|null|NaN/gi, // Programming artifacts
+    /<\?.*?\?>/g, // PHP-like tags
+    /error|exception|stack/gi, // Error messages
+  ];
+
+  for (const pattern of suspiciousPatterns) {
+    const matches = content.match(pattern);
+    if (matches && matches.length > 0) {
+      return {
+        isValid: false,
+        reason: `Contains suspicious content: ${matches[0]}`,
+        severity: "high",
+      };
+    }
+  }
+
+  // Check for repeated content (possible AI hallucination)
+  const words = trimmedContent.toLowerCase().split(/\s+/);
+  const wordSet = new Set(words);
+  const uniqueRatio = wordSet.size / words.length;
+
+  if (uniqueRatio < 0.3) {
+    return {
+      isValid: false,
+      reason: "Content appears to be highly repetitive",
+      severity: "medium",
+    };
+  }
+
+  // Check for basic cover letter structure indicators
+  const _hasGreeting = /dear|hello|greetings|to whom/gi.test(content);
+  const _hasClosing = /sincerely|regards|best|yours/gi.test(content);
+  const hasPersonalPronouns = /\b(i|my|me)\b/gi.test(content);
+
+  if (!hasPersonalPronouns) {
+    return {
+      isValid: false,
+      reason: "Missing personal context typical of cover letters",
+      severity: "low",
+    };
+  }
+
+  // All validations passed
+  return { isValid: true };
+}
+
 export async function getResume(lang: string = "en"): Promise<Variant> {
   switch (lang) {
     case "fr":
@@ -127,11 +233,27 @@ export async function generateCoverLetter(
       supportedLanguages.includes(sanitizedLanguage) ? sanitizedLanguage : "en",
     );
 
-    // Additional validation of the generated result
+    // Enhanced validation of the generated result
     if (!result || result.trim().length === 0) {
       throw new Error(
         "The AI service returned an empty response. Please try again or select a different model.",
       );
+    }
+
+    // Validate the response structure and content
+    const validationResult = validateCoverLetterContent(result);
+    if (!validationResult.isValid) {
+      console.warn(
+        `Cover letter validation failed: ${validationResult.reason}`,
+        { result: result.substring(0, 200) },
+      );
+
+      // For severe issues, throw an error
+      if (validationResult.severity === "high") {
+        throw new Error(
+          `The AI generated an invalid cover letter: ${validationResult.reason}. Please try again with a different model or adjust your input.`,
+        );
+      }
     }
 
     if (result.length < 100) {

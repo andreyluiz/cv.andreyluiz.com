@@ -75,6 +75,11 @@
       },
       "validation": {
         "companyDescriptionRequired": "La description de l'entreprise est requise pour générer une lettre de motivation personnalisée.",
+        "companyDescriptionTooShort": "La description de l'entreprise doit contenir au moins 10 caractères.",
+        "companyDescriptionTooLong": "La description de l'entreprise doit contenir moins de 2000 caractères.",
+        "jobPositionTooLong": "Le poste visé doit contenir moins de 100 caractères.",
+        "jobDescriptionTooLong": "La description du poste doit contenir moins de 5000 caractères.",
+        "needAtLeastCompanyInfo": "Veuillez fournir au moins des informations sur l'entreprise pour la lettre de motivation.",
         "errorAnnouncement": "Erreur de validation du formulaire"
       }
     },
@@ -96,14 +101,21 @@
       "generating": {
         "message": "Création de votre lettre de motivation personnalisée...",
         "subtitle": "Cela peut prendre quelques instants",
-        "ariaLabel": "Génération de lettre de motivation en cours"
+        "ariaLabel": "Génération de lettre de motivation en cours",
+        "retryMessage": "Nouvelle tentative de génération de lettre de motivation...",
+        "retrySubtitle": "Tentative {attempt} sur {max}. Veuillez patienter..."
       },
       "error": {
         "title": "Quelque chose s'est mal passé"
       },
       "errors": {
         "generationFailed": "Échec de la génération de la lettre de motivation. Veuillez réessayer.",
-        "apiError": "Échec de la génération de la lettre de motivation. Veuillez vérifier votre clé API et le modèle sélectionné, puis réessayer."
+        "apiError": "Échec de la génération de la lettre de motivation. Veuillez vérifier votre clé API et le modèle sélectionné, puis réessayer.",
+        "authSuggestion": "Vérifiez votre clé API dans les paramètres et assurez-vous qu'elle est valide et active sur OpenRouter.",
+        "networkSuggestion": "Vérifiez votre connexion internet et réessayez. Le problème peut être temporaire.",
+        "quotaSuggestion": "Vous avez peut-être dépassé vos limites d'utilisation. Essayez d'utiliser un modèle gratuit ou vérifiez votre compte OpenRouter.",
+        "aiSuggestion": "Le modèle d'IA peut être temporairement indisponible. Essayez de sélectionner un modèle différent ou attendez un moment avant de réessayer.",
+        "generalSuggestion": "Veuillez réessayer dans un moment. Si le problème persiste, vérifiez vos paramètres ou contactez le support."
       },
       "actions": {
         "editInputs": "Modifier les Entrées",

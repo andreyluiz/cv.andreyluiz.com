@@ -70,7 +70,7 @@
   - Write accessibility tests using testing library
   - _Requirements: 1.1, 1.5_
 
-- [ ] 10. Add comprehensive error handling
+- [x] 10. Add comprehensive error handling
   - Implement client-side validation error display
   - Add user-friendly error messages for AI generation failures
   - Handle edge cases for malformed AI responses
@@ -78,18 +78,18 @@
   - Write error scenario tests covering all failure modes
   - _Requirements: 6.4, 6.5_
 
-- [ ] 11. Create integration tests for complete workflow
-  - Test full user journey from modal open to cover letter generation
-  - Verify persistence works across modal close/reopen cycles
-  - Test regeneration with modified inputs
-  - Validate spontaneous application flow
-  - Test multi-language generation scenarios
-  - _Requirements: 1.1, 1.2, 1.4, 4.1, 4.2, 4.3, 5.1, 5.2, 5.3_
-
-- [ ] 12. Add mobile responsiveness and styling
+- [ ] 11. Add mobile responsiveness and styling
   - Ensure modal and form components work on mobile devices
   - Implement responsive design for cover letter display
   - Add touch-friendly input controls
   - Optimize typography for mobile reading
   - Test on various screen sizes and devices
   - _Requirements: 2.1, 2.2, 2.4, 2.5, 2.6, 2.9, 2.10_
+
+- [ ] 12. Create integration tests for complete workflow
+  - Test full user journey from modal open to cover letter generation
+  - Verify persistence works across modal close/reopen cycles
+  - Test regeneration with modified inputs
+  - Validate spontaneous application flow
+  - Test multi-language generation scenarios
+  - _Requirements: 1.1, 1.2, 1.4, 4.1, 4.2, 4.3, 5.1, 5.2, 5.3_

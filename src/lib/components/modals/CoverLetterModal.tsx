@@ -32,6 +32,11 @@ export default function CoverLetterModal({
 
   const [currentPhase, setCurrentPhase] = useState<ModalPhase>("input");
   const [error, setError] = useState<string | null>(null);
+  const [errorType, setErrorType] = useState<
+    "validation" | "network" | "auth" | "quota" | "ai" | "unknown" | null
+  >(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isAutoRetrying, setIsAutoRetrying] = useState(false);
 
   // Focus management refs
   const generatingStatusRef = useRef<HTMLOutputElement>(null);
@@ -47,6 +52,9 @@ export default function CoverLetterModal({
         setCurrentPhase("input");
       }
       setError(null);
+      setErrorType(null);
+      setRetryCount(0);
+      setIsAutoRetrying(false);
     }
   }, [isOpen, generatedCoverLetter, coverLetterInputs]);
 
@@ -73,11 +81,108 @@ export default function CoverLetterModal({
     return () => clearTimeout(focusTimeout);
   }, [currentPhase, isOpen]);
 
+  const categorizeError = useCallback((errorMessage: string) => {
+    const lowerMessage = errorMessage.toLowerCase();
+
+    if (
+      lowerMessage.includes("api key") ||
+      lowerMessage.includes("unauthorized") ||
+      lowerMessage.includes("authentication")
+    ) {
+      return "auth";
+    }
+    if (
+      lowerMessage.includes("rate limit") ||
+      lowerMessage.includes("quota") ||
+      lowerMessage.includes("credits") ||
+      lowerMessage.includes("insufficient")
+    ) {
+      return "quota";
+    }
+    if (
+      lowerMessage.includes("network") ||
+      lowerMessage.includes("connection") ||
+      lowerMessage.includes("timeout")
+    ) {
+      return "network";
+    }
+    if (
+      lowerMessage.includes("model") ||
+      lowerMessage.includes("not found") ||
+      lowerMessage.includes("unavailable")
+    ) {
+      return "ai";
+    }
+    if (
+      lowerMessage.includes("validation") ||
+      lowerMessage.includes("required")
+    ) {
+      return "validation";
+    }
+    return "unknown";
+  }, []);
+
+  const isRetryableError = useCallback(
+    (errorType: string | null, errorMessage: string) => {
+      if (!errorType) return false;
+
+      // Don't retry authentication or validation errors
+      if (errorType === "auth" || errorType === "validation") {
+        return false;
+      }
+
+      // Don't retry quota errors (usually persistent)
+      if (errorType === "quota") {
+        return false;
+      }
+
+      // Retry network and AI errors (usually transient)
+      if (errorType === "network" || errorType === "ai") {
+        return true;
+      }
+
+      // For unknown errors, check specific patterns
+      const lowerMessage = errorMessage.toLowerCase();
+      const transientPatterns = [
+        "timeout",
+        "temporary",
+        "try again",
+        "service unavailable",
+        "internal error",
+        "server error",
+        "500",
+        "502",
+        "503",
+        "504",
+      ];
+
+      return transientPatterns.some((pattern) =>
+        lowerMessage.includes(pattern),
+      );
+    },
+    [],
+  );
+
+  const sleep = useCallback(
+    (ms: number) => new Promise((resolve) => setTimeout(resolve, ms)),
+    [],
+  );
+
   const generateNewCoverLetter = useCallback(
-    async (inputs: CoverLetterInputs) => {
+    async (inputs: CoverLetterInputs, retryAttempt = 0) => {
+      const maxRetries = 3;
+
       try {
         setCurrentPhase("generating");
         setError(null);
+        setRetryCount(retryAttempt);
+
+        if (retryAttempt > 0) {
+          setIsAutoRetrying(true);
+          // Exponential backoff: 1s, 2s, 4s
+          const delay = Math.min(1000 * 2 ** (retryAttempt - 1), 4000);
+          await sleep(delay);
+        }
 
         const newCoverLetter = await generateCoverLetter(
           inputs.jobPosition || "",
@@ -92,19 +197,49 @@ export default function CoverLetterModal({
         if (newCoverLetter) {
           setCoverLetter(newCoverLetter, inputs);
           setCurrentPhase("display");
+          setError(null);
+          setErrorType(null);
+          setRetryCount(0);
+          setIsAutoRetrying(false);
         } else {
           setError(t("errors.generationFailed"));
+          setErrorType("ai");
           setCurrentPhase("error");
+          setIsAutoRetrying(false);
         }
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : t("errors.apiError");
+        const type = categorizeError(errorMessage);
+
+        // Check if we should automatically retry
+        if (retryAttempt < maxRetries && isRetryableError(type, errorMessage)) {
+          console.log(
+            `Retrying cover letter generation (attempt ${retryAttempt + 1}/${maxRetries}):`,
+            errorMessage,
+          );
+          return generateNewCoverLetter(inputs, retryAttempt + 1);
+        }
+
         setError(errorMessage);
+        setErrorType(type);
         setCurrentPhase("error");
+        setRetryCount(retryAttempt);
+        setIsAutoRetrying(false);
         console.error("Error generating cover letter:", error);
       }
     },
-    [resumeData, apiKey, selectedModel, setCoverLetter, t, locale],
+    [
+      resumeData,
+      apiKey,
+      selectedModel,
+      setCoverLetter,
+      t,
+      locale,
+      categorizeError,
+      isRetryableError,
+      sleep,
+    ],
   );
 
   const handleFormSubmit = (inputs: CoverLetterInputs) => {
@@ -122,11 +257,17 @@ export default function CoverLetterModal({
   const handleRetry = () => {
     setCurrentPhase("input");
     setError(null);
+    setErrorType(null);
+    setRetryCount(0);
+    setIsAutoRetrying(false);
   };
 
   const handleEditInputs = () => {
     setCurrentPhase("input");
     setError(null);
+    setErrorType(null);
+    setRetryCount(0);
+    setIsAutoRetrying(false);
   };
 
   const getModalTitle = (): string => {
@@ -169,10 +310,17 @@ export default function CoverLetterModal({
               aria-hidden="true"
             ></div>
             <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
-              {t("generating.message")}
+              {isAutoRetrying
+                ? t("generating.retryMessage")
+                : t("generating.message")}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {t("generating.subtitle")}
+              {isAutoRetrying
+                ? t("generating.retrySubtitle", {
+                    attempt: retryCount + 1,
+                    max: 3,
+                  })
+                : t("generating.subtitle")}
             </p>
           </output>
         );
@@ -214,34 +362,135 @@ export default function CoverLetterModal({
           </div>
         );
 
-      case "error":
+      case "error": {
+        const getErrorIcon = () => {
+          switch (errorType) {
+            case "auth":
+              return (
+                <svg
+                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Authentication error icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 0h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              );
+            case "network":
+              return (
+                <svg
+                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Network error icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              );
+            case "quota":
+              return (
+                <svg
+                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Quota error icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                  />
+                </svg>
+              );
+            case "ai":
+              return (
+                <svg
+                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="AI service error icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              );
+            default:
+              return (
+                <svg
+                  className="w-6 h-6 text-red-600 dark:text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Error icon"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              );
+          }
+        };
+
+        const getHelpfulSuggestion = () => {
+          switch (errorType) {
+            case "auth":
+              return t("errors.authSuggestion");
+            case "network":
+              return t("errors.networkSuggestion");
+            case "quota":
+              return t("errors.quotaSuggestion");
+            case "ai":
+              return t("errors.aiSuggestion");
+            default:
+              return t("errors.generalSuggestion");
+          }
+        };
+
         return (
           <div className="flex flex-col items-center gap-6 py-12">
             <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full dark:bg-red-900/20">
-              <svg
-                className="w-6 h-6 text-red-600 dark:text-red-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                role="img"
-                aria-label="Error icon"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                />
-              </svg>
+              {getErrorIcon()}
             </div>
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3 max-w-lg">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {t("error.title")}
               </h3>
               {error && (
-                <p className="text-sm text-red-600 dark:text-red-400 max-w-md">
-                  {error}
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm text-red-600 dark:text-red-400">
+                    {error}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {getHelpfulSuggestion()}
+                  </p>
+                </div>
               )}
             </div>
             <div className="flex gap-3">
@@ -265,6 +514,7 @@ export default function CoverLetterModal({
             </div>
           </div>
         );
+      }
 
       default:
         return null;

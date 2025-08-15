@@ -75,6 +75,11 @@
       },
       "validation": {
         "companyDescriptionRequired": "A descrição da empresa é obrigatória para gerar uma carta de apresentação personalizada.",
+        "companyDescriptionTooShort": "A descrição da empresa deve ter pelo menos 10 caracteres.",
+        "companyDescriptionTooLong": "A descrição da empresa deve ter menos de 2000 caracteres.",
+        "jobPositionTooLong": "O cargo pretendido deve ter menos de 100 caracteres.",
+        "jobDescriptionTooLong": "A descrição do cargo deve ter menos de 5000 caracteres.",
+        "needAtLeastCompanyInfo": "Por favor, forneça pelo menos informações sobre a empresa para a carta de apresentação.",
         "errorAnnouncement": "Erro de validação do formulário"
       }
     },
@@ -96,14 +101,21 @@
       "generating": {
         "message": "Criando sua carta de apresentação personalizada...",
         "subtitle": "Isso pode levar alguns momentos",
-        "ariaLabel": "Geração de carta de apresentação em progresso"
+        "ariaLabel": "Geração de carta de apresentação em progresso",
+        "retryMessage": "Tentando gerar carta de apresentação novamente...",
+        "retrySubtitle": "Tentativa {attempt} de {max}. Por favor, aguarde..."
       },
       "error": {
         "title": "Algo deu errado"
       },
       "errors": {
         "generationFailed": "Falha ao gerar carta de apresentação. Por favor, tente novamente.",
-        "apiError": "Falha ao gerar carta de apresentação. Por favor, verifique sua chave da API e modelo selecionado, então tente novamente."
+        "apiError": "Falha ao gerar carta de apresentação. Por favor, verifique sua chave da API e modelo selecionado, então tente novamente.",
+        "authSuggestion": "Verifique sua chave da API nas configurações e certifique-se de que está válida e ativa no OpenRouter.",
+        "networkSuggestion": "Verifique sua conexão com a internet e tente novamente. O problema pode ser temporário.",
+        "quotaSuggestion": "Você pode ter excedido seus limites de uso. Tente usar um modelo gratuito ou verifique sua conta OpenRouter.",
+        "aiSuggestion": "O modelo de IA pode estar temporariamente indisponível. Tente selecionar um modelo diferente ou aguarde um momento antes de tentar novamente.",
+        "generalSuggestion": "Por favor, tente novamente em um momento. Se o problema persistir, verifique suas configurações ou contate o suporte."
       },
       "actions": {
         "editInputs": "Editar Entradas",
