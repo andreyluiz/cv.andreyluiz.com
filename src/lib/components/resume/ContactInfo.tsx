@@ -37,7 +37,6 @@ export default function ContactInfo({ contactInfo }: Props) {
         <ContactItem item={contactInfo.website} icon="mdi:web" />
         <ContactItem item={contactInfo.age.toString()} icon="mdi:calendar" />
         <ContactItem item={contactInfo.nationality} icon="mdi:flag" />
-        <ContactItem item={contactInfo.permit} icon="mdi:passport" />
       </ul>
     </Section>
   );

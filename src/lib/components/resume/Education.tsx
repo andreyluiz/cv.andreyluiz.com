@@ -17,7 +17,7 @@ export default function Education({ education }: Props) {
     <Section title={t("title")}>
       <div className="flex flex-col gap-2">
         {education.map((edu) => (
-          <div key={edu.degree} className="not-last:pb-4">
+          <div key={edu.degree}>
             <div className="flex items-baseline justify-between gap-1">
               <div className="flex items-baseline gap-0.5">
                 <span>

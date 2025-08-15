@@ -11,7 +11,8 @@
     "experience": {
       "tech_stack": "Stack Tecnológica",
       "title": "Experiência Profissional",
-      "previousExperience": "Experiência Anterior"
+      "previousExperience": "Experiência Anterior",
+      "hideBullets": "Ocultar detalhes"
     },
     "breaks": {
       "title": "Pausas de Carreira & Projetos Independentes",

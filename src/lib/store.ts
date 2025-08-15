@@ -7,10 +7,12 @@ interface StoreState {
   selectedModel: string;
   generatedCoverLetter: string | null;
   coverLetterInputs: CoverLetterInputs | null;
+  hideBullets: boolean;
   setApiKey: (apiKey: string) => void;
   setSelectedModel: (model: string) => void;
   setCoverLetter: (letter: string, inputs: CoverLetterInputs) => void;
   clearCoverLetter: () => void;
+  setHideBullets: (hideBullets: boolean) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -20,6 +22,7 @@ export const useStore = create<StoreState>()(
       selectedModel: "openai/gpt-4.1-mini", // Default model for new users
       generatedCoverLetter: null,
       coverLetterInputs: null,
+      hideBullets: false,
       setApiKey: (apiKey) => set({ apiKey }),
       setSelectedModel: (model) => set({ selectedModel: model }),
       setCoverLetter: (letter, inputs) =>
@@ -32,6 +35,7 @@ export const useStore = create<StoreState>()(
           generatedCoverLetter: null,
           coverLetterInputs: null,
         }),
+      setHideBullets: (hideBullets) => set({ hideBullets }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)

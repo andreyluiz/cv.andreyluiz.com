@@ -35,7 +35,6 @@ export interface ContactInfo {
   github: string;
   age: string;
   nationality: string;
-  permit: string;
 }
 
 export interface Experience {

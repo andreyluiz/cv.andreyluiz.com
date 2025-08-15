@@ -11,7 +11,8 @@
     "experience": {
       "tech_stack": "Tech Stack",
       "title": "Professional Experience",
-      "previousExperience": "Previous Experience"
+      "previousExperience": "Previous Experience",
+      "hideBullets": "Hide details"
     },
     "breaks": {
       "title": "Career Breaks & Independent Projects",
