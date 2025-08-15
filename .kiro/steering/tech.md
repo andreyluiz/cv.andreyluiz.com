@@ -1,61 +1,71 @@
-# Technology Stack
+---
+inclusion: always
+---
 
-## Framework & Runtime
+# Technology Stack & Development Guidelines
 
-- **Next.js 15.3.1** - React framework with App Router
-- **React 19** - UI library
-- **TypeScript 5** - Type safety and development experience
-- **Bun** - Package manager and runtime (preferred over npm/yarn)
+## Core Technologies
 
-## Styling & UI
+### Framework & Runtime
+- **Next.js 15.3.1** with App Router - Use server components by default
+- **React 19** - Leverage concurrent features and new hooks
+- **TypeScript 5** with strict mode - All code must be fully typed
+- **Bun** - REQUIRED for package management and runtime (never use npm/yarn)
 
-- **Tailwind CSS v4** - Utility-first CSS framework
-- **Headless UI** - Unstyled, accessible UI components
-- **Heroicons** - Icon library
-- **next-themes** - Theme switching (light/dark mode)
-- **class-variance-authority** - Component variant management
+### Styling & UI Standards
+- **Tailwind CSS v4** - Use utility classes, avoid custom CSS when possible
+- **Headless UI** - For accessible, unstyled components
+- **Heroicons** - Consistent icon usage across the app
+- **next-themes** - Theme switching implementation
+- **class-variance-authority** - Type-safe component variants
 
-## State Management & Data
+### State & Data Management
+- **Zustand** with persistence - For user preferences and API keys only
+- **next-intl** - All user-facing text must be internationalized
+- **OpenAI API** - Server-side only, never expose keys client-side
 
-- **Zustand** - Lightweight state management with persistence
-- **next-intl** - Internationalization (i18n) support
-- **OpenAI API** - AI-powered resume tailoring and cover letter generation
+### Testing Stack
+- **Vitest** - Fast unit test runner with native TypeScript support
+- **Testing Library** - React Testing Library for component testing
+- **jsdom** - DOM environment for testing browser APIs
+- **@testing-library/user-event** - User interaction simulation
+- **@testing-library/jest-dom** - Custom Jest matchers for DOM testing
 
-## Code Quality & Formatting
+## Development Rules
 
-- **Biome** - Fast linter and formatter (preferred over ESLint/Prettier)
-- **TypeScript strict mode** - Enhanced type checking
-- **ESLint** - Additional linting rules
+### Code Quality Requirements
+- **Biome** for linting and formatting (preferred over ESLint/Prettier)
+- **TypeScript strict mode** - No `any` types allowed
+- All components must be accessible (ARIA compliant)
+- Use named exports (avoid default exports)
 
-## Common Commands
-
-### Development
-
-```bash
-bun run dev          # Start development server with Turbopack
-bun run build        # Build for production
-bun run start        # Start production server
-```
-
-### Code Quality
-
-```bash
-bun run lint         # Run Next.js linting
-bun run format       # Format code with Prettier
-bun run typecheck    # Type checking without emit
-```
-
-### Package Management
-
+### Package Management Commands
 ```bash
 bun install         # Install dependencies
-bun add <package>   # Add new dependency
+bun add <package>   # Add new dependency  
 bun remove <package> # Remove dependency
 ```
 
-## Build System
+### Development Workflow
+```bash
+bun run dev          # Start development with Turbopack
+bun run build        # Production build
+bun run lint         # Code linting
+bun run typecheck    # Type checking
+bun run test         # Run tests in watch mode
+bun run test:run     # Run tests once
+```
 
-- Uses Next.js App Router with file-based routing
-- Turbopack for fast development builds
-- Static optimization for production builds
-- Supports internationalized routing with locale prefixes
+## Architecture Patterns
+
+### Next.js App Router Usage
+- Use Server Components by default
+- Client Components only when necessary (interactivity, hooks)
+- Leverage file-based routing with internationalized `[locale]` segments
+- Server Actions for all AI operations and data mutations
+
+### Performance Guidelines
+- Optimize for Core Web Vitals
+- Use Turbopack for fast development builds
+- Implement proper loading states for async operations
+- Minimize client-side JavaScript bundle size

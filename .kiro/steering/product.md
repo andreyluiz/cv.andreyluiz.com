@@ -1,21 +1,47 @@
-# Product Overview
+---
+inclusion: always
+---
 
-This is an AI-powered CV tailor application that helps users adapt their resumes to specific job descriptions. The application provides:
+# Product Overview & Development Guidelines
 
-- **Resume Tailoring**: Uses OpenAI API to automatically customize resumes based on job descriptions
-- **Cover Letter Generation**: Creates personalized cover letters matching the job requirements
-- **Multi-language Support**: Supports English, French, and Portuguese with easy extensibility
-- **Theme Support**: Light and dark mode themes with system preference detection
-- **Print Optimization**: Resume layouts optimized for printing and PDF generation
+This is an AI-powered CV tailor application that helps users adapt their resumes to specific job descriptions using OpenAI API integration.
 
-## Target Users
+## Core Features
 
-Professionals looking to customize their resumes for specific job applications, with support for multiple languages and markets.
+- **Resume Tailoring**: AI-powered customization based on job descriptions
+- **Cover Letter Generation**: Personalized cover letters with job matching
+- **Multi-language Support**: English, French, Portuguese (easily extensible)
+- **Theme Support**: Light/dark modes with system preference detection
+- **Print Optimization**: Layouts designed for PDF generation and printing
 
-## Key Features
+## Development Principles
 
-- Real-time resume editing and preview
-- AI-powered content suggestions and modifications
-- Responsive design with print-friendly layouts
-- Internationalization support
-- Local storage for API keys and preferences
+### User Experience
+- Prioritize accessibility and keyboard navigation
+- Maintain responsive design across all screen sizes
+- Ensure print layouts are professional and clean
+- Keep UI interactions intuitive and fast
+
+### Data Handling
+- Resume data is stored in locale-specific JSON files (`resume-{locale}.json`)
+- API keys are stored locally in browser storage (never server-side)
+- All AI operations happen server-side via Next.js server actions
+- State management uses Zustand with persistence for user preferences
+
+### Internationalization Rules
+- All user-facing text must be translatable via `next-intl`
+- Add new translations to all supported locales (`en`, `fr`, `pt`)
+- Use typed translation keys for compile-time safety
+- Locale-specific resume data should follow the same structure
+
+### AI Integration Guidelines
+- Always validate OpenAI API responses before using
+- Provide fallback behavior when AI services are unavailable
+- Include proper error handling and user feedback
+- Respect rate limits and implement appropriate retry logic
+
+### Performance Considerations
+- Optimize for fast initial page load
+- Use React Server Components where possible
+- Minimize client-side JavaScript bundle size
+- Implement proper loading states for AI operations
