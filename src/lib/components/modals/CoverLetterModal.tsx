@@ -300,7 +300,7 @@ export default function CoverLetterModal({
         return (
           <output
             ref={generatingStatusRef}
-            className="flex flex-col items-center justify-center gap-4 py-12"
+            className="flex flex-col items-center justify-center gap-3 sm:gap-4 py-8 sm:py-12"
             tabIndex={-1}
             aria-live="polite"
             aria-label={t("generating.ariaLabel")}
@@ -309,12 +309,12 @@ export default function CoverLetterModal({
               className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
               aria-hidden="true"
             ></div>
-            <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
+            <p className="text-base sm:text-lg font-medium text-gray-700 dark:text-gray-300 text-center px-4">
               {isAutoRetrying
                 ? t("generating.retryMessage")
                 : t("generating.message")}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 dark:text-gray-400 text-center px-4">
               {isAutoRetrying
                 ? t("generating.retrySubtitle", {
                     attempt: retryCount + 1,
@@ -331,7 +331,7 @@ export default function CoverLetterModal({
           return null;
         }
         return (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 sm:gap-4">
             <CoverLetterDisplay
               content={generatedCoverLetter}
               inputs={coverLetterInputs}
@@ -339,13 +339,13 @@ export default function CoverLetterModal({
             />
             <div
               ref={displayActionsRef}
-              className="flex justify-between gap-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+              className="flex flex-col-reverse sm:flex-row justify-between gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-gray-200 dark:border-gray-700"
               tabIndex={-1}
             >
               <button
                 type="button"
                 onClick={handleEditInputs}
-                className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                className="text-sm sm:text-base text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-4 py-3 sm:px-2 sm:py-1 min-h-[44px] sm:min-h-auto flex items-center justify-center"
                 aria-label={t("actions.editInputsAriaLabel")}
               >
                 {t("actions.editInputs")}
@@ -353,7 +353,7 @@ export default function CoverLetterModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-3 sm:px-4 sm:py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] sm:min-h-auto text-base sm:text-sm font-medium"
                 aria-label={t("actions.closeAriaLabel")}
               >
                 {t("actions.close")}
@@ -474,12 +474,12 @@ export default function CoverLetterModal({
         };
 
         return (
-          <div className="flex flex-col items-center gap-6 py-12">
+          <div className="flex flex-col items-center gap-4 sm:gap-6 py-8 sm:py-12 px-4">
             <div className="flex items-center justify-center w-12 h-12 bg-red-100 rounded-full dark:bg-red-900/20">
               {getErrorIcon()}
             </div>
             <div className="text-center space-y-3 max-w-lg">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100">
                 {t("error.title")}
               </h3>
               {error && (
@@ -493,12 +493,12 @@ export default function CoverLetterModal({
                 </div>
               )}
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
               <button
                 ref={retryButtonRef}
                 type="button"
                 onClick={handleRetry}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-3 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] sm:min-h-auto text-base sm:text-sm font-medium flex-1"
                 aria-label={t("actions.retryAriaLabel")}
               >
                 {t("actions.retry")}
@@ -506,7 +506,7 @@ export default function CoverLetterModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-6 py-3 sm:px-4 sm:py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] sm:min-h-auto text-base sm:text-sm font-medium flex-1"
                 aria-label={t("actions.cancelAriaLabel")}
               >
                 {t("actions.cancel")}

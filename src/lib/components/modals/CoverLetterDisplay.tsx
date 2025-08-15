@@ -20,16 +20,16 @@ export default function CoverLetterDisplay({
   });
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4 sm:gap-6">
       {/* Cover Letter Content */}
       <div
-        className="max-h-[75vh] overflow-y-auto rounded-lg border border-gray-200 bg-white p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:max-h-none print:overflow-visible print:border-none print:bg-white print:p-0 print:shadow-none"
+        className="max-h-[60vh] sm:max-h-[65vh] md:max-h-[70vh] lg:max-h-[75vh] overflow-y-auto rounded-lg border border-gray-200 bg-white p-4 sm:p-6 md:p-8 shadow-sm transition-colors duration-200 dark:border-gray-700 dark:bg-gray-800 print:max-h-none print:overflow-visible print:border-none print:bg-white print:p-0 print:shadow-none"
         role="document"
         aria-label={t("content.ariaLabel")}
       >
         <div className="mx-auto max-w-4xl">
           <div
-            className="cover-letter-content whitespace-pre-wrap font-sans text-base leading-relaxed text-gray-900 selection:bg-blue-100 dark:text-gray-100 print:font-sans print:text-black print:text-sm print:leading-normal"
+            className="cover-letter-content whitespace-pre-wrap font-sans text-sm sm:text-base leading-relaxed text-gray-900 selection:bg-blue-100 dark:text-gray-100 print:font-sans print:text-black print:text-sm print:leading-normal"
             // biome-ignore lint/security/noDangerouslySetInnerHtml: Content comes from AI generation and is safe
             dangerouslySetInnerHTML={getCoverLetterHTML()}
           />
@@ -37,11 +37,11 @@ export default function CoverLetterDisplay({
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-end gap-4 print:hidden">
+      <div className="flex justify-end gap-3 sm:gap-4 print:hidden pt-2">
         <Button
           onClick={onRegenerate}
           variant="secondary"
-          className="min-w-[120px]"
+          className="min-w-[120px] min-h-[44px] sm:min-h-auto px-6 py-3 sm:px-4 sm:py-2 text-base sm:text-sm"
           aria-label={t("regenerateAriaLabel")}
         >
           {t("regenerate")}
@@ -59,6 +59,64 @@ export default function CoverLetterDisplay({
           -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Mobile-specific adjustments */
+        @media (max-width: 640px) {
+          .cover-letter-content {
+            line-height: 1.6;
+            font-size: 14px;
+          }
+
+          .cover-letter-content p {
+            margin-bottom: 0.75rem;
+            text-align: left;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+          }
+
+          .cover-letter-content h1,
+          .cover-letter-content h2,
+          .cover-letter-content h3 {
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+          }
+
+          .cover-letter-content h1 {
+            font-size: 1.125rem;
+          }
+
+          .cover-letter-content h2 {
+            font-size: 1rem;
+          }
+
+          .cover-letter-content h3 {
+            font-size: 0.875rem;
+          }
+
+          /* Mobile spacing adjustments */
+          .cover-letter-content .sender-address,
+          .cover-letter-content .recipient-address,
+          .cover-letter-content .date-line,
+          .cover-letter-content .subject-line,
+          .cover-letter-content .salutation,
+          .cover-letter-content .closing,
+          .cover-letter-content .signature-line {
+            margin-bottom: 0.5rem;
+          }
+
+          .cover-letter-content .company-paragraph,
+          .cover-letter-content .skills-paragraph,
+          .cover-letter-content .collaboration-paragraph,
+          .cover-letter-content .interview-request {
+            margin-bottom: 0.5rem;
+          }
+
+          .cover-letter-content .closing-signature {
+            margin-top: 1rem;
+          }
+        }
+
         .cover-letter-content p {
           margin-bottom: 0.5rem;
           text-align: justify;
@@ -66,6 +124,16 @@ export default function CoverLetterDisplay({
           -webkit-hyphens: auto;
           -moz-hyphens: auto;
           -ms-hyphens: auto;
+        }
+
+        @media (max-width: 640px) {
+          .cover-letter-content p {
+            text-align: left;
+            hyphens: none;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
+          }
         }
 
         .cover-letter-content p + p {

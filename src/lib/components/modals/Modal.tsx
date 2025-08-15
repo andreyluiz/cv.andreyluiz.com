@@ -97,7 +97,7 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-50 p-2 sm:p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -106,23 +106,26 @@ export default function Modal({
     >
       <div
         ref={modalRef}
-        className="w-full min-w-[800px] max-w-4xl rounded-lg bg-white p-6 shadow-xl dark:bg-neutral-800 my-8 max-h-[calc(100vh-4rem)] overflow-y-auto"
+        className="w-full sm:min-w-[640px] md:min-w-[768px] lg:min-w-[800px] max-w-4xl rounded-lg bg-white p-4 sm:p-6 shadow-xl dark:bg-neutral-800 my-2 sm:my-8 max-h-[calc(100vh-1rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto"
         role="document"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => e.stopPropagation()}
       >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 id={titleId} className="text-2xl font-bold">
+        <div className="mb-3 sm:mb-4 flex items-center justify-between">
+          <h2
+            id={titleId}
+            className="text-lg sm:text-xl md:text-2xl font-bold pr-2"
+          >
             {title}
           </h2>
           <button
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="rounded-lg p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="rounded-lg p-2 sm:p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 min-h-[44px] min-w-[44px] sm:min-h-auto sm:min-w-auto flex items-center justify-center"
             aria-label="Close modal"
           >
-            <Icon icon="heroicons:x-mark" className="h-6 w-6" />
+            <Icon icon="heroicons:x-mark" className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
         </div>
         {children}

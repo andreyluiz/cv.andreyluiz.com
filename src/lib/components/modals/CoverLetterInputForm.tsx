@@ -137,13 +137,13 @@ export default function CoverLetterInputForm({
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-4 sm:gap-6"
         aria-labelledby={formTitleId}
         aria-describedby={formDescId}
         noValidate
       >
         <section
-          className="rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20"
+          className="rounded-lg bg-blue-50 p-3 sm:p-4 dark:bg-blue-900/20"
           aria-labelledby={infoBoxTitleId}
           aria-describedby={infoBoxDescId}
         >
@@ -165,11 +165,11 @@ export default function CoverLetterInputForm({
             <div className="ml-3">
               <h3
                 id={infoBoxTitleId}
-                className="text-sm font-medium text-blue-800 dark:text-blue-200"
+                className="text-sm sm:text-base font-medium text-blue-800 dark:text-blue-200"
               >
                 {t("infoBox.title")}
               </h3>
-              <div className="mt-2 text-sm text-blue-700 dark:text-blue-300">
+              <div className="mt-1 sm:mt-2 text-sm text-blue-700 dark:text-blue-300">
                 <p id={infoBoxDescId}>{t("infoBox.description")}</p>
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function CoverLetterInputForm({
         {/* General Error Display */}
         {validationErrors.general && (
           <div
-            className="rounded-lg bg-red-50 p-4 dark:bg-red-900/20"
+            className="rounded-lg bg-red-50 p-3 sm:p-4 dark:bg-red-900/20"
             role="alert"
           >
             <div className="flex">
@@ -198,7 +198,7 @@ export default function CoverLetterInputForm({
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm font-medium text-red-800 dark:text-red-200">
+                <p className="text-sm sm:text-base font-medium text-red-800 dark:text-red-200">
                   {validationErrors.general}
                 </p>
               </div>
@@ -206,7 +206,10 @@ export default function CoverLetterInputForm({
           </div>
         )}
 
-        <fieldset className="space-y-4" aria-labelledby={fieldsTitleId}>
+        <fieldset
+          className="space-y-3 sm:space-y-4"
+          aria-labelledby={fieldsTitleId}
+        >
           <legend id={fieldsTitleId} className="sr-only">
             Cover Letter Information
           </legend>
@@ -227,10 +230,11 @@ export default function CoverLetterInputForm({
             onChange={(value) => handleInputChange("companyDescription", value)}
             placeholder={t("companyDescription.placeholder")}
             required
-            rows={4}
+            rows={3}
             error={validationErrors.companyDescription}
             helperText={t("companyDescription.helperText")}
             aria-describedby="company-description-help"
+            className="sm:rows-4"
           />
 
           <Textarea
@@ -238,15 +242,20 @@ export default function CoverLetterInputForm({
             value={formData.jobDescription}
             onChange={(value) => handleInputChange("jobDescription", value)}
             placeholder={t("jobDescription.placeholder")}
-            rows={4}
+            rows={3}
             helperText={t("jobDescription.helperText")}
             error={validationErrors.jobDescription}
             aria-describedby="job-description-help"
+            className="sm:rows-4"
           />
         </fieldset>
 
-        <div className="flex justify-end gap-4">
-          <Button type="submit" disabled={isLoading} className="min-w-[120px]">
+        <div className="flex justify-end gap-3 sm:gap-4 pt-2">
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="min-w-[120px] min-h-[44px] sm:min-h-auto px-6 py-3 sm:px-4 sm:py-2 text-base sm:text-sm"
+          >
             {isLoading ? t("generating") : t("generate")}
           </Button>
         </div>
