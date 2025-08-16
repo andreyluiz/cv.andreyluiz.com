@@ -64,7 +64,10 @@
       "rawTextPlaceholder": "Cole o texto do seu CV aqui...",
       "submit": "Processar CV",
       "cancel": "Cancelar",
-      "processing": "Processando CV..."
+      "processing": "Processando CV...",
+      "ingestTitle": "Ingerir Novo CV",
+      "editTitle": "Editar CV",
+      "processingDescription": "Por favor, aguarde enquanto formatamos seu CV usando IA. Isso pode levar alguns momentos."
     },
     "actions": {
       "load": "Carregar CV",
@@ -79,7 +82,8 @@
       "rawTextTooShort": "O texto do CV deve ter pelo menos 50 caracteres",
       "rawTextTooLong": "O texto do CV deve ter menos de 50.000 caracteres",
       "processingFailed": "Falha ao processar CV",
-      "storageError": "Falha ao salvar CV"
+      "storageError": "Falha ao salvar CV",
+      "apiKeyRequired": "Uma chave API é necessária para processar o CV. Por favor, configure sua chave API nas configurações."
     }
   },
   "coverLetter": {

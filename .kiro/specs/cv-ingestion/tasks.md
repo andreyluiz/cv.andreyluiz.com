@@ -23,7 +23,7 @@
   - Add action icon buttons (load, edit, delete) with tooltips
   - _Requirements: 1.2, 1.3, 1.4, 1.5, 6.5, 6.6_
 
-- [ ] 5. Implement main CV management modal
+- [x] 5. Implement main CV management modal
   - Create CVManagementModal component with state management
   - Handle transitions between list view and ingestion form
   - Implement CV loading functionality that closes modal and updates main view
