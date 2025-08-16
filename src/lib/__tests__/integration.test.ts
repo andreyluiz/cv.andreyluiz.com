@@ -122,7 +122,10 @@ describe("OpenRouter Integration Tests", () => {
                       title: testJobTitle,
                       summary: "Frontend-focused software engineer",
                       changes: [
-                        { field: "title", change: "Updated to match job title" },
+                        {
+                          field: "title",
+                          change: "Updated to match job title",
+                        },
                       ],
                     }),
                   },
@@ -344,7 +347,7 @@ describe("OpenRouter Integration Tests", () => {
     it("should use correct OpenRouter configuration for all models", async () => {
       const mockOpenAI = await import("openai");
       const mockConstructor = vi.mocked(mockOpenAI.default);
-      
+
       // Mock the OpenAI response to avoid actual API calls
       const mockCreate = vi.fn().mockResolvedValue({
         choices: [

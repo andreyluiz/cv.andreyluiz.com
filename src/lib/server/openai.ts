@@ -345,6 +345,203 @@ Return the modified resume in the exact same JSON structure as the input, but wi
   }
 }
 
+export async function ingestCV(
+  rawText: string,
+  apiKey: string,
+  selectedModel: string,
+  language: string = "en",
+): Promise<Variant> {
+  const openai = new OpenAI({
+    apiKey,
+    baseURL: "https://openrouter.ai/api/v1",
+    defaultHeaders: {
+      "HTTP-Referer":
+        process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+      "X-Title": "CV Tailor App",
+    },
+  });
+
+  // Language-specific instructions
+  const languageMap: Record<string, string> = {
+    en: "English",
+    fr: "French",
+    pt: "Portuguese",
+  };
+  const languageName = languageMap[language] || "English";
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: selectedModel,
+      messages: [
+        {
+          role: "system",
+          content: `You are a professional CV formatting assistant. Your task is to convert raw CV text into a structured JSON format that matches the exact schema provided. 
+
+CRITICAL REQUIREMENTS:
+1. Extract ALL relevant information from the raw text
+2. Maintain accuracy - do not fabricate or add information not present in the source
+3. Format dates consistently as YYYY-MM (e.g., "2023-01" for January 2023)
+4. If specific information is missing, use appropriate defaults:
+   - Empty strings for missing text fields
+   - Empty arrays for missing lists
+   - "Present" for current/ongoing positions
+5. Organize skills into logical domains (e.g., "Programming Languages", "Frameworks", "Tools")
+6. Extract achievements and format them as clear, concise bullet points
+7. Preserve the original meaning and context of all information
+8. Handle text in ${languageName} appropriately
+9. Return ONLY valid JSON that matches the schema exactly
+
+The JSON structure must include all required fields from the Variant interface. Pay special attention to:
+- contactInfo: Extract email, phone, location, and any web presence
+- experience: Include all work history with achievements and tech stack
+- skills: Group technical and soft skills into appropriate domains
+- education: Include all educational background
+- certifications: List any certifications or professional qualifications
+- languages: Include language proficiencies if mentioned`,
+        },
+        {
+          role: "user",
+          content: `Please convert this raw CV text into the structured JSON format:
+
+${rawText}
+
+Return the formatted CV as a JSON object that matches this exact structure:
+{
+  "name": "string",
+  "title": "string", 
+  "contactInfo": {
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "website": "string",
+    "linkedin": "string", 
+    "github": "string",
+    "age": "string",
+    "nationality": "string"
+  },
+  "summary": "string",
+  "qualities": ["string"],
+  "generalSkills": ["string"],
+  "skills": [{"domain": "string", "skills": ["string"]}],
+  "experience": [{
+    "title": "string",
+    "company": "string", 
+    "location": "string",
+    "period": {"start": "YYYY-MM", "end": "YYYY-MM or Present"},
+    "achievements": ["string"],
+    "techStack": ["string"],
+    "isPrevious": false
+  }],
+  "projects": [{
+    "name": "string",
+    "description": "string", 
+    "techStack": ["string"],
+    "period": {"start": "YYYY-MM", "end": "YYYY-MM"}
+  }],
+  "education": [{
+    "degree": "string",
+    "institution": "string",
+    "year": "string",
+    "location": "string",
+    "gpa": "string",
+    "topics": "string"
+  }],
+  "certifications": [{
+    "degree": "string",
+    "institution": "string", 
+    "year": "string",
+    "location": "string"
+  }],
+  "languages": [{"name": "string", "level": "string"}],
+  "publications": [{
+    "title": "string",
+    "location": "string",
+    "url": "string"
+  }],
+  "personalityTraits": ["string"]
+}
+
+IMPORTANT: Return ONLY the JSON object, no additional text or formatting.`,
+        },
+      ],
+      max_completion_tokens: 8000,
+      temperature: 0.3, // Lower temperature for more consistent formatting
+    });
+
+    const generatedContent = response.choices[0].message.content;
+
+    if (!generatedContent || generatedContent.trim().length === 0) {
+      throw new Error("AI generated empty CV content");
+    }
+
+    // Parse the JSON response
+    let parsedCV: Variant;
+    try {
+      // Clean the response in case there are markdown code blocks
+      const cleanedContent = generatedContent
+        .replace(/```json\s*/g, "")
+        .replace(/```\s*/g, "")
+        .trim();
+
+      parsedCV = JSON.parse(cleanedContent);
+    } catch (parseError) {
+      console.error("Failed to parse AI response as JSON:", parseError);
+      throw new Error(
+        "The AI response could not be parsed as valid JSON. Please try again with a different model.",
+      );
+    }
+
+    // Validate required fields are present
+    if (!parsedCV.name || typeof parsedCV.name !== "string") {
+      throw new Error("CV must contain a valid name");
+    }
+
+    if (!parsedCV.title || typeof parsedCV.title !== "string") {
+      throw new Error("CV must contain a valid title/position");
+    }
+
+    // Ensure all required fields exist with proper defaults
+    const formattedCV: Variant = {
+      name: parsedCV.name,
+      title: parsedCV.title,
+      contactInfo: {
+        email: parsedCV.contactInfo?.email || "",
+        phone: parsedCV.contactInfo?.phone || "",
+        location: parsedCV.contactInfo?.location || "",
+        website: parsedCV.contactInfo?.website || "",
+        linkedin: parsedCV.contactInfo?.linkedin || "",
+        github: parsedCV.contactInfo?.github || "",
+        age: parsedCV.contactInfo?.age || "",
+        nationality: parsedCV.contactInfo?.nationality || "",
+      },
+      summary: parsedCV.summary || "",
+      qualities: Array.isArray(parsedCV.qualities) ? parsedCV.qualities : [],
+      generalSkills: Array.isArray(parsedCV.generalSkills)
+        ? parsedCV.generalSkills
+        : [],
+      skills: Array.isArray(parsedCV.skills) ? parsedCV.skills : [],
+      experience: Array.isArray(parsedCV.experience) ? parsedCV.experience : [],
+      projects: Array.isArray(parsedCV.projects) ? parsedCV.projects : [],
+      education: Array.isArray(parsedCV.education) ? parsedCV.education : [],
+      certifications: Array.isArray(parsedCV.certifications)
+        ? parsedCV.certifications
+        : [],
+      languages: Array.isArray(parsedCV.languages) ? parsedCV.languages : [],
+      publications: Array.isArray(parsedCV.publications)
+        ? parsedCV.publications
+        : [],
+      personalityTraits: Array.isArray(parsedCV.personalityTraits)
+        ? parsedCV.personalityTraits
+        : [],
+    };
+
+    return formattedCV;
+  } catch (error) {
+    console.error("Error ingesting CV:", error);
+    throw createOpenRouterError(error, selectedModel);
+  }
+}
+
 export async function generateCoverLetter(
   jobTitle: string,
   jobDescription: string,

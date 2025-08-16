@@ -3,6 +3,7 @@
 import type { Variant } from "../types";
 import {
   generateCoverLetter as generateCoverLetterWithOpenAI,
+  ingestCV as ingestCVWithOpenAI,
   tailorResume as tailorResumeWithOpenAI,
 } from "./openai";
 import resumeEnglish from "./resume-en.json";
@@ -151,6 +152,135 @@ export async function tailorResume(
     }
     throw new Error(
       "Failed to tailor resume with OpenRouter. Please check your API key and selected model, then try again.",
+    );
+  }
+}
+
+export async function ingestCV(
+  rawText: string,
+  apiKey: string,
+  selectedModel: string,
+  language: string = "en",
+): Promise<Variant> {
+  // Input validation
+  if (!rawText || rawText.trim().length === 0) {
+    throw new Error("Raw CV text is required for ingestion.");
+  }
+
+  if (rawText.trim().length < 50) {
+    throw new Error(
+      "CV text is too short. Please provide at least 50 characters.",
+    );
+  }
+
+  if (rawText.trim().length > 50000) {
+    throw new Error("CV text is too long. Please limit to 50,000 characters.");
+  }
+
+  if (!apiKey || apiKey.trim().length === 0) {
+    throw new Error(
+      "API key is required to process CV. Please configure your API key in settings.",
+    );
+  }
+
+  if (!selectedModel || selectedModel.trim().length === 0) {
+    throw new Error(
+      "Model selection is required to process CV. Please select a model in settings.",
+    );
+  }
+
+  // Validate language is supported
+  const supportedLanguages = ["en", "fr", "pt"];
+  const sanitizedLanguage = language?.trim() || "en";
+  if (!supportedLanguages.includes(sanitizedLanguage)) {
+    console.warn(
+      `Unsupported language "${sanitizedLanguage}", defaulting to English`,
+    );
+  }
+
+  try {
+    const result = await ingestCVWithOpenAI(
+      rawText.trim(),
+      apiKey.trim(),
+      selectedModel.trim(),
+      supportedLanguages.includes(sanitizedLanguage) ? sanitizedLanguage : "en",
+    );
+
+    // Validate the generated CV structure
+    if (!result) {
+      throw new Error(
+        "The AI service returned an empty response. Please try again or select a different model.",
+      );
+    }
+
+    // Basic validation of required fields
+    if (!result.name || !result.title) {
+      throw new Error(
+        "The AI could not extract essential information (name or title) from the CV text. Please ensure your CV contains clear personal information and try again.",
+      );
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Error ingesting CV:", error);
+
+    // Enhanced error handling with specific error messages
+    if (error instanceof Error) {
+      // If this is our own validation error, re-throw as is
+      if (
+        error.message.includes("The AI service returned an empty response") ||
+        error.message.includes("The AI could not extract essential information")
+      ) {
+        throw error;
+      }
+
+      // Check for specific error patterns and provide better user guidance
+      const errorMessage = error.message.toLowerCase();
+
+      if (
+        errorMessage.includes("api key") ||
+        errorMessage.includes("unauthorized") ||
+        errorMessage.includes("invalid key")
+      ) {
+        throw new Error(
+          "Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.",
+        );
+      }
+
+      if (
+        errorMessage.includes("rate limit") ||
+        errorMessage.includes("too many requests")
+      ) {
+        throw new Error(
+          "Rate limit exceeded. Please wait a moment before trying again, or consider switching to a free model.",
+        );
+      }
+
+      if (
+        errorMessage.includes("model") &&
+        errorMessage.includes("not found")
+      ) {
+        throw new Error(
+          "The selected AI model is currently unavailable. Please try a different model from the settings.",
+        );
+      }
+
+      if (
+        errorMessage.includes("insufficient credits") ||
+        errorMessage.includes("quota exceeded")
+      ) {
+        throw new Error(
+          "Insufficient credits or quota exceeded. Please check your OpenRouter account balance or switch to a free model.",
+        );
+      }
+
+      // Re-throw the original error if it's already well-formatted
+      throw error;
+    }
+
+    // Fallback error message
+    throw new Error(
+      "Failed to process CV. Please check your API key and selected model, then try again.",
     );
   }
 }

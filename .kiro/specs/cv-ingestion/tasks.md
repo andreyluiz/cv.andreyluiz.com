@@ -5,7 +5,7 @@
   - Add CV management state to store.ts with persistence
   - _Requirements: 3.1, 3.2, 3.3_
 
-- [ ] 2. Implement CV ingestion server action
+- [x] 2. Implement CV ingestion server action
   - Add ingestCV function to server/actions.ts
   - Create specialized AI prompt for CV formatting
   - Implement error handling and validation
