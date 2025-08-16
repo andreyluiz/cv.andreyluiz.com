@@ -73,7 +73,11 @@
       "load": "Carregar CV",
       "edit": "Editar CV",
       "delete": "Excluir CV",
-      "confirmDelete": "Tem certeza de que deseja excluir este CV?"
+      "confirmDelete": "Tem certeza de que deseja excluir este CV?",
+      "confirmDeleteTitle": "Excluir CV",
+      "confirmDeleteMessage": "Esta ação não pode ser desfeita. O CV será permanentemente removido da sua coleção.",
+      "confirmDeleteButton": "Excluir",
+      "cancelDelete": "Cancelar"
     },
     "errors": {
       "titleRequired": "O título do CV é obrigatório",

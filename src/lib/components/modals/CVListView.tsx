@@ -2,8 +2,10 @@
 
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import Button from "@/lib/components/ui/Button";
 import type { IngestedCV, Variant } from "@/lib/types";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 interface CVListViewProps {
   cvs: IngestedCV[];
@@ -93,53 +95,78 @@ export default function CVListView({
   onIngestNew,
 }: CVListViewProps) {
   const t = useTranslations("cvManagement");
+  const [confirmDeleteCV, setConfirmDeleteCV] = useState<IngestedCV | null>(
+    null,
+  );
 
-  const handleDeleteCV = (cv: IngestedCV) => {
-    if (window.confirm(t("actions.confirmDelete"))) {
-      onDeleteCV(cv.id);
+  const handleDeleteClick = (cv: IngestedCV) => {
+    setConfirmDeleteCV(cv);
+  };
+
+  const handleConfirmDelete = () => {
+    if (confirmDeleteCV) {
+      onDeleteCV(confirmDeleteCV.id);
+      setConfirmDeleteCV(null);
     }
   };
 
+  const handleCancelDelete = () => {
+    setConfirmDeleteCV(null);
+  };
+
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-          {t("modal.title")}
-        </h3>
-        <Button onClick={onIngestNew} variant="primary">
-          {t("modal.ingestNew")}
-        </Button>
+    <>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            {t("modal.title")}
+          </h3>
+          <Button onClick={onIngestNew} variant="primary">
+            {t("modal.ingestNew")}
+          </Button>
+        </div>
+
+        <div className="space-y-3">
+          {/* Default CV - always first */}
+          <CVListItem
+            title={`${defaultCV.name} - ${defaultCV.title}`}
+            isDefault={true}
+            onLoad={() => onLoadCV(defaultCV)}
+          />
+
+          {/* Ingested CVs */}
+          {cvs.length > 0 ? (
+            cvs.map((cv) => (
+              <CVListItem
+                key={cv.id}
+                title={cv.title}
+                onLoad={() => onLoadCV(cv.formattedCV)}
+                onEdit={() => onEditCV(cv)}
+                onDelete={() => handleDeleteClick(cv)}
+              />
+            ))
+          ) : (
+            <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+              <Icon
+                icon="heroicons:document-text"
+                className="h-12 w-12 mx-auto mb-3 opacity-50"
+              />
+              <p>{t("modal.noIngestedCVs")}</p>
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="space-y-3">
-        {/* Default CV - always first */}
-        <CVListItem
-          title={`${defaultCV.name} - ${defaultCV.title}`}
-          isDefault={true}
-          onLoad={() => onLoadCV(defaultCV)}
-        />
-
-        {/* Ingested CVs */}
-        {cvs.length > 0 ? (
-          cvs.map((cv) => (
-            <CVListItem
-              key={cv.id}
-              title={cv.title}
-              onLoad={() => onLoadCV(cv.formattedCV)}
-              onEdit={() => onEditCV(cv)}
-              onDelete={() => handleDeleteCV(cv)}
-            />
-          ))
-        ) : (
-          <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
-            <Icon
-              icon="heroicons:document-text"
-              className="h-12 w-12 mx-auto mb-3 opacity-50"
-            />
-            <p>{t("modal.noIngestedCVs")}</p>
-          </div>
-        )}
-      </div>
-    </div>
+      <ConfirmationDialog
+        isOpen={confirmDeleteCV !== null}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        title={t("actions.confirmDeleteTitle")}
+        message={`${t("actions.confirmDeleteMessage")} "${confirmDeleteCV?.title}"`}
+        confirmText={t("actions.confirmDeleteButton")}
+        cancelText={t("actions.cancelDelete")}
+        variant="danger"
+      />
+    </>
   );
 }

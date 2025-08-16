@@ -73,7 +73,11 @@
       "load": "Load CV",
       "edit": "Edit CV",
       "delete": "Delete CV",
-      "confirmDelete": "Are you sure you want to delete this CV?"
+      "confirmDelete": "Are you sure you want to delete this CV?",
+      "confirmDeleteTitle": "Delete CV",
+      "confirmDeleteMessage": "This action cannot be undone. The CV will be permanently removed from your collection.",
+      "confirmDeleteButton": "Delete",
+      "cancelDelete": "Cancel"
     },
     "errors": {
       "titleRequired": "CV title is required",

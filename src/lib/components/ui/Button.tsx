@@ -12,6 +12,7 @@ const buttonVariants = cva(
         secondary:
           "text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-700",
         ghost: "hover:bg-neutral-100 dark:hover:bg-neutral-700",
+        danger: "bg-red-600 text-white hover:bg-red-700",
       },
       size: {
         default: "px-4 py-2",

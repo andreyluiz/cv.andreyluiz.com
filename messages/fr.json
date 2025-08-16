@@ -73,7 +73,11 @@
       "load": "Charger le CV",
       "edit": "Modifier le CV",
       "delete": "Supprimer le CV",
-      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce CV ?"
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce CV ?",
+      "confirmDeleteTitle": "Supprimer le CV",
+      "confirmDeleteMessage": "Cette action ne peut pas être annulée. Le CV sera définitivement supprimé de votre collection.",
+      "confirmDeleteButton": "Supprimer",
+      "cancelDelete": "Annuler"
     },
     "errors": {
       "titleRequired": "Le titre du CV est requis",

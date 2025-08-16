@@ -35,7 +35,7 @@
   - Handle CV updates and re-processing
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 7. Implement CV deletion with confirmation
+- [x] 7. Implement CV deletion with confirmation
   - Add delete confirmation dialog
   - Implement CV removal from storage
   - Update CV list after deletion

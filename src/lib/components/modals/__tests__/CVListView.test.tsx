@@ -18,6 +18,11 @@ const messages = {
       edit: "Edit CV",
       delete: "Delete CV",
       confirmDelete: "Are you sure you want to delete this CV?",
+      confirmDeleteTitle: "Delete CV",
+      confirmDeleteMessage:
+        "This action cannot be undone. The CV will be permanently removed from your collection.",
+      confirmDeleteButton: "Delete",
+      cancelDelete: "Cancel",
     },
   },
 };
@@ -88,12 +93,7 @@ const renderWithIntl = (component: React.ReactElement) => {
   );
 };
 
-// Mock window.confirm
-const mockConfirm = vi.fn();
-Object.defineProperty(window, "confirm", {
-  value: mockConfirm,
-  writable: true,
-});
+// No longer using window.confirm - using custom confirmation dialog
 
 describe("CVListView", () => {
   const mockProps = {
@@ -107,7 +107,6 @@ describe("CVListView", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    mockConfirm.mockReturnValue(true);
   });
 
   it("renders the component with title and ingest button", () => {
@@ -193,15 +192,20 @@ describe("CVListView", () => {
     const deleteButton = screen.getByLabelText("Delete CV: My Custom CV");
     fireEvent.click(deleteButton);
 
-    expect(mockConfirm).toHaveBeenCalledWith(
-      "Are you sure you want to delete this CV?",
-    );
+    // Check that confirmation dialog appears
+    expect(screen.getByText("Delete CV")).toBeInTheDocument();
+    expect(
+      screen.getByText(/This action cannot be undone/),
+    ).toBeInTheDocument();
+
+    // Click the confirm button
+    const confirmButton = screen.getByText("Delete");
+    fireEvent.click(confirmButton);
+
     expect(mockProps.onDeleteCV).toHaveBeenCalledWith("test-cv-1");
   });
 
   it("does not call onDeleteCV when delete is cancelled", () => {
-    mockConfirm.mockReturnValue(false);
-
     const propsWithCVs = {
       ...mockProps,
       cvs: [mockIngestedCV],
@@ -212,9 +216,16 @@ describe("CVListView", () => {
     const deleteButton = screen.getByLabelText("Delete CV: My Custom CV");
     fireEvent.click(deleteButton);
 
-    expect(mockConfirm).toHaveBeenCalledWith(
-      "Are you sure you want to delete this CV?",
-    );
+    // Check that confirmation dialog appears
+    expect(screen.getByText("Delete CV")).toBeInTheDocument();
+    expect(
+      screen.getByText(/This action cannot be undone/),
+    ).toBeInTheDocument();
+
+    // Click the cancel button
+    const cancelButton = screen.getByText("Cancel");
+    fireEvent.click(cancelButton);
+
     expect(mockProps.onDeleteCV).not.toHaveBeenCalled();
   });
 
