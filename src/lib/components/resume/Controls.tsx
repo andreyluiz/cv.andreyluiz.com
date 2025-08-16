@@ -8,6 +8,7 @@ import type { Variant } from "@/lib/types";
 import ApiKeyModal from "../modals/ApiKeyModal";
 import Button from "../ui/Button";
 import LayoutToggle from "../ui/LayoutToggle";
+import MyCVsButton from "../ui/MyCVsButton";
 import Select from "../ui/Select";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import ResumeTailor from "./ResumeTailor";
@@ -30,6 +31,7 @@ export default function Controls({ currentResume, setCurrentResume }: Props) {
   return (
     <div className="flex items-center justify-between gap-4 print:hidden">
       <div className="flex items-center gap-2">
+        <MyCVsButton onCVLoad={setCurrentResume} />
         <ResumeTailor
           resumeData={currentResume}
           onResumeUpdate={setCurrentResume}

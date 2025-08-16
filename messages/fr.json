@@ -51,6 +51,9 @@
     }
   },
   "cvManagement": {
+    "button": {
+      "myCVs": "Mes CVs"
+    },
     "modal": {
       "title": "Mes CVs",
       "ingestNew": "Ingérer un nouveau CV",

@@ -22,6 +22,24 @@ vi.mock("@/lib/store", () => ({
   useStore: vi.fn(),
 }));
 
+// Mock the server actions
+vi.mock("@/lib/server/actions", () => ({
+  ingestCV: vi.fn(),
+}));
+
+// Mock the resume data files
+vi.mock("@/lib/server/resume-en.json", () => ({
+  default: { name: "Test User", title: "Test Title" },
+}));
+
+vi.mock("@/lib/server/resume-fr.json", () => ({
+  default: { name: "Test User", title: "Test Title" },
+}));
+
+vi.mock("@/lib/server/resume-pt.json", () => ({
+  default: { name: "Test User", title: "Test Title" },
+}));
+
 // Mock child components that use translations
 vi.mock("../ResumeTailor", () => ({
   default: () => <div data-testid="resume-tailor">Resume Tailor</div>,
@@ -34,6 +52,49 @@ const mockMessages = {
   // Add minimal messages needed for the test
   common: {
     loading: "Loading...",
+  },
+  cvManagement: {
+    button: {
+      myCVs: "My CVs",
+    },
+    modal: {
+      title: "My CVs",
+      ingestNew: "Ingest New CV",
+      defaultCV: "Default CV",
+      noIngestedCVs: "No ingested CVs yet",
+    },
+    form: {
+      title: "CV Title",
+      titlePlaceholder: "Enter a name for this CV",
+      rawText: "Raw CV Text",
+      rawTextPlaceholder: "Paste your CV text here...",
+      submit: "Process CV",
+      cancel: "Cancel",
+      processing: "Processing CV...",
+      ingestTitle: "Ingest New CV",
+      editTitle: "Edit CV",
+      processingDescription: "Please wait while we format your CV using AI.",
+    },
+    actions: {
+      load: "Load CV",
+      edit: "Edit CV",
+      delete: "Delete CV",
+      confirmDelete: "Are you sure you want to delete this CV?",
+      confirmDeleteTitle: "Delete CV",
+      confirmDeleteMessage: "This action cannot be undone.",
+      confirmDeleteButton: "Delete",
+      cancelDelete: "Cancel",
+    },
+    errors: {
+      titleRequired: "CV title is required",
+      titleTooLong: "CV title must be less than 100 characters",
+      rawTextRequired: "CV text is required",
+      rawTextTooShort: "CV text must be at least 50 characters",
+      rawTextTooLong: "CV text must be less than 50,000 characters",
+      processingFailed: "Failed to process CV",
+      storageError: "Failed to save CV",
+      apiKeyRequired: "API key is required",
+    },
   },
 };
 
@@ -78,6 +139,11 @@ describe("Controls", () => {
       apiKey: "test-key",
       layoutMode: "single",
       setLayoutMode: vi.fn(),
+      ingestedCVs: [],
+      selectedModel: "test-model",
+      addIngestedCV: vi.fn(),
+      updateIngestedCV: vi.fn(),
+      deleteIngestedCV: vi.fn(),
     });
   });
 
@@ -99,6 +165,7 @@ describe("Controls", () => {
     );
 
     // Check that all main controls are present
+    expect(screen.getByRole("button", { name: /my cvs/i })).toBeInTheDocument();
     expect(screen.getByTestId("resume-tailor")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /switch to two column layout/i }),

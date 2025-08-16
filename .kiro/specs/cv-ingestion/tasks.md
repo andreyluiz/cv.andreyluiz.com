@@ -42,7 +42,7 @@
   - Prevent deletion of default CV
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 8. Create "My CVs" button component
+- [x] 8. Create "My CVs" button component
   - Build MyCVsButton component to open the management modal
   - Integrate button into main application layout
   - _Requirements: 1.1_
