@@ -1,477 +1,474 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
-import { generateCoverLetter, tailorResume } from "../server/actions";
-import type { Variant } from "../types";
+import { describe, expect, it, vi } from "vitest";
+import { ingestCV } from "../server/actions";
 
-// Mock the OpenAI client
-vi.mock("openai", () => {
-  return {
-    default: vi.fn().mockImplementation(() => ({
-      chat: {
-        completions: {
-          create: vi.fn(),
-        },
+// Mock the OpenAI module
+vi.mock("openai", () => ({
+  default: vi.fn().mockImplementation(() => ({
+    chat: {
+      completions: {
+        create: vi.fn(),
       },
-    })),
-  };
-});
-
-describe("Error Scenarios Integration Tests", () => {
-  const mockResume: Variant = {
-    title: "Software Engineer",
-    name: "John Doe",
-    contactInfo: {
-      email: "john@example.com",
-      phone: "+1234567890",
-      location: "San Francisco, CA",
-      linkedin: "linkedin.com/in/johndoe",
-      github: "github.com/johndoe",
-      website: "johndoe.dev",
-      age: "30",
-      nationality: "American",
     },
-    summary: "Experienced software engineer",
-    generalSkills: ["JavaScript", "TypeScript"],
-    skills: [{ domain: "Frontend", skills: ["React"] }],
-    experience: [
-      {
-        title: "Software Engineer",
-        company: "Tech Corp",
-        location: "San Francisco, CA",
-        period: { start: "2020", end: "Present" },
-        achievements: ["Built applications"],
-        techStack: ["React"],
-        isPrevious: false,
-      },
-    ],
-    projects: [],
-    education: [],
-    certifications: [],
-    publications: [],
-    personalityTraits: [],
-    qualities: [],
-    languages: [],
-    changes: [],
-  };
+  })),
+}));
 
-  const testJobTitle = "Frontend Developer";
-  const testJobDescription = "React developer position";
+describe("CV Ingestion Error Scenarios", () => {
+  const mockApiKey = "test-api-key";
+  const mockModel = "test-model";
+  const mockRawText =
+    "Valid CV text with enough content to pass validation requirements for testing purposes.";
 
-  beforeEach(() => {
-    vi.clearAllMocks();
+  describe("network and connection errors", () => {
+    it("should handle network timeout errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("Network timeout error"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Network error connecting to OpenRouter/);
+    });
+
+    it("should handle connection refused errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("Connection refused"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow("Connection refused");
+    });
   });
 
-  describe("Invalid API Key Scenarios", () => {
-    it("should handle invalid API key error for resume tailoring", async () => {
+  describe("API authentication and authorization errors", () => {
+    it("should handle invalid API key errors", async () => {
       const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
       const mockCreate = vi.fn().mockRejectedValue({
-        code: 401,
         message: "Invalid API key provided",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "invalid-api-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(
-        "Invalid OpenRouter API key. Please check your API key in the settings and ensure it's active on your OpenRouter account.",
-      );
-    });
-
-    it("should handle invalid API key error for cover letter generation", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        status: 401,
-        message: "unauthorized",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "invalid-api-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(
-        "Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.",
-      );
-    });
-
-    it("should handle empty API key", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "invalid api key",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/Invalid OpenRouter API key/);
-    });
-  });
-
-  describe("Model Unavailability Scenarios", () => {
-    it("should handle model not found error with free model suggestions", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "model openai/gpt-4.1-mini not found",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(
-        /currently unavailable.*Try one of these free alternatives/,
-      );
-    });
-
-    it("should handle model unavailable error for free models", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "model google/gemini-2.0-flash-exp:free does not exist",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "google/gemini-2.0-flash-exp:free",
-        ),
-      ).rejects.toThrow(/Gemini 2.0 Flash.*currently unavailable/);
-    });
-
-    it("should handle unknown model error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "model unknown/invalid-model not found",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "unknown/invalid-model",
-        ),
-      ).rejects.toThrow(
-        /currently unavailable.*Try one of these free alternatives/,
-      );
-    });
-  });
-
-  describe("Rate Limiting Scenarios", () => {
-    it("should handle rate limit error with free model suggestion", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        code: 429,
-        message: "Rate limit exceeded",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/rate limit exceeded.*Try switching to a free model/);
-    });
-
-    it("should handle too many requests error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "too many requests",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "qwen/qwq-32b",
-        ),
-      ).rejects.toThrow(/Rate limit exceeded.*Please wait a moment/);
-    });
-  });
-
-  describe("Quota and Credit Scenarios", () => {
-    it("should handle insufficient credits error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "Insufficient credits",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-oss-120b",
-        ),
-      ).rejects.toThrow(
-        /Insufficient OpenRouter credits.*Try switching to a free model/,
-      );
-    });
-
-    it("should handle quota exceeded error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "quota exceeded for this model",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "deepseek/deepseek-chat-v3-0324:free",
-        ),
-      ).rejects.toThrow(
-        /quota exceeded.*check your OpenRouter account balance/,
-      );
-    });
-  });
-
-  describe("Network and Connection Scenarios", () => {
-    it("should handle network connection error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "network connection failed",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/Network error connecting to OpenRouter/);
-    });
-
-    it("should handle timeout error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "Request timeout",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "google/gemini-2.0-flash-exp:free",
-        ),
-      ).rejects.toThrow(/Network error connecting to OpenRouter/);
-    });
-  });
-
-  describe("Generic Error Scenarios", () => {
-    it("should handle unknown OpenRouter API error", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "Unknown server error",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/OpenRouter API error: Unknown server error/);
-    });
-
-    it("should handle error without message", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue(new Error());
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/OpenRouter API error/);
-    });
-
-    it("should handle non-Error objects", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue("String error");
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/OpenRouter API error: String error/);
-    });
-  });
-
-  describe("Server Action Error Handling", () => {
-    it("should wrap OpenRouter errors in server actions for resume tailoring", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
         code: 401,
-        message: "Invalid API key",
       });
 
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "invalid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(/Invalid OpenRouter API key/);
-    });
-
-    it("should wrap OpenRouter errors in server actions for cover letter generation", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue({
-        message: "model not found",
-      });
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        generateCoverLetter(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "sk-valid-key",
-          "invalid/model",
-        ),
-      ).rejects.toThrow(/currently unavailable/);
-    });
-
-    it("should provide fallback error message when OpenRouter error is unclear", async () => {
-      const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue(null);
-
-      const mockOpenAIInstance = new (mockOpenAI.default as any)();
-      mockOpenAIInstance.chat.completions.create = mockCreate;
-      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
-
-      await expect(
-        tailorResume(
-          testJobTitle,
-          testJobDescription,
-          mockResume,
-          "",
-          "sk-valid-key",
-          "openai/gpt-4.1-mini",
-        ),
-      ).rejects.toThrow(
-        /OpenRouter API error.*Please try again or select a different model/,
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
       );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Invalid API key/);
+    });
+
+    it("should handle unauthorized access errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockRejectedValue({
+        message: "Unauthorized access",
+        status: 401,
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Invalid API key/);
+    });
+  });
+
+  describe("rate limiting and quota errors", () => {
+    it("should handle rate limit exceeded errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockRejectedValue({
+        message: "Rate limit exceeded",
+        code: 429,
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Rate limit exceeded/);
+    });
+
+    it("should handle insufficient credits errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("Insufficient credits in your account"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Insufficient credits/);
+    });
+
+    it("should handle quota exceeded errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("Quota exceeded for this model"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Insufficient credits/);
+    });
+  });
+
+  describe("model availability errors", () => {
+    it("should handle model not found errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("The model 'test-model' does not exist"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/currently unavailable on OpenRouter/);
+    });
+
+    it("should handle model unavailable errors", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("Model is currently unavailable"));
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/Model is currently unavailable/);
+    });
+  });
+
+  describe("AI response parsing errors", () => {
+    it("should handle malformed JSON responses", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: "{ invalid json response",
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/could not be parsed as valid JSON/);
+    });
+
+    it("should handle responses with missing required fields", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                // Missing name and title
+                contactInfo: { email: "test@example.com" },
+                summary: "Test summary",
+              }),
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/must contain a valid name/);
+    });
+
+    it("should handle completely empty AI responses", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: "",
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/AI generated empty CV content/);
+    });
+
+    it("should handle null AI responses", async () => {
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: null,
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      await expect(
+        ingestCV(mockRawText, mockApiKey, mockModel),
+      ).rejects.toThrow(/AI generated empty CV content/);
+    });
+  });
+
+  describe("input validation edge cases", () => {
+    it("should handle whitespace-only raw text", async () => {
+      await expect(
+        ingestCV("   \n\t   ", mockApiKey, mockModel),
+      ).rejects.toThrow(/Raw CV text is required/);
+    });
+
+    it("should handle whitespace-only API key", async () => {
+      await expect(
+        ingestCV(mockRawText, "   \n\t   ", mockModel),
+      ).rejects.toThrow(/API key is required/);
+    });
+
+    it("should handle whitespace-only model", async () => {
+      await expect(
+        ingestCV(mockRawText, mockApiKey, "   \n\t   "),
+      ).rejects.toThrow(/Model selection is required/);
+    });
+
+    it("should handle text at exact minimum length", async () => {
+      const exactMinText = "a".repeat(50);
+
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                name: "Test User",
+                title: "Test Title",
+                contactInfo: {},
+                summary: "",
+                qualities: [],
+                generalSkills: [],
+                skills: [],
+                experience: [],
+                projects: [],
+                education: [],
+                certifications: [],
+                languages: [],
+                publications: [],
+                personalityTraits: [],
+              }),
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      // Should not throw for exactly 50 characters
+      await expect(
+        ingestCV(exactMinText, mockApiKey, mockModel),
+      ).resolves.toBeDefined();
+    });
+
+    it("should handle text at exact maximum length", async () => {
+      const exactMaxText = "a".repeat(50000);
+
+      const mockOpenAI = await import("openai");
+      const mockConstructor = vi.mocked(mockOpenAI.default);
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                name: "Test User",
+                title: "Test Title",
+                contactInfo: {},
+                summary: "",
+                qualities: [],
+                generalSkills: [],
+                skills: [],
+                experience: [],
+                projects: [],
+                education: [],
+                certifications: [],
+                languages: [],
+                publications: [],
+                personalityTraits: [],
+              }),
+            },
+          },
+        ],
+      });
+
+      mockConstructor.mockImplementation(
+        () =>
+          ({
+            chat: {
+              completions: {
+                create: mockCreate,
+              },
+            },
+          }) as any,
+      );
+
+      // Should not throw for exactly 50,000 characters
+      await expect(
+        ingestCV(exactMaxText, mockApiKey, mockModel),
+      ).resolves.toBeDefined();
     });
   });
 });

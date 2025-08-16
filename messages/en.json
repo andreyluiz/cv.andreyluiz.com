@@ -68,9 +68,11 @@
       "submit": "Process CV",
       "cancel": "Cancel",
       "processing": "Processing CV...",
+      "retrying": "Retrying CV processing...",
       "ingestTitle": "Ingest New CV",
       "editTitle": "Edit CV",
-      "processingDescription": "Please wait while we format your CV using AI. This may take a few moments."
+      "processingDescription": "Please wait while we format your CV using AI. This may take a few moments.",
+      "attemptProgress": "Attempt {attempt} of {max}. Please wait..."
     },
     "actions": {
       "load": "Load CV",
@@ -90,7 +92,20 @@
       "rawTextTooLong": "CV text must be less than 50,000 characters",
       "processingFailed": "Failed to process CV",
       "storageError": "Failed to save CV",
-      "apiKeyRequired": "API key is required to process CV. Please configure your API key in settings."
+      "apiKeyRequired": "API key is required to process CV. Please configure your API key in settings.",
+      "modelRequired": "Model selection is required to process CV. Please select a model in settings.",
+      "networkError": "Network connection failed. Please check your internet connection and try again.",
+      "rateLimitError": "Rate limit exceeded. Please wait a moment before trying again, or consider switching to a free model.",
+      "quotaError": "Insufficient credits or quota exceeded. Please check your OpenRouter account balance or switch to a free model.",
+      "modelError": "The selected AI model is currently unavailable. Please try a different model from the settings.",
+      "authError": "Invalid API key. Please check your OpenRouter API key in settings and ensure it's active on your account.",
+      "parseError": "The AI response could not be processed. Please try again with a different model.",
+      "validationError": "The AI could not extract essential information from your CV. Please ensure your CV contains clear personal information and try again.",
+      "emptyResponseError": "The AI service returned an empty response. Please try again or select a different model.",
+      "unexpectedError": "An unexpected error occurred. Please try again in a moment.",
+      "retryPrompt": "Would you like to try again?",
+      "settingsPrompt": "Check your settings and try again.",
+      "modelSuggestion": "Try selecting a different AI model from the settings."
     }
   },
   "coverLetter": {

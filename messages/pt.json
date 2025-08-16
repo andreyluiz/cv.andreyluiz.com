@@ -68,9 +68,11 @@
       "submit": "Processar CV",
       "cancel": "Cancelar",
       "processing": "Processando CV...",
+      "retrying": "Tentando processar CV novamente...",
       "ingestTitle": "Ingerir Novo CV",
       "editTitle": "Editar CV",
-      "processingDescription": "Por favor, aguarde enquanto formatamos seu CV usando IA. Isso pode levar alguns momentos."
+      "processingDescription": "Por favor, aguarde enquanto formatamos seu CV usando IA. Isso pode levar alguns momentos.",
+      "attemptProgress": "Tentativa {attempt} de {max}. Por favor, aguarde..."
     },
     "actions": {
       "load": "Carregar CV",
@@ -90,7 +92,20 @@
       "rawTextTooLong": "O texto do CV deve ter menos de 50.000 caracteres",
       "processingFailed": "Falha ao processar CV",
       "storageError": "Falha ao salvar CV",
-      "apiKeyRequired": "Uma chave API é necessária para processar o CV. Por favor, configure sua chave API nas configurações."
+      "apiKeyRequired": "Uma chave API é necessária para processar o CV. Por favor, configure sua chave API nas configurações.",
+      "modelRequired": "A seleção de um modelo é necessária para processar o CV. Por favor, selecione um modelo nas configurações.",
+      "networkError": "Falha na conexão de rede. Por favor, verifique sua conexão com a internet e tente novamente.",
+      "rateLimitError": "Limite de taxa excedido. Por favor, aguarde um momento antes de tentar novamente, ou considere mudar para um modelo gratuito.",
+      "quotaError": "Créditos insuficientes ou cota excedida. Por favor, verifique o saldo da sua conta OpenRouter ou mude para um modelo gratuito.",
+      "modelError": "O modelo de IA selecionado está atualmente indisponível. Por favor, tente um modelo diferente nas configurações.",
+      "authError": "Chave API inválida. Por favor, verifique sua chave API OpenRouter nas configurações e certifique-se de que está ativa em sua conta.",
+      "parseError": "A resposta da IA não pôde ser processada. Por favor, tente novamente com um modelo diferente.",
+      "validationError": "A IA não conseguiu extrair informações essenciais do seu CV. Por favor, certifique-se de que seu CV contém informações pessoais claras e tente novamente.",
+      "emptyResponseError": "O serviço de IA retornou uma resposta vazia. Por favor, tente novamente ou selecione um modelo diferente.",
+      "unexpectedError": "Ocorreu um erro inesperado. Por favor, tente novamente em um momento.",
+      "retryPrompt": "Gostaria de tentar novamente?",
+      "settingsPrompt": "Verifique suas configurações e tente novamente.",
+      "modelSuggestion": "Tente selecionar um modelo de IA diferente nas configurações."
     }
   },
   "coverLetter": {

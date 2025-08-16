@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import Button from "@/lib/components/ui/Button";
 import Input from "@/lib/components/ui/Input";
+import LoadingSpinner from "@/lib/components/ui/LoadingSpinner";
 import Textarea from "@/lib/components/ui/Textarea";
 
 interface CVIngestionFormProps {
@@ -117,6 +118,7 @@ export default function CVIngestionForm({
         </Button>
 
         <Button type="submit" disabled={isLoading}>
+          {isLoading && <LoadingSpinner size="sm" className="mr-2" />}
           {isLoading ? t("form.processing") : t("form.submit")}
         </Button>
       </div>
