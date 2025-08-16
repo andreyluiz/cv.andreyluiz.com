@@ -71,7 +71,7 @@
   - Test modal state transitions
   - _Requirements: All requirements - testing coverage_
 
-- [ ] 13. Write integration tests for CV ingestion flow
+- [x] 13. Write integration tests for CV ingestion flow
   - Test end-to-end CV ingestion process
   - Test CV switching and persistence
   - Test error scenarios and recovery

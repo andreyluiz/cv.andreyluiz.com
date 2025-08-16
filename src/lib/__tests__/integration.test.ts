@@ -92,6 +92,12 @@ describe("OpenRouter Integration Tests", () => {
     useStore.setState({
       apiKey: "",
       selectedModel: "openai/gpt-4.1-mini",
+      ingestedCVs: [],
+      currentCV: null,
+      generatedCoverLetter: null,
+      coverLetterInputs: null,
+      hideBullets: false,
+      layoutMode: "single",
     });
   });
 
@@ -433,6 +439,169 @@ describe("OpenRouter Integration Tests", () => {
 
       expect(modelIds.length).toBe(uniqueIds.size);
       expect(modelIds.length).toBe(6);
+    });
+  });
+
+  describe("CV Ingestion Integration", () => {
+    it("should integrate CV ingestion with existing OpenRouter flow", async () => {
+      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } = useStore.getState();
+      setApiKey(testApiKey);
+      setSelectedModel("google/gemini-2.0-flash-exp:free");
+
+      // Mock successful CV ingestion
+      const mockOpenAI = await import("openai");
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                ...mockResume,
+                name: "Ingested User",
+                title: "Ingested Developer",
+              }),
+            },
+          },
+        ],
+      });
+
+      const mockOpenAIInstance = new (mockOpenAI.default as any)();
+      mockOpenAIInstance.chat.completions.create = mockCreate;
+      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
+
+      // Import and use ingestCV
+      const { ingestCV } = await import("../server/actions");
+      const rawText = "Ingested User\nIngested Developer\ntest@example.com\nExperienced developer with skills in React and Node.js";
+      
+      const ingestedResult = await ingestCV(rawText, testApiKey, "google/gemini-2.0-flash-exp:free");
+      
+      // Store the ingested CV
+      const ingestedCV = {
+        id: "integration-test-cv",
+        title: "Integration Test CV",
+        rawText,
+        formattedCV: ingestedResult,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      
+      addIngestedCV(ingestedCV);
+      setCurrentCV(ingestedResult);
+
+      // Verify the CV was ingested and stored
+      const state = useStore.getState();
+      expect(state.ingestedCVs).toHaveLength(1);
+      expect(state.currentCV?.name).toBe("Ingested User");
+      expect(state.currentCV?.title).toBe("Ingested Developer");
+
+      // Now test that we can use this ingested CV for resume tailoring
+      mockCreate.mockResolvedValue({
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...ingestedResult,
+                      title: testJobTitle,
+                      summary: "Tailored summary for ingested CV",
+                      changes: [
+                        {
+                          field: "title",
+                          change: "Updated to match job title",
+                        },
+                      ],
+                    }),
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      });
+
+      const tailoredResult = await tailorResume(
+        testJobTitle,
+        testJobDescription,
+        ingestedResult,
+        "",
+        testApiKey,
+        "google/gemini-2.0-flash-exp:free",
+      );
+
+      expect(tailoredResult.title).toBe(testJobTitle);
+      expect(tailoredResult.summary).toBe("Tailored summary for ingested CV");
+      expect(mockCreate).toHaveBeenCalledTimes(2); // Once for ingestion, once for tailoring
+    });
+
+    it("should handle CV switching in complete user workflow", async () => {
+      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } = useStore.getState();
+      setApiKey(testApiKey);
+      setSelectedModel("openai/gpt-4.1-mini");
+
+      // Mock responses for multiple CVs
+      const mockOpenAI = await import("openai");
+      const mockCreate = vi.fn();
+
+      // First CV ingestion
+      const firstCV = { ...mockResume, name: "First User", title: "First Developer" };
+      mockCreate.mockResolvedValueOnce({
+        choices: [{ message: { content: JSON.stringify(firstCV) } }],
+      });
+
+      // Second CV ingestion
+      const secondCV = { ...mockResume, name: "Second User", title: "Second Developer" };
+      mockCreate.mockResolvedValueOnce({
+        choices: [{ message: { content: JSON.stringify(secondCV) } }],
+      });
+
+      const mockOpenAIInstance = new (mockOpenAI.default as any)();
+      mockOpenAIInstance.chat.completions.create = mockCreate;
+      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
+
+      const { ingestCV } = await import("../server/actions");
+
+      // Ingest first CV
+      const firstRawText = "First User\nFirst Developer\nfirst@example.com\nExperienced in frontend development";
+      const firstResult = await ingestCV(firstRawText, testApiKey, "openai/gpt-4.1-mini");
+      
+      const firstIngestedCV = {
+        id: "first-cv",
+        title: "First CV",
+        rawText: firstRawText,
+        formattedCV: firstResult,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      addIngestedCV(firstIngestedCV);
+
+      // Ingest second CV
+      const secondRawText = "Second User\nSecond Developer\nsecond@example.com\nExperienced in backend development";
+      const secondResult = await ingestCV(secondRawText, testApiKey, "openai/gpt-4.1-mini");
+      
+      const secondIngestedCV = {
+        id: "second-cv",
+        title: "Second CV",
+        rawText: secondRawText,
+        formattedCV: secondResult,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      addIngestedCV(secondIngestedCV);
+
+      // Test switching between CVs
+      setCurrentCV(firstResult);
+      expect(useStore.getState().currentCV?.name).toBe("First User");
+
+      setCurrentCV(secondResult);
+      expect(useStore.getState().currentCV?.name).toBe("Second User");
+
+      // Verify both CVs are stored
+      const { ingestedCVs } = useStore.getState();
+      expect(ingestedCVs).toHaveLength(2);
+      expect(ingestedCVs.find(cv => cv.id === "first-cv")?.formattedCV.name).toBe("First User");
+      expect(ingestedCVs.find(cv => cv.id === "second-cv")?.formattedCV.name).toBe("Second User");
     });
   });
 });
