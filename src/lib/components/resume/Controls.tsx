@@ -7,6 +7,7 @@ import { useStore } from "@/lib/store";
 import type { Variant } from "@/lib/types";
 import ApiKeyModal from "../modals/ApiKeyModal";
 import Button from "../ui/Button";
+import LayoutToggle from "../ui/LayoutToggle";
 import Select from "../ui/Select";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import ResumeTailor from "./ResumeTailor";
@@ -52,6 +53,7 @@ export default function Controls({ currentResume, setCurrentResume }: Props) {
             />
           </Button>
         </div>
+        <LayoutToggle />
         <Select
           options={langsOptions}
           value={locale as string}

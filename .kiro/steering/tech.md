@@ -38,6 +38,7 @@ inclusion: always
 - **TypeScript strict mode** - No `any` types allowed
 - All components must be accessible (ARIA compliant)
 - Use named exports (avoid default exports)
+- A task should only be completely after all quality checks (linting, types, and tests) are passing
 
 ### Package Management Commands
 ```bash
