@@ -113,17 +113,21 @@ describe("OpenRouter Integration Tests", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({
-                  ...mockResume,
-                  title: testJobTitle,
-                  summary: "Frontend-focused software engineer",
-                  changes: [
-                    { field: "title", change: "Updated to match job title" },
-                  ],
-                }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      title: testJobTitle,
+                      summary: "Frontend-focused software engineer",
+                      changes: [
+                        { field: "title", change: "Updated to match job title" },
+                      ],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -257,14 +261,18 @@ describe("OpenRouter Integration Tests", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({
-                  ...mockResume,
-                  title: testJobTitle,
-                  changes: [{ field: "title", change: "Updated title" }],
-                }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      title: testJobTitle,
+                      changes: [{ field: "title", change: "Updated title" }],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -336,6 +344,32 @@ describe("OpenRouter Integration Tests", () => {
     it("should use correct OpenRouter configuration for all models", async () => {
       const mockOpenAI = await import("openai");
       const mockConstructor = vi.mocked(mockOpenAI.default);
+      
+      // Mock the OpenAI response to avoid actual API calls
+      const mockCreate = vi.fn().mockResolvedValue({
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      title: testJobTitle,
+                      changes: [{ field: "title", change: "Updated title" }],
+                    }),
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      });
+
+      const mockOpenAIInstance = new (mockOpenAI.default as any)();
+      mockOpenAIInstance.chat.completions.create = mockCreate;
+      vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
 
       // Test that OpenRouter configuration is used
       await tailorResume(
@@ -345,7 +379,7 @@ describe("OpenRouter Integration Tests", () => {
         "",
         testApiKey,
         "openai/gpt-4.1-mini",
-      ).catch(() => {}); // Ignore errors, we just want to check constructor
+      );
 
       expect(mockConstructor).toHaveBeenCalledWith({
         apiKey: testApiKey,
