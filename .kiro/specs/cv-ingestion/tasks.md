@@ -65,7 +65,7 @@
   - Handle network failures and API errors
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 12. Write unit tests for core functionality
+- [x] 12. Write unit tests for core functionality
   - Test CV CRUD operations in store
   - Test form validation and submission
   - Test modal state transitions
