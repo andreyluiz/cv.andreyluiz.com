@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { getResume } from "@/lib/server/actions";
+import { useStore } from "@/lib/store";
 import type { Variant } from "@/lib/types";
 import ContactInfo from "./ContactInfo";
 import Controls from "./Controls";
@@ -14,6 +15,7 @@ import Languages from "./Languages";
 import Projects from "./Projects";
 import Publications from "./Publications";
 import Skills from "./Skills";
+import TwoColumnLayout from "./TwoColumnLayout";
 
 interface Props {
   initialResume: Variant;
@@ -21,6 +23,7 @@ interface Props {
 
 export default function ResumeContent({ initialResume }: Props) {
   const [currentResume, setCurrentResume] = useState<Variant>(initialResume);
+  const { layoutMode } = useStore();
 
   const { locale } = useParams();
 
@@ -49,13 +52,8 @@ export default function ResumeContent({ initialResume }: Props) {
     generalSkills,
   } = currentResume;
 
-  return (
-    <main className="mx-auto max-w-[210mm] w-[210mm] space-y-6 bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 p-[10mm] print:p-0">
-      <Controls
-        currentResume={currentResume}
-        setCurrentResume={setCurrentResume}
-      />
-      <hr className="border-neutral-200 dark:border-neutral-700 print:hidden" />
+  const renderSingleColumnLayout = () => (
+    <>
       <Header
         name={name}
         title={title}
@@ -70,6 +68,22 @@ export default function ResumeContent({ initialResume }: Props) {
       <Projects projects={projects} />
       <Publications publications={publications} />
       <Languages languages={languages} />
+    </>
+  );
+
+  return (
+    <main className="mx-auto max-w-[210mm] w-[210mm] space-y-6 bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 p-[10mm] print:p-0">
+      <Controls
+        currentResume={currentResume}
+        setCurrentResume={setCurrentResume}
+      />
+      <hr className="border-neutral-200 dark:border-neutral-700 print:hidden" />
+
+      {layoutMode === "two-column" ? (
+        <TwoColumnLayout resumeData={currentResume} />
+      ) : (
+        renderSingleColumnLayout()
+      )}
     </main>
   );
 }

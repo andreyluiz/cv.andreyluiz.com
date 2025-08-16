@@ -63,7 +63,7 @@
   - Test toggle functionality with other control interactions
   - _Requirements: 1.1, 1.2_
 
-- [ ] 9. Update ResumeContent to support layout switching
+- [x] 9. Update ResumeContent to support layout switching
   - Modify ResumeContent component to conditionally render layouts
   - Add logic to switch between single-column and TwoColumnLayout
   - Ensure smooth transitions between layout modes
