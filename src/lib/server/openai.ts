@@ -154,179 +154,182 @@ Return the modified resume in the exact same JSON structure as the input, but wi
           )}`,
         },
       ],
-      functions: [
+      tools: [
         {
-          name: "tailor_resume",
-          description: "Tailor a resume based on a job description",
-          parameters: {
-            type: "object",
-            properties: {
-              title: {
-                type: "string",
-                description:
-                  "The title of the job. Should match exactly the required job title.",
-              },
-              summary: {
-                type: "string",
-              },
-              generalSkills: {
-                type: "array",
-                items: {
+          type: "function",
+          function: {
+            name: "tailor_resume",
+            description: "Tailor a resume based on a job description",
+            parameters: {
+              type: "object",
+              properties: {
+                title: {
+                  type: "string",
+                  description:
+                    "The title of the job. Should match exactly the required job title.",
+                },
+                summary: {
                   type: "string",
                 },
-              },
-              skills: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    domain: { type: "string" },
-                    skills: {
-                      type: "array",
-                      items: { type: "string" },
-                    },
+                generalSkills: {
+                  type: "array",
+                  items: {
+                    type: "string",
                   },
-                  required: ["domain", "skills"],
                 },
-              },
-              experience: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    title: { type: "string" },
-                    company: { type: "string" },
-                    location: { type: "string" },
-                    period: {
-                      type: "object",
-                      properties: {
-                        start: { type: "string" },
-                        end: { type: "string" },
+                skills: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      domain: { type: "string" },
+                      skills: {
+                        type: "array",
+                        items: { type: "string" },
                       },
-                      required: ["start", "end"],
                     },
-                    achievements: {
-                      type: "array",
-                      items: { type: "string" },
+                    required: ["domain", "skills"],
+                  },
+                },
+                experience: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      title: { type: "string" },
+                      company: { type: "string" },
+                      location: { type: "string" },
+                      period: {
+                        type: "object",
+                        properties: {
+                          start: { type: "string" },
+                          end: { type: "string" },
+                        },
+                        required: ["start", "end"],
+                      },
+                      achievements: {
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                      techStack: {
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                      isPrevious: {
+                        type: "boolean",
+                        description:
+                          "Indicates if this experience should be displayed on the Previous Experiences section.",
+                        default: false,
+                      },
                     },
-                    techStack: {
-                      type: "array",
-                      items: { type: "string" },
+                    required: [
+                      "title",
+                      "company",
+                      "location",
+                      "period",
+                      "achievements",
+                      "techStack",
+                    ],
+                  },
+                },
+                projects: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      name: { type: "string" },
+                      description: { type: "string" },
+                      techStack: {
+                        type: "array",
+                        items: { type: "string" },
+                      },
                     },
-                    isPrevious: {
-                      type: "boolean",
-                      description:
-                        "Indicates if this experience should be displayed on the Previous Experiences section.",
-                      default: false,
+                    required: ["name", "description", "techStack"],
+                  },
+                },
+                education: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      degree: { type: "string" },
+                      institution: { type: "string" },
+                      year: { type: "string" },
+                      location: { type: "string" },
                     },
+                    required: ["degree", "institution", "year", "location"],
                   },
-                  required: [
-                    "title",
-                    "company",
-                    "location",
-                    "period",
-                    "achievements",
-                    "techStack",
-                  ],
                 },
-              },
-              projects: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    name: { type: "string" },
-                    description: { type: "string" },
-                    techStack: {
-                      type: "array",
-                      items: { type: "string" },
+                certifications: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      degree: { type: "string" },
+                      institution: { type: "string" },
+                      year: { type: "string" },
+                      location: { type: "string" },
                     },
+                    required: ["degree", "institution", "year", "location"],
                   },
-                  required: ["name", "description", "techStack"],
                 },
-              },
-              education: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    degree: { type: "string" },
-                    institution: { type: "string" },
-                    year: { type: "string" },
-                    location: { type: "string" },
+                publications: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      title: { type: "string" },
+                      location: { type: "string" },
+                      url: { type: "string" },
+                    },
+                    required: ["title", "location", "url"],
                   },
-                  required: ["degree", "institution", "year", "location"],
                 },
-              },
-              certifications: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    degree: { type: "string" },
-                    institution: { type: "string" },
-                    year: { type: "string" },
-                    location: { type: "string" },
+                personalityTraits: {
+                  type: "array",
+                  items: {
+                    type: "string",
                   },
-                  required: ["degree", "institution", "year", "location"],
                 },
-              },
-              publications: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    title: { type: "string" },
-                    location: { type: "string" },
-                    url: { type: "string" },
+                changes: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: { type: "string" },
+                      change: { type: "string" },
+                    },
+                    required: ["field", "change"],
                   },
-                  required: ["title", "location", "url"],
                 },
               },
-              personalityTraits: {
-                type: "array",
-                items: {
-                  type: "string",
-                },
-              },
-              changes: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    field: { type: "string" },
-                    change: { type: "string" },
-                  },
-                  required: ["field", "change"],
-                },
-              },
+              required: [
+                "summary",
+                "skills",
+                "experience",
+                "education",
+                "certifications",
+                "publications",
+                "changes",
+              ],
             },
-            required: [
-              "summary",
-              "skills",
-              "experience",
-              "education",
-              "certifications",
-              "publications",
-              "changes",
-            ],
           },
         },
       ],
-      function_call: { name: "tailor_resume" },
+      tool_choice: { type: "function", function: { name: "tailor_resume" } },
       max_completion_tokens: 10000,
       temperature: 0.7,
     });
 
-    const functionCall = response.choices[0].message.function_call;
+    const toolCalls = response.choices[0].message.tool_calls;
 
-    if (!functionCall || functionCall.name !== "tailor_resume") {
+    if (!toolCalls || toolCalls.length === 0 || toolCalls[0].function.name !== "tailor_resume") {
       throw new Error(
-        "Expected function call to tailor_resume was not returned",
+        "Expected tool call to tailor_resume was not returned",
       );
     }
 
-    const tailoredResumeData = JSON.parse(functionCall.arguments);
+    const tailoredResumeData = JSON.parse(toolCalls[0].function.arguments);
 
     const tailoredResume = {
       ...currentResume,

@@ -113,14 +113,18 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({
-                  ...mockResume,
-                  title: mockJobTitle,
-                  changes: [{ field: "title", change: "Updated title" }],
-                }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      title: mockJobTitle,
+                      changes: [{ field: "title", change: "Updated title" }],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -153,13 +157,17 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({
-                  ...mockResume,
-                  changes: [],
-                }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      changes: [],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -192,14 +200,18 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({
-                  ...mockResume,
-                  title: mockJobTitle,
-                  changes: [{ field: "title", change: "Updated title" }],
-                }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      title: mockJobTitle,
+                      changes: [{ field: "title", change: "Updated title" }],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -229,12 +241,15 @@ describe("OpenRouter Client", () => {
             content: expect.stringContaining(mockJobTitle),
           }),
         ]),
-        functions: expect.arrayContaining([
+        tools: expect.arrayContaining([
           expect.objectContaining({
-            name: "tailor_resume",
+            type: "function",
+            function: expect.objectContaining({
+              name: "tailor_resume",
+            }),
           }),
         ]),
-        function_call: { name: "tailor_resume" },
+        tool_choice: { type: "function", function: { name: "tailor_resume" } },
         max_completion_tokens: 10000,
         temperature: 0.7,
       });
@@ -252,10 +267,14 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify(tailoredData),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify(tailoredData),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -279,10 +298,14 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "tailor_resume",
-                arguments: JSON.stringify({ ...mockResume, changes: [] }),
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "tailor_resume",
+                    arguments: JSON.stringify({ ...mockResume, changes: [] }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -517,7 +540,7 @@ describe("OpenRouter Client", () => {
           mockSelectedModel,
         ),
       ).rejects.toThrow(
-        /Expected function call to tailor_resume was not returned/,
+        /Expected tool call to tailor_resume was not returned/,
       );
     });
 
@@ -526,10 +549,14 @@ describe("OpenRouter Client", () => {
         choices: [
           {
             message: {
-              function_call: {
-                name: "wrong_function",
-                arguments: "{}",
-              },
+              tool_calls: [
+                {
+                  function: {
+                    name: "wrong_function",
+                    arguments: "{}",
+                  },
+                },
+              ],
             },
           },
         ],
@@ -546,7 +573,7 @@ describe("OpenRouter Client", () => {
           mockSelectedModel,
         ),
       ).rejects.toThrow(
-        /Expected function call to tailor_resume was not returned/,
+        /Expected tool call to tailor_resume was not returned/,
       );
     });
   });
