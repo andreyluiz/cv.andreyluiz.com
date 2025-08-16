@@ -35,13 +35,13 @@ export default function TwoColumnLayout({ resumeData }: TwoColumnLayoutProps) {
   } = resumeData;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[minmax(200px,1fr)_2fr] gap-6 md:gap-8 items-start print:grid-cols-[200px_1fr] print:gap-4 print:text-xs print:leading-tight touch-pan-y">
+    <div className="grid grid-cols-1 md:grid-cols-[minmax(250px,1fr)_2fr] gap-12 items-start print:grid-cols-[250px_1fr] print:leading-tight touch-pan-y">
       {/* Left Column - Personal Information */}
       <div className="flex flex-col gap-6 min-w-0 print:gap-3 print:break-inside-avoid">
         <div className="print:break-inside-avoid">
           <ProfileImage />
         </div>
-        <div className="print:break-inside-avoid">
+        <div className="print:break-inside-avoid mt-12">
           <Qualities qualities={qualities} />
         </div>
         <div className="print:break-inside-avoid">
