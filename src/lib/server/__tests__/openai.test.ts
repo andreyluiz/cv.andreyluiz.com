@@ -539,9 +539,7 @@ describe("OpenRouter Client", () => {
           mockApiKey,
           mockSelectedModel,
         ),
-      ).rejects.toThrow(
-        /Expected tool call to tailor_resume was not returned/,
-      );
+      ).rejects.toThrow(/Expected tool call to tailor_resume was not returned/);
     });
 
     it("should throw error when wrong function is called", async () => {
@@ -572,9 +570,7 @@ describe("OpenRouter Client", () => {
           mockApiKey,
           mockSelectedModel,
         ),
-      ).rejects.toThrow(
-        /Expected tool call to tailor_resume was not returned/,
-      );
+      ).rejects.toThrow(/Expected tool call to tailor_resume was not returned/);
     });
   });
 });

@@ -218,10 +218,10 @@ describe("TwoColumnLayout", () => {
       );
 
       const gridContainer = container.firstChild as HTMLElement;
-      
+
       // Grid should have touch-friendly navigation
       expect(gridContainer).toHaveClass("touch-pan-y");
-      
+
       // Verify grid layout is properly structured
       expect(gridContainer).toHaveClass("grid");
     });

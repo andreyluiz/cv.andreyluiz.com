@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CoverLetterInputs } from "./types";
+import type { CoverLetterInputs, IngestedCV, Variant } from "./types";
 
 interface StoreState {
   apiKey: string;
@@ -9,12 +9,18 @@ interface StoreState {
   coverLetterInputs: CoverLetterInputs | null;
   hideBullets: boolean;
   layoutMode: "single" | "two-column";
+  ingestedCVs: IngestedCV[];
+  currentCV: Variant | null;
   setApiKey: (apiKey: string) => void;
   setSelectedModel: (model: string) => void;
   setCoverLetter: (letter: string, inputs: CoverLetterInputs) => void;
   clearCoverLetter: () => void;
   setHideBullets: (hideBullets: boolean) => void;
   setLayoutMode: (mode: "single" | "two-column") => void;
+  addIngestedCV: (cv: IngestedCV) => void;
+  updateIngestedCV: (id: string, cv: IngestedCV) => void;
+  deleteIngestedCV: (id: string) => void;
+  setCurrentCV: (cv: Variant) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -26,6 +32,8 @@ export const useStore = create<StoreState>()(
       coverLetterInputs: null,
       hideBullets: false,
       layoutMode: "single", // Default to single column for backward compatibility
+      ingestedCVs: [],
+      currentCV: null,
       setApiKey: (apiKey) => set({ apiKey }),
       setSelectedModel: (model) => set({ selectedModel: model }),
       setCoverLetter: (letter, inputs) =>
@@ -40,6 +48,21 @@ export const useStore = create<StoreState>()(
         }),
       setHideBullets: (hideBullets) => set({ hideBullets }),
       setLayoutMode: (mode) => set({ layoutMode: mode }),
+      addIngestedCV: (cv) =>
+        set((state) => ({
+          ingestedCVs: [...state.ingestedCVs, cv],
+        })),
+      updateIngestedCV: (id, updatedCV) =>
+        set((state) => ({
+          ingestedCVs: state.ingestedCVs.map((cv) =>
+            cv.id === id ? updatedCV : cv,
+          ),
+        })),
+      deleteIngestedCV: (id) =>
+        set((state) => ({
+          ingestedCVs: state.ingestedCVs.filter((cv) => cv.id !== id),
+        })),
+      setCurrentCV: (cv) => set({ currentCV: cv }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)

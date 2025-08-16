@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [ ] 1. Set up core data structures and types
+- [x] 1. Set up core data structures and types
   - Create IngestedCV interface in types.ts
   - Add CV management state to store.ts with persistence
   - _Requirements: 3.1, 3.2, 3.3_

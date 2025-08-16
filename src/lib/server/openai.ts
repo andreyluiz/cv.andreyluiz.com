@@ -323,10 +323,12 @@ Return the modified resume in the exact same JSON structure as the input, but wi
 
     const toolCalls = response.choices[0].message.tool_calls;
 
-    if (!toolCalls || toolCalls.length === 0 || toolCalls[0].function.name !== "tailor_resume") {
-      throw new Error(
-        "Expected tool call to tailor_resume was not returned",
-      );
+    if (
+      !toolCalls ||
+      toolCalls.length === 0 ||
+      toolCalls[0].function.name !== "tailor_resume"
+    ) {
+      throw new Error("Expected tool call to tailor_resume was not returned");
     }
 
     const tailoredResumeData = JSON.parse(toolCalls[0].function.arguments);

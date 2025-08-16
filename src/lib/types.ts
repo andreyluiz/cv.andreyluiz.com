@@ -99,3 +99,12 @@ export interface CoverLetterInputs {
   companyDescription: string;
   jobDescription: string;
 }
+
+export interface IngestedCV {
+  id: string;
+  title: string;
+  rawText: string;
+  formattedCV: Variant;
+  createdAt: Date;
+  updatedAt: Date;
+}
