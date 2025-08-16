@@ -67,6 +67,9 @@ const mockMessages = {
       generating: {
         message: "Creating your personalized cover letter...",
         subtitle: "This may take a few moments",
+        ariaLabel: "Cover letter generation in progress",
+        retryMessage: "Retrying cover letter generation...",
+        retrySubtitle: "Attempt {attempt} of {max}. Please wait..."
       },
       error: {
         title: "Something went wrong",
@@ -75,12 +78,21 @@ const mockMessages = {
         generationFailed: "Failed to generate cover letter. Please try again.",
         apiError:
           "Failed to generate cover letter. Please check your API key and selected model, then try again.",
+        authSuggestion: "Check your API key in settings and ensure it's valid and active on OpenRouter.",
+        networkSuggestion: "Check your internet connection and try again. The issue may be temporary.",
+        quotaSuggestion: "You may have exceeded your usage limits. Try using a free model or check your OpenRouter account.",
+        aiSuggestion: "The AI model may be temporarily unavailable. Try selecting a different model or wait a moment before retrying.",
+        generalSuggestion: "Please try again in a moment. If the problem persists, check your settings or contact support."
       },
       actions: {
         editInputs: "Edit Inputs",
         close: "Close",
         retry: "Try Again",
         cancel: "Cancel",
+        editInputsAriaLabel: "Go back to edit cover letter inputs",
+        closeAriaLabel: "Close cover letter modal",
+        retryAriaLabel: "Try generating the cover letter again",
+        cancelAriaLabel: "Cancel and close modal"
       },
     },
   },

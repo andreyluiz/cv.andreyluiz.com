@@ -38,6 +38,12 @@ const mockMessages = {
       validation: {
         companyDescriptionRequired:
           "Company description is required to generate a personalized cover letter.",
+        companyDescriptionTooShort: "Company description must be at least 10 characters long.",
+        companyDescriptionTooLong: "Company description must be less than 2000 characters.",
+        jobPositionTooLong: "Job position must be less than 100 characters.",
+        jobDescriptionTooLong: "Job description must be less than 5000 characters.",
+        needAtLeastCompanyInfo: "Please provide at least company information for the cover letter.",
+        errorAnnouncement: "Form validation error"
       },
     },
   },
