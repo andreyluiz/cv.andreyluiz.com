@@ -15,7 +15,7 @@ import ResumeTailor from "./ResumeTailor";
 
 interface Props {
   currentResume: Variant;
-  setCurrentResume: (resume: Variant) => void;
+  setCurrentResume: (resume: Variant, isDefault?: boolean) => void;
 }
 
 export default function Controls({ currentResume, setCurrentResume }: Props) {

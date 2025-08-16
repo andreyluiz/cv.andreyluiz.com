@@ -21,6 +21,7 @@ interface StoreState {
   updateIngestedCV: (id: string, cv: IngestedCV) => void;
   deleteIngestedCV: (id: string) => void;
   setCurrentCV: (cv: Variant) => void;
+  clearCurrentCV: () => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -63,6 +64,7 @@ export const useStore = create<StoreState>()(
           ingestedCVs: state.ingestedCVs.filter((cv) => cv.id !== id),
         })),
       setCurrentCV: (cv) => set({ currentCV: cv }),
+      clearCurrentCV: () => set({ currentCV: null }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)

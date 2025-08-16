@@ -8,15 +8,15 @@ import CVManagementModal from "../modals/CVManagementModal";
 import Button from "./Button";
 
 interface MyCVsButtonProps {
-  onCVLoad: (cv: Variant) => void;
+  onCVLoad: (cv: Variant, isDefault?: boolean) => void;
 }
 
 export default function MyCVsButton({ onCVLoad }: MyCVsButtonProps) {
   const t = useTranslations("cvManagement");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCVLoad = (cv: Variant) => {
-    onCVLoad(cv);
+  const handleCVLoad = (cv: Variant, isDefault?: boolean) => {
+    onCVLoad(cv, isDefault);
     setIsModalOpen(false);
   };
 

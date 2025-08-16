@@ -45,7 +45,7 @@ function useIsMobile() {
 
 export default function ResumeContent({ initialResume }: Props) {
   const [currentResume, setCurrentResume] = useState<Variant>(initialResume);
-  const { layoutMode } = useStore();
+  const { layoutMode, currentCV, setCurrentCV, clearCurrentCV } = useStore();
   const isMobile = useIsMobile();
 
   const { locale } = useParams();
@@ -53,11 +53,30 @@ export default function ResumeContent({ initialResume }: Props) {
   const fetchResume = useCallback(async (lang: string) => {
     const resume = await getResume(lang);
     setCurrentResume(resume);
+    // Don't update store's currentCV when fetching default resume
   }, []);
 
+  // Initialize with currentCV from store if available, or fetch default resume based on locale
   useEffect(() => {
-    fetchResume(locale as string);
-  }, [locale, fetchResume]);
+    if (currentCV) {
+      setCurrentResume(currentCV);
+    } else {
+      fetchResume(locale as string);
+    }
+  }, [locale, fetchResume, currentCV]);
+
+  // Handle CV loading from CV management
+  const handleCVLoad = useCallback(
+    (cv: Variant, isDefault?: boolean) => {
+      setCurrentResume(cv);
+      if (isDefault) {
+        clearCurrentCV();
+      } else {
+        setCurrentCV(cv);
+      }
+    },
+    [setCurrentCV, clearCurrentCV],
+  );
 
   const {
     name,
@@ -96,10 +115,7 @@ export default function ResumeContent({ initialResume }: Props) {
 
   return (
     <main className="mx-auto max-w-[210mm] w-[210mm] space-y-6 bg-white text-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 p-[10mm] print:p-0">
-      <Controls
-        currentResume={currentResume}
-        setCurrentResume={setCurrentResume}
-      />
+      <Controls currentResume={currentResume} setCurrentResume={handleCVLoad} />
       <hr className="border-neutral-200 dark:border-neutral-700 print:hidden" />
 
       {layoutMode === "two-column" && !isMobile ? (

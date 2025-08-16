@@ -71,6 +71,10 @@ const messages = {
       edit: "Edit CV",
       delete: "Delete CV",
       confirmDelete: "Are you sure you want to delete this CV?",
+      confirmDeleteTitle: "Delete CV",
+      confirmDeleteMessage: "This action cannot be undone.",
+      confirmDeleteButton: "Delete",
+      cancelDelete: "Cancel",
     },
     errors: {
       titleRequired: "CV title is required",
@@ -124,6 +128,8 @@ const mockStore = {
   addIngestedCV: vi.fn(),
   updateIngestedCV: vi.fn(),
   deleteIngestedCV: vi.fn(),
+  setCurrentCV: vi.fn(),
+  clearCurrentCV: vi.fn(),
 };
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (

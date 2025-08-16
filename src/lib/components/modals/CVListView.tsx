@@ -10,7 +10,7 @@ import ConfirmationDialog from "./ConfirmationDialog";
 interface CVListViewProps {
   cvs: IngestedCV[];
   defaultCV: Variant;
-  onLoadCV: (cv: Variant) => void;
+  onLoadCV: (cv: Variant, isDefault?: boolean) => void;
   onEditCV: (cv: IngestedCV) => void;
   onDeleteCV: (id: string) => void;
   onIngestNew: () => void;
@@ -131,7 +131,7 @@ export default function CVListView({
           <CVListItem
             title={`${defaultCV.name} - ${defaultCV.title}`}
             isDefault={true}
-            onLoad={() => onLoadCV(defaultCV)}
+            onLoad={() => onLoadCV(defaultCV, true)}
           />
 
           {/* Ingested CVs */}
@@ -140,7 +140,7 @@ export default function CVListView({
               <CVListItem
                 key={cv.id}
                 title={cv.title}
-                onLoad={() => onLoadCV(cv.formattedCV)}
+                onLoad={() => onLoadCV(cv.formattedCV, false)}
                 onEdit={() => onEditCV(cv)}
                 onDelete={() => handleDeleteClick(cv)}
               />

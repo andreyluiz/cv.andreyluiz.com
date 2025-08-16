@@ -15,7 +15,7 @@ import Modal from "./Modal";
 interface CVManagementModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onCVLoad: (cv: Variant) => void;
+  onCVLoad: (cv: Variant, isDefault?: boolean) => void;
 }
 
 type ModalState = "list" | "ingesting" | "editing" | "processing";
@@ -39,6 +39,8 @@ export default function CVManagementModal({
     addIngestedCV,
     updateIngestedCV,
     deleteIngestedCV,
+    setCurrentCV,
+    clearCurrentCV,
   } = useStore();
 
   // Get default CV based on locale
@@ -55,7 +57,12 @@ export default function CVManagementModal({
 
   const defaultCV = getDefaultCV();
 
-  const handleLoadCV = (cv: Variant) => {
+  const handleLoadCV = (cv: Variant, isDefault = false) => {
+    if (isDefault) {
+      clearCurrentCV();
+    } else {
+      setCurrentCV(cv);
+    }
     onCVLoad(cv);
     onClose();
   };

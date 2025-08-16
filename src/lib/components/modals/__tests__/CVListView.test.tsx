@@ -149,7 +149,7 @@ describe("CVListView", () => {
     const loadButton = screen.getAllByLabelText(/Load CV:/)[0];
     fireEvent.click(loadButton);
 
-    expect(mockProps.onLoadCV).toHaveBeenCalledWith(mockDefaultCV);
+    expect(mockProps.onLoadCV).toHaveBeenCalledWith(mockDefaultCV, true);
   });
 
   it("calls onLoadCV when load button is clicked for ingested CV", () => {
@@ -164,7 +164,10 @@ describe("CVListView", () => {
     const ingestedCVLoadButton = loadButtons[1]; // Second button (first is default CV)
     fireEvent.click(ingestedCVLoadButton);
 
-    expect(mockProps.onLoadCV).toHaveBeenCalledWith(mockIngestedCV.formattedCV);
+    expect(mockProps.onLoadCV).toHaveBeenCalledWith(
+      mockIngestedCV.formattedCV,
+      false,
+    );
   });
 
   it("calls onEditCV when edit button is clicked", () => {
