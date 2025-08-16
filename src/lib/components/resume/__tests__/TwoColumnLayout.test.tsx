@@ -163,4 +163,43 @@ describe("TwoColumnLayout", () => {
     expect(gridContainer).toHaveClass("print:grid-cols-[1fr_2fr]");
     expect(gridContainer).toHaveClass("print:gap-4");
   });
+
+  it("should include touch-friendly classes for mobile", () => {
+    const { container } = renderWithIntl(
+      <TwoColumnLayout resumeData={mockResumeData} />,
+    );
+
+    const gridContainer = container.firstChild as HTMLElement;
+    expect(gridContainer).toHaveClass("touch-pan-y");
+  });
+
+  it("should have proper responsive column structure", () => {
+    const { container } = renderWithIntl(
+      <TwoColumnLayout resumeData={mockResumeData} />,
+    );
+
+    const gridContainer = container.firstChild as HTMLElement;
+    // Should be single column on mobile (default)
+    expect(gridContainer).toHaveClass("grid-cols-1");
+    // Should be two columns on medium screens and up
+    expect(gridContainer).toHaveClass("md:grid-cols-[minmax(200px,1fr)_2fr]");
+  });
+
+  it("should prevent content overflow with min-width classes", () => {
+    const { container } = renderWithIntl(
+      <TwoColumnLayout resumeData={mockResumeData} />,
+    );
+
+    // Get the main grid container
+    const gridContainer = container.firstChild as HTMLElement;
+
+    // Get the direct children of the grid (the two main columns)
+    const columns = gridContainer.querySelectorAll(":scope > .flex.flex-col");
+    expect(columns).toHaveLength(2);
+
+    // Both columns should have min-w-0 to prevent overflow
+    columns.forEach((column) => {
+      expect(column).toHaveClass("min-w-0");
+    });
+  });
 });

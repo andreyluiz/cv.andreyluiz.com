@@ -34,16 +34,16 @@ export default function TwoColumnLayout({ resumeData }: TwoColumnLayoutProps) {
   } = resumeData;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[minmax(200px,1fr)_2fr] gap-6 md:gap-8 items-start print:grid-cols-[1fr_2fr] print:gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-[minmax(200px,1fr)_2fr] gap-6 md:gap-8 items-start print:grid-cols-[1fr_2fr] print:gap-4 touch-pan-y">
       {/* Left Column - Personal Information */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 min-w-0">
         <ProfileImage />
         <ContactInfo contactInfo={contactInfo} />
         <Languages languages={languages} />
       </div>
 
       {/* Right Column - Professional Content */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 min-w-0">
         <HeaderContent
           name={name}
           title={title}

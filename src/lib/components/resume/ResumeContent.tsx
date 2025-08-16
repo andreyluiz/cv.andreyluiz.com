@@ -21,9 +21,32 @@ interface Props {
   initialResume: Variant;
 }
 
+// Custom hook to detect mobile screen size
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint is 768px
+    };
+
+    // Check on mount
+    checkIsMobile();
+
+    // Add event listener for resize
+    window.addEventListener("resize", checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  return isMobile;
+}
+
 export default function ResumeContent({ initialResume }: Props) {
   const [currentResume, setCurrentResume] = useState<Variant>(initialResume);
   const { layoutMode } = useStore();
+  const isMobile = useIsMobile();
 
   const { locale } = useParams();
 
@@ -79,7 +102,7 @@ export default function ResumeContent({ initialResume }: Props) {
       />
       <hr className="border-neutral-200 dark:border-neutral-700 print:hidden" />
 
-      {layoutMode === "two-column" ? (
+      {layoutMode === "two-column" && !isMobile ? (
         <TwoColumnLayout resumeData={currentResume} />
       ) : (
         renderSingleColumnLayout()
