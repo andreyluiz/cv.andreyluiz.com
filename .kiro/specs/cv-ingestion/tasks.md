@@ -47,7 +47,7 @@
   - Integrate button into main application layout
   - _Requirements: 1.1_
 
-- [ ] 9. Add internationalization support
+- [x] 9. Add internationalization support
   - Create translation keys for all CV management UI text
   - Add translations for English, French, and Portuguese
   - Implement error message translations
