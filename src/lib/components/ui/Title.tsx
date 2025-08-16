@@ -9,7 +9,7 @@ const titleVariants = cva(
     variants: {
       tag: {
         h1: "font-semibold text-2xl print:text-lg print:font-bold print:break-after-avoid",
-        h2: "font-semibold text-xl print:text-base print:font-semibold print:break-after-avoid print:mb-1",
+        h2: "font-semibold text-xl print:text-base print:font-semibold print:break-after-avoid",
       },
     },
     defaultVariants: {

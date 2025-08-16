@@ -39,7 +39,9 @@ export default function HeaderContent({
           {title}
         </Title>
       </div>
-      <div className="mt-4 print:mt-2 print:leading-tight">{summary}</div>
+      <div className="mt-4 text-justify print:mt-2 print:leading-tight">
+        {summary}
+      </div>
 
       {!isTwoColumn && <Qualities qualities={qualities} />}
     </div>

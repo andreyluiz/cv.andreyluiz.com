@@ -11,7 +11,7 @@ export default function ProfileImage({ className = "" }: ProfileImageProps) {
       alt="Profile Picture"
       width={150}
       height={150}
-      className={`rounded-full ${className}`}
+      className={`rounded-full print:size-32 ${className}`}
     />
   );
 }
