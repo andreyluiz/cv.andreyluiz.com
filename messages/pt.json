@@ -51,6 +51,12 @@
     }
   },
   "cvManagement": {
+    "modal": {
+      "title": "Meus CVs",
+      "ingestNew": "Ingerir Novo CV",
+      "defaultCV": "CV Padrão",
+      "noIngestedCVs": "Nenhum CV ingerido ainda"
+    },
     "form": {
       "title": "Título do CV",
       "titlePlaceholder": "Digite um nome para este CV",
@@ -59,6 +65,12 @@
       "submit": "Processar CV",
       "cancel": "Cancelar",
       "processing": "Processando CV..."
+    },
+    "actions": {
+      "load": "Carregar CV",
+      "edit": "Editar CV",
+      "delete": "Excluir CV",
+      "confirmDelete": "Tem certeza de que deseja excluir este CV?"
     },
     "errors": {
       "titleRequired": "O título do CV é obrigatório",

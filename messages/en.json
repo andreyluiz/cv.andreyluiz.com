@@ -51,6 +51,12 @@
     }
   },
   "cvManagement": {
+    "modal": {
+      "title": "My CVs",
+      "ingestNew": "Ingest New CV",
+      "defaultCV": "Default CV",
+      "noIngestedCVs": "No ingested CVs yet"
+    },
     "form": {
       "title": "CV Title",
       "titlePlaceholder": "Enter a name for this CV",
@@ -59,6 +65,12 @@
       "submit": "Process CV",
       "cancel": "Cancel",
       "processing": "Processing CV..."
+    },
+    "actions": {
+      "load": "Load CV",
+      "edit": "Edit CV",
+      "delete": "Delete CV",
+      "confirmDelete": "Are you sure you want to delete this CV?"
     },
     "errors": {
       "titleRequired": "CV title is required",

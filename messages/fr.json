@@ -51,6 +51,12 @@
     }
   },
   "cvManagement": {
+    "modal": {
+      "title": "Mes CVs",
+      "ingestNew": "Ingérer un nouveau CV",
+      "defaultCV": "CV par défaut",
+      "noIngestedCVs": "Aucun CV ingéré pour le moment"
+    },
     "form": {
       "title": "Titre du CV",
       "titlePlaceholder": "Entrez un nom pour ce CV",
@@ -59,6 +65,12 @@
       "submit": "Traiter le CV",
       "cancel": "Annuler",
       "processing": "Traitement du CV..."
+    },
+    "actions": {
+      "load": "Charger le CV",
+      "edit": "Modifier le CV",
+      "delete": "Supprimer le CV",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce CV ?"
     },
     "errors": {
       "titleRequired": "Le titre du CV est requis",

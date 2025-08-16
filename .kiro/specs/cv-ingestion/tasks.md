@@ -17,7 +17,7 @@
   - Add loading states and error handling
   - _Requirements: 2.2, 2.3, 4.2, 5.1, 5.3_
 
-- [ ] 4. Build CV list view component
+- [x] 4. Build CV list view component
   - Create CVListView component to display available CVs
   - Implement default CV display as first item
   - Add action icon buttons (load, edit, delete) with tooltips
