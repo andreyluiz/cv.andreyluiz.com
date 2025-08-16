@@ -213,7 +213,7 @@ describe("Cover Letter Error Handling", () => {
         "Tell us about the company...",
       );
       await user.clear(companyInput);
-      await user.type(companyInput, longText.substring(0, 50) + "...");
+      await user.type(companyInput, `${longText.substring(0, 50)}...`);
 
       // Simulate the full long text by setting the value directly
       Object.defineProperty(companyInput, "value", {

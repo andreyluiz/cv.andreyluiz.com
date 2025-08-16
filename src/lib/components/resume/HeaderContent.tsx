@@ -7,15 +7,24 @@ interface HeaderContentProps {
   qualities: string[];
 }
 
-export default function HeaderContent({ name, title, summary, qualities }: HeaderContentProps) {
+export default function HeaderContent({
+  name,
+  title,
+  summary,
+  qualities,
+}: HeaderContentProps) {
   return (
     <div className="flex-1">
       <div className="flex items-baseline justify-center md:justify-start">
-        <Title tag="h1" className="text-2xl md:text-3xl">{name}</Title>
+        <Title tag="h1" className="text-2xl md:text-3xl">
+          {name}
+        </Title>
         <Title tag="h2" className="mx-2 !text-neutral-600 text-xl md:text-2xl">
           -
         </Title>
-        <Title tag="h2" className="text-xl md:text-2xl">{title}</Title>
+        <Title tag="h2" className="text-xl md:text-2xl">
+          {title}
+        </Title>
       </div>
       <div className="mt-4 text-sm md:text-base">{summary}</div>
 

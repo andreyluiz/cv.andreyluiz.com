@@ -1,11 +1,11 @@
 import type { Variant } from "@/lib/types";
-import HeaderContent from "./HeaderContent";
-import GeneralSkills from "./GeneralSkills";
-import Experience from "./Experience";
-import Skills from "./Skills";
 import Education from "./Education";
+import Experience from "./Experience";
+import GeneralSkills from "./GeneralSkills";
+import HeaderContent from "./HeaderContent";
 import Projects from "./Projects";
 import Publications from "./Publications";
+import Skills from "./Skills";
 
 interface RightColumnProps {
   resumeData: Variant;
@@ -28,7 +28,7 @@ export default function RightColumn({ resumeData }: RightColumnProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <HeaderContent 
+      <HeaderContent
         name={name}
         title={title}
         summary={summary}

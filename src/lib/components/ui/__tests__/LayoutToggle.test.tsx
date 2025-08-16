@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useStore } from "@/lib/store";
 import LayoutToggle from "../LayoutToggle";
 
@@ -37,7 +37,10 @@ describe("LayoutToggle", () => {
     render(<LayoutToggle />);
 
     const button = screen.getByRole("button");
-    expect(button).toHaveAttribute("aria-label", "Switch to single column layout");
+    expect(button).toHaveAttribute(
+      "aria-label",
+      "Switch to single column layout",
+    );
     expect(button).toHaveAttribute("aria-pressed", "true");
     expect(button).toHaveAttribute("title", "Switch to single column layout");
   });
@@ -79,7 +82,7 @@ describe("LayoutToggle", () => {
     render(<LayoutToggle />);
 
     const button = screen.getByRole("button");
-    
+
     // Button should be focusable and have proper tab index
     expect(button).not.toHaveAttribute("tabindex", "-1");
     button.focus();

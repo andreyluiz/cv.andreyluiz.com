@@ -1,5 +1,5 @@
-import ProfileImage from "./ProfileImage";
 import HeaderContent from "./HeaderContent";
+import ProfileImage from "./ProfileImage";
 
 interface Props {
   name: string;
@@ -12,7 +12,7 @@ export default function Header({ name, title, summary, qualities }: Props) {
   return (
     <header className="flex items-center justify-between gap-8">
       <ProfileImage />
-      <HeaderContent 
+      <HeaderContent
         name={name}
         title={title}
         summary={summary}

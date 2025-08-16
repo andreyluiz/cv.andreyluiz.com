@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
-import { vi } from "vitest";
-import RightColumn from "../RightColumn";
+import { describe, expect, it, vi } from "vitest";
 import type { Variant } from "@/lib/types";
+import RightColumn from "../RightColumn";
 
 // Mock the store
 vi.mock("@/lib/store", () => ({
@@ -131,7 +131,7 @@ const renderWithIntl = (component: React.ReactElement) => {
   return render(
     <NextIntlClientProvider locale="en" messages={mockMessages}>
       {component}
-    </NextIntlClientProvider>
+    </NextIntlClientProvider>,
   );
 };
 
@@ -142,7 +142,11 @@ describe("RightColumn", () => {
     // Check HeaderContent is rendered
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("Software Engineer")).toBeInTheDocument();
-    expect(screen.getByText("Experienced software engineer with expertise in web development.")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Experienced software engineer with expertise in web development.",
+      ),
+    ).toBeInTheDocument();
 
     // Check GeneralSkills is rendered
     expect(screen.getByText("General Skills")).toBeInTheDocument();
@@ -158,7 +162,9 @@ describe("RightColumn", () => {
 
     // Check Education is rendered
     expect(screen.getByText("Education & Certifications")).toBeInTheDocument();
-    expect(screen.getByText("Bachelor of Computer Science")).toBeInTheDocument();
+    expect(
+      screen.getByText("Bachelor of Computer Science"),
+    ).toBeInTheDocument();
 
     // Check Projects is rendered
     expect(screen.getByText("Projects")).toBeInTheDocument();
@@ -166,12 +172,16 @@ describe("RightColumn", () => {
 
     // Check Publications is rendered
     expect(screen.getByText("Publications")).toBeInTheDocument();
-    expect(screen.getByText("Modern Web Development Practices - Tech Journal")).toBeInTheDocument();
+    expect(
+      screen.getByText("Modern Web Development Practices - Tech Journal"),
+    ).toBeInTheDocument();
   });
 
   it("uses flex column layout with proper spacing", () => {
-    const { container } = renderWithIntl(<RightColumn resumeData={mockResumeData} />);
-    
+    const { container } = renderWithIntl(
+      <RightColumn resumeData={mockResumeData} />,
+    );
+
     const rightColumnDiv = container.firstChild as HTMLElement;
     expect(rightColumnDiv).toHaveClass("flex", "flex-col", "gap-6");
   });
@@ -216,6 +226,8 @@ describe("RightColumn", () => {
 
     // Both certification and education should appear in the same section
     expect(screen.getByText("AWS Certified Developer")).toBeInTheDocument();
-    expect(screen.getByText("Bachelor of Computer Science")).toBeInTheDocument();
+    expect(
+      screen.getByText("Bachelor of Computer Science"),
+    ).toBeInTheDocument();
   });
 });

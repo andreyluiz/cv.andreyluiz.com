@@ -1,14 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
-import { vi } from "vitest";
-import LeftColumn from "../LeftColumn";
+import { describe, expect, it, vi } from "vitest";
 import type { Variant } from "@/lib/types";
-import { it } from "node:test";
-import { it } from "node:test";
-import { it } from "node:test";
-import { it } from "node:test";
-import { it } from "node:test";
-import { describe } from "node:test";
+import LeftColumn from "../LeftColumn";
 
 // Mock the ProfileImage component since it uses Next.js Image
 vi.mock("../ProfileImage", () => ({
@@ -90,7 +84,7 @@ describe("LeftColumn", () => {
     return render(
       <NextIntlClientProvider locale="en" messages={mockMessages}>
         {component}
-      </NextIntlClientProvider>
+      </NextIntlClientProvider>,
     );
   };
 
@@ -112,8 +106,10 @@ describe("LeftColumn", () => {
   });
 
   it("applies correct CSS classes for layout", () => {
-    const { container } = renderWithIntl(<LeftColumn resumeData={mockResumeData} />);
-    
+    const { container } = renderWithIntl(
+      <LeftColumn resumeData={mockResumeData} />,
+    );
+
     const leftColumnElement = container.firstChild as HTMLElement;
     expect(leftColumnElement).toHaveClass("flex", "flex-col", "gap-6");
   });
@@ -121,24 +117,32 @@ describe("LeftColumn", () => {
   it("accepts and applies custom className", () => {
     const customClass = "custom-left-column";
     const { container } = renderWithIntl(
-      <LeftColumn resumeData={mockResumeData} className={customClass} />
+      <LeftColumn resumeData={mockResumeData} className={customClass} />,
     );
-    
+
     const leftColumnElement = container.firstChild as HTMLElement;
     expect(leftColumnElement).toHaveClass(customClass);
   });
 
   it("centers the profile image", () => {
-    const { container } = renderWithIntl(<LeftColumn resumeData={mockResumeData} />);
-    
-    const profileImageContainer = container.querySelector(".flex.justify-center");
+    const { container } = renderWithIntl(
+      <LeftColumn resumeData={mockResumeData} />,
+    );
+
+    const profileImageContainer = container.querySelector(
+      ".flex.justify-center",
+    );
     expect(profileImageContainer).toBeInTheDocument();
-    expect(profileImageContainer).toContainElement(screen.getByTestId("profile-image"));
+    expect(profileImageContainer).toContainElement(
+      screen.getByTestId("profile-image"),
+    );
   });
 
   it("renders with proper vertical spacing", () => {
-    const { container } = renderWithIntl(<LeftColumn resumeData={mockResumeData} />);
-    
+    const { container } = renderWithIntl(
+      <LeftColumn resumeData={mockResumeData} />,
+    );
+
     const leftColumnElement = container.firstChild as HTMLElement;
     expect(leftColumnElement).toHaveClass("gap-6");
   });
