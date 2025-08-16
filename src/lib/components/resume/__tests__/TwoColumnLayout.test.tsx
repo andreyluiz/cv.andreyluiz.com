@@ -160,7 +160,7 @@ describe("TwoColumnLayout", () => {
     );
 
     const gridContainer = container.firstChild as HTMLElement;
-    expect(gridContainer).toHaveClass("print:grid-cols-[1fr_2fr]");
+    expect(gridContainer).toHaveClass("print:grid-cols-[200px_1fr]");
     expect(gridContainer).toHaveClass("print:gap-4");
   });
 
@@ -200,6 +200,80 @@ describe("TwoColumnLayout", () => {
     // Both columns should have min-w-0 to prevent overflow
     columns.forEach((column) => {
       expect(column).toHaveClass("min-w-0");
+    });
+  });
+
+  describe("Print Optimization", () => {
+    it("should have print-specific grid layout classes", () => {
+      const { container } = renderWithIntl(
+        <TwoColumnLayout resumeData={mockResumeData} />,
+      );
+
+      const gridContainer = container.firstChild as HTMLElement;
+      expect(gridContainer).toHaveClass("print:grid-cols-[200px_1fr]");
+      expect(gridContainer).toHaveClass("print:gap-4");
+      expect(gridContainer).toHaveClass("print:text-xs");
+      expect(gridContainer).toHaveClass("print:leading-tight");
+    });
+
+    it("should have print-optimized spacing in columns", () => {
+      const { container } = renderWithIntl(
+        <TwoColumnLayout resumeData={mockResumeData} />,
+      );
+
+      const gridContainer = container.firstChild as HTMLElement;
+      const columns = gridContainer.querySelectorAll(":scope > .flex.flex-col");
+
+      // Both columns should have print-optimized gap spacing
+      columns.forEach((column) => {
+        expect(column).toHaveClass("print:gap-3");
+      });
+    });
+
+    it("should have page break avoidance classes for left column sections", () => {
+      const { container } = renderWithIntl(
+        <TwoColumnLayout resumeData={mockResumeData} />,
+      );
+
+      const gridContainer = container.firstChild as HTMLElement;
+      const leftColumn = gridContainer.querySelector(":scope > .flex.flex-col");
+
+      // Left column should prevent breaking
+      expect(leftColumn).toHaveClass("print:break-inside-avoid");
+
+      // Left column sections should be wrapped in break-inside-avoid divs
+      const leftColumnSections = leftColumn?.querySelectorAll(
+        ":scope > .print\\:break-inside-avoid",
+      );
+      expect(leftColumnSections?.length).toBeGreaterThan(0);
+    });
+
+    it("should have page break avoidance classes for right column sections", () => {
+      const { container } = renderWithIntl(
+        <TwoColumnLayout resumeData={mockResumeData} />,
+      );
+
+      const gridContainer = container.firstChild as HTMLElement;
+      const rightColumn = gridContainer.querySelector(
+        ":scope > .flex.flex-col:last-child",
+      );
+
+      // Right column sections should have page break avoidance
+      const rightColumnSections = rightColumn?.querySelectorAll(
+        ":scope > .print\\:break-inside-avoid-page",
+      );
+      expect(rightColumnSections?.length).toBeGreaterThan(0);
+    });
+
+    it("should maintain content structure in print layout", () => {
+      renderWithIntl(<TwoColumnLayout resumeData={mockResumeData} />);
+
+      // Verify all essential content is still present for print
+      expect(screen.getByText("John Doe")).toBeInTheDocument();
+      expect(screen.getByText("Software Engineer")).toBeInTheDocument();
+      expect(screen.getByText("john@example.com")).toBeInTheDocument();
+      expect(screen.getByText("Senior Developer")).toBeInTheDocument();
+      expect(screen.getByText("English")).toBeInTheDocument();
     });
   });
 });

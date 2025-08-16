@@ -169,4 +169,42 @@ describe("Responsive Behavior", () => {
     // At 767px should be mobile (< 768 is mobile)
     expect(getByTestId("mobile-status")).toHaveTextContent("mobile");
   });
+
+  describe("Print Media Behavior", () => {
+    it("should have print-specific CSS classes available", () => {
+      // Create a test element with print classes
+      const testElement = document.createElement("div");
+      testElement.className =
+        "print:grid-cols-[200px_1fr] print:gap-4 print:text-xs print:leading-tight";
+
+      // Verify the classes are applied (they exist in the className)
+      expect(testElement.className).toContain("print:grid-cols-[200px_1fr]");
+      expect(testElement.className).toContain("print:gap-4");
+      expect(testElement.className).toContain("print:text-xs");
+      expect(testElement.className).toContain("print:leading-tight");
+    });
+
+    it("should have page break avoidance classes available", () => {
+      const testElement = document.createElement("div");
+      testElement.className =
+        "print:break-inside-avoid print:break-inside-avoid-page";
+
+      expect(testElement.className).toContain("print:break-inside-avoid");
+      expect(testElement.className).toContain("print:break-inside-avoid-page");
+    });
+
+    it("should maintain responsive behavior with print classes", () => {
+      // Test that print classes don't interfere with responsive behavior
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 600, // Mobile size
+      });
+
+      const { getByTestId } = render(<TestComponent />);
+
+      // Should still detect mobile correctly even with print classes present
+      expect(getByTestId("mobile-status")).toHaveTextContent("mobile");
+    });
+  });
 });

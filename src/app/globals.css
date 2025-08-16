@@ -11,5 +11,60 @@
   body {
     font-family: "Arial", sans-serif;
     font-size: 10pt;
+    line-height: 1.3;
+  }
+
+  /* Optimize two-column layout for print */
+  .print\:break-inside-avoid-page {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* Ensure proper column alignment in print */
+  .print\:grid-cols-\[200px_1fr\] {
+    grid-template-columns: 200px 1fr;
+  }
+
+  /* Optimize spacing for print density */
+  .print\:gap-3 > * + * {
+    margin-top: 0.75rem;
+  }
+
+  .print\:gap-4 {
+    gap: 1rem;
+  }
+
+  /* Typography optimizations for print */
+  .print\:text-xs {
+    font-size: 0.75rem;
+  }
+
+  .print\:leading-tight {
+    line-height: 1.25;
+  }
+
+  /* Prevent orphaned content */
+  h1, h2, h3, h4, h5, h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Ensure sections don't break awkwardly */
+  section {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* Optimize list items for print */
+  li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Force color adjustments for better print contrast */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
