@@ -1,4 +1,6 @@
 import Title from "@/lib/components/ui/Title";
+import { useStore } from "@/lib/store";
+import Qualities from "./Qualities";
 
 interface HeaderContentProps {
   name: string;
@@ -13,42 +15,33 @@ export default function HeaderContent({
   summary,
   qualities,
 }: HeaderContentProps) {
+  const { layoutMode } = useStore();
+  const isTwoColumn = layoutMode === "two-column";
+
   return (
     <div className="flex-1">
-      <div className="flex items-baseline justify-center md:justify-start print:justify-start">
-        <Title
-          tag="h1"
-          className="text-2xl md:text-3xl print:text-lg print:font-bold"
-        >
+      <div
+        className={
+          isTwoColumn
+            ? "flex flex-col items-center md:items-start print:items-start"
+            : "flex items-baseline justify-center md:justify-start print:justify-start"
+        }
+      >
+        <Title tag="h1" className="print:font-bold">
           {name}
         </Title>
-        <Title
-          tag="h2"
-          className="mx-2 !text-neutral-600 text-xl md:text-2xl print:text-sm print:mx-1"
-        >
-          -
-        </Title>
-        <Title
-          tag="h2"
-          className="text-xl md:text-2xl print:text-base print:font-semibold"
-        >
+        {!isTwoColumn && (
+          <Title tag="h2" className="mx-2 !text-neutral-600 print:mx-1">
+            -
+          </Title>
+        )}
+        <Title tag="h2" className="print:font-semibold">
           {title}
         </Title>
       </div>
-      <div className="mt-4 text-sm md:text-base print:mt-2 print:text-xs print:leading-tight">
-        {summary}
-      </div>
+      <div className="mt-4 print:mt-2 print:leading-tight">{summary}</div>
 
-      <ul className="flex flex-wrap justify-center md:justify-start gap-3 mt-4 print:justify-start print:gap-2 print:mt-2">
-        {qualities.map((quality) => (
-          <li
-            className="first:before:content-none before:content-['•'] before:mr-3 before:inline-block font-bold text-sm md:text-base print:text-xs print:before:mr-2"
-            key={quality}
-          >
-            {quality}
-          </li>
-        ))}
-      </ul>
+      {!isTwoColumn && <Qualities qualities={qualities} />}
     </div>
   );
 }

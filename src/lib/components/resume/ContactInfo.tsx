@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
+import { useStore } from "@/lib/store";
 import type { Variant } from "@/lib/types";
 import { Section } from "../ui/Section";
 
@@ -25,10 +26,17 @@ const ContactItem = ({ item, icon }: { item: string; icon: string }) => {
 
 export default function ContactInfo({ contactInfo }: Props) {
   const t = useTranslations("resume.contactInfo");
+  const { layoutMode } = useStore();
 
   return (
     <Section title={t("title")}>
-      <ul className="grid grid-cols-2">
+      <ul
+        className={
+          layoutMode === "two-column"
+            ? "flex flex-col gap-2"
+            : "grid grid-cols-2"
+        }
+      >
         <ContactItem item={contactInfo.email} icon="mdi:email" />
         <ContactItem item={contactInfo.location} icon="mdi:map-marker" />
         <ContactItem item={contactInfo.phone} icon="mdi:phone" />

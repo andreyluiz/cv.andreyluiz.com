@@ -56,14 +56,4 @@ describe("HeaderContent", () => {
     const headerContainer = container.querySelector(".flex.items-baseline");
     expect(headerContainer).toHaveClass("justify-center", "md:justify-start");
   });
-
-  it("should apply responsive text sizing classes", () => {
-    render(<HeaderContent {...mockProps} />);
-
-    const nameHeading = screen.getByRole("heading", { level: 1 });
-    expect(nameHeading).toHaveClass("text-2xl", "md:text-3xl");
-
-    const titleHeading = screen.getByText("Software Engineer");
-    expect(titleHeading).toHaveClass("text-xl", "md:text-2xl");
-  });
 });

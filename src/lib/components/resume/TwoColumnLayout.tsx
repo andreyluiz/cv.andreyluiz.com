@@ -10,6 +10,7 @@ import Languages from "./Languages";
 import ProfileImage from "./ProfileImage";
 import Projects from "./Projects";
 import Publications from "./Publications";
+import Qualities from "./Qualities";
 import Skills from "./Skills";
 
 interface TwoColumnLayoutProps {
@@ -39,6 +40,9 @@ export default function TwoColumnLayout({ resumeData }: TwoColumnLayoutProps) {
       <div className="flex flex-col gap-6 min-w-0 print:gap-3 print:break-inside-avoid">
         <div className="print:break-inside-avoid">
           <ProfileImage />
+        </div>
+        <div className="print:break-inside-avoid">
+          <Qualities qualities={qualities} />
         </div>
         <div className="print:break-inside-avoid">
           <ContactInfo contactInfo={contactInfo} />
