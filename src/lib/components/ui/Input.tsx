@@ -11,6 +11,7 @@ interface InputProps {
   helperText?: string;
   id?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function Input({
@@ -24,6 +25,7 @@ export default function Input({
   helperText,
   id,
   className = "",
+  disabled = false,
 }: InputProps) {
   const generatedId = useId();
   const inputId = id || generatedId;
@@ -46,10 +48,13 @@ export default function Input({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         required={required}
+        disabled={disabled}
         className={`w-full rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 ${
           error
             ? "border-red-300 focus:border-red-500"
             : "border-neutral-300 focus:border-blue-500"
+        } ${
+          disabled ? "cursor-not-allowed opacity-50" : ""
         } dark:border-neutral-600 dark:bg-neutral-700 dark:text-white dark:placeholder-gray-400`}
         aria-describedby={
           error ? errorId : helperText ? helperTextId : undefined

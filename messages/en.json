@@ -50,6 +50,26 @@
       "title": "Personality Traits"
     }
   },
+  "cvManagement": {
+    "form": {
+      "title": "CV Title",
+      "titlePlaceholder": "Enter a name for this CV",
+      "rawText": "Raw CV Text",
+      "rawTextPlaceholder": "Paste your CV text here...",
+      "submit": "Process CV",
+      "cancel": "Cancel",
+      "processing": "Processing CV..."
+    },
+    "errors": {
+      "titleRequired": "CV title is required",
+      "titleTooLong": "CV title must be less than 100 characters",
+      "rawTextRequired": "CV text is required",
+      "rawTextTooShort": "CV text must be at least 50 characters",
+      "rawTextTooLong": "CV text must be less than 50,000 characters",
+      "processingFailed": "Failed to process CV",
+      "storageError": "Failed to save CV"
+    }
+  },
   "coverLetter": {
     "form": {
       "optional": "optional",

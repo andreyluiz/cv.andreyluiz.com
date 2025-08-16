@@ -11,6 +11,7 @@ interface TextareaProps {
   helperText?: string;
   id?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function Textarea({
@@ -24,6 +25,7 @@ export default function Textarea({
   helperText,
   id,
   className = "",
+  disabled = false,
 }: TextareaProps) {
   const generatedId = useId();
   const textareaId = id || generatedId;
@@ -46,10 +48,13 @@ export default function Textarea({
         placeholder={placeholder}
         required={required}
         rows={rows}
+        disabled={disabled}
         className={`w-full rounded-lg border p-4 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 resize-vertical ${
           error
             ? "border-red-300 focus:border-red-500"
             : "border-neutral-300 focus:border-blue-500"
+        } ${
+          disabled ? "cursor-not-allowed opacity-50" : ""
         } dark:border-neutral-600 dark:bg-neutral-700 dark:text-white dark:placeholder-gray-400`}
         aria-describedby={
           error ? errorId : helperText ? helperTextId : undefined

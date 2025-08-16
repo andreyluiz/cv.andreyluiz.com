@@ -50,6 +50,26 @@
       "title": "Traços de Personalidade"
     }
   },
+  "cvManagement": {
+    "form": {
+      "title": "Título do CV",
+      "titlePlaceholder": "Digite um nome para este CV",
+      "rawText": "Texto Bruto do CV",
+      "rawTextPlaceholder": "Cole o texto do seu CV aqui...",
+      "submit": "Processar CV",
+      "cancel": "Cancelar",
+      "processing": "Processando CV..."
+    },
+    "errors": {
+      "titleRequired": "O título do CV é obrigatório",
+      "titleTooLong": "O título do CV deve ter menos de 100 caracteres",
+      "rawTextRequired": "O texto do CV é obrigatório",
+      "rawTextTooShort": "O texto do CV deve ter pelo menos 50 caracteres",
+      "rawTextTooLong": "O texto do CV deve ter menos de 50.000 caracteres",
+      "processingFailed": "Falha ao processar CV",
+      "storageError": "Falha ao salvar CV"
+    }
+  },
   "coverLetter": {
     "form": {
       "optional": "opcional",

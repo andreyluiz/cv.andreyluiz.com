@@ -50,6 +50,26 @@
       "title": "Traits de Personnalité"
     }
   },
+  "cvManagement": {
+    "form": {
+      "title": "Titre du CV",
+      "titlePlaceholder": "Entrez un nom pour ce CV",
+      "rawText": "Texte Brut du CV",
+      "rawTextPlaceholder": "Collez le texte de votre CV ici...",
+      "submit": "Traiter le CV",
+      "cancel": "Annuler",
+      "processing": "Traitement du CV..."
+    },
+    "errors": {
+      "titleRequired": "Le titre du CV est requis",
+      "titleTooLong": "Le titre du CV doit contenir moins de 100 caractères",
+      "rawTextRequired": "Le texte du CV est requis",
+      "rawTextTooShort": "Le texte du CV doit contenir au moins 50 caractères",
+      "rawTextTooLong": "Le texte du CV doit contenir moins de 50 000 caractères",
+      "processingFailed": "Échec du traitement du CV",
+      "storageError": "Échec de la sauvegarde du CV"
+    }
+  },
   "coverLetter": {
     "form": {
       "optional": "optionnel",

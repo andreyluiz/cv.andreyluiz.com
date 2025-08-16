@@ -11,7 +11,7 @@
   - Implement error handling and validation
   - _Requirements: 2.4, 2.5, 2.6, 5.1, 5.4_
 
-- [ ] 3. Create CV ingestion form component
+- [x] 3. Create CV ingestion form component
   - Build CVIngestionForm component with title and raw text inputs
   - Implement form validation (title length, text length requirements)
   - Add loading states and error handling
