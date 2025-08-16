@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { useStore } from "@/lib/store";
+import type { IngestedCV } from "@/lib/types";
 
 import CVManagementModal from "../CVManagementModal";
 
@@ -13,6 +14,10 @@ const mockUseStore = vi.mocked(useStore);
 vi.mock("@/lib/server/actions", () => ({
   ingestCV: vi.fn(),
 }));
+
+import { ingestCV } from "@/lib/server/actions";
+
+const mockIngestCV = vi.mocked(ingestCV);
 
 // Mock resume data
 vi.mock("@/lib/server/resume-en.json", () => ({
@@ -78,6 +83,38 @@ const messages = {
       apiKeyRequired: "API key is required to process CV.",
     },
   },
+};
+
+const mockIngestedCV: IngestedCV = {
+  id: "test-cv-1",
+  title: "Test CV",
+  rawText:
+    "This is test CV raw text content that is long enough to pass validation requirements.",
+  formattedCV: {
+    name: "Test User",
+    title: "Test Title",
+    contactInfo: {
+      email: "test@example.com",
+      phone: "+1234567890",
+      location: "Test Location",
+      github: "github.com/test",
+      linkedin: "linkedin.com/in/test",
+      website: "test.com",
+      age: "30",
+      nationality: "Test",
+    },
+    summary: "Test summary",
+    qualities: [],
+    generalSkills: [],
+    skills: [],
+    experience: [],
+    education: [],
+    certifications: [],
+    languages: [],
+    personalityTraits: [],
+  },
+  createdAt: new Date("2024-01-01"),
+  updatedAt: new Date("2024-01-01"),
 };
 
 const mockStore = {
@@ -191,5 +228,176 @@ describe("CVManagementModal", () => {
     );
 
     expect(screen.queryByText("My CVs")).not.toBeInTheDocument();
+  });
+
+  it("shows edit form when edit button is clicked on ingested CV", async () => {
+    mockUseStore.mockReturnValue({
+      ...mockStore,
+      ingestedCVs: [mockIngestedCV],
+    } as any);
+
+    render(
+      <TestWrapper>
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCVLoad}
+        />
+      </TestWrapper>,
+    );
+
+    const editButton = screen.getByLabelText("Edit CV: Test CV");
+    fireEvent.click(editButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Edit CV")).toBeInTheDocument();
+      expect(screen.getByDisplayValue("Test CV")).toBeInTheDocument();
+      expect(
+        screen.getByDisplayValue(mockIngestedCV.rawText),
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("updates existing CV when edit form is submitted", async () => {
+    const mockUpdatedCV = {
+      ...mockIngestedCV.formattedCV,
+      name: "Updated User",
+    };
+
+    mockIngestCV.mockResolvedValue(mockUpdatedCV);
+
+    mockUseStore.mockReturnValue({
+      ...mockStore,
+      ingestedCVs: [mockIngestedCV],
+    } as any);
+
+    render(
+      <TestWrapper>
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCVLoad}
+        />
+      </TestWrapper>,
+    );
+
+    // Click edit button
+    const editButton = screen.getByLabelText("Edit CV: Test CV");
+    fireEvent.click(editButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Edit CV")).toBeInTheDocument();
+    });
+
+    // Update the title
+    const titleInput = screen.getByDisplayValue("Test CV");
+    fireEvent.change(titleInput, { target: { value: "Updated Test CV" } });
+
+    // Update the raw text
+    const rawTextArea = screen.getByDisplayValue(mockIngestedCV.rawText);
+    fireEvent.change(rawTextArea, {
+      target: {
+        value:
+          "Updated CV raw text content that is long enough to pass validation requirements.",
+      },
+    });
+
+    // Submit the form
+    const submitButton = screen.getByText("Process CV");
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockIngestCV).toHaveBeenCalledWith(
+        "Updated CV raw text content that is long enough to pass validation requirements.",
+        "test-api-key",
+        "test-model",
+        "en",
+      );
+      expect(mockStore.updateIngestedCV).toHaveBeenCalledWith(
+        "test-cv-1",
+        expect.objectContaining({
+          id: "test-cv-1",
+          title: "Updated Test CV",
+          rawText:
+            "Updated CV raw text content that is long enough to pass validation requirements.",
+          formattedCV: mockUpdatedCV,
+        }),
+      );
+    });
+  });
+
+  it("returns to list view after successful CV update", async () => {
+    const mockUpdatedCV = {
+      ...mockIngestedCV.formattedCV,
+      name: "Updated User",
+    };
+
+    mockIngestCV.mockResolvedValue(mockUpdatedCV);
+
+    mockUseStore.mockReturnValue({
+      ...mockStore,
+      ingestedCVs: [mockIngestedCV],
+    } as any);
+
+    render(
+      <TestWrapper>
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCVLoad}
+        />
+      </TestWrapper>,
+    );
+
+    // Click edit button
+    const editButton = screen.getByLabelText("Edit CV: Test CV");
+    fireEvent.click(editButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Edit CV")).toBeInTheDocument();
+    });
+
+    // Submit the form
+    const submitButton = screen.getByText("Process CV");
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getAllByText("My CVs")).toHaveLength(2); // Back to list view
+      expect(screen.getByText("Ingest New CV")).toBeInTheDocument();
+    });
+  });
+
+  it("handles edit form cancellation", async () => {
+    mockUseStore.mockReturnValue({
+      ...mockStore,
+      ingestedCVs: [mockIngestedCV],
+    } as any);
+
+    render(
+      <TestWrapper>
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCVLoad}
+        />
+      </TestWrapper>,
+    );
+
+    // Click edit button
+    const editButton = screen.getByLabelText("Edit CV: Test CV");
+    fireEvent.click(editButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Edit CV")).toBeInTheDocument();
+    });
+
+    // Cancel the form
+    const cancelButton = screen.getByText("Cancel");
+    fireEvent.click(cancelButton);
+
+    await waitFor(() => {
+      expect(screen.getAllByText("My CVs")).toHaveLength(2); // Back to list view
+      expect(screen.getByText("Ingest New CV")).toBeInTheDocument();
+    });
   });
 });

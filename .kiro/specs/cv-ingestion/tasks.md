@@ -29,7 +29,7 @@
   - Implement CV loading functionality that closes modal and updates main view
   - _Requirements: 1.1, 1.5, 2.1, 4.1, 4.5_
 
-- [ ] 6. Add CV editing functionality
+- [x] 6. Add CV editing functionality
   - Implement edit mode in CVIngestionForm with pre-filled data
   - Add edit button handling in CV list
   - Handle CV updates and re-processing
