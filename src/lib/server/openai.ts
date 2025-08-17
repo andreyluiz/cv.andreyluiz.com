@@ -375,7 +375,7 @@ export async function ingestCV(
       messages: [
         {
           role: "system",
-          content: `You are a professional CV formatting assistant. Your task is to convert raw CV text into a structured JSON format that matches the exact schema provided. 
+          content: `You are a professional CV formatting assistant. Your task is to convert raw CV text into a structured format using the provided function. 
 
 CRITICAL REQUIREMENTS:
 1. Extract ALL relevant information from the raw text
@@ -389,9 +389,9 @@ CRITICAL REQUIREMENTS:
 6. Extract achievements and format them as clear, concise bullet points
 7. Preserve the original meaning and context of all information
 8. Handle text in ${languageName} appropriately
-9. Return ONLY valid JSON that matches the schema exactly
+9. Use the ingest_cv function to return the structured data
 
-The JSON structure must include all required fields from the Variant interface. Pay special attention to:
+Pay special attention to:
 - contactInfo: Extract email, phone, location, and any web presence
 - experience: Include all work history with achievements and tech stack
 - skills: Group technical and soft skills into appropriate domains
@@ -401,95 +401,222 @@ The JSON structure must include all required fields from the Variant interface. 
         },
         {
           role: "user",
-          content: `Please convert this raw CV text into the structured JSON format:
+          content: `Please convert this raw CV text into the structured format:
 
-${rawText}
-
-Return the formatted CV as a JSON object that matches this exact structure:
-{
-  "name": "string",
-  "title": "string", 
-  "contactInfo": {
-    "email": "string",
-    "phone": "string",
-    "location": "string",
-    "website": "string",
-    "linkedin": "string", 
-    "github": "string",
-    "age": "string",
-    "nationality": "string"
-  },
-  "summary": "string",
-  "qualities": ["string"],
-  "generalSkills": ["string"],
-  "skills": [{"domain": "string", "skills": ["string"]}],
-  "experience": [{
-    "title": "string",
-    "company": "string", 
-    "location": "string",
-    "period": {"start": "YYYY-MM", "end": "YYYY-MM or Present"},
-    "achievements": ["string"],
-    "techStack": ["string"],
-    "isPrevious": false
-  }],
-  "projects": [{
-    "name": "string",
-    "description": "string", 
-    "techStack": ["string"],
-    "period": {"start": "YYYY-MM", "end": "YYYY-MM"}
-  }],
-  "education": [{
-    "degree": "string",
-    "institution": "string",
-    "year": "string",
-    "location": "string",
-    "gpa": "string",
-    "topics": "string"
-  }],
-  "certifications": [{
-    "degree": "string",
-    "institution": "string", 
-    "year": "string",
-    "location": "string"
-  }],
-  "languages": [{"name": "string", "level": "string"}],
-  "publications": [{
-    "title": "string",
-    "location": "string",
-    "url": "string"
-  }],
-  "personalityTraits": ["string"]
-}
-
-IMPORTANT: Return ONLY the JSON object, no additional text or formatting.`,
+${rawText}`,
         },
       ],
+      tools: [
+        {
+          type: "function",
+          function: {
+            name: "ingest_cv",
+            description: "Convert raw CV text into structured format",
+            parameters: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                  description: "Full name of the person",
+                },
+                title: {
+                  type: "string",
+                  description: "Professional title or current position",
+                },
+                contactInfo: {
+                  type: "object",
+                  properties: {
+                    email: { type: "string" },
+                    phone: { type: "string" },
+                    location: { type: "string" },
+                    website: { type: "string" },
+                    linkedin: { type: "string" },
+                    github: { type: "string" },
+                    age: { type: "string", description: "Year of birth and age of person" },
+                    nationality: { type: "string", description: "Nationality, followed by the type of permit, if available." },
+                  },
+                  required: ["email", "phone", "location", "website", "linkedin", "github", "age", "nationality"],
+                },
+                summary: {
+                  type: "string",
+                  description: "Professional summary or objective",
+                },
+                qualities: {
+                  type: "array",
+                  items: { type: "string" },
+                  description: "Personal qualities or soft skills",
+                },
+                generalSkills: {
+                  type: "array",
+                  items: { type: "string" },
+                  description: "General skills not categorized by domain",
+                },
+                skills: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      domain: { type: "string" },
+                      skills: {
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                    },
+                    required: ["domain", "skills"],
+                  },
+                  description: "Skills organized by domain/category",
+                },
+                experience: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      title: { type: "string" },
+                      company: { type: "string" },
+                      location: { type: "string" },
+                      period: {
+                        type: "object",
+                        properties: {
+                          start: { type: "string", description: "Start date in YYYY-MM format" },
+                          end: { type: "string", description: "End date in YYYY-MM format or 'Present'" },
+                        },
+                        required: ["start", "end"],
+                      },
+                      achievements: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Key achievements and responsibilities",
+                      },
+                      techStack: {
+                        type: "array",
+                        items: { type: "string" },
+                        description: "Technologies used in this role",
+                      },
+                      isPrevious: {
+                        type: "boolean",
+                        description: "Whether this should be shown in Previous Experience section",
+                        default: false,
+                      },
+                    },
+                    required: ["title", "company", "location", "period", "achievements", "techStack"],
+                  },
+                },
+                projects: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      name: { type: "string" },
+                      description: { type: "string" },
+                      techStack: {
+                        type: "array",
+                        items: { type: "string" },
+                      },
+                      period: {
+                        type: "object",
+                        properties: {
+                          start: { type: "string" },
+                          end: { type: "string" },
+                        },
+                        required: ["start", "end"],
+                      },
+                    },
+                    required: ["name", "description", "techStack"],
+                  },
+                },
+                education: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      degree: { type: "string" },
+                      institution: { type: "string" },
+                      year: { type: "string" },
+                      location: { type: "string" },
+                      gpa: { type: "string" },
+                      topics: { type: "string" },
+                    },
+                    required: ["degree", "institution", "year", "location"],
+                  },
+                },
+                certifications: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      degree: { type: "string" },
+                      institution: { type: "string" },
+                      year: { type: "string" },
+                      location: { type: "string" },
+                    },
+                    required: ["degree", "institution", "year", "location"],
+                  },
+                },
+                languages: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      name: { type: "string" },
+                      level: { type: "string" },
+                    },
+                    required: ["name", "level"],
+                  },
+                },
+                publications: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      title: { type: "string" },
+                      location: { type: "string" },
+                      url: { type: "string" },
+                    },
+                    required: ["title", "location", "url"],
+                  },
+                },
+                personalityTraits: {
+                  type: "array",
+                  items: { type: "string" },
+                  description: "Personality traits or characteristics",
+                },
+              },
+              required: [
+                "name",
+                "title",
+                "contactInfo",
+                "summary",
+                "qualities",
+                "generalSkills",
+                "skills",
+                "experience",
+                "projects",
+                "education",
+                "certifications",
+                "languages",
+                "publications",
+                "personalityTraits",
+              ],
+            },
+          },
+        },
+      ],
+      tool_choice: { type: "function", function: { name: "ingest_cv" } },
       max_completion_tokens: 8000,
       temperature: 0.3, // Lower temperature for more consistent formatting
     });
 
-    const generatedContent = response.choices[0].message.content;
+    const toolCalls = response.choices[0].message.tool_calls;
 
-    if (!generatedContent || generatedContent.trim().length === 0) {
-      throw new Error("AI generated empty CV content");
+    if (
+      !toolCalls ||
+      toolCalls.length === 0 ||
+      toolCalls[0].function.name !== "ingest_cv"
+    ) {
+      throw new Error("Expected tool call to ingest_cv was not returned");
     }
 
-    // Parse the JSON response
-    let parsedCV: Variant;
-    try {
-      // Clean the response in case there are markdown code blocks
-      const cleanedContent = generatedContent
-        .replace(/```json\s*/g, "")
-        .replace(/```\s*/g, "")
-        .trim();
-
-      parsedCV = JSON.parse(cleanedContent);
-    } catch (parseError) {
-      console.error("Failed to parse AI response as JSON:", parseError);
-      throw new Error(
-        "The AI response could not be parsed as valid JSON. Please try again with a different model.",
-      );
-    }
+    const parsedCV = JSON.parse(toolCalls[0].function.arguments);
 
     // Validate required fields are present
     if (!parsedCV.name || typeof parsedCV.name !== "string") {

@@ -29,16 +29,14 @@ export default function Controls({ currentResume, setCurrentResume }: Props) {
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 print:hidden">
-      <div className="flex items-center gap-2">
-        <MyCVsButton onCVLoad={setCurrentResume} />
-        <ResumeTailor
-          resumeData={currentResume}
-          onResumeUpdate={setCurrentResume}
-        />
-      </div>
-      <div className="flex items-center justify-center gap-2">
-        <div className="flex items-center gap-2">
+    <div className="flex flex-col justify-between gap-4 print:hidden">
+      <div className="flex justify-between gap-2 w-full">
+        <div className="flex">
+          <Select
+            options={langsOptions}
+            value={locale as string}
+            onChange={handleLangChange}
+          />
           {!apiKey && (
             <span className="text-xs text-red-500">Set your API key</span>
           )}
@@ -54,15 +52,19 @@ export default function Controls({ currentResume, setCurrentResume }: Props) {
               }`}
             />
           </Button>
+          <LayoutToggle />
+
+          <ThemeSwitcher />
         </div>
-        <LayoutToggle />
-        <Select
-          options={langsOptions}
-          value={locale as string}
-          onChange={handleLangChange}
-        />
-        <ThemeSwitcher />
+
+        <div className="ml-auto">
+          <MyCVsButton onCVLoad={setCurrentResume} />
+        </div>
       </div>
+      <ResumeTailor
+        resumeData={currentResume}
+        onResumeUpdate={setCurrentResume}
+      />
       <ApiKeyModal
         isOpen={isApiKeyModalOpen}
         onClose={() => setIsApiKeyModalOpen(false)}
