@@ -72,7 +72,7 @@
   - Test PhotoService IndexedDB operations and error scenarios
   - _Requirements: All requirements - unit testing coverage_
 
-- [ ] 11. Write integration tests for photo workflow
+- [x] 11. Write integration tests for photo workflow
   - Test end-to-end photo upload during CV creation
   - Test photo persistence and retrieval across browser sessions
   - Test photo editing and deletion workflows
