@@ -42,7 +42,7 @@ describe("ProfileImage", () => {
     expect(image).toHaveAttribute("alt", "Profile Picture");
     expect(image).toHaveAttribute(
       "src",
-      expect.stringContaining("profile.png"),
+      expect.stringContaining("profile.webp"),
     );
   });
 
@@ -118,7 +118,7 @@ describe("ProfileImage", () => {
       expect(image).toHaveAttribute("alt", "Profile Picture");
       expect(image).toHaveAttribute(
         "src",
-        expect.stringContaining("profile.png"),
+        expect.stringContaining("profile.webp"),
       );
     });
   });
@@ -135,7 +135,7 @@ describe("ProfileImage", () => {
       expect(image).toHaveAttribute("alt", "Profile Picture");
       expect(image).toHaveAttribute(
         "src",
-        expect.stringContaining("profile.png"),
+        expect.stringContaining("profile.webp"),
       );
     });
   });
@@ -168,7 +168,7 @@ describe("ProfileImage", () => {
       });
       expect(fallbackImage).toHaveAttribute(
         "src",
-        expect.stringContaining("profile.png"),
+        expect.stringContaining("profile.webp"),
       );
     });
   });
@@ -250,7 +250,7 @@ describe("ProfileImage", () => {
       const image = screen.getByRole("img", { name: /profile picture/i });
       expect(image).toHaveAttribute(
         "src",
-        expect.stringContaining("profile.png"),
+        expect.stringContaining("profile.webp"),
       );
     });
   });
