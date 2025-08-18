@@ -105,7 +105,22 @@
       "unexpectedError": "An unexpected error occurred. Please try again in a moment.",
       "retryPrompt": "Would you like to try again?",
       "settingsPrompt": "Check your settings and try again.",
-      "modelSuggestion": "Try selecting a different AI model from the settings."
+      "modelSuggestion": "Try selecting a different AI model from the settings.",
+      "photoTooLarge": "Image file must be smaller than 2MB",
+      "photoInvalidType": "Please select a valid image file (JPEG, PNG, or WebP)",
+      "photoUploadFailed": "Failed to process image. Please try again"
+    },
+    "photo": {
+      "upload": "Upload Photo",
+      "dragDrop": "Drag and drop an image here, or click to browse",
+      "remove": "Remove Photo",
+      "preview": "Photo Preview",
+      "alt": "Profile photo preview",
+      "removeAlt": "Remove uploaded photo",
+      "uploading": "Uploading photo...",
+      "clickToReplace": "Click to replace photo",
+      "supportedFormats": "JPEG, PNG, WebP (max 2MB)",
+      "helpText": "Upload a profile photo to personalize your CV"
     }
   },
   "coverLetter": {

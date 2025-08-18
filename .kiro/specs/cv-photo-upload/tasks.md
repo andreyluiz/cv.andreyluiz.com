@@ -13,7 +13,7 @@
   - Add photo-related form data types for CVIngestionForm
   - _Requirements: 3.1, 3.2_
 
-- [ ] 3. Create PhotoUpload component with file handling
+- [x] 3. Create PhotoUpload component with file handling
   - Build PhotoUpload component with drag-and-drop file upload area
   - Implement file type validation (JPEG, PNG, WebP) and size validation (2MB limit)
   - Add image preview functionality with remove option

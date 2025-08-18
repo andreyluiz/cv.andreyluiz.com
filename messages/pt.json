@@ -105,7 +105,22 @@
       "unexpectedError": "Ocorreu um erro inesperado. Por favor, tente novamente em um momento.",
       "retryPrompt": "Gostaria de tentar novamente?",
       "settingsPrompt": "Verifique suas configurações e tente novamente.",
-      "modelSuggestion": "Tente selecionar um modelo de IA diferente nas configurações."
+      "modelSuggestion": "Tente selecionar um modelo de IA diferente nas configurações.",
+      "photoTooLarge": "O arquivo de imagem deve ser menor que 2MB",
+      "photoInvalidType": "Por favor, selecione um arquivo de imagem válido (JPEG, PNG ou WebP)",
+      "photoUploadFailed": "Falha ao processar imagem. Por favor, tente novamente"
+    },
+    "photo": {
+      "upload": "Enviar Foto",
+      "dragDrop": "Arraste e solte uma imagem aqui, ou clique para navegar",
+      "remove": "Remover Foto",
+      "preview": "Visualização da Foto",
+      "alt": "Visualização da foto de perfil",
+      "removeAlt": "Remover foto enviada",
+      "uploading": "Enviando foto...",
+      "clickToReplace": "Clique para substituir a foto",
+      "supportedFormats": "JPEG, PNG, WebP (máx 2MB)",
+      "helpText": "Envie uma foto de perfil para personalizar seu CV"
     }
   },
   "coverLetter": {

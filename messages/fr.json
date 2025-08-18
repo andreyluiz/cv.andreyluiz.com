@@ -105,7 +105,22 @@
       "unexpectedError": "Une erreur inattendue s'est produite. Veuillez réessayer dans un moment.",
       "retryPrompt": "Souhaitez-vous réessayer ?",
       "settingsPrompt": "Vérifiez vos paramètres et réessayez.",
-      "modelSuggestion": "Essayez de sélectionner un modèle IA différent dans les paramètres."
+      "modelSuggestion": "Essayez de sélectionner un modèle IA différent dans les paramètres.",
+      "photoTooLarge": "Le fichier image doit être inférieur à 2 Mo",
+      "photoInvalidType": "Veuillez sélectionner un fichier image valide (JPEG, PNG ou WebP)",
+      "photoUploadFailed": "Échec du traitement de l'image. Veuillez réessayer"
+    },
+    "photo": {
+      "upload": "Télécharger une Photo",
+      "dragDrop": "Glissez-déposez une image ici, ou cliquez pour parcourir",
+      "remove": "Supprimer la Photo",
+      "preview": "Aperçu de la Photo",
+      "alt": "Aperçu de la photo de profil",
+      "removeAlt": "Supprimer la photo téléchargée",
+      "uploading": "Téléchargement de la photo...",
+      "clickToReplace": "Cliquez pour remplacer la photo",
+      "supportedFormats": "JPEG, PNG, WebP (max 2 Mo)",
+      "helpText": "Téléchargez une photo de profil pour personnaliser votre CV"
     }
   },
   "coverLetter": {
