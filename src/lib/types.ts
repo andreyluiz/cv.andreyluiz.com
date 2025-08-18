@@ -110,6 +110,16 @@ export interface IngestedCV {
   profilePhotoId?: string; // Reference to photo stored in IndexedDB
 }
 
+// Photo record interface for IndexedDB storage structure
+export interface PhotoRecord {
+  id: string; // Unique photo identifier
+  blob: Blob; // Binary image data
+  type: string; // MIME type (image/jpeg, image/png, etc.)
+  size: number; // File size in bytes
+  uploadedAt: Date; // Upload timestamp
+  cvId: string; // Associated CV identifier
+}
+
 // Photo-related types for form handling
 export interface PhotoFormData {
   photoId?: string | null;

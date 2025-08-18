@@ -432,10 +432,26 @@ ${rawText}`,
                     website: { type: "string" },
                     linkedin: { type: "string" },
                     github: { type: "string" },
-                    age: { type: "string", description: "Year of birth and age of person" },
-                    nationality: { type: "string", description: "Nationality, followed by the type of permit, if available." },
+                    age: {
+                      type: "string",
+                      description: "Year of birth and age of person",
+                    },
+                    nationality: {
+                      type: "string",
+                      description:
+                        "Nationality, followed by the type of permit, if available.",
+                    },
                   },
-                  required: ["email", "phone", "location", "website", "linkedin", "github", "age", "nationality"],
+                  required: [
+                    "email",
+                    "phone",
+                    "location",
+                    "website",
+                    "linkedin",
+                    "github",
+                    "age",
+                    "nationality",
+                  ],
                 },
                 summary: {
                   type: "string",
@@ -477,8 +493,15 @@ ${rawText}`,
                       period: {
                         type: "object",
                         properties: {
-                          start: { type: "string", description: "Start date in YYYY-MM format" },
-                          end: { type: "string", description: "End date in YYYY-MM format or 'Present'" },
+                          start: {
+                            type: "string",
+                            description: "Start date in YYYY-MM format",
+                          },
+                          end: {
+                            type: "string",
+                            description:
+                              "End date in YYYY-MM format or 'Present'",
+                          },
                         },
                         required: ["start", "end"],
                       },
@@ -494,11 +517,19 @@ ${rawText}`,
                       },
                       isPrevious: {
                         type: "boolean",
-                        description: "Whether this should be shown in Previous Experience section",
+                        description:
+                          "Whether this should be shown in Previous Experience section",
                         default: false,
                       },
                     },
-                    required: ["title", "company", "location", "period", "achievements", "techStack"],
+                    required: [
+                      "title",
+                      "company",
+                      "location",
+                      "period",
+                      "achievements",
+                      "techStack",
+                    ],
                   },
                 },
                 projects: {

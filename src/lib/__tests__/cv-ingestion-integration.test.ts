@@ -79,9 +79,19 @@ describe("CV Ingestion Integration Tests", () => {
       age: "",
       nationality: "",
     },
-    summary: "Experienced software engineer with 5+ years of experience in full-stack development.",
+    summary:
+      "Experienced software engineer with 5+ years of experience in full-stack development.",
     qualities: [],
-    generalSkills: ["JavaScript", "TypeScript", "React", "Node.js", "Python", "Django", "AWS", "Docker"],
+    generalSkills: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Python",
+      "Django",
+      "AWS",
+      "Docker",
+    ],
     skills: [
       {
         domain: "Frontend",
@@ -126,7 +136,8 @@ describe("CV Ingestion Integration Tests", () => {
     projects: [
       {
         name: "E-commerce Platform",
-        description: "Built full-stack e-commerce platform with React and Node.js. Integrated payment processing and inventory management.",
+        description:
+          "Built full-stack e-commerce platform with React and Node.js. Integrated payment processing and inventory management.",
         techStack: ["React", "Node.js"],
         period: { start: "2021-01", end: "2022-01" },
       },
@@ -144,7 +155,7 @@ describe("CV Ingestion Integration Tests", () => {
         degree: "AWS Certified Developer Associate",
         institution: "Amazon Web Services",
         year: "2021",
-        location: "Switzerland"
+        location: "Switzerland",
       },
     ],
     languages: [
@@ -258,7 +269,8 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should handle multiple CV ingestion and switching", async () => {
-      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } = useStore.getState();
+      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } =
+        useStore.getState();
       setApiKey(mockApiKey);
       setSelectedModel(mockModel);
 
@@ -267,13 +279,21 @@ describe("CV Ingestion Integration Tests", () => {
       const mockCreate = vi.fn();
 
       // First CV response
-      const firstCV = { ...mockFormattedCV, name: "Alice Smith", title: "Frontend Developer" };
+      const firstCV = {
+        ...mockFormattedCV,
+        name: "Alice Smith",
+        title: "Frontend Developer",
+      };
       mockCreate.mockResolvedValueOnce({
         choices: [{ message: { content: JSON.stringify(firstCV) } }],
       });
 
       // Second CV response
-      const secondCV = { ...mockFormattedCV, name: "Bob Johnson", title: "Backend Developer" };
+      const secondCV = {
+        ...mockFormattedCV,
+        name: "Bob Johnson",
+        title: "Backend Developer",
+      };
       mockCreate.mockResolvedValueOnce({
         choices: [{ message: { content: JSON.stringify(secondCV) } }],
       });
@@ -283,7 +303,8 @@ describe("CV Ingestion Integration Tests", () => {
       vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
 
       // Ingest first CV
-      const firstRawText = "Alice Smith Frontend Developer with 5 years experience in React and JavaScript development.";
+      const firstRawText =
+        "Alice Smith Frontend Developer with 5 years experience in React and JavaScript development.";
       const firstResult = await ingestCV(firstRawText, mockApiKey, mockModel);
       const firstIngestedCV: IngestedCV = {
         id: "cv-1",
@@ -296,7 +317,8 @@ describe("CV Ingestion Integration Tests", () => {
       addIngestedCV(firstIngestedCV);
 
       // Ingest second CV
-      const secondRawText = "Bob Johnson Backend Developer with 3 years experience in Node.js and Python development.";
+      const secondRawText =
+        "Bob Johnson Backend Developer with 3 years experience in Node.js and Python development.";
       const secondResult = await ingestCV(secondRawText, mockApiKey, mockModel);
       const secondIngestedCV: IngestedCV = {
         id: "cv-2",
@@ -326,11 +348,12 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should persist CV data across store operations", async () => {
-      const { setApiKey, addIngestedCV, setCurrentCV, setCoverLetter } = useStore.getState();
-      
+      const { setApiKey, addIngestedCV, setCurrentCV, setCoverLetter } =
+        useStore.getState();
+
       // Setup initial state
       setApiKey(mockApiKey);
-      
+
       const ingestedCV: IngestedCV = {
         id: "persist-test-cv",
         title: "Persistence Test CV",
@@ -371,12 +394,13 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should handle complete CRUD operations on ingested CVs", async () => {
-      const { addIngestedCV, updateIngestedCV, deleteIngestedCV } = useStore.getState();
+      const { addIngestedCV, updateIngestedCV, deleteIngestedCV } =
+        useStore.getState();
 
       // Create
       const cv1 = createMockIngestedCV("cv-1", "John Doe");
       const cv2 = createMockIngestedCV("cv-2", "Jane Smith");
-      
+
       addIngestedCV(cv1);
       addIngestedCV(cv2);
 
@@ -384,17 +408,25 @@ describe("CV Ingestion Integration Tests", () => {
 
       // Read
       const { ingestedCVs } = useStore.getState();
-      expect(ingestedCVs.find(cv => cv.id === "cv-1")).toEqual(cv1);
-      expect(ingestedCVs.find(cv => cv.id === "cv-2")).toEqual(cv2);
+      expect(ingestedCVs.find((cv) => cv.id === "cv-1")).toEqual(cv1);
+      expect(ingestedCVs.find((cv) => cv.id === "cv-2")).toEqual(cv2);
 
       // Update
-      const updatedCV1 = { ...cv1, title: "Updated John Doe CV", updatedAt: new Date() };
+      const updatedCV1 = {
+        ...cv1,
+        title: "Updated John Doe CV",
+        updatedAt: new Date(),
+      };
       updateIngestedCV("cv-1", updatedCV1);
 
       const updatedState = useStore.getState();
       expect(updatedState.ingestedCVs).toHaveLength(2);
-      expect(updatedState.ingestedCVs.find(cv => cv.id === "cv-1")).toEqual(updatedCV1);
-      expect(updatedState.ingestedCVs.find(cv => cv.id === "cv-2")).toEqual(cv2); // Unchanged
+      expect(updatedState.ingestedCVs.find((cv) => cv.id === "cv-1")).toEqual(
+        updatedCV1,
+      );
+      expect(updatedState.ingestedCVs.find((cv) => cv.id === "cv-2")).toEqual(
+        cv2,
+      ); // Unchanged
 
       // Delete
       deleteIngestedCV("cv-1");
@@ -402,11 +434,14 @@ describe("CV Ingestion Integration Tests", () => {
       const finalState = useStore.getState();
       expect(finalState.ingestedCVs).toHaveLength(1);
       expect(finalState.ingestedCVs[0]).toEqual(cv2);
-      expect(finalState.ingestedCVs.find(cv => cv.id === "cv-1")).toBeUndefined();
+      expect(
+        finalState.ingestedCVs.find((cv) => cv.id === "cv-1"),
+      ).toBeUndefined();
     });
 
     it("should handle CV editing and re-processing workflow", async () => {
-      const { setApiKey, addIngestedCV, updateIngestedCV } = useStore.getState();
+      const { setApiKey, addIngestedCV, updateIngestedCV } =
+        useStore.getState();
       setApiKey(mockApiKey);
 
       // Add initial CV
@@ -415,7 +450,11 @@ describe("CV Ingestion Integration Tests", () => {
 
       // Mock AI response for re-processing
       const mockOpenAI = await import("openai");
-      const updatedFormattedCV = { ...mockFormattedCV, name: "Updated User", title: "Updated Title" };
+      const updatedFormattedCV = {
+        ...mockFormattedCV,
+        name: "Updated User",
+        title: "Updated Title",
+      };
       const mockCreate = vi.fn().mockResolvedValue({
         choices: [{ message: { content: JSON.stringify(updatedFormattedCV) } }],
       });
@@ -425,8 +464,13 @@ describe("CV Ingestion Integration Tests", () => {
       vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
 
       // Simulate editing: re-process with updated raw text
-      const updatedRawText = "Updated User\nUpdated Title\nupdated.user@example.com\nUpdated content...";
-      const reprocessedCV = await ingestCV(updatedRawText, mockApiKey, mockModel);
+      const updatedRawText =
+        "Updated User\nUpdated Title\nupdated.user@example.com\nUpdated content...";
+      const reprocessedCV = await ingestCV(
+        updatedRawText,
+        mockApiKey,
+        mockModel,
+      );
 
       // Update the stored CV
       const updatedIngestedCV: IngestedCV = {
@@ -448,7 +492,8 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should maintain data integrity during concurrent operations", async () => {
-      const { addIngestedCV, setCurrentCV, deleteIngestedCV } = useStore.getState();
+      const { addIngestedCV, setCurrentCV, deleteIngestedCV } =
+        useStore.getState();
 
       const cv1 = createMockIngestedCV("concurrent-1", "User One");
       const cv2 = createMockIngestedCV("concurrent-2", "User Two");
@@ -459,7 +504,7 @@ describe("CV Ingestion Integration Tests", () => {
       setCurrentCV(cv1.formattedCV);
       addIngestedCV(cv2);
       addIngestedCV(cv3);
-      
+
       // Verify all operations completed correctly
       const state = useStore.getState();
       expect(state.ingestedCVs).toHaveLength(3);
@@ -467,11 +512,13 @@ describe("CV Ingestion Integration Tests", () => {
 
       // Delete current CV and verify state consistency
       deleteIngestedCV("concurrent-1");
-      
+
       const updatedState = useStore.getState();
       expect(updatedState.ingestedCVs).toHaveLength(2);
       expect(updatedState.currentCV).toEqual(cv1.formattedCV); // Current CV not auto-cleared
-      expect(updatedState.ingestedCVs.find(cv => cv.id === "concurrent-1")).toBeUndefined();
+      expect(
+        updatedState.ingestedCVs.find((cv) => cv.id === "concurrent-1"),
+      ).toBeUndefined();
     });
   });
 
@@ -481,21 +528,27 @@ describe("CV Ingestion Integration Tests", () => {
       setApiKey(mockApiKey);
 
       // Add a successful CV first
-      const successfulCV = createMockIngestedCV("success-cv", "Successful User");
+      const successfulCV = createMockIngestedCV(
+        "success-cv",
+        "Successful User",
+      );
       addIngestedCV(successfulCV);
 
       // Mock AI failure
       const mockOpenAI = await import("openai");
-      const mockCreate = vi.fn().mockRejectedValue(new Error("AI processing failed"));
+      const mockCreate = vi
+        .fn()
+        .mockRejectedValue(new Error("AI processing failed"));
 
       const mockOpenAIInstance = new (mockOpenAI.default as any)();
       mockOpenAIInstance.chat.completions.create = mockCreate;
       vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
 
       // Attempt to ingest CV that will fail (use valid length text to bypass input validation)
-      const validLengthText = "Failed CV content that meets minimum length requirements for testing AI processing failures.";
+      const validLengthText =
+        "Failed CV content that meets minimum length requirements for testing AI processing failures.";
       await expect(
-        ingestCV(validLengthText, mockApiKey, mockModel)
+        ingestCV(validLengthText, mockApiKey, mockModel),
       ).rejects.toThrow("AI processing failed");
 
       // Verify store state is not corrupted
@@ -505,7 +558,8 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should handle storage errors gracefully", async () => {
-      const { addIngestedCV, updateIngestedCV, deleteIngestedCV } = useStore.getState();
+      const { addIngestedCV, updateIngestedCV, deleteIngestedCV } =
+        useStore.getState();
 
       const cv1 = createMockIngestedCV("storage-test-1", "User One");
       const cv2 = createMockIngestedCV("storage-test-2", "User Two");
@@ -551,7 +605,7 @@ describe("CV Ingestion Integration Tests", () => {
 
       // Should throw validation error
       await expect(
-        ingestCV(mockRawText, mockApiKey, mockModel)
+        ingestCV(mockRawText, mockApiKey, mockModel),
       ).rejects.toThrow("CV must contain a valid name");
 
       // Verify store remains clean
@@ -560,7 +614,8 @@ describe("CV Ingestion Integration Tests", () => {
     });
 
     it("should maintain consistency during rapid state changes", async () => {
-      const { addIngestedCV, setCurrentCV, clearCurrentCV, deleteIngestedCV } = useStore.getState();
+      const { addIngestedCV, setCurrentCV, clearCurrentCV, deleteIngestedCV } =
+        useStore.getState();
 
       const cv1 = createMockIngestedCV("rapid-1", "Rapid User 1");
       const cv2 = createMockIngestedCV("rapid-2", "Rapid User 2");
@@ -591,13 +646,21 @@ describe("CV Ingestion Integration Tests", () => {
       const mockCreate = vi.fn();
 
       // French CV
-      const frenchCV = { ...mockFormattedCV, name: "Jean Dupont", title: "Ingénieur Logiciel" };
+      const frenchCV = {
+        ...mockFormattedCV,
+        name: "Jean Dupont",
+        title: "Ingénieur Logiciel",
+      };
       mockCreate.mockResolvedValueOnce({
         choices: [{ message: { content: JSON.stringify(frenchCV) } }],
       });
 
       // Portuguese CV
-      const portugueseCV = { ...mockFormattedCV, name: "João Silva", title: "Engenheiro de Software" };
+      const portugueseCV = {
+        ...mockFormattedCV,
+        name: "João Silva",
+        title: "Engenheiro de Software",
+      };
       mockCreate.mockResolvedValueOnce({
         choices: [{ message: { content: JSON.stringify(portugueseCV) } }],
       });
@@ -607,13 +670,25 @@ describe("CV Ingestion Integration Tests", () => {
       vi.mocked(mockOpenAI.default).mockReturnValue(mockOpenAIInstance);
 
       // Test French CV ingestion
-      const frenchRawText = "Jean Dupont\nIngénieur Logiciel\njean@example.com\nExpérience professionnelle...";
-      const frenchResult = await ingestCV(frenchRawText, mockApiKey, mockModel, "fr");
+      const frenchRawText =
+        "Jean Dupont\nIngénieur Logiciel\njean@example.com\nExpérience professionnelle...";
+      const frenchResult = await ingestCV(
+        frenchRawText,
+        mockApiKey,
+        mockModel,
+        "fr",
+      );
       expect(frenchResult.name).toBe("Jean Dupont");
 
       // Test Portuguese CV ingestion
-      const portugueseRawText = "João Silva\nEngenheiro de Software\njoao@example.com\nExperiência profissional...";
-      const portugueseResult = await ingestCV(portugueseRawText, mockApiKey, mockModel, "pt");
+      const portugueseRawText =
+        "João Silva\nEngenheiro de Software\njoao@example.com\nExperiência profissional...";
+      const portugueseResult = await ingestCV(
+        portugueseRawText,
+        mockApiKey,
+        mockModel,
+        "pt",
+      );
       expect(portugueseResult.name).toBe("João Silva");
 
       // Verify language-specific prompts were used
@@ -624,7 +699,7 @@ describe("CV Ingestion Integration Tests", () => {
               content: expect.stringContaining("French"),
             }),
           ]),
-        })
+        }),
       );
 
       expect(mockCreate).toHaveBeenCalledWith(
@@ -634,7 +709,7 @@ describe("CV Ingestion Integration Tests", () => {
               content: expect.stringContaining("Portuguese"),
             }),
           ]),
-        })
+        }),
       );
     });
   });

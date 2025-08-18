@@ -7,7 +7,7 @@
   - Write unit tests for PhotoService CRUD operations
   - _Requirements: 3.1, 3.3, 3.4, 5.1, 5.4_
 
-- [ ] 2. Extend data types for photo support
+- [x] 2. Extend data types for photo support
   - Add profilePhotoId optional property to IngestedCV interface in types.ts
   - Create PhotoRecord interface for IndexedDB storage structure
   - Add photo-related form data types for CVIngestionForm

@@ -40,9 +40,15 @@ export default function ContactInfo({ contactInfo }: Props) {
         <ContactItem item={contactInfo.email} icon="mdi:email" />
         <ContactItem item={contactInfo.location} icon="mdi:map-marker" />
         <ContactItem item={contactInfo.phone} icon="mdi:phone" />
-        {contactInfo.linkedin && <ContactItem item={contactInfo.linkedin} icon="mdi:linkedin" />}
-        {contactInfo.github && <ContactItem item={contactInfo.github} icon="mdi:github" />}
-        {contactInfo.website && <ContactItem item={contactInfo.website} icon="mdi:web" />}
+        {contactInfo.linkedin && (
+          <ContactItem item={contactInfo.linkedin} icon="mdi:linkedin" />
+        )}
+        {contactInfo.github && (
+          <ContactItem item={contactInfo.github} icon="mdi:github" />
+        )}
+        {contactInfo.website && (
+          <ContactItem item={contactInfo.website} icon="mdi:web" />
+        )}
         <ContactItem item={contactInfo.age.toString()} icon="mdi:calendar" />
         <ContactItem item={contactInfo.nationality} icon="mdi:flag" />
       </ul>
