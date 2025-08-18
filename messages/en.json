@@ -76,7 +76,7 @@
     },
     "actions": {
       "load": "Load CV",
-      "edit": "Edit CV",
+      "edit": "Edit CV", 
       "delete": "Delete CV",
       "confirmDelete": "Are you sure you want to delete this CV?",
       "confirmDeleteTitle": "Delete CV",

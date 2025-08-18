@@ -71,13 +71,23 @@ export function PhotoUpload({
   // Load preview when value changes
   useEffect(() => {
     let mounted = true;
+    let currentUrl: string | null = null;
 
     const loadPreview = async () => {
+      // Clean up previous URL if it exists
+      if (previewUrl && previewUrl !== value) {
+        PhotoService.revokePhotoUrl(previewUrl);
+        setPreviewUrl(null);
+      }
+
       if (value && value !== previewUrl) {
         try {
           const url = await photoService.getPhotoUrl(value);
-          if (mounted) {
+          if (mounted && url) {
+            currentUrl = url;
             setPreviewUrl(url);
+          } else if (mounted) {
+            setPreviewUrl(null);
           }
         } catch (error) {
           console.error("Failed to load photo preview:", error);
@@ -97,8 +107,9 @@ export function PhotoUpload({
 
     return () => {
       mounted = false;
-      if (previewUrl) {
-        PhotoService.revokePhotoUrl(previewUrl);
+      // Clean up the URL created in this effect
+      if (currentUrl) {
+        PhotoService.revokePhotoUrl(currentUrl);
       }
     };
   }, [value, previewUrl]);

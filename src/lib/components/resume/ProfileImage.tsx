@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { photoService } from "@/lib/services/photoService";
+import { PhotoService, photoService } from "@/lib/services/photoService";
 
 interface ProfileImageProps {
   className?: string;
@@ -22,6 +22,12 @@ export default function ProfileImage({
     let currentPhotoUrl: string | null = null;
 
     const loadPhoto = async () => {
+      // Clean up previous URL if it exists
+      if (photoUrl && photoUrl !== "/profile.webp") {
+        PhotoService.revokePhotoUrl(photoUrl);
+        setPhotoUrl(null);
+      }
+
       if (!photoId) {
         setPhotoUrl(null);
         setIsLoading(false);
@@ -62,10 +68,10 @@ export default function ProfileImage({
     return () => {
       isMounted = false;
       if (currentPhotoUrl) {
-        URL.revokeObjectURL(currentPhotoUrl);
+        PhotoService.revokePhotoUrl(currentPhotoUrl);
       }
     };
-  }, [photoId]);
+  }, [photoId, photoUrl]);
 
   // Show loading state
   if (isLoading) {

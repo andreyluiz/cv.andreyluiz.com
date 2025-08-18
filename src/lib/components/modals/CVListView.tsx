@@ -2,8 +2,10 @@
 
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/lib/components/ui/Button";
+import { LazyPhotoPreview } from "@/lib/components/ui/LazyPhotoPreview";
+import { photoService } from "@/lib/services/photoService";
 import type { IngestedCV, Variant } from "@/lib/types";
 import ConfirmationDialog from "./ConfirmationDialog";
 
@@ -19,6 +21,7 @@ interface CVListViewProps {
 interface CVListItemProps {
   title: string;
   isDefault?: boolean;
+  photoId?: string;
   onLoad: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -27,6 +30,7 @@ interface CVListItemProps {
 function CVListItem({
   title,
   isDefault = false,
+  photoId,
   onLoad,
   onEdit,
   onDelete,
@@ -36,15 +40,25 @@ function CVListItem({
 
   return (
     <div className="flex items-center justify-between p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors">
-      <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
-          {title}
-        </h3>
-        {isDefault && (
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
-            {modalT("defaultCV")}
-          </p>
-        )}
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        {/* Photo preview with lazy loading */}
+        <LazyPhotoPreview
+          photoId={photoId}
+          alt={`${title} profile photo`}
+          size={40}
+          className="flex-shrink-0"
+        />
+        
+        <div className="flex-1 min-w-0">
+          <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
+            {title}
+          </h3>
+          {isDefault && (
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+              {modalT("defaultCV")}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="flex items-center gap-2 ml-4">
@@ -99,6 +113,19 @@ export default function CVListView({
     null,
   );
 
+  // Preload photos for better performance
+  useEffect(() => {
+    const photoIds = cvs
+      .map(cv => cv.profilePhotoId)
+      .filter((id): id is string => Boolean(id));
+    
+    if (photoIds.length > 0) {
+      photoService.preloadPhotos(photoIds).catch(error => {
+        console.warn("Failed to preload CV photos:", error);
+      });
+    }
+  }, [cvs]);
+
   const handleDeleteClick = (cv: IngestedCV) => {
     setConfirmDeleteCV(cv);
   };
@@ -140,6 +167,7 @@ export default function CVListView({
               <CVListItem
                 key={cv.id}
                 title={cv.title}
+                photoId={cv.profilePhotoId}
                 onLoad={() => onLoadCV(cv.formattedCV, false)}
                 onEdit={() => onEditCV(cv)}
                 onDelete={() => handleDeleteClick(cv)}

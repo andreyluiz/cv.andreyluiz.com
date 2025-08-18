@@ -20,6 +20,10 @@ vi.mock("@/lib/services/photoService", () => ({
     cleanupOrphanedPhotos: vi.fn(),
     getAllPhotosWithCvIds: vi.fn(),
     getStorageInfo: vi.fn(),
+    preloadPhotos: vi.fn().mockResolvedValue(undefined),
+    clearUrlCache: vi.fn(),
+    getCacheStats: vi.fn(() => ({ size: 0, maxSize: 50 })),
+    closeConnection: vi.fn(),
   },
   PhotoService: {
     getInstance: vi.fn(),

@@ -25,6 +25,9 @@ export class PhotoService {
   private db: IDBPDatabase<PhotoDB> | null = null;
   private readonly DB_NAME = "CVPhotoStorage";
   private readonly DB_VERSION = 1;
+  private dbPromise: Promise<IDBPDatabase<PhotoDB>> | null = null;
+  private urlCache = new Map<string, string>();
+  private readonly MAX_CACHE_SIZE = 50; // Limit URL cache size
 
   private constructor() {}
 
@@ -36,30 +39,54 @@ export class PhotoService {
     return PhotoService.instance;
   }
 
-  // Initialize IndexedDB connection
+  // Initialize IndexedDB connection with connection pooling
   private async initDB(): Promise<IDBPDatabase<PhotoDB>> {
+    // Return existing connection if available
     if (this.db) {
       return this.db;
     }
 
+    // Return existing promise if initialization is in progress
+    if (this.dbPromise) {
+      return this.dbPromise;
+    }
+
+    // Create new initialization promise
+    this.dbPromise = openDB<PhotoDB>(this.DB_NAME, this.DB_VERSION, {
+      upgrade(db) {
+        // Create photos object store
+        const photoStore = db.createObjectStore("photos", {
+          keyPath: "id",
+        });
+
+        // Create index for querying photos by CV ID
+        photoStore.createIndex("by-cv", "cvId", { unique: false });
+      },
+    });
+
     try {
-      this.db = await openDB<PhotoDB>(this.DB_NAME, this.DB_VERSION, {
-        upgrade(db) {
-          // Create photos object store
-          const photoStore = db.createObjectStore("photos", {
-            keyPath: "id",
-          });
-
-          // Create index for querying photos by CV ID
-          photoStore.createIndex("by-cv", "cvId", { unique: false });
-        },
-      });
-
+      this.db = await this.dbPromise;
       return this.db;
     } catch (error) {
+      // Reset promise on error to allow retry
+      this.dbPromise = null;
       throw new Error(
         `Failed to initialize IndexedDB: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
+    }
+  }
+
+  // Clean up URL cache when it gets too large
+  private cleanupUrlCache(): void {
+    if (this.urlCache.size >= this.MAX_CACHE_SIZE) {
+      // Remove oldest entries (first half of cache)
+      const entries = Array.from(this.urlCache.entries());
+      const toRemove = entries.slice(0, Math.floor(entries.length / 2));
+      
+      for (const [photoId, url] of toRemove) {
+        URL.revokeObjectURL(url);
+        this.urlCache.delete(photoId);
+      }
     }
   }
 
@@ -110,15 +137,26 @@ export class PhotoService {
     }
   }
 
-  // Get photo as object URL for display
+  // Get photo as object URL for display with caching
   public async getPhotoUrl(photoId: string): Promise<string | null> {
     try {
+      // Check cache first
+      if (this.urlCache.has(photoId)) {
+        return this.urlCache.get(photoId)!;
+      }
+
       const blob = await this.getPhoto(photoId);
       if (!blob) {
         return null;
       }
 
-      return URL.createObjectURL(blob);
+      // Clean up cache if needed before adding new entry
+      this.cleanupUrlCache();
+
+      const url = URL.createObjectURL(blob);
+      this.urlCache.set(photoId, url);
+      
+      return url;
     } catch (error) {
       console.error("Failed to create photo URL:", error);
       return null;
@@ -130,6 +168,13 @@ export class PhotoService {
     try {
       const db = await this.initDB();
       await db.delete("photos", photoId);
+      
+      // Clean up cached URL
+      if (this.urlCache.has(photoId)) {
+        const url = this.urlCache.get(photoId)!;
+        URL.revokeObjectURL(url);
+        this.urlCache.delete(photoId);
+      }
     } catch (error) {
       throw new Error(
         `Failed to delete photo: ${error instanceof Error ? error.message : "Unknown error"}`,
@@ -147,9 +192,16 @@ export class PhotoService {
       // Get all photos for this CV
       const photoRecords = await index.getAll(cvId);
 
-      // Delete each photo
+      // Delete each photo and clean up cached URLs
       for (const record of photoRecords) {
         await tx.store.delete(record.id);
+        
+        // Clean up cached URL
+        if (this.urlCache.has(record.id)) {
+          const url = this.urlCache.get(record.id)!;
+          URL.revokeObjectURL(url);
+          this.urlCache.delete(record.id);
+        }
       }
 
       await tx.done;
@@ -281,6 +333,52 @@ export class PhotoService {
       console.error("Failed to get photos with CV IDs:", error);
       return [];
     }
+  }
+
+  // Clean up all cached URLs (useful for memory management)
+  public clearUrlCache(): void {
+    for (const url of this.urlCache.values()) {
+      URL.revokeObjectURL(url);
+    }
+    this.urlCache.clear();
+  }
+
+  // Get cache statistics for performance monitoring
+  public getCacheStats(): {
+    size: number;
+    maxSize: number;
+    hitRate?: number;
+  } {
+    return {
+      size: this.urlCache.size,
+      maxSize: this.MAX_CACHE_SIZE,
+    };
+  }
+
+  // Preload photos for better performance (useful for CV lists)
+  public async preloadPhotos(photoIds: string[]): Promise<void> {
+    const loadPromises = photoIds
+      .filter(id => !this.urlCache.has(id)) // Only load uncached photos
+      .slice(0, 10) // Limit concurrent loads
+      .map(async (photoId) => {
+        try {
+          await this.getPhotoUrl(photoId);
+        } catch (error) {
+          console.warn(`Failed to preload photo ${photoId}:`, error);
+        }
+      });
+
+    await Promise.allSettled(loadPromises);
+  }
+
+  // Close database connection (useful for cleanup)
+  public async closeConnection(): Promise<void> {
+    if (this.db) {
+      this.db.close();
+      this.db = null;
+      this.dbPromise = null;
+    }
+    this.clearUrlCache();
   }
 }
 

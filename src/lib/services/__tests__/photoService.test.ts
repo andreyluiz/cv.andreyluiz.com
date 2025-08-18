@@ -93,6 +93,9 @@ describe("PhotoService", () => {
 
     // Get fresh instance
     photoService = PhotoService.getInstance();
+    
+    // Clear URL cache to ensure clean state between tests
+    photoService.clearUrlCache();
 
     // Create mock file
     mockFile = new File(["test image data"], "test.jpg", {
