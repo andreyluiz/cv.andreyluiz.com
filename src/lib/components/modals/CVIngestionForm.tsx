@@ -5,11 +5,16 @@ import { useState } from "react";
 import Button from "@/lib/components/ui/Button";
 import Input from "@/lib/components/ui/Input";
 import LoadingSpinner from "@/lib/components/ui/LoadingSpinner";
+import { PhotoUpload } from "@/lib/components/ui/PhotoUpload";
 import Textarea from "@/lib/components/ui/Textarea";
 
 interface CVIngestionFormProps {
-  initialData?: { title: string; rawText: string };
-  onSubmit: (data: { title: string; rawText: string }) => void;
+  initialData?: { title: string; rawText: string; photoId?: string | null };
+  onSubmit: (data: {
+    title: string;
+    rawText: string;
+    photoId?: string | null;
+  }) => void;
   onCancel: () => void;
   isLoading: boolean;
 }
@@ -17,6 +22,7 @@ interface CVIngestionFormProps {
 interface FormErrors {
   title?: string;
   rawText?: string;
+  photo?: string;
 }
 
 export default function CVIngestionForm({
@@ -30,6 +36,7 @@ export default function CVIngestionForm({
   const [formData, setFormData] = useState({
     title: initialData?.title || "",
     rawText: initialData?.rawText || "",
+    photoId: initialData?.photoId || null,
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -67,6 +74,7 @@ export default function CVIngestionForm({
     onSubmit({
       title: formData.title.trim(),
       rawText: formData.rawText.trim(),
+      photoId: formData.photoId,
     });
   };
 
@@ -84,6 +92,13 @@ export default function CVIngestionForm({
     }
   };
 
+  const handlePhotoChange = (photoId: string | null) => {
+    setFormData((prev) => ({ ...prev, photoId }));
+    if (errors.photo) {
+      setErrors((prev) => ({ ...prev, photo: undefined }));
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <Input
@@ -94,6 +109,18 @@ export default function CVIngestionForm({
         required
         error={errors.title}
         disabled={isLoading}
+      />
+
+      <PhotoUpload
+        value={formData.photoId}
+        onChange={handlePhotoChange}
+        disabled={isLoading}
+        error={errors.photo}
+        cvId={
+          initialData?.title
+            ? `cv-${initialData.title.replace(/\s+/g, "-").toLowerCase()}`
+            : "temp"
+        }
       />
 
       <Textarea

@@ -46,6 +46,7 @@ export default function CVManagementModal({
   const [retryData, setRetryData] = useState<{
     title: string;
     rawText: string;
+    photoId?: string | null;
   } | null>(null);
 
   const {
@@ -100,7 +101,10 @@ export default function CVManagementModal({
   };
 
   const processCV = useCallback(
-    async (data: { title: string; rawText: string }, attempt = 1) => {
+    async (
+      data: { title: string; rawText: string; photoId?: string | null },
+      attempt = 1,
+    ) => {
       const maxAttempts = 3;
 
       setProcessingState({
@@ -126,6 +130,7 @@ export default function CVManagementModal({
           formattedCV,
           createdAt: editingCV?.createdAt || new Date(),
           updatedAt: new Date(),
+          profilePhotoId: data.photoId || undefined,
         };
 
         if (editingCV) {
@@ -177,7 +182,11 @@ export default function CVManagementModal({
     ],
   );
 
-  const handleFormSubmit = async (data: { title: string; rawText: string }) => {
+  const handleFormSubmit = async (data: {
+    title: string;
+    rawText: string;
+    photoId?: string | null;
+  }) => {
     if (!apiKey) {
       setError(new Error(t("errors.apiKeyRequired")));
       return;
@@ -263,7 +272,11 @@ export default function CVManagementModal({
           <CVIngestionForm
             initialData={
               editingCV
-                ? { title: editingCV.title, rawText: editingCV.rawText }
+                ? {
+                    title: editingCV.title,
+                    rawText: editingCV.rawText,
+                    photoId: editingCV.profilePhotoId,
+                  }
                 : undefined
             }
             onSubmit={handleFormSubmit}

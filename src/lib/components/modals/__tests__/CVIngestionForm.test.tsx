@@ -20,6 +20,27 @@ const messages = {
       rawTextRequired: "CV text is required",
       rawTextTooShort: "CV text must be at least 50 characters",
       rawTextTooLong: "CV text must be less than 50,000 characters",
+      photoTooLarge: "Image file must be smaller than 2MB",
+      photoInvalidType: "Please select a valid image file (JPEG, PNG, or WebP)",
+      photoUploadFailed: "Failed to process image. Please try again",
+    },
+    photo: {
+      upload: "Upload Photo",
+      dragDrop: "Drag and drop an image here, or click to browse",
+      remove: "Remove Photo",
+      preview: "Photo Preview",
+      alt: "Profile photo preview",
+      removeAlt: "Remove uploaded photo",
+      uploading: "Uploading photo...",
+      clickToReplace: "Click to replace photo",
+      clickToReplaceAlt: "Click to replace current photo with a new one",
+      uploadAreaLabel:
+        "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      supportedFormats: "JPEG, PNG, WebP (max 2MB)",
+      helpText: "Upload a profile photo to personalize your CV",
+      uploadSuccess: "Photo uploaded successfully",
+      uploadError: "Photo upload failed",
+      removeSuccess: "Photo removed successfully",
     },
   },
 };
@@ -171,6 +192,7 @@ describe("CVIngestionForm", () => {
       expect(mockOnSubmit).toHaveBeenCalledWith({
         title: validTitle,
         rawText: validRawText,
+        photoId: null,
       });
     });
   });
@@ -271,6 +293,7 @@ describe("CVIngestionForm", () => {
         title: "Test CV",
         rawText:
           "This is a valid CV text with enough content to pass validation requirements.",
+        photoId: null,
       });
     });
   });

@@ -28,7 +28,7 @@
   - Test with screen reader software for compliance
   - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-- [ ] 5. Integrate PhotoUpload into CVIngestionForm
+- [x] 5. Integrate PhotoUpload into CVIngestionForm
   - Add PhotoUpload component between title and rawText fields in CVIngestionForm
   - Extend form state management to include photo data
   - Update form validation to include photo validation errors
