@@ -35,9 +35,36 @@ export function PhotoUpload({
   const [isUploading, setIsUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [announcement, setAnnouncement] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const announcementTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const helpId = useId();
   const errorId = useId();
+  const announcementId = useId();
+
+  // Clear announcement after delay
+  const announceToScreenReader = useCallback((message: string) => {
+    setAnnouncement(message);
+
+    // Clear any existing timeout
+    if (announcementTimeoutRef.current) {
+      clearTimeout(announcementTimeoutRef.current);
+    }
+
+    // Clear announcement after 3 seconds
+    announcementTimeoutRef.current = setTimeout(() => {
+      setAnnouncement("");
+    }, 3000);
+  }, []);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (announcementTimeoutRef.current) {
+        clearTimeout(announcementTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Load preview when value changes
   useEffect(() => {
@@ -105,17 +132,19 @@ export function PhotoUpload({
       try {
         const photoId = await photoService.storePhoto(file, cvId);
         onChange(photoId);
+        announceToScreenReader(t("cvManagement.photo.uploadSuccess"));
       } catch (error) {
         const errorMessage =
           error instanceof Error
             ? error.message
             : t("cvManagement.errors.photoUploadFailed");
         setUploadError(errorMessage);
+        announceToScreenReader(t("cvManagement.photo.uploadError"));
       } finally {
         setIsUploading(false);
       }
     },
-    [validateFile, onChange, cvId, t],
+    [validateFile, onChange, cvId, t, announceToScreenReader],
   );
 
   // Handle file input change
@@ -190,8 +219,9 @@ export function PhotoUpload({
 
       onChange(null);
       setUploadError(null);
+      announceToScreenReader(t("cvManagement.photo.removeSuccess"));
     },
-    [value, onChange],
+    [value, onChange, announceToScreenReader, t],
   );
 
   // Handle keyboard navigation
@@ -203,6 +233,17 @@ export function PhotoUpload({
       }
     },
     [handleClick],
+  );
+
+  // Handle keyboard navigation for remove button
+  const handleRemoveKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleRemove(event as any);
+      }
+    },
+    [handleRemove],
   );
 
   const displayError = error || uploadError;
@@ -228,8 +269,9 @@ export function PhotoUpload({
             <button
               type="button"
               onClick={handleRemove}
+              onKeyDown={handleRemoveKeyDown}
               disabled={disabled}
-              className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label={t("cvManagement.photo.removeAlt")}
             >
               ×
@@ -241,8 +283,10 @@ export function PhotoUpload({
           <button
             type="button"
             onClick={handleClick}
+            onKeyDown={handleKeyDown}
             disabled={disabled}
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="text-sm text-blue-600 hover:text-blue-700 focus:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1 dark:text-blue-400 dark:hover:text-blue-300 dark:focus:text-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label={t("cvManagement.photo.clickToReplaceAlt")}
           >
             {t("cvManagement.photo.clickToReplace")}
           </button>
@@ -263,7 +307,7 @@ export function PhotoUpload({
             ${
               disabled
                 ? "opacity-50 cursor-not-allowed bg-gray-50 dark:bg-gray-800"
-                : "hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer"
+                : "hover:border-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:hover:border-gray-500 cursor-pointer"
             }
             ${displayError ? "border-red-300 dark:border-red-600" : ""}
           `}
@@ -273,8 +317,9 @@ export function PhotoUpload({
           onClick={handleClick}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          aria-label={t("cvManagement.photo.upload")}
+          aria-label={t("cvManagement.photo.uploadAreaLabel")}
           aria-describedby={displayError ? errorId : helpId}
+          tabIndex={disabled ? -1 : 0}
         >
           {/* Hidden file input */}
           <input
@@ -344,6 +389,18 @@ export function PhotoUpload({
           {displayError}
         </p>
       )}
+
+      {/* Screen reader announcements */}
+      <div
+        id={announcementId}
+        className="sr-only"
+        // biome-ignore lint/a11y/useSemanticElements: role="status" is correct for screen reader announcements
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {announcement}
+      </div>
     </div>
   );
 }

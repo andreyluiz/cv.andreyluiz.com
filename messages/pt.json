@@ -119,8 +119,13 @@
       "removeAlt": "Remover foto enviada",
       "uploading": "Enviando foto...",
       "clickToReplace": "Clique para substituir a foto",
+      "clickToReplaceAlt": "Clique para substituir a foto atual por uma nova",
+      "uploadAreaLabel": "Área de envio de foto. Arraste e solte uma imagem aqui, ou pressione Enter ou Espaço para navegar pelos arquivos",
       "supportedFormats": "JPEG, PNG, WebP (máx 2MB)",
-      "helpText": "Envie uma foto de perfil para personalizar seu CV"
+      "helpText": "Envie uma foto de perfil para personalizar seu CV",
+      "uploadSuccess": "Foto enviada com sucesso",
+      "uploadError": "Falha no envio da foto",
+      "removeSuccess": "Foto removida com sucesso"
     }
   },
   "coverLetter": {

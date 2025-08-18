@@ -52,6 +52,7 @@ bun remove <package> # Remove dependency
 bun run dev          # Start development with Turbopack
 bun run build        # Production build
 bun run lint         # Code linting
+bun run format       # Code formatting
 bun run typecheck    # Type checking
 bun run test         # Run tests in watch mode
 bun run test:run     # Run tests once

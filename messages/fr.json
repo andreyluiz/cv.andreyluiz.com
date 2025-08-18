@@ -119,8 +119,13 @@
       "removeAlt": "Supprimer la photo téléchargée",
       "uploading": "Téléchargement de la photo...",
       "clickToReplace": "Cliquez pour remplacer la photo",
+      "clickToReplaceAlt": "Cliquez pour remplacer la photo actuelle par une nouvelle",
+      "uploadAreaLabel": "Zone de téléchargement de photo. Glissez-déposez une image ici, ou appuyez sur Entrée ou Espace pour parcourir les fichiers",
       "supportedFormats": "JPEG, PNG, WebP (max 2 Mo)",
-      "helpText": "Téléchargez une photo de profil pour personnaliser votre CV"
+      "helpText": "Téléchargez une photo de profil pour personnaliser votre CV",
+      "uploadSuccess": "Photo téléchargée avec succès",
+      "uploadError": "Échec du téléchargement de la photo",
+      "removeSuccess": "Photo supprimée avec succès"
     }
   },
   "coverLetter": {

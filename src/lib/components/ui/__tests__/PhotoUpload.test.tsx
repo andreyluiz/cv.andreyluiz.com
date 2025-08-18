@@ -34,8 +34,14 @@ const mockMessages = {
       removeAlt: "Remove uploaded photo",
       uploading: "Uploading photo...",
       clickToReplace: "Click to replace photo",
+      clickToReplaceAlt: "Click to replace current photo with a new one",
+      uploadAreaLabel:
+        "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
       supportedFormats: "JPEG, PNG, WebP (max 2MB)",
       helpText: "Upload a profile photo to personalize your CV",
+      uploadSuccess: "Photo uploaded successfully",
+      uploadError: "Photo upload failed",
+      removeSuccess: "Photo removed successfully",
     },
     errors: {
       photoTooLarge: "Image file must be smaller than 2MB",
@@ -76,7 +82,9 @@ describe("PhotoUpload", () => {
   it("shows disabled state when disabled prop is true", () => {
     renderWithIntl(<PhotoUpload onChange={mockOnChange} disabled />);
 
-    const uploadButton = screen.getByRole("button", { name: "Upload Photo" });
+    const uploadButton = screen.getByRole("button", {
+      name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+    });
     expect(uploadButton).toBeDisabled();
     expect(uploadButton).toHaveClass("opacity-50", "cursor-not-allowed");
   });
@@ -97,7 +105,9 @@ describe("PhotoUpload", () => {
     renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
     const fileInput = screen
-      .getByRole("button", { name: "Upload Photo" })
+      .getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      })
       .querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a mock file with invalid type
@@ -121,7 +131,9 @@ describe("PhotoUpload", () => {
     renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
     const fileInput = screen
-      .getByRole("button", { name: "Upload Photo" })
+      .getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      })
       .querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a mock file larger than 2MB
@@ -147,7 +159,9 @@ describe("PhotoUpload", () => {
     renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
 
     const fileInput = screen
-      .getByRole("button", { name: "Upload Photo" })
+      .getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      })
       .querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a valid image file
@@ -178,7 +192,9 @@ describe("PhotoUpload", () => {
     renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
     const fileInput = screen
-      .getByRole("button", { name: "Upload Photo" })
+      .getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      })
       .querySelector('input[type="file"]') as HTMLInputElement;
     const validFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
@@ -231,15 +247,33 @@ describe("PhotoUpload", () => {
     expect(mockOnChange).toHaveBeenCalledWith(null);
   });
 
-  it("handles keyboard navigation", async () => {
+  it("handles keyboard navigation with Enter key", async () => {
     const user = userEvent.setup();
     renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
-    const uploadButton = screen.getByRole("button", { name: "Upload Photo" });
+    const uploadButton = screen.getByRole("button", {
+      name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+    });
 
     // Focus the button and press Enter
     uploadButton.focus();
     await user.keyboard("{Enter}");
+
+    // Should trigger file input click (we can't easily test this without mocking)
+    expect(uploadButton).toHaveFocus();
+  });
+
+  it("handles keyboard navigation with Space key", async () => {
+    const user = userEvent.setup();
+    renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+    const uploadButton = screen.getByRole("button", {
+      name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+    });
+
+    // Focus the button and press Space
+    uploadButton.focus();
+    await user.keyboard(" ");
 
     // Should trigger file input click (we can't easily test this without mocking)
     expect(uploadButton).toHaveFocus();
@@ -252,7 +286,9 @@ describe("PhotoUpload", () => {
 
     renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
 
-    const uploadButton = screen.getByRole("button", { name: "Upload Photo" });
+    const uploadButton = screen.getByRole("button", {
+      name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+    });
     const validFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
     });
@@ -279,6 +315,261 @@ describe("PhotoUpload", () => {
         "test-cv",
       );
       expect(mockOnChange).toHaveBeenCalledWith(mockPhotoId);
+    });
+  });
+
+  describe("Accessibility Features", () => {
+    it("has proper ARIA labels and descriptions", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+      const uploadButton = screen.getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      });
+
+      expect(uploadButton).toHaveAttribute(
+        "aria-label",
+        "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      );
+      expect(uploadButton).toHaveAttribute("tabIndex", "0");
+    });
+
+    it("has proper ARIA describedby relationship with help text", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+      const uploadButton = screen.getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      });
+      const helpText = screen.getByText(
+        "Upload a profile photo to personalize your CV",
+      );
+
+      expect(uploadButton).toHaveAttribute("aria-describedby");
+      const describedById = uploadButton.getAttribute("aria-describedby");
+      expect(helpText).toHaveAttribute("id", describedById);
+    });
+
+    it("has proper ARIA describedby relationship with error message", () => {
+      const errorMessage = "Test error message";
+      renderWithIntl(
+        <PhotoUpload onChange={mockOnChange} error={errorMessage} />,
+      );
+
+      const uploadButton = screen.getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      });
+      const errorElement = screen.getByRole("alert");
+
+      expect(uploadButton).toHaveAttribute("aria-describedby");
+      const describedById = uploadButton.getAttribute("aria-describedby");
+      expect(errorElement).toHaveAttribute("id", describedById);
+    });
+
+    it("has proper focus indicators", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+      const uploadButton = screen.getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      });
+
+      expect(uploadButton).toHaveClass(
+        "focus:border-blue-500",
+        "focus:outline-none",
+        "focus:ring-2",
+        "focus:ring-blue-500",
+        "focus:ring-offset-2",
+      );
+    });
+
+    it("removes tabIndex when disabled", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} disabled />);
+
+      const uploadButton = screen.getByRole("button", {
+        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+      });
+
+      expect(uploadButton).toHaveAttribute("tabIndex", "-1");
+      expect(uploadButton).toBeDisabled();
+    });
+
+    it("has proper keyboard navigation for remove button", async () => {
+      const user = userEvent.setup();
+      const mockPhotoUrl = "blob:mock-url";
+      const { photoService } = await import("@/lib/services/photoService");
+      vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+      await waitFor(() => {
+        expect(
+          screen.getByAltText("Profile photo preview"),
+        ).toBeInTheDocument();
+      });
+
+      const removeButton = screen.getByRole("button", {
+        name: "Remove uploaded photo",
+      });
+
+      // Test keyboard navigation
+      removeButton.focus();
+      expect(removeButton).toHaveFocus();
+      expect(removeButton).toHaveClass(
+        "focus:bg-red-600",
+        "focus:outline-none",
+        "focus:ring-2",
+        "focus:ring-red-500",
+        "focus:ring-offset-2",
+      );
+
+      // Test Enter key
+      await user.keyboard("{Enter}");
+      expect(photoService.deletePhoto).toHaveBeenCalledWith("photo_123");
+      expect(mockOnChange).toHaveBeenCalledWith(null);
+    });
+
+    it("has proper keyboard navigation for replace button", async () => {
+      const user = userEvent.setup();
+      const mockPhotoUrl = "blob:mock-url";
+      const { photoService } = await import("@/lib/services/photoService");
+      vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+      await waitFor(() => {
+        expect(screen.getByText("Click to replace photo")).toBeInTheDocument();
+      });
+
+      const replaceButton = screen.getByRole("button", {
+        name: "Click to replace current photo with a new one",
+      });
+
+      // Test keyboard navigation
+      replaceButton.focus();
+      expect(replaceButton).toHaveFocus();
+      expect(replaceButton).toHaveClass(
+        "focus:text-blue-700",
+        "focus:outline-none",
+        "focus:ring-2",
+        "focus:ring-blue-500",
+        "focus:ring-offset-2",
+      );
+
+      // Test Space key
+      await user.keyboard(" ");
+      // Should trigger file input click (we can't easily test this without mocking)
+      expect(replaceButton).toHaveFocus();
+    });
+
+    it("announces upload success to screen readers", async () => {
+      const user = userEvent.setup();
+      const mockPhotoId = "photo_123";
+      const { photoService } = await import("@/lib/services/photoService");
+      vi.mocked(photoService.storePhoto).mockResolvedValue(mockPhotoId);
+
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+
+      const fileInput = screen
+        .getByRole("button", {
+          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+        })
+        .querySelector('input[type="file"]') as HTMLInputElement;
+
+      const validFile = new File(["image data"], "test.jpg", {
+        type: "image/jpeg",
+      });
+
+      await user.upload(fileInput, validFile);
+
+      await waitFor(() => {
+        const announcement = screen.getByRole("status");
+        expect(announcement).toHaveTextContent("Photo uploaded successfully");
+        expect(announcement).toHaveAttribute("aria-live", "polite");
+        expect(announcement).toHaveAttribute("aria-atomic", "true");
+      });
+    });
+
+    it("announces upload error to screen readers", async () => {
+      const user = userEvent.setup();
+      const { photoService } = await import("@/lib/services/photoService");
+      vi.mocked(photoService.storePhoto).mockRejectedValue(
+        new Error("Upload failed"),
+      );
+
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+
+      const fileInput = screen
+        .getByRole("button", {
+          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+        })
+        .querySelector('input[type="file"]') as HTMLInputElement;
+
+      const validFile = new File(["image data"], "test.jpg", {
+        type: "image/jpeg",
+      });
+
+      await user.upload(fileInput, validFile);
+
+      await waitFor(() => {
+        const announcement = screen.getByRole("status");
+        expect(announcement).toHaveTextContent("Photo upload failed");
+      });
+    });
+
+    it("announces photo removal to screen readers", async () => {
+      const user = userEvent.setup();
+      const mockPhotoUrl = "blob:mock-url";
+      const { photoService } = await import("@/lib/services/photoService");
+      vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+      await waitFor(() => {
+        expect(
+          screen.getByAltText("Profile photo preview"),
+        ).toBeInTheDocument();
+      });
+
+      const removeButton = screen.getByRole("button", {
+        name: "Remove uploaded photo",
+      });
+      await user.click(removeButton);
+
+      await waitFor(() => {
+        const announcement = screen.getByRole("status");
+        expect(announcement).toHaveTextContent("Photo removed successfully");
+      });
+    });
+
+    it("has live region for screen reader announcements", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+      const announcement = screen.getByRole("status");
+      expect(announcement).toHaveAttribute("aria-live", "polite");
+      expect(announcement).toHaveAttribute("aria-atomic", "true");
+      expect(announcement).toHaveClass("sr-only");
+    });
+
+    it("has proper error role for error messages", () => {
+      const errorMessage = "Test error message";
+      renderWithIntl(
+        <PhotoUpload onChange={mockOnChange} error={errorMessage} />,
+      );
+
+      const errorElement = screen.getByRole("alert");
+      expect(errorElement).toHaveTextContent(errorMessage);
+      expect(errorElement).toHaveClass("text-red-600", "dark:text-red-400");
+    });
+
+    it("hides file input from screen readers", () => {
+      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+
+      const fileInput = screen
+        .getByRole("button", {
+          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
+        })
+        .querySelector('input[type="file"]') as HTMLInputElement;
+
+      expect(fileInput).toHaveClass("sr-only");
+      expect(fileInput).toHaveAttribute("tabIndex", "-1");
     });
   });
 });

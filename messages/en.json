@@ -119,8 +119,13 @@
       "removeAlt": "Remove uploaded photo",
       "uploading": "Uploading photo...",
       "clickToReplace": "Click to replace photo",
+      "clickToReplaceAlt": "Click to replace current photo with a new one",
+      "uploadAreaLabel": "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
       "supportedFormats": "JPEG, PNG, WebP (max 2MB)",
-      "helpText": "Upload a profile photo to personalize your CV"
+      "helpText": "Upload a profile photo to personalize your CV",
+      "uploadSuccess": "Photo uploaded successfully",
+      "uploadError": "Photo upload failed",
+      "removeSuccess": "Photo removed successfully"
     }
   },
   "coverLetter": {
