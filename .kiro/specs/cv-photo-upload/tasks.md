@@ -35,7 +35,7 @@
   - Modify form submission to handle photo ID in form data
   - _Requirements: 2.1, 4.1, 4.2, 6.4_
 
-- [ ] 6. Enhance ProfileImage component for custom photos
+- [x] 6. Enhance ProfileImage component for custom photos
   - Add photoId prop to ProfileImage component
   - Implement photo loading from IndexedDB using PhotoService
   - Add fallback logic to default profile image when photo unavailable
