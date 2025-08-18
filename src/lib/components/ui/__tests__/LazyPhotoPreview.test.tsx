@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { LazyPhotoPreview } from "../LazyPhotoPreview";
 
 // Mock photoService
@@ -57,12 +57,7 @@ describe("LazyPhotoPreview", () => {
   });
 
   it("should render fallback image when no photoId is provided", () => {
-    render(
-      <LazyPhotoPreview
-        alt="Test photo"
-        fallbackSrc="/default.jpg"
-      />
-    );
+    render(<LazyPhotoPreview alt="Test photo" fallbackSrc="/default.jpg" />);
 
     const img = screen.getByRole("img");
     expect(img).toHaveAttribute("src", "/default.jpg");
@@ -70,19 +65,14 @@ describe("LazyPhotoPreview", () => {
   });
 
   it("should set up intersection observer when photoId is provided", () => {
-    render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-      />
-    );
+    render(<LazyPhotoPreview photoId="photo1" alt="Test photo" />);
 
     expect(mockIntersectionObserver).toHaveBeenCalledWith(
       expect.any(Function),
       {
         rootMargin: "50px",
         threshold: 0.1,
-      }
+      },
     );
     expect(mockObserve).toHaveBeenCalled();
   });
@@ -90,12 +80,7 @@ describe("LazyPhotoPreview", () => {
   it("should load photo when element comes into view", async () => {
     mockGetPhotoUrl.mockResolvedValue("blob:mock-url");
 
-    render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-      />
-    );
+    render(<LazyPhotoPreview photoId="photo1" alt="Test photo" />);
 
     // Simulate intersection observer callback
     const callback = mockIntersectionObserver.mock.calls[0][0];
@@ -115,13 +100,7 @@ describe("LazyPhotoPreview", () => {
     // Make getPhotoUrl hang to simulate loading
     mockGetPhotoUrl.mockImplementation(() => new Promise(() => {}));
 
-    render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-        size={40}
-      />
-    );
+    render(<LazyPhotoPreview photoId="photo1" alt="Test photo" size={40} />);
 
     // Trigger intersection
     const callback = mockIntersectionObserver.mock.calls[0][0];
@@ -141,7 +120,7 @@ describe("LazyPhotoPreview", () => {
         photoId="photo1"
         alt="Test photo"
         fallbackSrc="/default.jpg"
-      />
+      />,
     );
 
     // Trigger intersection
@@ -159,11 +138,7 @@ describe("LazyPhotoPreview", () => {
     mockGetPhotoUrl.mockResolvedValue(null);
 
     render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-        onError={onError}
-      />
+      <LazyPhotoPreview photoId="photo1" alt="Test photo" onError={onError} />,
     );
 
     // Trigger intersection
@@ -177,11 +152,7 @@ describe("LazyPhotoPreview", () => {
 
   it("should apply custom className and size", () => {
     render(
-      <LazyPhotoPreview
-        alt="Test photo"
-        className="custom-class"
-        size={60}
-      />
+      <LazyPhotoPreview alt="Test photo" className="custom-class" size={60} />,
     );
 
     const container = document.querySelector(".custom-class");
@@ -191,10 +162,7 @@ describe("LazyPhotoPreview", () => {
 
   it("should disconnect observer on unmount", () => {
     const { unmount } = render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-      />
+      <LazyPhotoPreview photoId="photo1" alt="Test photo" />,
     );
 
     unmount();
@@ -203,19 +171,14 @@ describe("LazyPhotoPreview", () => {
   });
 
   it("should not load photo if not in view", async () => {
-    render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-      />
-    );
+    render(<LazyPhotoPreview photoId="photo1" alt="Test photo" />);
 
     // Simulate intersection observer callback with not intersecting
     const callback = mockIntersectionObserver.mock.calls[0][0];
     callback([{ isIntersecting: false }]);
 
     // Wait a bit to ensure no loading happens
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
     expect(mockGetPhotoUrl).not.toHaveBeenCalled();
   });
@@ -230,7 +193,7 @@ describe("LazyPhotoPreview", () => {
         alt="Test photo"
         onError={onError}
         fallbackSrc="/default.jpg"
-      />
+      />,
     );
 
     // Trigger intersection
@@ -255,12 +218,7 @@ describe("LazyPhotoPreview", () => {
   it("should use unoptimized prop for blob URLs", async () => {
     mockGetPhotoUrl.mockResolvedValue("blob:mock-url");
 
-    render(
-      <LazyPhotoPreview
-        photoId="photo1"
-        alt="Test photo"
-      />
-    );
+    render(<LazyPhotoPreview photoId="photo1" alt="Test photo" />);
 
     // Trigger intersection
     const callback = mockIntersectionObserver.mock.calls[0][0];

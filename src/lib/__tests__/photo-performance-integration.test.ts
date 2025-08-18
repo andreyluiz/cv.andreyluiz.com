@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { openDB } from "idb";
-import { PhotoService, photoService } from "@/lib/services/photoService";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { photoService } from "@/lib/services/photoService";
 
 // Mock IndexedDB with realistic behavior
 const mockDB = {
@@ -57,7 +57,9 @@ function createMockImageFile(sizeInMB: number, name: string): File {
 describe("Photo Performance Integration Tests", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockCreateObjectURL.mockImplementation((blob) => `blob:mock-${Date.now()}-${Math.random()}`);
+    mockCreateObjectURL.mockImplementation(
+      (blob) => `blob:mock-${Date.now()}-${Math.random()}`,
+    );
     mockPerformanceNow.mockReturnValue(0);
   });
 
@@ -74,12 +76,12 @@ describe("Photo Performance Integration Tests", () => {
       ];
 
       const startTime = Date.now();
-      
+
       // Store multiple large photos
       const photoIds = await Promise.all(
-        largePhotos.map((file, index) => 
-          photoService.storePhoto(file, `cv${index + 1}`)
-        )
+        largePhotos.map((file, index) =>
+          photoService.storePhoto(file, `cv${index + 1}`),
+        ),
       );
 
       const endTime = Date.now();
@@ -93,21 +95,24 @@ describe("Photo Performance Integration Tests", () => {
 
     it("should handle storage quota exceeded gracefully", async () => {
       const largePhoto = createMockImageFile(2, "large.jpg");
-      
+
       // Mock quota exceeded error
       mockDB.add.mockRejectedValue(
-        Object.assign(new Error("QuotaExceededError"), { name: "QuotaExceededError" })
+        Object.assign(new Error("QuotaExceededError"), {
+          name: "QuotaExceededError",
+        }),
       );
 
-      await expect(photoService.storePhoto(largePhoto, "cv1"))
-        .rejects.toThrow("Storage quota exceeded");
+      await expect(photoService.storePhoto(largePhoto, "cv1")).rejects.toThrow(
+        "Storage quota exceeded",
+      );
     });
   });
 
   describe("Memory Management Under Load", () => {
     it("should manage memory efficiently with many photos", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Simulate loading many photos
       const photoCount = 100;
       const photoIds: string[] = [];
@@ -115,7 +120,7 @@ describe("Photo Performance Integration Tests", () => {
       for (let i = 0; i < photoCount; i++) {
         const photoId = `photo${i}`;
         photoIds.push(photoId);
-        
+
         mockDB.get.mockResolvedValueOnce({
           id: photoId,
           blob: mockBlob,
@@ -128,14 +133,14 @@ describe("Photo Performance Integration Tests", () => {
 
       // Load all photos
       const urls = await Promise.all(
-        photoIds.map(id => photoService.getPhotoUrl(id))
+        photoIds.map((id) => photoService.getPhotoUrl(id)),
       );
 
       expect(urls).toHaveLength(photoCount);
-      
+
       // Cache should have been cleaned up during the process
       expect(mockRevokeObjectURL).toHaveBeenCalled();
-      
+
       // Final cache size should be within limits
       const stats = photoService.getCacheStats();
       expect(stats.size).toBeLessThanOrEqual(stats.maxSize);
@@ -145,7 +150,7 @@ describe("Photo Performance Integration Tests", () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
       const cvId = "cv1";
       const photoCount = 20;
-      
+
       // Mock photos for a CV
       const mockPhotos = Array.from({ length: photoCount }, (_, i) => ({
         id: `photo${i}`,
@@ -169,9 +174,11 @@ describe("Photo Performance Integration Tests", () => {
 
       // Should have revoked cached URLs
       expect(mockRevokeObjectURL).toHaveBeenCalledTimes(5);
-      
+
       // Should have deleted all photos from DB
-      expect(mockDB.transaction().store.delete).toHaveBeenCalledTimes(photoCount);
+      expect(mockDB.transaction().store.delete).toHaveBeenCalledTimes(
+        photoCount,
+      );
     });
   });
 
@@ -179,7 +186,7 @@ describe("Photo Performance Integration Tests", () => {
     it("should handle concurrent photo loads efficiently", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
       const photoCount = 10;
-      
+
       // Mock multiple photos
       for (let i = 0; i < photoCount; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -193,23 +200,23 @@ describe("Photo Performance Integration Tests", () => {
       }
 
       const startTime = Date.now();
-      
+
       // Load photos concurrently
       const promises = Array.from({ length: photoCount }, (_, i) =>
-        photoService.getPhotoUrl(`photo${i}`)
+        photoService.getPhotoUrl(`photo${i}`),
       );
-      
+
       const urls = await Promise.all(promises);
-      
+
       const endTime = Date.now();
       const totalTime = endTime - startTime;
 
       expect(urls).toHaveLength(photoCount);
-      expect(urls.every(url => url !== null)).toBe(true);
-      
+      expect(urls.every((url) => url !== null)).toBe(true);
+
       // Should complete within reasonable time
       expect(totalTime).toBeLessThan(2000); // 2 seconds
-      
+
       // Should only initialize DB once despite concurrent calls
       expect(openDB).toHaveBeenCalledTimes(1);
     });
@@ -217,7 +224,7 @@ describe("Photo Performance Integration Tests", () => {
     it("should handle concurrent store and retrieve operations", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
       const file = new File([mockBlob], "test.jpg", { type: "image/jpeg" });
-      
+
       // Mock successful storage
       mockDB.add.mockResolvedValue(undefined);
       mockDB.get.mockResolvedValue({
@@ -244,7 +251,7 @@ describe("Photo Performance Integration Tests", () => {
   describe("Performance Monitoring", () => {
     it("should provide accurate performance statistics", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Load some photos to generate stats
       for (let i = 0; i < 5; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -255,12 +262,12 @@ describe("Photo Performance Integration Tests", () => {
           uploadedAt: new Date(),
           cvId: `cv${i}`,
         });
-        
+
         await photoService.getPhotoUrl(`photo${i}`);
       }
 
       const stats = photoService.getCacheStats();
-      
+
       expect(stats.size).toBe(5);
       expect(stats.maxSize).toBeGreaterThan(0);
       expect(typeof stats.size).toBe("number");
@@ -280,7 +287,7 @@ describe("Photo Performance Integration Tests", () => {
       });
 
       const storageInfo = await photoService.getStorageInfo();
-      
+
       expect(storageInfo).toEqual({
         used: 1024 * 1024 * 10,
         available: 1024 * 1024 * 100,
@@ -291,21 +298,42 @@ describe("Photo Performance Integration Tests", () => {
   describe("Cleanup Operations", () => {
     it("should efficiently clean up orphaned photos", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Mock orphaned photos (CVs that no longer exist)
       const allPhotos = [
-        { id: "photo1", cvId: "cv1", blob: mockBlob, type: "image/jpeg", size: 1000, uploadedAt: new Date() },
-        { id: "photo2", cvId: "cv2", blob: mockBlob, type: "image/jpeg", size: 1000, uploadedAt: new Date() },
-        { id: "photo3", cvId: "cv3", blob: mockBlob, type: "image/jpeg", size: 1000, uploadedAt: new Date() },
+        {
+          id: "photo1",
+          cvId: "cv1",
+          blob: mockBlob,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+        },
+        {
+          id: "photo2",
+          cvId: "cv2",
+          blob: mockBlob,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+        },
+        {
+          id: "photo3",
+          cvId: "cv3",
+          blob: mockBlob,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+        },
       ];
 
       mockDB.transaction().store.getAll.mockResolvedValue(allPhotos);
-      
+
       // Only cv1 still exists
       const existingCvIds = ["cv1"];
-      
+
       const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
-      
+
       expect(result.cleaned).toBe(2); // photo2 and photo3 should be cleaned
       expect(result.errors).toHaveLength(0);
       expect(mockDB.transaction().store.delete).toHaveBeenCalledTimes(2);
@@ -313,17 +341,33 @@ describe("Photo Performance Integration Tests", () => {
 
     it("should handle cleanup errors gracefully", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       const allPhotos = [
-        { id: "photo1", cvId: "cv1", blob: mockBlob, type: "image/jpeg", size: 1000, uploadedAt: new Date() },
-        { id: "photo2", cvId: "cv2", blob: mockBlob, type: "image/jpeg", size: 1000, uploadedAt: new Date() },
+        {
+          id: "photo1",
+          cvId: "cv1",
+          blob: mockBlob,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+        },
+        {
+          id: "photo2",
+          cvId: "cv2",
+          blob: mockBlob,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+        },
       ];
 
       mockDB.transaction().store.getAll.mockResolvedValue(allPhotos);
-      mockDB.transaction().store.delete.mockRejectedValue(new Error("Delete failed"));
-      
+      mockDB
+        .transaction()
+        .store.delete.mockRejectedValue(new Error("Delete failed"));
+
       const result = await photoService.cleanupOrphanedPhotos([]);
-      
+
       expect(result.cleaned).toBe(0);
       expect(result.errors).toHaveLength(2);
       expect(result.errors[0]).toContain("Failed to delete orphaned photo");
@@ -333,7 +377,7 @@ describe("Photo Performance Integration Tests", () => {
   describe("Preloading Performance", () => {
     it("should preload photos efficiently without blocking", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Mock photos for preloading
       for (let i = 0; i < 15; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -347,23 +391,23 @@ describe("Photo Performance Integration Tests", () => {
       }
 
       const photoIds = Array.from({ length: 15 }, (_, i) => `photo${i}`);
-      
+
       const startTime = Date.now();
       await photoService.preloadPhotos(photoIds);
       const endTime = Date.now();
-      
+
       const totalTime = endTime - startTime;
-      
+
       // Should complete within reasonable time
       expect(totalTime).toBeLessThan(3000); // 3 seconds
-      
+
       // Should limit concurrent loads to 10
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(10);
     });
 
     it("should skip already cached photos during preload", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Load and cache some photos first
       for (let i = 0; i < 3; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -374,7 +418,7 @@ describe("Photo Performance Integration Tests", () => {
           uploadedAt: new Date(),
           cvId: `cv${i}`,
         });
-        
+
         await photoService.getPhotoUrl(`photo${i}`);
       }
 
@@ -382,7 +426,7 @@ describe("Photo Performance Integration Tests", () => {
 
       // Preload should skip cached photos
       await photoService.preloadPhotos(["photo0", "photo1", "photo2"]);
-      
+
       // Should not create additional URLs for cached photos
       expect(mockCreateObjectURL).toHaveBeenCalledTimes(3);
     });

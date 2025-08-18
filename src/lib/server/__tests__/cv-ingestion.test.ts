@@ -340,5 +340,4 @@ describe("CV Ingestion Server Action", () => {
       ).rejects.toThrow("Expected tool call to ingest_cv was not returned");
     });
   });
-
 });

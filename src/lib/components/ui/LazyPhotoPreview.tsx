@@ -33,7 +33,7 @@ export function LazyPhotoPreview({
     if (!imgRef.current || !photoId) return;
 
     // Check if IntersectionObserver is available (not available in test environments)
-    if (typeof IntersectionObserver === 'undefined') {
+    if (typeof IntersectionObserver === "undefined") {
       // Fallback: immediately set as in view for environments without IntersectionObserver
       setIsInView(true);
       return;
@@ -50,7 +50,7 @@ export function LazyPhotoPreview({
       {
         rootMargin: "50px", // Start loading 50px before the image comes into view
         threshold: 0.1,
-      }
+      },
     );
 
     observerRef.current.observe(imgRef.current);

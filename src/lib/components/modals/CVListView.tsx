@@ -48,7 +48,7 @@ function CVListItem({
           size={40}
           className="flex-shrink-0"
         />
-        
+
         <div className="flex-1 min-w-0">
           <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
             {title}
@@ -116,11 +116,11 @@ export default function CVListView({
   // Preload photos for better performance
   useEffect(() => {
     const photoIds = cvs
-      .map(cv => cv.profilePhotoId)
+      .map((cv) => cv.profilePhotoId)
       .filter((id): id is string => Boolean(id));
-    
+
     if (photoIds.length > 0) {
-      photoService.preloadPhotos(photoIds).catch(error => {
+      photoService.preloadPhotos(photoIds).catch((error) => {
         console.warn("Failed to preload CV photos:", error);
       });
     }

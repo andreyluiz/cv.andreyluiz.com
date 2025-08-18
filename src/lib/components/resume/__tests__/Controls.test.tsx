@@ -185,8 +185,6 @@ describe("Controls", () => {
       name: /switch to two column layout/i,
     });
     const controlsContainer = layoutToggle.closest("div");
-    expect(controlsContainer).toHaveClass(
-      "flex",
-    );
+    expect(controlsContainer).toHaveClass("flex");
   });
 });

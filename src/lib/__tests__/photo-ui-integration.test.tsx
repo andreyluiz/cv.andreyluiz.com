@@ -203,7 +203,10 @@ describe("Photo UI Integration Tests", () => {
   };
 
   const createMockFile = (name: string, type: string, size = 1000): File => {
-    return new File(["mock image data"], name, { type, lastModified: Date.now() });
+    return new File(["mock image data"], name, {
+      type,
+      lastModified: Date.now(),
+    });
   };
 
   beforeEach(() => {
@@ -246,22 +249,32 @@ describe("Photo UI Integration Tests", () => {
       );
 
       // Step 1: Fill in CV title
-      const titleInput = screen.getByPlaceholderText("Enter a name for this CV");
+      const titleInput = screen.getByPlaceholderText(
+        "Enter a name for this CV",
+      );
       await user.type(titleInput, "John Doe - Software Engineer");
 
       // Step 2: Fill in CV text
-      const textArea = screen.getByPlaceholderText("Paste your CV text here...");
-      const cvText = "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer with 5+ years of experience in full-stack development...";
+      const textArea = screen.getByPlaceholderText(
+        "Paste your CV text here...",
+      );
+      const cvText =
+        "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer with 5+ years of experience in full-stack development...";
       await user.type(textArea, cvText);
 
       // Step 3: Upload photo
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       const mockFile = createMockFile("profile.jpg", "image/jpeg");
       await user.upload(fileInput, mockFile);
 
       // Wait for photo upload to complete
       await waitFor(() => {
-        expect(photoService.storePhoto).toHaveBeenCalledWith(mockFile, expect.any(String));
+        expect(photoService.storePhoto).toHaveBeenCalledWith(
+          mockFile,
+          expect.any(String),
+        );
       });
 
       // Step 4: Submit form
@@ -283,7 +296,9 @@ describe("Photo UI Integration Tests", () => {
       const { photoService } = await import("@/lib/services/photoService");
 
       // Mock photo upload failure
-      vi.mocked(photoService.storePhoto).mockRejectedValue(new Error("Upload failed"));
+      vi.mocked(photoService.storePhoto).mockRejectedValue(
+        new Error("Upload failed"),
+      );
 
       const mockOnSubmit = vi.fn();
       const mockOnCancel = vi.fn();
@@ -297,14 +312,23 @@ describe("Photo UI Integration Tests", () => {
       );
 
       // Fill in required fields
-      const titleInput = screen.getByPlaceholderText("Enter a name for this CV");
+      const titleInput = screen.getByPlaceholderText(
+        "Enter a name for this CV",
+      );
       await user.type(titleInput, "Test CV");
 
-      const textArea = screen.getByPlaceholderText("Paste your CV text here...");
-      await user.type(textArea, "Test CV content with enough characters to pass validation requirements...");
+      const textArea = screen.getByPlaceholderText(
+        "Paste your CV text here...",
+      );
+      await user.type(
+        textArea,
+        "Test CV content with enough characters to pass validation requirements...",
+      );
 
       // Attempt photo upload
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       const mockFile = createMockFile("profile.jpg", "image/jpeg");
       await user.upload(fileInput, mockFile);
 
@@ -320,7 +344,8 @@ describe("Photo UI Integration Tests", () => {
       await waitFor(() => {
         expect(mockOnSubmit).toHaveBeenCalledWith({
           title: "Test CV",
-          rawText: "Test CV content with enough characters to pass validation requirements...",
+          rawText:
+            "Test CV content with enough characters to pass validation requirements...",
           photoId: null,
         });
       });
@@ -340,17 +365,29 @@ describe("Photo UI Integration Tests", () => {
         />,
       );
 
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
 
       // Verify file input has correct accept attribute for validation
-      expect(fileInput).toHaveAttribute("accept", "image/jpeg,image/jpg,image/png,image/webp");
+      expect(fileInput).toHaveAttribute(
+        "accept",
+        "image/jpeg,image/jpg,image/png,image/webp",
+      );
 
       // Test that form can be submitted without photo (validation is handled by PhotoUpload component)
-      const titleInput = screen.getByPlaceholderText("Enter a name for this CV");
+      const titleInput = screen.getByPlaceholderText(
+        "Enter a name for this CV",
+      );
       await user.type(titleInput, "Test CV");
 
-      const textArea = screen.getByPlaceholderText("Paste your CV text here...");
-      await user.type(textArea, "Test CV content with enough characters to pass validation requirements...");
+      const textArea = screen.getByPlaceholderText(
+        "Paste your CV text here...",
+      );
+      await user.type(
+        textArea,
+        "Test CV content with enough characters to pass validation requirements...",
+      );
 
       const submitButton = screen.getByRole("button", { name: /Process CV/ });
       await user.click(submitButton);
@@ -358,7 +395,8 @@ describe("Photo UI Integration Tests", () => {
       await waitFor(() => {
         expect(mockOnSubmit).toHaveBeenCalledWith({
           title: "Test CV",
-          rawText: "Test CV content with enough characters to pass validation requirements...",
+          rawText:
+            "Test CV content with enough characters to pass validation requirements...",
           photoId: null,
         });
       });
@@ -381,7 +419,8 @@ describe("Photo UI Integration Tests", () => {
 
       const initialData = {
         title: "Existing CV",
-        rawText: "Existing CV content with enough characters to pass validation requirements...",
+        rawText:
+          "Existing CV content with enough characters to pass validation requirements...",
         photoId: existingPhotoId,
         cvId: "existing-cv-id",
       };
@@ -400,19 +439,26 @@ describe("Photo UI Integration Tests", () => {
 
       // Wait for existing photo to load
       await waitFor(() => {
-        expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+        expect(
+          screen.getByAltText("Profile photo preview"),
+        ).toBeInTheDocument();
         expect(screen.getByText("Click to replace photo")).toBeInTheDocument();
       });
 
       // Replace photo
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       const newFile = createMockFile("new-profile.png", "image/png");
       await user.upload(fileInput, newFile);
 
       // Verify old photo deletion and new photo upload
       await waitFor(() => {
         expect(photoService.deletePhoto).toHaveBeenCalledWith(existingPhotoId);
-        expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "existing-cv-id");
+        expect(photoService.storePhoto).toHaveBeenCalledWith(
+          newFile,
+          "existing-cv-id",
+        );
       });
 
       // Submit form
@@ -440,7 +486,8 @@ describe("Photo UI Integration Tests", () => {
 
       const initialData = {
         title: "CV with Photo",
-        rawText: "CV content with photo that will be removed and has enough characters...",
+        rawText:
+          "CV content with photo that will be removed and has enough characters...",
         photoId: existingPhotoId,
         cvId: "cv-with-photo",
       };
@@ -459,11 +506,15 @@ describe("Photo UI Integration Tests", () => {
 
       // Wait for photo to load
       await waitFor(() => {
-        expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+        expect(
+          screen.getByAltText("Profile photo preview"),
+        ).toBeInTheDocument();
       });
 
       // Click remove button
-      const removeButton = screen.getByRole("button", { name: "Remove uploaded photo" });
+      const removeButton = screen.getByRole("button", {
+        name: "Remove uploaded photo",
+      });
       await user.click(removeButton);
 
       // Confirm removal in dialog
@@ -471,9 +522,13 @@ describe("Photo UI Integration Tests", () => {
         expect(screen.getByRole("dialog")).toBeInTheDocument();
       });
 
-      const confirmButton = screen.getAllByRole("button").find(
-        (button) => button.textContent === "Remove Photo" && button.className.includes("bg-red-600")
-      );
+      const confirmButton = screen
+        .getAllByRole("button")
+        .find(
+          (button) =>
+            button.textContent === "Remove Photo" &&
+            button.className.includes("bg-red-600"),
+        );
       expect(confirmButton).toBeDefined();
       if (confirmButton) {
         await user.click(confirmButton);
@@ -482,7 +537,9 @@ describe("Photo UI Integration Tests", () => {
       // Verify photo deletion
       await waitFor(() => {
         expect(photoService.deletePhoto).toHaveBeenCalledWith(existingPhotoId);
-        expect(screen.getByText("Drag and drop an image here, or click to browse")).toBeInTheDocument();
+        expect(
+          screen.getByText("Drag and drop an image here, or click to browse"),
+        ).toBeInTheDocument();
       });
 
       // Submit form
@@ -524,19 +581,26 @@ describe("Photo UI Integration Tests", () => {
       };
 
       // Mock photo URL for CV with photo
-      vi.mocked(photoService.getPhotoUrl).mockImplementation(async (photoId) => {
-        if (photoId === "photo_1") return "blob:cv1-photo-url";
-        return null;
-      });
+      vi.mocked(photoService.getPhotoUrl).mockImplementation(
+        async (photoId) => {
+          if (photoId === "photo_1") return "blob:cv1-photo-url";
+          return null;
+        },
+      );
 
       const { addIngestedCV } = useStore.getState();
       addIngestedCV(cv1);
       addIngestedCV(cv2);
 
       const mockOnClose = vi.fn();
+      const mockOnCvLoad = vi.fn();
 
       renderWithIntl(
-        <CVManagementModal isOpen={true} onClose={mockOnClose} />
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCvLoad}
+        />,
       );
 
       // Verify CVs are displayed
@@ -550,7 +614,6 @@ describe("Photo UI Integration Tests", () => {
     });
 
     it("should handle CV deletion with photo cleanup", async () => {
-      const user = userEvent.setup();
       const { photoService } = await import("@/lib/services/photoService");
 
       // Setup CV with photo
@@ -570,9 +633,14 @@ describe("Photo UI Integration Tests", () => {
       addIngestedCV(cvWithPhoto);
 
       const mockOnClose = vi.fn();
+      const mockOnCvLoad = vi.fn();
 
       renderWithIntl(
-        <CVManagementModal isOpen={true} onClose={mockOnClose} />
+        <CVManagementModal
+          isOpen={true}
+          onClose={mockOnClose}
+          onCVLoad={mockOnCvLoad}
+        />,
       );
 
       // Find and click delete button (implementation depends on CVListView)
@@ -597,9 +665,7 @@ describe("Photo UI Integration Tests", () => {
       // Mock URL.revokeObjectURL for test environment
       global.URL.revokeObjectURL = vi.fn();
 
-      renderWithIntl(
-        <ProfileImage photoId={photoId} />
-      );
+      renderWithIntl(<ProfileImage photoId={photoId} />);
 
       // Wait for photo to load
       await waitFor(() => {
@@ -621,9 +687,7 @@ describe("Photo UI Integration Tests", () => {
       // Mock photo not found
       vi.mocked(photoService.getPhotoUrl).mockResolvedValue(null);
 
-      renderWithIntl(
-        <ProfileImage photoId={photoId} />
-      );
+      renderWithIntl(<ProfileImage photoId={photoId} />);
 
       // Wait for fallback
       await waitFor(() => {
@@ -638,9 +702,7 @@ describe("Photo UI Integration Tests", () => {
     });
 
     it("should display default image when no photoId is provided", () => {
-      renderWithIntl(
-        <ProfileImage />
-      );
+      renderWithIntl(<ProfileImage />);
 
       const img = screen.getByRole("img");
       expect(img).toHaveAttribute("src", "/profile.webp");
@@ -652,11 +714,11 @@ describe("Photo UI Integration Tests", () => {
       const photoId = "error_photo_123";
 
       // Mock photo service error
-      vi.mocked(photoService.getPhotoUrl).mockRejectedValue(new Error("Photo service error"));
-
-      renderWithIntl(
-        <ProfileImage photoId={photoId} />
+      vi.mocked(photoService.getPhotoUrl).mockRejectedValue(
+        new Error("Photo service error"),
       );
+
+      renderWithIntl(<ProfileImage photoId={photoId} />);
 
       // Wait for error handling
       await waitFor(() => {
@@ -695,23 +757,37 @@ describe("Photo UI Integration Tests", () => {
       );
 
       // Fill form and upload photo
-      const titleInput = screen.getByPlaceholderText("Enter a name for this CV");
+      const titleInput = screen.getByPlaceholderText(
+        "Enter a name for this CV",
+      );
       await user.type(titleInput, "Consistency Test CV");
 
-      const textArea = screen.getByPlaceholderText("Paste your CV text here...");
-      await user.type(textArea, "CV content for consistency testing with enough characters...");
+      const textArea = screen.getByPlaceholderText(
+        "Paste your CV text here...",
+      );
+      await user.type(
+        textArea,
+        "CV content for consistency testing with enough characters...",
+      );
 
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       const mockFile = createMockFile("consistent.jpg", "image/jpeg");
       await user.upload(fileInput, mockFile);
 
       await waitFor(() => {
-        expect(photoService.storePhoto).toHaveBeenCalledWith(mockFile, expect.any(String));
+        expect(photoService.storePhoto).toHaveBeenCalledWith(
+          mockFile,
+          expect.any(String),
+        );
       });
 
       // Verify photo preview is shown in form
       await waitFor(() => {
-        expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+        expect(
+          screen.getByAltText("Profile photo preview"),
+        ).toBeInTheDocument();
       });
     });
   });
@@ -750,7 +826,9 @@ describe("Photo UI Integration Tests", () => {
       expect(uploadButton).toHaveFocus();
 
       // Upload photo and verify accessibility announcements
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       const mockFile = createMockFile("accessible.jpg", "image/jpeg");
       await user.upload(fileInput, mockFile);
 
@@ -768,8 +846,13 @@ describe("Photo UI Integration Tests", () => {
       });
 
       // Test remove button accessibility
-      const removeButton = screen.getByRole("button", { name: "Remove uploaded photo" });
-      expect(removeButton).toHaveAttribute("aria-label", "Remove uploaded photo");
+      const removeButton = screen.getByRole("button", {
+        name: "Remove uploaded photo",
+      });
+      expect(removeButton).toHaveAttribute(
+        "aria-label",
+        "Remove uploaded photo",
+      );
     });
 
     it("should handle error announcements accessibly", async () => {

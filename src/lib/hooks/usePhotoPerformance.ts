@@ -36,10 +36,12 @@ export function usePhotoPerformance() {
       try {
         const cacheStats = photoService.getCacheStats();
         const storageInfo = await photoService.getStorageInfo();
-        
-        const averageLoadTime = loadTimesRef.current.length > 0
-          ? loadTimesRef.current.reduce((sum, time) => sum + time, 0) / loadTimesRef.current.length
-          : 0;
+
+        const averageLoadTime =
+          loadTimesRef.current.length > 0
+            ? loadTimesRef.current.reduce((sum, time) => sum + time, 0) /
+              loadTimesRef.current.length
+            : 0;
 
         setMetrics({
           cacheStats,
@@ -65,7 +67,7 @@ export function usePhotoPerformance() {
   // Track photo load time
   const trackLoadTime = (loadTime: number) => {
     loadTimesRef.current.push(loadTime);
-    
+
     // Keep only last 100 load times to prevent memory growth
     if (loadTimesRef.current.length > 100) {
       loadTimesRef.current = loadTimesRef.current.slice(-100);
@@ -95,19 +97,30 @@ export function usePhotoPerformance() {
     const recommendations: string[] = [];
 
     if (metrics.cacheStats.size >= metrics.cacheStats.maxSize * 0.8) {
-      recommendations.push("Cache is nearly full. Consider clearing unused photos.");
+      recommendations.push(
+        "Cache is nearly full. Consider clearing unused photos.",
+      );
     }
 
     if (metrics.averageLoadTime > 1000) {
-      recommendations.push("Photo load times are high. Consider optimizing image sizes.");
+      recommendations.push(
+        "Photo load times are high. Consider optimizing image sizes.",
+      );
     }
 
     if (metrics.errorCount > 10) {
-      recommendations.push("High error rate detected. Check IndexedDB availability.");
+      recommendations.push(
+        "High error rate detected. Check IndexedDB availability.",
+      );
     }
 
-    if (metrics.storageInfo && metrics.storageInfo.used > metrics.storageInfo.available * 0.8) {
-      recommendations.push("Storage quota is nearly full. Consider cleaning up old photos.");
+    if (
+      metrics.storageInfo &&
+      metrics.storageInfo.used > metrics.storageInfo.available * 0.8
+    ) {
+      recommendations.push(
+        "Storage quota is nearly full. Consider cleaning up old photos.",
+      );
     }
 
     return recommendations;

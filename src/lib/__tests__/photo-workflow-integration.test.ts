@@ -89,10 +89,16 @@ describe("Photo Workflow Integration Tests", () => {
   };
 
   const createMockFile = (name: string, type: string, size = 1000): File => {
-    return new File(["mock image data"], name, { type, lastModified: Date.now() });
+    return new File(["mock image data"], name, {
+      type,
+      lastModified: Date.now(),
+    });
   };
 
-  const createMockPhotoRecord = (photoId: string, cvId: string): PhotoRecord => ({
+  const createMockPhotoRecord = (
+    photoId: string,
+    cvId: string,
+  ): PhotoRecord => ({
     id: photoId,
     blob: createMockFile("test.jpg", "image/jpeg"),
     type: "image/jpeg",
@@ -120,9 +126,10 @@ describe("Photo Workflow Integration Tests", () => {
     it("should complete full CV creation workflow with photo upload", async () => {
       const { photoService } = await import("@/lib/services/photoService");
       const { ingestCV } = await import("@/lib/server/actions");
-      
+
       // Setup store
-      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } = useStore.getState();
+      const { setApiKey, setSelectedModel, addIngestedCV, setCurrentCV } =
+        useStore.getState();
       setApiKey(mockApiKey);
       setSelectedModel(mockModel);
 
@@ -142,7 +149,8 @@ describe("Photo Workflow Integration Tests", () => {
       expect(photoService.storePhoto).toHaveBeenCalledWith(mockFile, cvId);
 
       // Step 2: Ingest CV with photo reference
-      const rawText = "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
+      const rawText =
+        "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
       const formattedCV = await ingestCV(rawText, mockApiKey, mockModel);
       expect(formattedCV).toEqual(mockVariant);
 
@@ -175,7 +183,7 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle CV creation without photo", async () => {
       const { ingestCV } = await import("@/lib/server/actions");
-      
+
       // Setup store
       const { setApiKey, addIngestedCV } = useStore.getState();
       setApiKey(mockApiKey);
@@ -184,7 +192,8 @@ describe("Photo Workflow Integration Tests", () => {
       vi.mocked(ingestCV).mockResolvedValue(mockVariant);
 
       // Create CV without photo
-      const rawText = "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
+      const rawText =
+        "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
       const formattedCV = await ingestCV(rawText, mockApiKey, mockModel);
 
       const ingestedCV: IngestedCV = {
@@ -208,24 +217,29 @@ describe("Photo Workflow Integration Tests", () => {
     it("should handle photo upload failure during CV creation", async () => {
       const { photoService } = await import("@/lib/services/photoService");
       const { ingestCV } = await import("@/lib/server/actions");
-      
+
       // Setup store
       const { setApiKey, addIngestedCV } = useStore.getState();
       setApiKey(mockApiKey);
 
       // Mock photo upload failure
       const mockFile = createMockFile("profile.jpg", "image/jpeg");
-      vi.mocked(photoService.storePhoto).mockRejectedValue(new Error("Storage quota exceeded"));
+      vi.mocked(photoService.storePhoto).mockRejectedValue(
+        new Error("Storage quota exceeded"),
+      );
 
       // Mock successful CV ingestion
       vi.mocked(ingestCV).mockResolvedValue(mockVariant);
 
       // Attempt photo upload
       const cvId = "cv-photo-fail";
-      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow("Storage quota exceeded");
+      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow(
+        "Storage quota exceeded",
+      );
 
       // Continue with CV creation without photo
-      const rawText = "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
+      const rawText =
+        "John Doe\nSoftware Engineer\njohn@example.com\nExperienced developer...";
       const formattedCV = await ingestCV(rawText, mockApiKey, mockModel);
 
       const ingestedCV: IngestedCV = {
@@ -250,12 +264,12 @@ describe("Photo Workflow Integration Tests", () => {
   describe("Photo Persistence and Retrieval Across Browser Sessions", () => {
     it("should persist photo data across store resets", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup initial state with CV and photo
       const cvId = "cv-persist-test";
       const photoId = "photo_persist_123";
       const mockFile = createMockFile("profile.jpg", "image/jpeg");
-      
+
       vi.mocked(photoService.storePhoto).mockResolvedValue(photoId);
       vi.mocked(photoService.getPhotoUrl).mockResolvedValue("blob:mock-url");
       vi.mocked(photoService.getPhoto).mockResolvedValue(mockFile);
@@ -309,11 +323,11 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle missing photos gracefully after session restart", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Create CV with photo reference
       const cvId = "cv-missing-photo";
       const photoId = "photo_missing_123";
-      
+
       const ingestedCV: IngestedCV = {
         id: cvId,
         title: "CV with Missing Photo",
@@ -346,31 +360,31 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should maintain photo-CV associations across multiple sessions", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Create multiple CVs with photos
       const cv1Id = "cv-multi-1";
       const cv2Id = "cv-multi-2";
       const photo1Id = "photo_multi_1";
       const photo2Id = "photo_multi_2";
-      
+
       const mockFile1 = createMockFile("profile1.jpg", "image/jpeg");
       const mockFile2 = createMockFile("profile2.png", "image/png");
-      
+
       vi.mocked(photoService.storePhoto)
         .mockResolvedValueOnce(photo1Id)
         .mockResolvedValueOnce(photo2Id);
-      vi.mocked(photoService.getPhotoUrl)
-        .mockImplementation(async (id) => {
-          if (id === photo1Id) return "blob:mock-url-1";
-          if (id === photo2Id) return "blob:mock-url-2";
-          return null;
-        });
-      vi.mocked(photoService.getPhotosByCvId)
-        .mockImplementation(async (cvId) => {
+      vi.mocked(photoService.getPhotoUrl).mockImplementation(async (id) => {
+        if (id === photo1Id) return "blob:mock-url-1";
+        if (id === photo2Id) return "blob:mock-url-2";
+        return null;
+      });
+      vi.mocked(photoService.getPhotosByCvId).mockImplementation(
+        async (cvId) => {
           if (cvId === cv1Id) return [createMockPhotoRecord(photo1Id, cv1Id)];
           if (cvId === cv2Id) return [createMockPhotoRecord(photo2Id, cv2Id)];
           return [];
-        });
+        },
+      );
 
       // Store photos
       await photoService.storePhoto(mockFile1, cv1Id);
@@ -421,29 +435,28 @@ describe("Photo Workflow Integration Tests", () => {
   describe("Photo Editing and Deletion Workflows", () => {
     it("should handle complete photo editing workflow", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup initial CV with photo
       const cvId = "cv-edit-test";
       const oldPhotoId = "photo_old_123";
       const newPhotoId = "photo_new_456";
-      
+
       const oldFile = createMockFile("old-profile.jpg", "image/jpeg");
       const newFile = createMockFile("new-profile.png", "image/png");
-      
+
       vi.mocked(photoService.storePhoto)
         .mockResolvedValueOnce(oldPhotoId)
         .mockResolvedValueOnce(newPhotoId);
-      vi.mocked(photoService.getPhotoUrl)
-        .mockImplementation(async (id) => {
-          if (id === oldPhotoId) return "blob:old-url";
-          if (id === newPhotoId) return "blob:new-url";
-          return null;
-        });
+      vi.mocked(photoService.getPhotoUrl).mockImplementation(async (id) => {
+        if (id === oldPhotoId) return "blob:old-url";
+        if (id === newPhotoId) return "blob:new-url";
+        return null;
+      });
       vi.mocked(photoService.deletePhoto).mockResolvedValue();
 
       // Create initial CV with photo
       await photoService.storePhoto(oldFile, cvId);
-      
+
       const initialCV: IngestedCV = {
         id: cvId,
         title: "Editable CV",
@@ -464,7 +477,7 @@ describe("Photo Workflow Integration Tests", () => {
       // Step 2: Replace photo (delete old, store new)
       await photoService.deletePhoto(oldPhotoId);
       const newStoredPhotoId = await photoService.storePhoto(newFile, cvId);
-      
+
       expect(photoService.deletePhoto).toHaveBeenCalledWith(oldPhotoId);
       expect(newStoredPhotoId).toBe(newPhotoId);
 
@@ -474,7 +487,7 @@ describe("Photo Workflow Integration Tests", () => {
         profilePhotoId: newPhotoId,
         updatedAt: new Date(),
       };
-      
+
       updateIngestedCV(cvId, updatedCV);
 
       // Step 4: Verify update
@@ -487,11 +500,11 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle photo removal workflow", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup CV with photo
       const cvId = "cv-remove-test";
       const photoId = "photo_remove_123";
-      
+
       vi.mocked(photoService.deletePhoto).mockResolvedValue();
 
       const cvWithPhoto: IngestedCV = {
@@ -517,7 +530,7 @@ describe("Photo Workflow Integration Tests", () => {
         profilePhotoId: undefined,
         updatedAt: new Date(),
       };
-      
+
       updateIngestedCV(cvId, updatedCV);
 
       // Verify photo reference is removed
@@ -527,11 +540,11 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle CV deletion with photo cleanup", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup CV with photo
       const cvId = "cv-delete-test";
       const photoId = "photo_delete_123";
-      
+
       vi.mocked(photoService.deletePhotosByCvId).mockResolvedValue();
 
       const cvWithPhoto: IngestedCV = {
@@ -553,18 +566,18 @@ describe("Photo Workflow Integration Tests", () => {
 
       // Verify cleanup
       expect(photoService.deletePhotosByCvId).toHaveBeenCalledWith(cvId);
-      
+
       const state = useStore.getState();
       expect(state.ingestedCVs).toHaveLength(0);
     });
 
     it("should handle bulk photo operations", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup multiple CVs with photos
       const cvIds = ["cv-bulk-1", "cv-bulk-2", "cv-bulk-3"];
       const photoIds = ["photo_bulk_1", "photo_bulk_2", "photo_bulk_3"];
-      
+
       vi.mocked(photoService.getAllPhotosWithCvIds).mockResolvedValue([
         { photoId: photoIds[0], cvId: cvIds[0], uploadedAt: new Date() },
         { photoId: photoIds[1], cvId: cvIds[1], uploadedAt: new Date() },
@@ -600,8 +613,9 @@ describe("Photo Workflow Integration Tests", () => {
 
       // Cleanup orphaned photos
       const remainingCvIds = cvIds.slice(1);
-      const cleanupResult = await photoService.cleanupOrphanedPhotos(remainingCvIds);
-      
+      const cleanupResult =
+        await photoService.cleanupOrphanedPhotos(remainingCvIds);
+
       expect(cleanupResult.cleaned).toBe(1);
       expect(cleanupResult.errors).toHaveLength(0);
     });
@@ -610,7 +624,7 @@ describe("Photo Workflow Integration Tests", () => {
   describe("Error Recovery and Fallback Scenarios", () => {
     it("should handle IndexedDB unavailability", async () => {
       const { PhotoService } = await import("@/lib/services/photoService");
-      
+
       // Mock IndexedDB as unavailable
       vi.mocked(PhotoService.isIndexedDBAvailable).mockReturnValue(false);
 
@@ -637,7 +651,7 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle storage quota exceeded errors", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Mock quota exceeded error
       const quotaError = new Error("Storage quota exceeded");
       quotaError.name = "QuotaExceededError";
@@ -648,14 +662,20 @@ describe("Photo Workflow Integration Tests", () => {
       });
 
       const cvId = "cv-quota-test";
-      const mockFile = createMockFile("large-profile.jpg", "image/jpeg", 5000000); // 5MB file
+      const mockFile = createMockFile(
+        "large-profile.jpg",
+        "image/jpeg",
+        5000000,
+      ); // 5MB file
 
       // Attempt photo upload
-      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow("Storage quota exceeded");
+      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow(
+        "Storage quota exceeded",
+      );
 
       // Check storage info
       const storageInfo = await photoService.getStorageInfo();
-      expect(storageInfo?.used).toBeGreaterThan(storageInfo?.available * 0.9); // Over 90% used
+      expect(storageInfo?.used).toBeGreaterThan(storageInfo?.available! * 0.9); // Over 90% used
 
       // Create CV without photo due to quota issue
       const cvWithoutPhoto: IngestedCV = {
@@ -678,11 +698,11 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle photo corruption and recovery", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup CV with photo
       const cvId = "cv-corruption-test";
       const photoId = "photo_corrupt_123";
-      
+
       // Mock photo retrieval failure (corruption)
       vi.mocked(photoService.getPhotoUrl).mockResolvedValue(null);
       vi.mocked(photoService.getPhoto).mockResolvedValue(null);
@@ -703,7 +723,7 @@ describe("Photo Workflow Integration Tests", () => {
       // Attempt to retrieve corrupted photo
       const photoUrl = await photoService.getPhotoUrl(photoId);
       const photo = await photoService.getPhoto(photoId);
-      
+
       expect(photoUrl).toBeNull();
       expect(photo).toBeNull();
 
@@ -715,7 +735,7 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle network interruption during photo operations", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Mock network error
       const networkError = new Error("Network request failed");
       vi.mocked(photoService.storePhoto).mockRejectedValue(networkError);
@@ -724,7 +744,9 @@ describe("Photo Workflow Integration Tests", () => {
       const mockFile = createMockFile("profile.jpg", "image/jpeg");
 
       // Attempt photo upload with network failure
-      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow("Network request failed");
+      await expect(photoService.storePhoto(mockFile, cvId)).rejects.toThrow(
+        "Network request failed",
+      );
 
       // Simulate retry after network recovery
       const retryPhotoId = "photo_retry_123";
@@ -736,18 +758,19 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle concurrent photo operations", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup concurrent operations
       const cvId = "cv-concurrent-test";
       const file1 = createMockFile("photo1.jpg", "image/jpeg");
       const file2 = createMockFile("photo2.png", "image/png");
-      
-      vi.mocked(photoService.storePhoto)
-        .mockImplementation(async (file, id) => {
+
+      vi.mocked(photoService.storePhoto).mockImplementation(
+        async (file, id) => {
           // Simulate async delay
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise((resolve) => setTimeout(resolve, 100));
           return `photo_${id}_${file.name}`;
-        });
+        },
+      );
 
       // Execute concurrent operations
       const [result1, result2] = await Promise.all([
@@ -762,13 +785,15 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle photo deletion failures gracefully", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup CV with photo
       const cvId = "cv-delete-fail-test";
       const photoId = "photo_delete_fail_123";
-      
+
       // Mock deletion failure
-      vi.mocked(photoService.deletePhoto).mockRejectedValue(new Error("Delete operation failed"));
+      vi.mocked(photoService.deletePhoto).mockRejectedValue(
+        new Error("Delete operation failed"),
+      );
 
       const cvWithPhoto: IngestedCV = {
         id: cvId,
@@ -784,7 +809,9 @@ describe("Photo Workflow Integration Tests", () => {
       addIngestedCV(cvWithPhoto);
 
       // Attempt photo deletion (fails)
-      await expect(photoService.deletePhoto(photoId)).rejects.toThrow("Delete operation failed");
+      await expect(photoService.deletePhoto(photoId)).rejects.toThrow(
+        "Delete operation failed",
+      );
 
       // Continue with CV deletion despite photo deletion failure
       deleteIngestedCV(cvId);
@@ -796,18 +823,18 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle memory cleanup for object URLs", async () => {
       const { PhotoService } = await import("@/lib/services/photoService");
-      
+
       // Mock URL operations
       const mockUrls = ["blob:url1", "blob:url2", "blob:url3"];
-      
+
       // Simulate creating multiple object URLs
-      mockUrls.forEach(url => {
+      mockUrls.forEach((url) => {
         PhotoService.revokePhotoUrl(url);
       });
 
       // Verify cleanup was attempted for all URLs
       expect(PhotoService.revokePhotoUrl).toHaveBeenCalledTimes(3);
-      mockUrls.forEach(url => {
+      mockUrls.forEach((url) => {
         expect(PhotoService.revokePhotoUrl).toHaveBeenCalledWith(url);
       });
     });
@@ -816,12 +843,16 @@ describe("Photo Workflow Integration Tests", () => {
   describe("Performance and Storage Management", () => {
     it("should handle large photo files efficiently", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Create large file (just under 2MB limit)
-      const largeFile = createMockFile("large-profile.jpg", "image/jpeg", 1900000); // 1.9MB
+      const largeFile = createMockFile(
+        "large-profile.jpg",
+        "image/jpeg",
+        1900000,
+      ); // 1.9MB
       const cvId = "cv-large-photo";
       const photoId = "photo_large_123";
-      
+
       vi.mocked(photoService.storePhoto).mockResolvedValue(photoId);
       vi.mocked(photoService.getStorageInfo).mockResolvedValue({
         used: 1900000,
@@ -839,7 +870,7 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle multiple photos per CV", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Note: Current design supports one photo per CV, but test multiple for robustness
       const cvId = "cv-multiple-photos";
       const files = [
@@ -847,14 +878,14 @@ describe("Photo Workflow Integration Tests", () => {
         createMockFile("photo2.png", "image/png"),
         createMockFile("photo3.webp", "image/webp"),
       ];
-      
+
       const photoIds = ["photo_1", "photo_2", "photo_3"];
-      
+
       vi.mocked(photoService.storePhoto)
         .mockResolvedValueOnce(photoIds[0])
         .mockResolvedValueOnce(photoIds[1])
         .mockResolvedValueOnce(photoIds[2]);
-      
+
       vi.mocked(photoService.getPhotosByCvId).mockResolvedValue([
         createMockPhotoRecord(photoIds[0], cvId),
         createMockPhotoRecord(photoIds[1], cvId),
@@ -863,7 +894,7 @@ describe("Photo Workflow Integration Tests", () => {
 
       // Store multiple photos
       const storedIds = await Promise.all(
-        files.map(file => photoService.storePhoto(file, cvId))
+        files.map((file) => photoService.storePhoto(file, cvId)),
       );
 
       expect(storedIds).toEqual(photoIds);
@@ -875,28 +906,49 @@ describe("Photo Workflow Integration Tests", () => {
 
     it("should handle storage cleanup operations", async () => {
       const { photoService } = await import("@/lib/services/photoService");
-      
+
       // Setup scenario with orphaned photos
       const activeCvIds = ["cv-active-1", "cv-active-2"];
       const allPhotos = [
-        { photoId: "photo_active_1", cvId: "cv-active-1", uploadedAt: new Date() },
-        { photoId: "photo_active_2", cvId: "cv-active-2", uploadedAt: new Date() },
-        { photoId: "photo_orphan_1", cvId: "cv-deleted-1", uploadedAt: new Date() },
-        { photoId: "photo_orphan_2", cvId: "cv-deleted-2", uploadedAt: new Date() },
+        {
+          photoId: "photo_active_1",
+          cvId: "cv-active-1",
+          uploadedAt: new Date(),
+        },
+        {
+          photoId: "photo_active_2",
+          cvId: "cv-active-2",
+          uploadedAt: new Date(),
+        },
+        {
+          photoId: "photo_orphan_1",
+          cvId: "cv-deleted-1",
+          uploadedAt: new Date(),
+        },
+        {
+          photoId: "photo_orphan_2",
+          cvId: "cv-deleted-2",
+          uploadedAt: new Date(),
+        },
       ];
-      
-      vi.mocked(photoService.getAllPhotosWithCvIds).mockResolvedValue(allPhotos);
+
+      vi.mocked(photoService.getAllPhotosWithCvIds).mockResolvedValue(
+        allPhotos,
+      );
       vi.mocked(photoService.cleanupOrphanedPhotos).mockResolvedValue({
         cleaned: 2,
         errors: [],
       });
 
       // Perform cleanup
-      const cleanupResult = await photoService.cleanupOrphanedPhotos(activeCvIds);
-      
+      const cleanupResult =
+        await photoService.cleanupOrphanedPhotos(activeCvIds);
+
       expect(cleanupResult.cleaned).toBe(2);
       expect(cleanupResult.errors).toHaveLength(0);
-      expect(photoService.cleanupOrphanedPhotos).toHaveBeenCalledWith(activeCvIds);
+      expect(photoService.cleanupOrphanedPhotos).toHaveBeenCalledWith(
+        activeCvIds,
+      );
     });
   });
 });

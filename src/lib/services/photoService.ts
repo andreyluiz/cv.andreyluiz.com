@@ -82,7 +82,7 @@ export class PhotoService {
       // Remove oldest entries (first half of cache)
       const entries = Array.from(this.urlCache.entries());
       const toRemove = entries.slice(0, Math.floor(entries.length / 2));
-      
+
       for (const [photoId, url] of toRemove) {
         URL.revokeObjectURL(url);
         this.urlCache.delete(photoId);
@@ -155,7 +155,7 @@ export class PhotoService {
 
       const url = URL.createObjectURL(blob);
       this.urlCache.set(photoId, url);
-      
+
       return url;
     } catch (error) {
       console.error("Failed to create photo URL:", error);
@@ -168,7 +168,7 @@ export class PhotoService {
     try {
       const db = await this.initDB();
       await db.delete("photos", photoId);
-      
+
       // Clean up cached URL
       if (this.urlCache.has(photoId)) {
         const url = this.urlCache.get(photoId)!;
@@ -195,7 +195,7 @@ export class PhotoService {
       // Delete each photo and clean up cached URLs
       for (const record of photoRecords) {
         await tx.store.delete(record.id);
-        
+
         // Clean up cached URL
         if (this.urlCache.has(record.id)) {
           const url = this.urlCache.get(record.id)!;
@@ -358,7 +358,7 @@ export class PhotoService {
   // Preload photos for better performance (useful for CV lists)
   public async preloadPhotos(photoIds: string[]): Promise<void> {
     const loadPromises = photoIds
-      .filter(id => !this.urlCache.has(id)) // Only load uncached photos
+      .filter((id) => !this.urlCache.has(id)) // Only load uncached photos
       .slice(0, 10) // Limit concurrent loads
       .map(async (photoId) => {
         try {

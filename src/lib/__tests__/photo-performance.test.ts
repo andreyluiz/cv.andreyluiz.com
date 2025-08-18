@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { PhotoService, photoService } from "@/lib/services/photoService";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { photoService } from "@/lib/services/photoService";
 
 // Mock IndexedDB
 vi.mock("idb", () => ({
@@ -33,7 +33,7 @@ describe("PhotoService Performance Optimizations", () => {
   beforeEach(async () => {
     vi.clearAllMocks();
     mockCreateObjectURL.mockReturnValue("blob:mock-url");
-    
+
     // Get the mocked openDB function
     const { openDB } = await import("idb");
     mockDB = {
@@ -130,7 +130,7 @@ describe("PhotoService Performance Optimizations", () => {
     it("should reuse existing database connection", async () => {
       const { openDB } = await import("idb");
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Make multiple calls
       await photoService.storePhoto(new File([mockBlob], "test.jpg"), "cv1");
       await photoService.storePhoto(new File([mockBlob], "test2.jpg"), "cv1");
@@ -142,7 +142,7 @@ describe("PhotoService Performance Optimizations", () => {
     it("should handle concurrent initialization properly", async () => {
       const { openDB } = await import("idb");
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Make concurrent calls before DB is initialized
       const promises = [
         photoService.storePhoto(new File([mockBlob], "test1.jpg"), "cv1"),
@@ -169,10 +169,10 @@ describe("PhotoService Performance Optimizations", () => {
 
       // Create some cached URLs
       await photoService.getPhotoUrl("photo1");
-      
+
       // Close connection should clean up everything
       await photoService.closeConnection();
-      
+
       expect(mockDB.close).toHaveBeenCalled();
       expect(mockRevokeObjectURL).toHaveBeenCalled();
     });
@@ -181,7 +181,7 @@ describe("PhotoService Performance Optimizations", () => {
   describe("Preloading", () => {
     it("should preload multiple photos efficiently", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Mock multiple photos
       for (let i = 1; i <= 5; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -203,7 +203,7 @@ describe("PhotoService Performance Optimizations", () => {
 
     it("should limit concurrent preloads", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Mock many photos
       for (let i = 1; i <= 15; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -247,7 +247,7 @@ describe("PhotoService Performance Optimizations", () => {
   describe("Cache Statistics", () => {
     it("should provide accurate cache statistics", async () => {
       const stats = photoService.getCacheStats();
-      
+
       expect(stats).toHaveProperty("size");
       expect(stats).toHaveProperty("maxSize");
       expect(typeof stats.size).toBe("number");
@@ -256,7 +256,7 @@ describe("PhotoService Performance Optimizations", () => {
 
     it("should clear cache properly", () => {
       photoService.clearUrlCache();
-      
+
       const stats = photoService.getCacheStats();
       expect(stats.size).toBe(0);
     });
@@ -265,7 +265,7 @@ describe("PhotoService Performance Optimizations", () => {
   describe("Memory Management", () => {
     it("should handle large numbers of photos without memory leaks", async () => {
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // Create many photos
       for (let i = 0; i < 100; i++) {
         mockDB.get.mockResolvedValueOnce({
@@ -276,13 +276,13 @@ describe("PhotoService Performance Optimizations", () => {
           uploadedAt: new Date(),
           cvId: `cv${i}`,
         });
-        
+
         await photoService.getPhotoUrl(`photo${i}`);
       }
 
       // Cache should have been cleaned up during the process
       expect(mockRevokeObjectURL).toHaveBeenCalled();
-      
+
       const stats = photoService.getCacheStats();
       expect(stats.size).toBeLessThan(100); // Should be less due to cleanup
     });
@@ -299,21 +299,23 @@ describe("PhotoService Performance Optimizations", () => {
     it("should retry connection on initialization failure", async () => {
       const { openDB } = await import("idb");
       const mockOpenDB = vi.mocked(openDB);
-      
+
       // First call fails
       mockOpenDB.mockRejectedValueOnce(new Error("DB init failed"));
       // Second call succeeds
       mockOpenDB.mockResolvedValueOnce(mockDB);
 
       const mockBlob = new Blob(["test"], { type: "image/jpeg" });
-      
+
       // First attempt should fail and reset promise
-      await expect(photoService.storePhoto(new File([mockBlob], "test.jpg"), "cv1"))
-        .rejects.toThrow("Failed to initialize IndexedDB");
+      await expect(
+        photoService.storePhoto(new File([mockBlob], "test.jpg"), "cv1"),
+      ).rejects.toThrow("Failed to initialize IndexedDB");
 
       // Second attempt should succeed
-      await expect(photoService.storePhoto(new File([mockBlob], "test.jpg"), "cv1"))
-        .resolves.toBeDefined();
+      await expect(
+        photoService.storePhoto(new File([mockBlob], "test.jpg"), "cv1"),
+      ).resolves.toBeDefined();
 
       expect(mockOpenDB).toHaveBeenCalledTimes(2);
     });
