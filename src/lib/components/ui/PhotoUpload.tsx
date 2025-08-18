@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type React from "react";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import ConfirmationDialog from "@/lib/components/modals/ConfirmationDialog";
 import { PhotoService, photoService } from "@/lib/services/photoService";
 
 // Accepted image file types
@@ -36,6 +37,7 @@ export function PhotoUpload({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState<string>("");
+  const [showRemoveConfirm, setShowRemoveConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const announcementTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const helpId = useId();
@@ -135,7 +137,10 @@ export function PhotoUpload({
           try {
             await photoService.deletePhoto(value);
           } catch (error) {
-            console.warn("Failed to delete old photo during replacement:", error);
+            console.warn(
+              "Failed to delete old photo during replacement:",
+              error,
+            );
             // Continue with upload even if deletion fails
           }
         }
@@ -214,25 +219,35 @@ export function PhotoUpload({
     }
   }, [disabled]);
 
-  // Handle remove photo
-  const handleRemove = useCallback(
-    async (event: React.MouseEvent) => {
-      event.stopPropagation();
+  // Handle remove photo click - show confirmation
+  const handleRemoveClick = useCallback((event: React.MouseEvent) => {
+    event.stopPropagation();
+    setShowRemoveConfirm(true);
+  }, []);
 
-      if (value) {
-        try {
-          await photoService.deletePhoto(value);
-        } catch (error) {
-          console.error("Failed to delete photo:", error);
-        }
+  // Handle confirmed photo removal
+  const handleConfirmRemove = useCallback(async () => {
+    if (value) {
+      try {
+        await photoService.deletePhoto(value);
+        announceToScreenReader(t("cvManagement.photo.removeSuccess"));
+      } catch (error) {
+        console.error("Failed to delete photo:", error);
+        setUploadError(t("cvManagement.errors.photoUploadFailed"));
+        announceToScreenReader(t("cvManagement.photo.uploadError"));
+        return;
       }
+    }
 
-      onChange(null);
-      setUploadError(null);
-      announceToScreenReader(t("cvManagement.photo.removeSuccess"));
-    },
-    [value, onChange, announceToScreenReader, t],
-  );
+    onChange(null);
+    setUploadError(null);
+    setShowRemoveConfirm(false);
+  }, [value, onChange, announceToScreenReader, t]);
+
+  // Handle cancel remove
+  const handleCancelRemove = useCallback(() => {
+    setShowRemoveConfirm(false);
+  }, []);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
@@ -250,10 +265,10 @@ export function PhotoUpload({
     (event: React.KeyboardEvent) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        handleRemove(event as any);
+        handleRemoveClick(event as any);
       }
     },
-    [handleRemove],
+    [handleRemoveClick],
   );
 
   const displayError = error || uploadError;
@@ -289,7 +304,7 @@ export function PhotoUpload({
             />
             <button
               type="button"
-              onClick={handleRemove}
+              onClick={handleRemoveClick}
               onKeyDown={handleRemoveKeyDown}
               disabled={disabled}
               className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 focus:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -411,6 +426,18 @@ export function PhotoUpload({
       >
         {announcement}
       </div>
+
+      {/* Photo removal confirmation dialog */}
+      <ConfirmationDialog
+        isOpen={showRemoveConfirm}
+        onClose={handleCancelRemove}
+        onConfirm={handleConfirmRemove}
+        title={t("cvManagement.photo.confirmRemoveTitle")}
+        message={t("cvManagement.photo.confirmRemoveMessage")}
+        confirmText={t("cvManagement.photo.confirmRemoveButton")}
+        cancelText={t("cvManagement.actions.cancelDelete")}
+        variant="danger"
+      />
     </div>
   );
 }

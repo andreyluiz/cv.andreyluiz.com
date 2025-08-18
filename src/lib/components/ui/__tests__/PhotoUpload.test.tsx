@@ -24,6 +24,33 @@ vi.mock("next/image", () => ({
   },
 }));
 
+// Mock ConfirmationDialog component
+vi.mock("@/lib/components/modals/ConfirmationDialog", () => ({
+  default: ({
+    isOpen,
+    onClose,
+    onConfirm,
+    title,
+    message,
+    confirmText,
+    cancelText,
+  }: any) => {
+    if (!isOpen) return null;
+    return (
+      <div role="dialog" aria-labelledby="dialog-title" aria-modal="true">
+        <h3 id="dialog-title">{title}</h3>
+        <p>{message}</p>
+        <button type="button" onClick={onClose}>
+          {cancelText}
+        </button>
+        <button type="button" onClick={onConfirm} className="bg-red-600">
+          {confirmText}
+        </button>
+      </div>
+    );
+  },
+}));
+
 const mockMessages = {
   cvManagement: {
     photo: {
@@ -42,11 +69,18 @@ const mockMessages = {
       uploadSuccess: "Photo uploaded successfully",
       uploadError: "Photo upload failed",
       removeSuccess: "Photo removed successfully",
+      confirmRemoveTitle: "Remove Photo",
+      confirmRemoveMessage:
+        "Are you sure you want to remove this photo? This action cannot be undone.",
+      confirmRemoveButton: "Remove Photo",
     },
     errors: {
       photoTooLarge: "Image file must be smaller than 2MB",
       photoInvalidType: "Please select a valid image file (JPEG, PNG, or WebP)",
       photoUploadFailed: "Failed to process image. Please try again",
+    },
+    actions: {
+      cancelDelete: "Cancel",
     },
   },
 };
@@ -102,9 +136,13 @@ describe("PhotoUpload", () => {
   });
 
   it("validates file type and shows error for invalid files", async () => {
-    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} />,
+    );
 
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
 
     // Create a mock file with invalid type
     const invalidFile = new File(["test"], "test.txt", { type: "text/plain" });
@@ -124,9 +162,13 @@ describe("PhotoUpload", () => {
 
   it("validates file size and shows error for large files", async () => {
     const user = userEvent.setup();
-    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} />,
+    );
 
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
 
     // Create a mock file larger than 2MB
     const largeFile = new File(["x".repeat(3 * 1024 * 1024)], "large.jpg", {
@@ -148,9 +190,13 @@ describe("PhotoUpload", () => {
     const { photoService } = await import("@/lib/services/photoService");
     vi.mocked(photoService.storePhoto).mockResolvedValue(mockPhotoId);
 
-    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} cvId="test-cv" />,
+    );
 
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
 
     // Create a valid image file
     const validFile = new File(["image data"], "test.jpg", {
@@ -174,13 +220,13 @@ describe("PhotoUpload", () => {
     const newPhotoId = "new_photo_456";
     const mockPhotoUrl = "blob:mock-url";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
     vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
-    vi.mocked(photoService.deletePhoto).mockResolvedValue();
+    vi.mocked(photoService.deletePhoto).mockResolvedValue(undefined);
 
     const { container } = renderWithIntl(
-      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />
+      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />,
     );
 
     // Wait for preview to load
@@ -189,9 +235,11 @@ describe("PhotoUpload", () => {
     });
 
     // Find the file input within the component
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     expect(fileInput).toBeInTheDocument();
-    
+
     const newFile = new File(["new image data"], "new-test.jpg", {
       type: "image/jpeg",
     });
@@ -215,13 +263,15 @@ describe("PhotoUpload", () => {
     const newPhotoId = "new_photo_456";
     const mockPhotoUrl = "blob:mock-url";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
     vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
-    vi.mocked(photoService.deletePhoto).mockRejectedValue(new Error("Delete failed"));
+    vi.mocked(photoService.deletePhoto).mockRejectedValue(
+      new Error("Delete failed"),
+    );
 
     const { container } = renderWithIntl(
-      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />
+      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />,
     );
 
     // Wait for preview to load
@@ -230,9 +280,11 @@ describe("PhotoUpload", () => {
     });
 
     // Find the file input within the component
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     expect(fileInput).toBeInTheDocument();
-    
+
     const newFile = new File(["new image data"], "new-test.jpg", {
       type: "image/jpeg",
     });
@@ -259,9 +311,13 @@ describe("PhotoUpload", () => {
         new Promise((resolve) => setTimeout(() => resolve("photo_123"), 100)),
     );
 
-    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} />,
+    );
 
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     const validFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
     });
@@ -292,7 +348,7 @@ describe("PhotoUpload", () => {
     });
   });
 
-  it("handles remove photo functionality", async () => {
+  it("shows confirmation dialog before removing photo", async () => {
     const user = userEvent.setup();
     const mockPhotoUrl = "blob:mock-url";
     const { photoService } = await import("@/lib/services/photoService");
@@ -309,8 +365,127 @@ describe("PhotoUpload", () => {
     });
     await user.click(removeButton);
 
-    expect(photoService.deletePhoto).toHaveBeenCalledWith("photo_123");
-    expect(mockOnChange).toHaveBeenCalledWith(null);
+    // Verify confirmation dialog appears
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Are you sure you want to remove this photo? This action cannot be undone.",
+      ),
+    ).toBeInTheDocument();
+
+    // Verify photo is not deleted yet
+    expect(photoService.deletePhoto).not.toHaveBeenCalled();
+    expect(mockOnChange).not.toHaveBeenCalled();
+  });
+
+  it("removes photo when confirmed in dialog", async () => {
+    const user = userEvent.setup();
+    const mockPhotoUrl = "blob:mock-url";
+    const { photoService } = await import("@/lib/services/photoService");
+    vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+    vi.mocked(photoService.deletePhoto).mockResolvedValue(undefined);
+
+    renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+    await waitFor(() => {
+      expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+    });
+
+    const removeButton = screen.getByRole("button", {
+      name: "Remove uploaded photo",
+    });
+    await user.click(removeButton);
+
+    // Confirm removal
+    const confirmButton = screen
+      .getAllByRole("button")
+      .find(
+        (button) =>
+          button.textContent === "Remove Photo" &&
+          button.className.includes("bg-red-600"),
+      );
+    expect(confirmButton).toBeDefined();
+    if (confirmButton) {
+      await user.click(confirmButton);
+    }
+
+    await waitFor(() => {
+      expect(photoService.deletePhoto).toHaveBeenCalledWith("photo_123");
+      expect(mockOnChange).toHaveBeenCalledWith(null);
+    });
+  });
+
+  it("does not remove photo when cancelled in dialog", async () => {
+    const user = userEvent.setup();
+    const mockPhotoUrl = "blob:mock-url";
+    const { photoService } = await import("@/lib/services/photoService");
+    vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+
+    renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+    await waitFor(() => {
+      expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+    });
+
+    const removeButton = screen.getByRole("button", {
+      name: "Remove uploaded photo",
+    });
+    await user.click(removeButton);
+
+    // Cancel removal
+    const cancelButton = screen.getByRole("button", { name: "Cancel" });
+    await user.click(cancelButton);
+
+    // Verify photo service was not called
+    expect(photoService.deletePhoto).not.toHaveBeenCalled();
+    expect(mockOnChange).not.toHaveBeenCalled();
+
+    // Verify dialog is closed
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("handles photo deletion errors gracefully", async () => {
+    const user = userEvent.setup();
+    const mockPhotoUrl = "blob:mock-url";
+    const { photoService } = await import("@/lib/services/photoService");
+    vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+    vi.mocked(photoService.deletePhoto).mockRejectedValue(
+      new Error("Delete failed"),
+    );
+
+    renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
+
+    await waitFor(() => {
+      expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
+    });
+
+    // Click remove button and confirm
+    const removeButton = screen.getByRole("button", {
+      name: "Remove uploaded photo",
+    });
+    await user.click(removeButton);
+
+    const confirmButton = screen
+      .getAllByRole("button")
+      .find(
+        (button) =>
+          button.textContent === "Remove Photo" &&
+          button.className.includes("bg-red-600"),
+      );
+    expect(confirmButton).toBeDefined();
+    if (confirmButton) {
+      await user.click(confirmButton);
+    }
+
+    // Verify error is displayed
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Failed to process image. Please try again",
+      );
+    });
+
+    // Verify onChange was not called due to error
+    expect(mockOnChange).not.toHaveBeenCalled();
   });
 
   it("handles keyboard navigation with Enter key", async () => {
@@ -462,6 +637,7 @@ describe("PhotoUpload", () => {
       const mockPhotoUrl = "blob:mock-url";
       const { photoService } = await import("@/lib/services/photoService");
       vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+      vi.mocked(photoService.deletePhoto).mockResolvedValue(undefined);
 
       renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
 
@@ -486,10 +662,29 @@ describe("PhotoUpload", () => {
         "focus:ring-offset-2",
       );
 
-      // Test Enter key
+      // Test Enter key - should show confirmation dialog
       await user.keyboard("{Enter}");
-      expect(photoService.deletePhoto).toHaveBeenCalledWith("photo_123");
-      expect(mockOnChange).toHaveBeenCalledWith(null);
+
+      // Verify confirmation dialog appears
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+      // Confirm removal
+      const confirmButton = screen
+        .getAllByRole("button")
+        .find(
+          (button) =>
+            button.textContent === "Remove Photo" &&
+            button.className.includes("bg-red-600"),
+        );
+      expect(confirmButton).toBeDefined();
+      if (confirmButton) {
+        await user.click(confirmButton);
+      }
+
+      await waitFor(() => {
+        expect(photoService.deletePhoto).toHaveBeenCalledWith("photo_123");
+        expect(mockOnChange).toHaveBeenCalledWith(null);
+      });
     });
 
     it("has proper keyboard navigation for replace button", async () => {
@@ -531,9 +726,13 @@ describe("PhotoUpload", () => {
       const { photoService } = await import("@/lib/services/photoService");
       vi.mocked(photoService.storePhoto).mockResolvedValue(mockPhotoId);
 
-      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+      const { container } = renderWithIntl(
+        <PhotoUpload onChange={mockOnChange} cvId="test-cv" />,
+      );
 
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
 
       const validFile = new File(["image data"], "test.jpg", {
         type: "image/jpeg",
@@ -556,9 +755,13 @@ describe("PhotoUpload", () => {
         new Error("Upload failed"),
       );
 
-      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+      const { container } = renderWithIntl(
+        <PhotoUpload onChange={mockOnChange} cvId="test-cv" />,
+      );
 
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
 
       const validFile = new File(["image data"], "test.jpg", {
         type: "image/jpeg",
@@ -577,6 +780,7 @@ describe("PhotoUpload", () => {
       const mockPhotoUrl = "blob:mock-url";
       const { photoService } = await import("@/lib/services/photoService");
       vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+      vi.mocked(photoService.deletePhoto).mockResolvedValue(undefined);
 
       renderWithIntl(<PhotoUpload onChange={mockOnChange} value="photo_123" />);
 
@@ -590,6 +794,19 @@ describe("PhotoUpload", () => {
         name: "Remove uploaded photo",
       });
       await user.click(removeButton);
+
+      // Confirm removal in dialog
+      const confirmButton = screen
+        .getAllByRole("button")
+        .find(
+          (button) =>
+            button.textContent === "Remove Photo" &&
+            button.className.includes("bg-red-600"),
+        );
+      expect(confirmButton).toBeDefined();
+      if (confirmButton) {
+        await user.click(confirmButton);
+      }
 
       await waitFor(() => {
         const announcement = screen.getByRole("status");
@@ -618,9 +835,13 @@ describe("PhotoUpload", () => {
     });
 
     it("hides file input from screen readers", () => {
-      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+      const { container } = renderWithIntl(
+        <PhotoUpload onChange={mockOnChange} />,
+      );
 
-      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
 
       expect(fileInput).toHaveClass("sr-only");
       expect(fileInput).toHaveAttribute("tabIndex", "-1");

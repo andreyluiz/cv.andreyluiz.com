@@ -125,7 +125,10 @@
       "helpText": "Upload a profile photo to personalize your CV",
       "uploadSuccess": "Photo uploaded successfully",
       "uploadError": "Photo upload failed",
-      "removeSuccess": "Photo removed successfully"
+      "removeSuccess": "Photo removed successfully",
+      "confirmRemoveTitle": "Remove Photo",
+      "confirmRemoveMessage": "Are you sure you want to remove this photo? This action cannot be undone.",
+      "confirmRemoveButton": "Remove Photo"
     }
   },
   "coverLetter": {

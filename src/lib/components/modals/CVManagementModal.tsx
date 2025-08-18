@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ErrorBoundary from "@/lib/components/ui/ErrorBoundary";
 import ErrorDisplay from "@/lib/components/ui/ErrorDisplay";
 import LoadingSpinner from "@/lib/components/ui/LoadingSpinner";
@@ -9,6 +9,7 @@ import { ingestCV } from "@/lib/server/actions";
 import resumeEnglish from "@/lib/server/resume-en.json";
 import resumeFrench from "@/lib/server/resume-fr.json";
 import resumePortuguese from "@/lib/server/resume-pt.json";
+import { photoService } from "@/lib/services/photoService";
 import { useStore } from "@/lib/store";
 import type { IngestedCV, Variant } from "@/lib/types";
 import CVIngestionForm from "./CVIngestionForm";
@@ -96,8 +97,52 @@ export default function CVManagementModal({
     setModalState("editing");
   };
 
-  const handleDeleteCV = (id: string) => {
-    deleteIngestedCV(id);
+  const handleDeleteCV = async (id: string) => {
+    try {
+      // Find the CV to get its photo ID before deletion
+      const cvToDelete = ingestedCVs.find((cv) => cv.id === id);
+
+      // Delete the CV from store first
+      deleteIngestedCV(id);
+
+      // If the CV had a photo, delete it from IndexedDB
+      if (cvToDelete?.profilePhotoId) {
+        try {
+          await photoService.deletePhoto(cvToDelete.profilePhotoId);
+        } catch (photoError) {
+          // Log photo deletion error but don't prevent CV deletion
+          console.error("Failed to delete photo for CV:", photoError);
+
+          // Show a non-blocking error message to the user
+          setError(
+            new Error(
+              "CV deleted successfully, but failed to remove associated photo. The photo may remain in storage.",
+            ),
+          );
+
+          // Clear the error after a delay
+          setTimeout(() => {
+            setError(null);
+          }, 5000);
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting CV:", error);
+
+      // Show error to user
+      setError(
+        error instanceof Error ? error : new Error("Failed to delete CV"),
+      );
+
+      // Re-add the CV if deletion failed (only if it was actually removed)
+      const isStillInList = ingestedCVs.some((cv) => cv.id === id);
+      if (!isStillInList) {
+        const cvToRestore = ingestedCVs.find((cv) => cv.id === id);
+        if (cvToRestore) {
+          addIngestedCV(cvToRestore);
+        }
+      }
+    }
   };
 
   const processCV = useCallback(
@@ -218,6 +263,33 @@ export default function CVManagementModal({
     setProcessingState({ isProcessing: false });
     onClose();
   };
+
+  // Clean up orphaned photos when modal opens
+  const cleanupOrphanedPhotos = useCallback(async () => {
+    try {
+      const existingCvIds = ingestedCVs.map((cv) => cv.id);
+      const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
+
+      if (result.cleaned > 0) {
+        console.log(`Cleaned up ${result.cleaned} orphaned photos`);
+      }
+
+      if (result.errors.length > 0) {
+        console.warn("Photo cleanup errors:", result.errors);
+      }
+    } catch (error) {
+      console.error("Failed to cleanup orphaned photos:", error);
+    }
+  }, [ingestedCVs]);
+
+  // Run cleanup when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      // Run cleanup after a short delay to avoid blocking the UI
+      const timeoutId = setTimeout(cleanupOrphanedPhotos, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isOpen, cleanupOrphanedPhotos]);
 
   const handleRetry = () => {
     if (retryData) {

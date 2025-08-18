@@ -9,9 +9,9 @@ import { PhotoUpload } from "@/lib/components/ui/PhotoUpload";
 import Textarea from "@/lib/components/ui/Textarea";
 
 interface CVIngestionFormProps {
-  initialData?: { 
-    title: string; 
-    rawText: string; 
+  initialData?: {
+    title: string;
+    rawText: string;
     photoId?: string | null;
     cvId?: string; // Add CV ID for editing
   };
@@ -122,7 +122,7 @@ export default function CVIngestionForm({
         disabled={isLoading}
         error={errors.photo}
         cvId={
-          initialData?.cvId || 
+          initialData?.cvId ||
           (initialData?.title
             ? `cv-${initialData.title.replace(/\s+/g, "-").toLowerCase()}`
             : "temp")

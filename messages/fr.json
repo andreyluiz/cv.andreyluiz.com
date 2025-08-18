@@ -125,7 +125,10 @@
       "helpText": "Téléchargez une photo de profil pour personnaliser votre CV",
       "uploadSuccess": "Photo téléchargée avec succès",
       "uploadError": "Échec du téléchargement de la photo",
-      "removeSuccess": "Photo supprimée avec succès"
+      "removeSuccess": "Photo supprimée avec succès",
+      "confirmRemoveTitle": "Supprimer la Photo",
+      "confirmRemoveMessage": "Êtes-vous sûr de vouloir supprimer cette photo ? Cette action ne peut pas être annulée.",
+      "confirmRemoveButton": "Supprimer la Photo"
     }
   },
   "coverLetter": {

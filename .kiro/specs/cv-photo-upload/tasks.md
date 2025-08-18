@@ -50,7 +50,7 @@
   - Update PhotoService calls to handle photo updates
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 8. Add photo cleanup and deletion logic
+- [x] 8. Add photo cleanup and deletion logic
   - Implement photo deletion when CV is deleted
   - Add confirmation dialog for photo removal
   - Clean up orphaned photos in IndexedDB

@@ -125,7 +125,10 @@
       "helpText": "Envie uma foto de perfil para personalizar seu CV",
       "uploadSuccess": "Foto enviada com sucesso",
       "uploadError": "Falha no envio da foto",
-      "removeSuccess": "Foto removida com sucesso"
+      "removeSuccess": "Foto removida com sucesso",
+      "confirmRemoveTitle": "Remover Foto",
+      "confirmRemoveMessage": "Tem certeza de que deseja remover esta foto? Esta ação não pode ser desfeita.",
+      "confirmRemoveButton": "Remover Foto"
     }
   },
   "coverLetter": {

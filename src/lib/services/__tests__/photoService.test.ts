@@ -13,6 +13,7 @@ import { type PhotoRecord, PhotoService } from "../photoService";
 const mockDB = {
   add: vi.fn(),
   get: vi.fn(),
+  getAll: vi.fn(),
   delete: vi.fn(),
   transaction: vi.fn(),
   createObjectStore: vi.fn(),
@@ -431,6 +432,169 @@ describe("PhotoService", () => {
       const result = await photoService.getStorageInfo();
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe("cleanupOrphanedPhotos", () => {
+    it("should clean up orphaned photos successfully", async () => {
+      const existingCvIds = ["cv1", "cv2"];
+      const mockPhotos: PhotoRecord[] = [
+        {
+          id: "photo1",
+          blob: mockFile,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+          cvId: "cv1", // Valid CV
+        },
+        {
+          id: "photo2",
+          blob: mockFile,
+          type: "image/png",
+          size: 2000,
+          uploadedAt: new Date(),
+          cvId: "cv3", // Orphaned - CV doesn't exist
+        },
+        {
+          id: "photo3",
+          blob: mockFile,
+          type: "image/webp",
+          size: 1500,
+          uploadedAt: new Date(),
+          cvId: "cv4", // Orphaned - CV doesn't exist
+        },
+      ];
+
+      // Mock transaction and store
+      const mockStore = {
+        getAll: vi.fn().mockResolvedValue(mockPhotos),
+        delete: vi.fn().mockResolvedValue(undefined),
+      };
+      const mockTx = {
+        store: mockStore,
+        done: Promise.resolve(),
+      };
+      mockDB.transaction.mockReturnValue(mockTx);
+
+      const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
+
+      expect(result.cleaned).toBe(2);
+      expect(result.errors).toHaveLength(0);
+      expect(mockStore.delete).toHaveBeenCalledWith("photo2");
+      expect(mockStore.delete).toHaveBeenCalledWith("photo3");
+      expect(mockStore.delete).not.toHaveBeenCalledWith("photo1");
+    });
+
+    it("should handle deletion errors gracefully", async () => {
+      const existingCvIds = ["cv1"];
+      const mockPhotos: PhotoRecord[] = [
+        {
+          id: "photo1",
+          blob: mockFile,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date(),
+          cvId: "cv2", // Orphaned
+        },
+      ];
+
+      const mockStore = {
+        getAll: vi.fn().mockResolvedValue(mockPhotos),
+        delete: vi.fn().mockRejectedValue(new Error("Delete failed")),
+      };
+      const mockTx = {
+        store: mockStore,
+        done: Promise.resolve(),
+      };
+      mockDB.transaction.mockReturnValue(mockTx);
+
+      const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
+
+      expect(result.cleaned).toBe(0);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain(
+        "Failed to delete orphaned photo photo1",
+      );
+    });
+
+    it("should handle database errors", async () => {
+      const existingCvIds = ["cv1"];
+      mockDB.transaction.mockImplementation(() => {
+        throw new Error("Database error");
+      });
+
+      const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
+
+      expect(result.cleaned).toBe(0);
+      expect(result.errors).toHaveLength(1);
+      expect(result.errors[0]).toContain("Failed to cleanup orphaned photos");
+    });
+
+    it("should handle empty photo list", async () => {
+      const existingCvIds = ["cv1", "cv2"];
+      const mockStore = {
+        getAll: vi.fn().mockResolvedValue([]),
+        delete: vi.fn(),
+      };
+      const mockTx = {
+        store: mockStore,
+        done: Promise.resolve(),
+      };
+      mockDB.transaction.mockReturnValue(mockTx);
+
+      const result = await photoService.cleanupOrphanedPhotos(existingCvIds);
+
+      expect(result.cleaned).toBe(0);
+      expect(result.errors).toHaveLength(0);
+      expect(mockStore.delete).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("getAllPhotosWithCvIds", () => {
+    it("should return all photos with CV associations", async () => {
+      const mockPhotos: PhotoRecord[] = [
+        {
+          id: "photo1",
+          blob: mockFile,
+          type: "image/jpeg",
+          size: 1000,
+          uploadedAt: new Date("2023-01-01"),
+          cvId: "cv1",
+        },
+        {
+          id: "photo2",
+          blob: mockFile,
+          type: "image/png",
+          size: 2000,
+          uploadedAt: new Date("2023-01-02"),
+          cvId: "cv2",
+        },
+      ];
+
+      mockDB.getAll.mockResolvedValue(mockPhotos);
+
+      const result = await photoService.getAllPhotosWithCvIds();
+
+      expect(result).toEqual([
+        {
+          photoId: "photo1",
+          cvId: "cv1",
+          uploadedAt: new Date("2023-01-01"),
+        },
+        {
+          photoId: "photo2",
+          cvId: "cv2",
+          uploadedAt: new Date("2023-01-02"),
+        },
+      ]);
+    });
+
+    it("should return empty array when database error occurs", async () => {
+      mockDB.getAll.mockRejectedValue(new Error("Database error"));
+
+      const result = await photoService.getAllPhotosWithCvIds();
+
+      expect(result).toEqual([]);
     });
   });
 });

@@ -214,6 +214,74 @@ export class PhotoService {
       return null;
     }
   }
+
+  // Clean up orphaned photos (photos not associated with any existing CV)
+  public async cleanupOrphanedPhotos(existingCvIds: string[]): Promise<{
+    cleaned: number;
+    errors: string[];
+  }> {
+    const result = {
+      cleaned: 0,
+      errors: [] as string[],
+    };
+
+    try {
+      const db = await this.initDB();
+      const tx = db.transaction("photos", "readwrite");
+      const store = tx.store;
+
+      // Get all photos
+      const allPhotos = await store.getAll();
+
+      // Find orphaned photos
+      const orphanedPhotos = allPhotos.filter(
+        (photo) => !existingCvIds.includes(photo.cvId),
+      );
+
+      // Delete orphaned photos
+      for (const photo of orphanedPhotos) {
+        try {
+          await store.delete(photo.id);
+          result.cleaned++;
+        } catch (error) {
+          const errorMsg = `Failed to delete orphaned photo ${photo.id}: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`;
+          result.errors.push(errorMsg);
+          console.error(errorMsg);
+        }
+      }
+
+      await tx.done;
+    } catch (error) {
+      const errorMsg = `Failed to cleanup orphaned photos: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`;
+      result.errors.push(errorMsg);
+      console.error(errorMsg);
+    }
+
+    return result;
+  }
+
+  // Get all photos with their CV associations for debugging
+  public async getAllPhotosWithCvIds(): Promise<
+    Array<{ photoId: string; cvId: string; uploadedAt: Date }>
+  > {
+    try {
+      const db = await this.initDB();
+      const allPhotos = await db.getAll("photos");
+
+      return allPhotos.map((photo) => ({
+        photoId: photo.id,
+        cvId: photo.cvId,
+        uploadedAt: photo.uploadedAt,
+      }));
+    } catch (error) {
+      console.error("Failed to get photos with CV IDs:", error);
+      return [];
+    }
+  }
 }
 
 // Export singleton instance

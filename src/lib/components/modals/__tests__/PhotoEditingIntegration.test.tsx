@@ -88,14 +88,15 @@ describe("Photo Editing Integration", () => {
     const newPhotoId = "new_photo_456";
     const mockPhotoUrl = "blob:mock-url";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
     vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
     vi.mocked(photoService.deletePhoto).mockResolvedValue();
 
     const initialData = {
       title: "Existing CV",
-      rawText: "This is an existing CV with enough content to pass validation requirements for the minimum character count.",
+      rawText:
+        "This is an existing CV with enough content to pass validation requirements for the minimum character count.",
       photoId: oldPhotoId,
       cvId: "existing-cv-id",
     };
@@ -106,7 +107,7 @@ describe("Photo Editing Integration", () => {
         onSubmit={mockOnSubmit}
         onCancel={mockOnCancel}
         isLoading={false}
-      />
+      />,
     );
 
     // Wait for the existing photo to load and display
@@ -119,7 +120,9 @@ describe("Photo Editing Integration", () => {
     expect(screen.getByText("Photo Preview")).toBeInTheDocument();
 
     // Replace the photo with a new one
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     const newFile = new File(["new image data"], "new-photo.jpg", {
       type: "image/jpeg",
     });
@@ -131,7 +134,10 @@ describe("Photo Editing Integration", () => {
       // Should delete the old photo first
       expect(photoService.deletePhoto).toHaveBeenCalledWith(oldPhotoId);
       // Then store the new photo
-      expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "existing-cv-id");
+      expect(photoService.storePhoto).toHaveBeenCalledWith(
+        newFile,
+        "existing-cv-id",
+      );
     });
 
     // Submit the form
@@ -152,13 +158,14 @@ describe("Photo Editing Integration", () => {
     const existingPhotoId = "existing_photo_123";
     const mockPhotoUrl = "blob:mock-url";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
     vi.mocked(photoService.deletePhoto).mockResolvedValue();
 
     const initialData = {
       title: "CV with Photo",
-      rawText: "This is a CV with a photo that has enough content to pass validation requirements.",
+      rawText:
+        "This is a CV with a photo that has enough content to pass validation requirements.",
       photoId: existingPhotoId,
       cvId: "cv-with-photo-id",
     };
@@ -169,7 +176,7 @@ describe("Photo Editing Integration", () => {
         onSubmit={mockOnSubmit}
         onCancel={mockOnCancel}
         isLoading={false}
-      />
+      />,
     );
 
     // Wait for the existing photo to load
@@ -187,7 +194,9 @@ describe("Photo Editing Integration", () => {
     await waitFor(() => {
       expect(photoService.deletePhoto).toHaveBeenCalledWith(existingPhotoId);
       // Should show upload area again
-      expect(screen.getByText("Drag and drop an image here, or click to browse")).toBeInTheDocument();
+      expect(
+        screen.getByText("Drag and drop an image here, or click to browse"),
+      ).toBeInTheDocument();
     });
 
     // Submit the form
@@ -207,12 +216,13 @@ describe("Photo Editing Integration", () => {
     const user = userEvent.setup();
     const newPhotoId = "new_photo_789";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
 
     const initialData = {
       title: "Test CV",
-      rawText: "This is a test CV with enough content to pass validation requirements for the minimum character count.",
+      rawText:
+        "This is a test CV with enough content to pass validation requirements for the minimum character count.",
       cvId: "specific-cv-id-123", // Specific CV ID for editing
     };
 
@@ -222,11 +232,13 @@ describe("Photo Editing Integration", () => {
         onSubmit={mockOnSubmit}
         onCancel={mockOnCancel}
         isLoading={false}
-      />
+      />,
     );
 
     // Upload a new photo
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     const newFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
     });
@@ -235,7 +247,10 @@ describe("Photo Editing Integration", () => {
 
     // Verify the correct CV ID is used for photo storage
     await waitFor(() => {
-      expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "specific-cv-id-123");
+      expect(photoService.storePhoto).toHaveBeenCalledWith(
+        newFile,
+        "specific-cv-id-123",
+      );
     });
   });
 
@@ -243,12 +258,13 @@ describe("Photo Editing Integration", () => {
     const user = userEvent.setup();
     const newPhotoId = "new_photo_fallback";
     const { photoService } = await import("@/lib/services/photoService");
-    
+
     vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
 
     const initialData = {
       title: "Fallback CV",
-      rawText: "This is a CV without explicit ID that has enough content to pass validation requirements.",
+      rawText:
+        "This is a CV without explicit ID that has enough content to pass validation requirements.",
       // No cvId provided - should fallback to generated ID based on title
     };
 
@@ -258,11 +274,13 @@ describe("Photo Editing Integration", () => {
         onSubmit={mockOnSubmit}
         onCancel={mockOnCancel}
         isLoading={false}
-      />
+      />,
     );
 
     // Upload a new photo
-    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector(
+      'input[type="file"]',
+    ) as HTMLInputElement;
     const newFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
     });
@@ -271,7 +289,10 @@ describe("Photo Editing Integration", () => {
 
     // Verify fallback CV ID generation (based on title)
     await waitFor(() => {
-      expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "cv-fallback-cv");
+      expect(photoService.storePhoto).toHaveBeenCalledWith(
+        newFile,
+        "cv-fallback-cv",
+      );
     });
   });
 });
