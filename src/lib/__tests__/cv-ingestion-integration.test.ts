@@ -141,9 +141,10 @@ describe("CV Ingestion Integration Tests", () => {
     ],
     certifications: [
       {
-        name: "AWS Certified Developer Associate",
-        issuer: "Amazon Web Services",
+        degree: "AWS Certified Developer Associate",
+        institution: "Amazon Web Services",
         year: "2021",
+        location: "Switzerland"
       },
     ],
     languages: [

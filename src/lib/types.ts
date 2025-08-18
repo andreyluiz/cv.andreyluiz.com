@@ -107,4 +107,16 @@ export interface IngestedCV {
   formattedCV: Variant;
   createdAt: Date;
   updatedAt: Date;
+  profilePhotoId?: string; // Reference to photo stored in IndexedDB
+}
+
+// Photo-related types for form handling
+export interface PhotoFormData {
+  photoId?: string | null;
+}
+
+export interface CVFormData {
+  title: string;
+  rawText: string;
+  photoId?: string | null;
 }
