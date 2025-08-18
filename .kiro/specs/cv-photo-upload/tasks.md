@@ -57,7 +57,7 @@
   - Handle photo deletion errors gracefully
   - _Requirements: 3.4, 6.1, 6.2, 6.3, 6.4_
 
-- [ ] 9. Add internationalization support for photo features
+- [x] 9. Add internationalization support for photo features
   - Create translation keys for photo upload UI text in messages/en.json
   - Add French translations in messages/fr.json
   - Add Portuguese translations in messages/pt.json

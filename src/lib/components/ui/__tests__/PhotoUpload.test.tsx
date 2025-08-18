@@ -37,8 +37,8 @@ vi.mock("@/lib/components/modals/ConfirmationDialog", () => ({
   }: any) => {
     if (!isOpen) return null;
     return (
-      <div role="dialog" aria-labelledby="dialog-title" aria-modal="true">
-        <h3 id="dialog-title">{title}</h3>
+      <div role="dialog" aria-modal="true">
+        <h3>{title}</h3>
         <p>{message}</p>
         <button type="button" onClick={onClose}>
           {cancelText}
