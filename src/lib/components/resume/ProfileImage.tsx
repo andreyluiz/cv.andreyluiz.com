@@ -82,7 +82,7 @@ export default function ProfileImage({
   }
 
   // Use custom photo if available and no error, otherwise fallback to default
-  const imageSrc = photoUrl && !hasError ? photoUrl : "/profile.png";
+  const imageSrc = photoUrl && !hasError ? photoUrl : "/profile.webp";
   const altText =
     photoUrl && !hasError ? "Custom profile picture" : "Profile Picture";
 
