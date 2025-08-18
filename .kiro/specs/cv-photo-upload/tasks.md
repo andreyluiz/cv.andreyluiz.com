@@ -43,7 +43,7 @@
   - Maintain existing styling and responsive behavior
   - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 7. Implement photo editing functionality
+- [x] 7. Implement photo editing functionality
   - Add edit mode support in CVIngestionForm for existing photos
   - Display current photo in PhotoUpload when editing CV
   - Allow photo replacement and removal during CV editing

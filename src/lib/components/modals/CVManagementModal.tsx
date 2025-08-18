@@ -276,6 +276,7 @@ export default function CVManagementModal({
                     title: editingCV.title,
                     rawText: editingCV.rawText,
                     photoId: editingCV.profilePhotoId,
+                    cvId: editingCV.id,
                   }
                 : undefined
             }

@@ -130,6 +130,16 @@ export function PhotoUpload({
       setUploadError(null);
 
       try {
+        // If replacing an existing photo, delete the old one first
+        if (value) {
+          try {
+            await photoService.deletePhoto(value);
+          } catch (error) {
+            console.warn("Failed to delete old photo during replacement:", error);
+            // Continue with upload even if deletion fails
+          }
+        }
+
         const photoId = await photoService.storePhoto(file, cvId);
         onChange(photoId);
         announceToScreenReader(t("cvManagement.photo.uploadSuccess"));
@@ -144,7 +154,7 @@ export function PhotoUpload({
         setIsUploading(false);
       }
     },
-    [validateFile, onChange, cvId, t, announceToScreenReader],
+    [validateFile, onChange, cvId, value, t, announceToScreenReader],
   );
 
   // Handle file input change
@@ -254,6 +264,17 @@ export function PhotoUpload({
         {t("cvManagement.photo.upload")}
       </div>
 
+      {/* Hidden file input - always present */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept={ACCEPTED_FILE_TYPES.join(",")}
+        onChange={handleFileChange}
+        className="sr-only"
+        disabled={disabled}
+        tabIndex={-1}
+      />
+
       {/* Preview state - separate from upload area to avoid nested buttons */}
       {!isUploading && previewUrl && (
         <div className="flex flex-col items-center space-y-3 p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
@@ -321,17 +342,6 @@ export function PhotoUpload({
           aria-describedby={displayError ? errorId : helpId}
           tabIndex={disabled ? -1 : 0}
         >
-          {/* Hidden file input */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept={ACCEPTED_FILE_TYPES.join(",")}
-            onChange={handleFileChange}
-            className="sr-only"
-            disabled={disabled}
-            tabIndex={-1}
-          />
-
           {/* Loading state */}
           {isUploading && (
             <div className="flex flex-col items-center space-y-2">

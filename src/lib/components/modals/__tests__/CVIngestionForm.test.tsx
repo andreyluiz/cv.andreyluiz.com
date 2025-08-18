@@ -98,6 +98,30 @@ describe("CVIngestionForm", () => {
     expect(screen.getByDisplayValue(initialData.rawText)).toBeInTheDocument();
   });
 
+  it("renders with initial data including photo when editing", () => {
+    const initialData = {
+      title: "Test CV",
+      rawText:
+        "This is a test CV with enough content to pass validation requirements for the minimum character count.",
+      photoId: "test-photo-id",
+      cvId: "test-cv-id",
+    };
+
+    renderWithIntl(
+      <CVIngestionForm
+        initialData={initialData}
+        onSubmit={mockOnSubmit}
+        onCancel={mockOnCancel}
+        isLoading={false}
+      />,
+    );
+
+    expect(screen.getByDisplayValue("Test CV")).toBeInTheDocument();
+    expect(screen.getByDisplayValue(initialData.rawText)).toBeInTheDocument();
+    // PhotoUpload component should receive the photoId and cvId
+    expect(screen.getByText("Upload Photo")).toBeInTheDocument();
+  });
+
   it("shows validation errors for empty fields", async () => {
     renderWithIntl(
       <CVIngestionForm
@@ -193,6 +217,36 @@ describe("CVIngestionForm", () => {
         title: validTitle,
         rawText: validRawText,
         photoId: null,
+      });
+    });
+  });
+
+  it("submits form with photo data when editing", async () => {
+    const initialData = {
+      title: "Test CV",
+      rawText:
+        "This is a test CV with enough content to pass validation requirements for the minimum character count.",
+      photoId: "existing-photo-id",
+      cvId: "test-cv-id",
+    };
+
+    renderWithIntl(
+      <CVIngestionForm
+        initialData={initialData}
+        onSubmit={mockOnSubmit}
+        onCancel={mockOnCancel}
+        isLoading={false}
+      />,
+    );
+
+    const submitButton = screen.getByRole("button", { name: /Process CV/ });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockOnSubmit).toHaveBeenCalledWith({
+        title: "Test CV",
+        rawText: initialData.rawText,
+        photoId: "existing-photo-id",
       });
     });
   });

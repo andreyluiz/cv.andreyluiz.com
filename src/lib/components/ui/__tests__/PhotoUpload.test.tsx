@@ -102,13 +102,9 @@ describe("PhotoUpload", () => {
   });
 
   it("validates file type and shows error for invalid files", async () => {
-    renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
-    const fileInput = screen
-      .getByRole("button", {
-        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-      })
-      .querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a mock file with invalid type
     const invalidFile = new File(["test"], "test.txt", { type: "text/plain" });
@@ -128,13 +124,9 @@ describe("PhotoUpload", () => {
 
   it("validates file size and shows error for large files", async () => {
     const user = userEvent.setup();
-    renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
-    const fileInput = screen
-      .getByRole("button", {
-        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-      })
-      .querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a mock file larger than 2MB
     const largeFile = new File(["x".repeat(3 * 1024 * 1024)], "large.jpg", {
@@ -156,13 +148,9 @@ describe("PhotoUpload", () => {
     const { photoService } = await import("@/lib/services/photoService");
     vi.mocked(photoService.storePhoto).mockResolvedValue(mockPhotoId);
 
-    renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
 
-    const fileInput = screen
-      .getByRole("button", {
-        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-      })
-      .querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
     // Create a valid image file
     const validFile = new File(["image data"], "test.jpg", {
@@ -180,6 +168,88 @@ describe("PhotoUpload", () => {
     });
   });
 
+  it("deletes old photo when replacing with new photo", async () => {
+    const user = userEvent.setup();
+    const oldPhotoId = "old_photo_123";
+    const newPhotoId = "new_photo_456";
+    const mockPhotoUrl = "blob:mock-url";
+    const { photoService } = await import("@/lib/services/photoService");
+    
+    vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+    vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
+    vi.mocked(photoService.deletePhoto).mockResolvedValue();
+
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />
+    );
+
+    // Wait for preview to load
+    await waitFor(() => {
+      expect(screen.getByText("Click to replace photo")).toBeInTheDocument();
+    });
+
+    // Find the file input within the component
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    expect(fileInput).toBeInTheDocument();
+    
+    const newFile = new File(["new image data"], "new-test.jpg", {
+      type: "image/jpeg",
+    });
+
+    // Simulate file selection using userEvent
+    await user.upload(fileInput, newFile);
+
+    await waitFor(() => {
+      // Should delete the old photo first
+      expect(photoService.deletePhoto).toHaveBeenCalledWith(oldPhotoId);
+      // Then store the new photo
+      expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "test-cv");
+      // And call onChange with the new photo ID
+      expect(mockOnChange).toHaveBeenCalledWith(newPhotoId);
+    });
+  });
+
+  it("continues with upload even if old photo deletion fails", async () => {
+    const user = userEvent.setup();
+    const oldPhotoId = "old_photo_123";
+    const newPhotoId = "new_photo_456";
+    const mockPhotoUrl = "blob:mock-url";
+    const { photoService } = await import("@/lib/services/photoService");
+    
+    vi.mocked(photoService.getPhotoUrl).mockResolvedValue(mockPhotoUrl);
+    vi.mocked(photoService.storePhoto).mockResolvedValue(newPhotoId);
+    vi.mocked(photoService.deletePhoto).mockRejectedValue(new Error("Delete failed"));
+
+    const { container } = renderWithIntl(
+      <PhotoUpload onChange={mockOnChange} value={oldPhotoId} cvId="test-cv" />
+    );
+
+    // Wait for preview to load
+    await waitFor(() => {
+      expect(screen.getByText("Click to replace photo")).toBeInTheDocument();
+    });
+
+    // Find the file input within the component
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
+    expect(fileInput).toBeInTheDocument();
+    
+    const newFile = new File(["new image data"], "new-test.jpg", {
+      type: "image/jpeg",
+    });
+
+    // Simulate file selection using userEvent
+    await user.upload(fileInput, newFile);
+
+    await waitFor(() => {
+      // Should attempt to delete the old photo
+      expect(photoService.deletePhoto).toHaveBeenCalledWith(oldPhotoId);
+      // Should still store the new photo despite deletion failure
+      expect(photoService.storePhoto).toHaveBeenCalledWith(newFile, "test-cv");
+      // And call onChange with the new photo ID
+      expect(mockOnChange).toHaveBeenCalledWith(newPhotoId);
+    });
+  });
+
   it("shows loading state during upload", async () => {
     const user = userEvent.setup();
     const { photoService } = await import("@/lib/services/photoService");
@@ -189,13 +259,9 @@ describe("PhotoUpload", () => {
         new Promise((resolve) => setTimeout(() => resolve("photo_123"), 100)),
     );
 
-    renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+    const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
-    const fileInput = screen
-      .getByRole("button", {
-        name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-      })
-      .querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
     const validFile = new File(["image data"], "test.jpg", {
       type: "image/jpeg",
     });
@@ -465,13 +531,9 @@ describe("PhotoUpload", () => {
       const { photoService } = await import("@/lib/services/photoService");
       vi.mocked(photoService.storePhoto).mockResolvedValue(mockPhotoId);
 
-      renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
 
-      const fileInput = screen
-        .getByRole("button", {
-          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-        })
-        .querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
       const validFile = new File(["image data"], "test.jpg", {
         type: "image/jpeg",
@@ -494,13 +556,9 @@ describe("PhotoUpload", () => {
         new Error("Upload failed"),
       );
 
-      renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
+      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} cvId="test-cv" />);
 
-      const fileInput = screen
-        .getByRole("button", {
-          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-        })
-        .querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
       const validFile = new File(["image data"], "test.jpg", {
         type: "image/jpeg",
@@ -560,13 +618,9 @@ describe("PhotoUpload", () => {
     });
 
     it("hides file input from screen readers", () => {
-      renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
+      const { container } = renderWithIntl(<PhotoUpload onChange={mockOnChange} />);
 
-      const fileInput = screen
-        .getByRole("button", {
-          name: "Photo upload area. Drag and drop an image here, or press Enter or Space to browse for files",
-        })
-        .querySelector('input[type="file"]') as HTMLInputElement;
+      const fileInput = container.querySelector('input[type="file"]') as HTMLInputElement;
 
       expect(fileInput).toHaveClass("sr-only");
       expect(fileInput).toHaveAttribute("tabIndex", "-1");
