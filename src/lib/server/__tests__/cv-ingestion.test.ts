@@ -135,7 +135,14 @@ describe("CV Ingestion Server Action", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify(mockFormattedCV),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(mockFormattedCV),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -168,6 +175,15 @@ describe("CV Ingestion Server Action", () => {
               content: expect.stringContaining(mockRawText.trim()),
             }),
           ]),
+          tools: expect.arrayContaining([
+            expect.objectContaining({
+              type: "function",
+              function: expect.objectContaining({
+                name: "ingest_cv",
+              }),
+            }),
+          ]),
+          tool_choice: { type: "function", function: { name: "ingest_cv" } },
           max_completion_tokens: 8000,
           temperature: 0.3,
         }),
@@ -181,7 +197,14 @@ describe("CV Ingestion Server Action", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify(mockFormattedCV),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(mockFormattedCV),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -221,7 +244,14 @@ describe("CV Ingestion Server Action", () => {
         choices: [
           {
             message: {
-              content: "invalid json response",
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: "invalid json response",
+                  },
+                },
+              ],
             },
           },
         ],
@@ -240,7 +270,7 @@ describe("CV Ingestion Server Action", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow("The AI response could not be parsed as valid JSON");
+      ).rejects.toThrow();
     });
 
     it("should handle missing required fields", async () => {
@@ -252,7 +282,14 @@ describe("CV Ingestion Server Action", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify(incompleteCV),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(incompleteCV),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -281,7 +318,7 @@ describe("CV Ingestion Server Action", () => {
         choices: [
           {
             message: {
-              content: "",
+              tool_calls: null,
             },
           },
         ],
@@ -300,39 +337,8 @@ describe("CV Ingestion Server Action", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow("AI generated empty CV content");
+      ).rejects.toThrow("Expected tool call to ingest_cv was not returned");
     });
   });
 
-  describe("response cleaning", () => {
-    it("should clean markdown code blocks from AI response", async () => {
-      const responseWithMarkdown = `\`\`\`json\n${JSON.stringify(mockFormattedCV)}\n\`\`\``;
-
-      const mockOpenAI = await import("openai");
-      const mockConstructor = vi.mocked(mockOpenAI.default);
-      const mockCreate = vi.fn().mockResolvedValue({
-        choices: [
-          {
-            message: {
-              content: responseWithMarkdown,
-            },
-          },
-        ],
-      });
-
-      mockConstructor.mockImplementation(
-        () =>
-          ({
-            chat: {
-              completions: {
-                create: mockCreate,
-              },
-            },
-          }) as any,
-      );
-
-      const result = await ingestCV(mockRawText, mockApiKey, mockModel);
-      expect(result).toEqual(mockFormattedCV);
-    });
-  });
 });

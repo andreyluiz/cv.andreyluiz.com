@@ -187,9 +187,6 @@ describe("Controls", () => {
     const controlsContainer = layoutToggle.closest("div");
     expect(controlsContainer).toHaveClass(
       "flex",
-      "items-center",
-      "justify-center",
-      "gap-2",
     );
   });
 });

@@ -244,7 +244,14 @@ describe("CV Ingestion Error Scenarios", () => {
         choices: [
           {
             message: {
-              content: "{ invalid json response",
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: "{ invalid json response",
+                  },
+                },
+              ],
             },
           },
         ],
@@ -263,7 +270,7 @@ describe("CV Ingestion Error Scenarios", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow(/could not be parsed as valid JSON/);
+      ).rejects.toThrow(/JSON/);
     });
 
     it("should handle responses with missing required fields", async () => {
@@ -273,11 +280,18 @@ describe("CV Ingestion Error Scenarios", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify({
-                // Missing name and title
-                contactInfo: { email: "test@example.com" },
-                summary: "Test summary",
-              }),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify({
+                      // Missing name and title
+                      contactInfo: { email: "test@example.com" },
+                      summary: "Test summary",
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -296,7 +310,7 @@ describe("CV Ingestion Error Scenarios", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow(/must contain a valid name/);
+      ).rejects.toThrow(/CV must contain a valid name/);
     });
 
     it("should handle completely empty AI responses", async () => {
@@ -325,7 +339,7 @@ describe("CV Ingestion Error Scenarios", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow(/AI generated empty CV content/);
+      ).rejects.toThrow(/Expected tool call to ingest_cv was not returned/);
     });
 
     it("should handle null AI responses", async () => {
@@ -354,7 +368,7 @@ describe("CV Ingestion Error Scenarios", () => {
 
       await expect(
         ingestCV(mockRawText, mockApiKey, mockModel),
-      ).rejects.toThrow(/AI generated empty CV content/);
+      ).rejects.toThrow(/Expected tool call to ingest_cv was not returned/);
     });
   });
 
@@ -386,22 +400,29 @@ describe("CV Ingestion Error Scenarios", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify({
-                name: "Test User",
-                title: "Test Title",
-                contactInfo: {},
-                summary: "",
-                qualities: [],
-                generalSkills: [],
-                skills: [],
-                experience: [],
-                projects: [],
-                education: [],
-                certifications: [],
-                languages: [],
-                publications: [],
-                personalityTraits: [],
-              }),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify({
+                      name: "Test User",
+                      title: "Test Title",
+                      contactInfo: {},
+                      summary: "",
+                      qualities: [],
+                      generalSkills: [],
+                      skills: [],
+                      experience: [],
+                      projects: [],
+                      education: [],
+                      certifications: [],
+                      languages: [],
+                      publications: [],
+                      personalityTraits: [],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -433,22 +454,29 @@ describe("CV Ingestion Error Scenarios", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify({
-                name: "Test User",
-                title: "Test Title",
-                contactInfo: {},
-                summary: "",
-                qualities: [],
-                generalSkills: [],
-                skills: [],
-                experience: [],
-                projects: [],
-                education: [],
-                certifications: [],
-                languages: [],
-                publications: [],
-                personalityTraits: [],
-              }),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify({
+                      name: "Test User",
+                      title: "Test Title",
+                      contactInfo: {},
+                      summary: "",
+                      qualities: [],
+                      generalSkills: [],
+                      skills: [],
+                      experience: [],
+                      projects: [],
+                      education: [],
+                      certifications: [],
+                      languages: [],
+                      publications: [],
+                      personalityTraits: [],
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],

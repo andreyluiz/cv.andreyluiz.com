@@ -455,11 +455,18 @@ describe("OpenRouter Integration Tests", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify({
-                ...mockResume,
-                name: "Ingested User",
-                title: "Ingested Developer",
-              }),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify({
+                      ...mockResume,
+                      name: "Ingested User",
+                      title: "Ingested Developer",
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -558,7 +565,20 @@ describe("OpenRouter Integration Tests", () => {
         title: "First Developer",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(firstCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(firstCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       // Second CV ingestion
@@ -568,7 +588,20 @@ describe("OpenRouter Integration Tests", () => {
         title: "Second Developer",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(secondCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(secondCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       const mockOpenAIInstance = new (mockOpenAI.default as any)();

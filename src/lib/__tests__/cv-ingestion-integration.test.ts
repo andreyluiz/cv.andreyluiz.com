@@ -200,7 +200,14 @@ describe("CV Ingestion Integration Tests", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify(mockFormattedCV),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(mockFormattedCV),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -227,6 +234,15 @@ describe("CV Ingestion Integration Tests", () => {
               content: expect.stringContaining(mockRawText.trim()),
             }),
           ]),
+          tools: expect.arrayContaining([
+            expect.objectContaining({
+              type: "function",
+              function: expect.objectContaining({
+                name: "ingest_cv",
+              }),
+            }),
+          ]),
+          tool_choice: { type: "function", function: { name: "ingest_cv" } },
           max_completion_tokens: 8000,
           temperature: 0.3,
         }),
@@ -285,7 +301,20 @@ describe("CV Ingestion Integration Tests", () => {
         title: "Frontend Developer",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(firstCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(firstCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       // Second CV response
@@ -295,7 +324,20 @@ describe("CV Ingestion Integration Tests", () => {
         title: "Backend Developer",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(secondCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(secondCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       const mockOpenAIInstance = new (mockOpenAI.default as any)();
@@ -456,7 +498,20 @@ describe("CV Ingestion Integration Tests", () => {
         title: "Updated Title",
       };
       const mockCreate = vi.fn().mockResolvedValue({
-        choices: [{ message: { content: JSON.stringify(updatedFormattedCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(updatedFormattedCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       const mockOpenAIInstance = new (mockOpenAI.default as any)();
@@ -589,11 +644,18 @@ describe("CV Ingestion Integration Tests", () => {
         choices: [
           {
             message: {
-              content: JSON.stringify({
-                // Missing required fields
-                contactInfo: { email: "test@example.com" },
-                summary: "Test summary",
-              }),
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify({
+                      // Missing required fields
+                      contactInfo: { email: "test@example.com" },
+                      summary: "Test summary",
+                    }),
+                  },
+                },
+              ],
             },
           },
         ],
@@ -652,7 +714,20 @@ describe("CV Ingestion Integration Tests", () => {
         title: "Ingénieur Logiciel",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(frenchCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(frenchCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       // Portuguese CV
@@ -662,7 +737,20 @@ describe("CV Ingestion Integration Tests", () => {
         title: "Engenheiro de Software",
       };
       mockCreate.mockResolvedValueOnce({
-        choices: [{ message: { content: JSON.stringify(portugueseCV) } }],
+        choices: [
+          {
+            message: {
+              tool_calls: [
+                {
+                  function: {
+                    name: "ingest_cv",
+                    arguments: JSON.stringify(portugueseCV),
+                  },
+                },
+              ],
+            },
+          },
+        ],
       });
 
       const mockOpenAIInstance = new (mockOpenAI.default as any)();
