@@ -65,7 +65,7 @@
   - Test UI text rendering in all supported locales
   - _Requirements: 7.1, 7.3, 7.4_
 
-- [ ] 10. Write comprehensive unit tests for photo functionality
+- [x] 10. Write comprehensive unit tests for photo functionality
   - Test PhotoUpload component file handling and validation
   - Test CVIngestionForm integration with photo upload
   - Test ProfileImage component with custom photos and fallbacks

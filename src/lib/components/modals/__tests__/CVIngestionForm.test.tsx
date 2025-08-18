@@ -14,6 +14,9 @@ const messages = {
       cancel: "Cancel",
       processing: "Processing CV...",
     },
+    actions: {
+      cancelDelete: "Cancel",
+    },
     errors: {
       titleRequired: "CV title is required",
       titleTooLong: "CV title must be less than 100 characters",
@@ -41,6 +44,10 @@ const messages = {
       uploadSuccess: "Photo uploaded successfully",
       uploadError: "Photo upload failed",
       removeSuccess: "Photo removed successfully",
+      confirmRemoveTitle: "Remove Photo",
+      confirmRemoveMessage:
+        "Are you sure you want to remove this photo? This action cannot be undone.",
+      confirmRemoveButton: "Remove Photo",
     },
   },
 };

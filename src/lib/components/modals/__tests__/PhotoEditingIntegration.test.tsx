@@ -24,6 +24,33 @@ vi.mock("next/image", () => ({
   },
 }));
 
+// Mock ConfirmationDialog component
+vi.mock("@/lib/components/modals/ConfirmationDialog", () => ({
+  default: ({
+    isOpen,
+    onClose,
+    onConfirm,
+    title,
+    message,
+    confirmText,
+    cancelText,
+  }: any) => {
+    if (!isOpen) return null;
+    return (
+      <div role="dialog" aria-modal="true">
+        <h3>{title}</h3>
+        <p>{message}</p>
+        <button type="button" onClick={onClose}>
+          {cancelText}
+        </button>
+        <button type="button" onClick={onConfirm} className="bg-red-600">
+          {confirmText}
+        </button>
+      </div>
+    );
+  },
+}));
+
 const messages = {
   cvManagement: {
     form: {
@@ -34,6 +61,9 @@ const messages = {
       submit: "Process CV",
       cancel: "Cancel",
       processing: "Processing CV...",
+    },
+    actions: {
+      cancelDelete: "Cancel",
     },
     errors: {
       titleRequired: "CV title is required",
@@ -62,6 +92,10 @@ const messages = {
       uploadSuccess: "Photo uploaded successfully",
       uploadError: "Photo upload failed",
       removeSuccess: "Photo removed successfully",
+      confirmRemoveTitle: "Remove Photo",
+      confirmRemoveMessage:
+        "Are you sure you want to remove this photo? This action cannot be undone.",
+      confirmRemoveButton: "Remove Photo",
     },
   },
 };
@@ -184,11 +218,35 @@ describe("Photo Editing Integration", () => {
       expect(screen.getByAltText("Profile photo preview")).toBeInTheDocument();
     });
 
-    // Remove the photo
+    // Click the remove button to show confirmation dialog
     const removeButton = screen.getByRole("button", {
       name: "Remove uploaded photo",
     });
     await user.click(removeButton);
+
+    // Verify confirmation dialog appears
+    await waitFor(() => {
+      expect(screen.getByRole("dialog")).toBeInTheDocument();
+      expect(screen.getByRole("dialog")).toHaveTextContent("Remove Photo");
+      expect(
+        screen.getByText(
+          "Are you sure you want to remove this photo? This action cannot be undone.",
+        ),
+      ).toBeInTheDocument();
+    });
+
+    // Confirm removal by clicking the confirm button
+    const confirmButton = screen
+      .getAllByRole("button")
+      .find(
+        (button) =>
+          button.textContent === "Remove Photo" &&
+          button.className.includes("bg-red-600"),
+      );
+    expect(confirmButton).toBeDefined();
+    if (confirmButton) {
+      await user.click(confirmButton);
+    }
 
     // Verify photo removal
     await waitFor(() => {
