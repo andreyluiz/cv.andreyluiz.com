@@ -11,6 +11,8 @@ interface StoreState {
   layoutMode: "single" | "two-column";
   ingestedCVs: IngestedCV[];
   currentCV: Variant | null;
+  currentPhotoId: string | null;
+  _hasHydrated: boolean;
   setApiKey: (apiKey: string) => void;
   setSelectedModel: (model: string) => void;
   setCoverLetter: (letter: string, inputs: CoverLetterInputs) => void;
@@ -22,6 +24,8 @@ interface StoreState {
   deleteIngestedCV: (id: string) => void;
   setCurrentCV: (cv: Variant) => void;
   clearCurrentCV: () => void;
+  setCurrentPhotoId: (photoId: string | null) => void;
+  setHasHydrated: (state: boolean) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -35,6 +39,8 @@ export const useStore = create<StoreState>()(
       layoutMode: "single", // Default to single column for backward compatibility
       ingestedCVs: [],
       currentCV: null,
+      currentPhotoId: null,
+      _hasHydrated: false,
       setApiKey: (apiKey) => set({ apiKey }),
       setSelectedModel: (model) => set({ selectedModel: model }),
       setCoverLetter: (letter, inputs) =>
@@ -64,10 +70,21 @@ export const useStore = create<StoreState>()(
           ingestedCVs: state.ingestedCVs.filter((cv) => cv.id !== id),
         })),
       setCurrentCV: (cv) => set({ currentCV: cv }),
-      clearCurrentCV: () => set({ currentCV: null }),
+      clearCurrentCV: () => set({ currentCV: null, currentPhotoId: null }),
+      setCurrentPhotoId: (photoId) => set({ currentPhotoId: photoId }),
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
       name: "cv-tailor-storage", // name of the item in the storage (must be unique)
+      onRehydrateStorage: (state) => {
+        return (state, error) => {
+          if (error) {
+            console.log('An error happened during hydration', error);
+          } else {
+            state?.setHasHydrated(true);
+          }
+        }
+      },
     },
   ),
 );

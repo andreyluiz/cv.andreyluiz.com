@@ -39,6 +39,24 @@ export class PhotoService {
     return PhotoService.instance;
   }
 
+  // Associate an existing photo with a (new) CV id
+  public async updatePhotoCvId(photoId: string, newCvId: string): Promise<void> {
+    try {
+      const db = await this.initDB();
+      const existing = await db.get("photos", photoId);
+      if (!existing) return; // Nothing to update
+
+      const updated: PhotoRecord = { ...existing, cvId: newCvId };
+      await db.put("photos", updated);
+    } catch (error) {
+      console.warn(
+        `Failed to update photo association for ${photoId}: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
+      );
+    }
+  }
+
   // Initialize IndexedDB connection with connection pooling
   private async initDB(): Promise<IDBPDatabase<PhotoDB>> {
     // Return existing connection if available
@@ -286,9 +304,11 @@ export class PhotoService {
       const allPhotos = await store.getAll();
 
       // Find orphaned photos
-      const orphanedPhotos = allPhotos.filter(
-        (photo) => !existingCvIds.includes(photo.cvId),
-      );
+      const orphanedPhotos = allPhotos.filter((photo) => {
+        const isProvisional =
+          photo.cvId === "temp" || photo.cvId.startsWith("cv-");
+        return !existingCvIds.includes(photo.cvId) && !isProvisional;
+      });
 
       // Delete orphaned photos
       for (const photo of orphanedPhotos) {

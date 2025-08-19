@@ -38,6 +38,8 @@ function CVListItem({
   const t = useTranslations("cvManagement.actions");
   const modalT = useTranslations("cvManagement.modal");
 
+  console.log("Rendering item", photoId);
+
   return (
     <div className="flex items-center justify-between p-4 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors">
       <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -168,7 +170,10 @@ export default function CVListView({
                 key={cv.id}
                 title={cv.title}
                 photoId={cv.profilePhotoId}
-                onLoad={() => onLoadCV(cv.formattedCV, false)}
+                onLoad={() => onLoadCV({
+                  ...cv.formattedCV,
+                  profilePhotoId: cv.profilePhotoId
+                }, false)}
                 onEdit={() => onEditCV(cv)}
                 onDelete={() => handleDeleteClick(cv)}
               />

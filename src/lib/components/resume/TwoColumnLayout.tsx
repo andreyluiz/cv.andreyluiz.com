@@ -38,7 +38,7 @@ export default function TwoColumnLayout({ resumeData }: TwoColumnLayoutProps) {
     <div className="grid grid-cols-1 md:grid-cols-[minmax(250px,1fr)_2fr] gap-8 items-start print:grid-cols-[250px_1fr] print:leading-tight touch-pan-y">
       {/* Left Column - Personal Information */}
       <div className="print:break-inside-avoid">
-        <ProfileImage />
+        <ProfileImage photoId={resumeData.profilePhotoId} />
       </div>
       <div className="print:break-inside-avoid">
         <HeaderContent

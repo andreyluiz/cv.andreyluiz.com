@@ -59,6 +59,7 @@ export default function CVManagementModal({
     deleteIngestedCV,
     setCurrentCV,
     clearCurrentCV,
+    setCurrentPhotoId,
   } = useStore();
 
   // Get default CV based on locale
@@ -76,10 +77,13 @@ export default function CVManagementModal({
   const defaultCV = getDefaultCV();
 
   const handleLoadCV = (cv: Variant, isDefault = false) => {
+    console.log("Loading saved CV:", cv)
     if (isDefault) {
       clearCurrentCV();
+      setCurrentPhotoId(null);
     } else {
       setCurrentCV(cv);
+      setCurrentPhotoId(cv.profilePhotoId || null);
     }
     onCVLoad(cv);
     onClose();
@@ -168,6 +172,8 @@ export default function CVManagementModal({
           locale,
         );
 
+        console.log('Ingestion done');
+
         const cvData: IngestedCV = {
           id: editingCV?.id || crypto.randomUUID(),
           title: data.title,
@@ -178,10 +184,21 @@ export default function CVManagementModal({
           profilePhotoId: data.photoId || undefined,
         };
 
+        console.log('Photo ID on CV data: ', data.photoId)
+
         if (editingCV) {
           updateIngestedCV(editingCV.id, cvData);
         } else {
           addIngestedCV(cvData);
+        }
+
+        // Ensure uploaded photo is associated with the final CV id
+        if (cvData.profilePhotoId) {
+          try {
+            await photoService.updatePhotoCvId(cvData.profilePhotoId, cvData.id);
+          } catch (assocErr) {
+            console.warn("Failed to associate photo with CV:", assocErr);
+          }
         }
 
         // Success - reset states and return to list

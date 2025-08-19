@@ -76,6 +76,8 @@ export default function CVIngestionForm({
       return;
     }
 
+    console.log('Form data photo ID: ', formData.photoId);
+
     onSubmit({
       title: formData.title.trim(),
       rawText: formData.rawText.trim(),

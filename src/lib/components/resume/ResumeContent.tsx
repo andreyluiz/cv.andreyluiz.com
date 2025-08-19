@@ -45,7 +45,7 @@ function useIsMobile() {
 
 export default function ResumeContent({ initialResume }: Props) {
   const [currentResume, setCurrentResume] = useState<Variant>(initialResume);
-  const { layoutMode, currentCV, setCurrentCV, clearCurrentCV } = useStore();
+  const { layoutMode, currentCV, setCurrentCV, clearCurrentCV, setCurrentPhotoId, _hasHydrated } = useStore();
   const isMobile = useIsMobile();
 
   const { locale } = useParams();
@@ -57,17 +57,26 @@ export default function ResumeContent({ initialResume }: Props) {
   }, []);
 
   // Initialize with currentCV from store if available, or fetch default resume based on locale
+  // Wait for hydration to complete before making decisions
   useEffect(() => {
+    if (!_hasHydrated) {
+      // Still hydrating, don't make any decisions yet
+      return;
+    }
+
     if (currentCV) {
       setCurrentResume(currentCV);
     } else {
       fetchResume(locale as string);
+      // Ensure no stale photo carries over when showing default resume
+      setCurrentPhotoId(null);
     }
-  }, [locale, fetchResume, currentCV]);
+  }, [locale, fetchResume, currentCV, setCurrentPhotoId, _hasHydrated]);
 
   // Handle CV loading from CV management
   const handleCVLoad = useCallback(
     (cv: Variant, isDefault?: boolean) => {
+      console.log("Loading new CV", cv)
       setCurrentResume(cv);
       if (isDefault) {
         clearCurrentCV();

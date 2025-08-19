@@ -17,17 +17,11 @@ export default function ProfileImage({
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  // Effect to load photo URL when photoId changes
   useEffect(() => {
     let isMounted = true;
-    let currentPhotoUrl: string | null = null;
 
     const loadPhoto = async () => {
-      // Clean up previous URL if it exists
-      if (photoUrl && photoUrl !== "/profile.webp") {
-        PhotoService.revokePhotoUrl(photoUrl);
-        setPhotoUrl(null);
-      }
-
       if (!photoId) {
         setPhotoUrl(null);
         setIsLoading(false);
@@ -43,7 +37,6 @@ export default function ProfileImage({
 
         if (isMounted) {
           if (url) {
-            currentPhotoUrl = url;
             setPhotoUrl(url);
             setHasError(false);
           } else {
@@ -64,14 +57,13 @@ export default function ProfileImage({
 
     loadPhoto();
 
-    // Cleanup function to revoke object URL and prevent memory leaks
+    // Cleanup function - only cancel ongoing operations, don't revoke URLs
     return () => {
       isMounted = false;
-      if (currentPhotoUrl) {
-        PhotoService.revokePhotoUrl(currentPhotoUrl);
-      }
+      // Let photoService manage URL lifecycle through its own caching
     };
-  }, [photoId, photoUrl]);
+  }, [photoId]);
+
 
   // Show loading state
   if (isLoading) {

@@ -14,6 +14,7 @@ export interface Variant {
   publications?: Publication[];
   personalityTraits: string[];
   changes?: Change[];
+  profilePhotoId?: string;
 }
 
 export interface Change {
