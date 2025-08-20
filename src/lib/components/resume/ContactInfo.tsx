@@ -8,19 +8,53 @@ interface Props {
   contactInfo: Variant["contactInfo"];
 }
 
-const ContactItem = ({ item, icon }: { item: string; icon: string }) => {
+type ContactInfoT = Props["contactInfo"];
+type ContactKey = keyof ContactInfoT;
+
+const CONTACT_CONFIG = {
+  email: {
+    icon: "mdi:email",
+    href: (v: string) => `mailto:${v.replace(/^mailto:/i, "").trim()}`,
+  },
+  phone: {
+    icon: "mdi:phone",
+    href: (v: string) => `tel:${v.replace(/^tel:/i, "").trim()}`,
+  },
+  location: {
+    icon: "mdi:map-marker",
+    href: (v: string) => `https://maps.google.com/?q=${encodeURIComponent(v)}`,
+  },
+  website: {
+    icon: "mdi:web",
+    href: (v: string) => {
+      const s = v.trim().replace(/\/+$/, "");
+      return /^https?:\/\//i.test(s) ? s : `https://${s}`;
+    },
+  },
+  linkedin: {
+    icon: "mdi:linkedin",
+    href: (v: string) => `https://linkedin.com/in/${v.replace(/^@/, "")}`,
+  },
+  github: {
+    icon: "mdi:github",
+    href: (v: string) => `https://github.com/${v}`,
+  },
+} satisfies Record<ContactKey, { icon: string; href: (v: string) => string }>;
+
+
+const ContactItem = ({ label, href, icon }: { label: string; href: string; icon: string }) => {
   return (
-    <div className="flex items-center gap-2">
+    <li className="flex items-center gap-2">
       <Icon icon={icon} className="size-4" />
       <a
-        href={item}
+        href={href}
         target="_blank"
         rel="noopener noreferrer"
         className="hover:underline"
       >
-        {item}
+        {label}
       </a>
-    </div>
+    </li>
   );
 };
 
@@ -28,29 +62,21 @@ export default function ContactInfo({ contactInfo }: Props) {
   const t = useTranslations("resume.contactInfo");
   const { layoutMode } = useStore();
 
+  const items = (Object.entries(contactInfo) as [ContactKey, string | undefined][])
+    .filter(([, v]) => typeof v === "string" && v.trim() !== "")
+    .map(([key, item]) => ({
+      key,
+      item,
+      icon: CONTACT_CONFIG[key].icon,
+      href: CONTACT_CONFIG[key].href(item!),
+    }));
+
   return (
     <Section title={t("title")}>
-      <ul
-        className={
-          layoutMode === "two-column"
-            ? "flex flex-col gap-2"
-            : "grid grid-cols-2"
-        }
-      >
-        <ContactItem item={contactInfo.email} icon="mdi:email" />
-        <ContactItem item={contactInfo.location} icon="mdi:map-marker" />
-        <ContactItem item={contactInfo.phone} icon="mdi:phone" />
-        {contactInfo.linkedin && (
-          <ContactItem item={contactInfo.linkedin} icon="mdi:linkedin" />
-        )}
-        {contactInfo.github && (
-          <ContactItem item={contactInfo.github} icon="mdi:github" />
-        )}
-        {contactInfo.website && (
-          <ContactItem item={contactInfo.website} icon="mdi:web" />
-        )}
-        <ContactItem item={contactInfo.age.toString()} icon="mdi:calendar" />
-        <ContactItem item={contactInfo.nationality} icon="mdi:flag" />
+      <ul className="grid grid-cols-2 gap-x-24">
+        {items.map(({ key, item, icon, href }) => (
+          <ContactItem key={key} label={item!.trim()} href={href} icon={icon} />
+        ))}
       </ul>
     </Section>
   );
