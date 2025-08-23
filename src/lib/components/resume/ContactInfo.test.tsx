@@ -3,7 +3,7 @@ import { screen, render, within, cleanup } from "@testing-library/react";
 import { IntlProvider } from "next-intl";
 import ContactInfo from './ContactInfo';
 
-describe('ContactInfo', () => {
+describe('Simple ContactInfo', () => {
     beforeEach(() => {
         const contactInfo = {
             email: "test@example.com",
@@ -43,24 +43,53 @@ describe('ContactInfo', () => {
     test('correctly render location link', () => {
         const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
         const locationLink = within(contactInfoRendered).getByRole('link', { name: 'New York, NY' });
-        expect(locationLink).toHaveAttribute('href', 'https://www.google.com/maps/search/?api=1&query=New+York%2C+NY');
+        expect(locationLink).toHaveAttribute('href', 'https://www.google.com/maps/search/?api=1&query=New%20York%2C%20NY');
     });
 
     test('correctly render website link', () => {
         const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
         const websiteLink = within(contactInfoRendered).getByRole('link', { name: 'https://example.com' });
-        expect(websiteLink).toHaveAttribute('href', 'https://example.com');
+        expect(websiteLink).toHaveAttribute('href', 'https://example.com/');
     });
 
     test('correctly render LinkedIn link', () => {
         const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
         const linkedinLink = within(contactInfoRendered).getByRole('link', { name: '@example' });
-        expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/example');
+        expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/example');
     });
 
     test('correctly render GitHub link', () => {
         const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
         const githubLink = within(contactInfoRendered).getByRole('link', { name: 'example' });
+        expect(githubLink).toHaveAttribute('href', 'https://github.com/example');
+    });
+});
+
+describe("Edge cases", () => {
+    beforeEach(() => {
+        const contactInfo = {
+            linkedin: "linkedin.com/in/example",
+            github: "github.com/example",
+        };
+
+        render(
+            <IntlProvider locale="en" messages={{ resume: { contactInfo: { title: "Contact" } } }}>
+                <ContactInfo contactInfo={contactInfo} />
+            </IntlProvider>
+        );
+    });
+
+    afterEach(() => cleanup());
+
+    test('correctly render LinkedIn link', () => {
+        const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
+        const linkedinLink = within(contactInfoRendered).getByRole('link', { name: 'linkedin.com/in/example' });
+        expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com/in/example');
+    });
+
+    test('correctly render GitHub link', () => {
+        const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
+        const githubLink = within(contactInfoRendered).getByRole('link', { name: 'github.com/example' });
         expect(githubLink).toHaveAttribute('href', 'https://github.com/example');
     });
 });

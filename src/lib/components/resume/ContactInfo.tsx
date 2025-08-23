@@ -11,33 +11,48 @@ interface Props {
 type ContactInfoT = Props["contactInfo"];
 type ContactKey = keyof ContactInfoT;
 
+const toURL = (str: string, protocol = "https://"): URL => {
+  const regex = new RegExp(`^${protocol}`, "i");
+  if (!regex.test(str)) {
+    str = `${protocol}${str}`;
+  }
+  return new URL(str);
+};
+
 const CONTACT_CONFIG = {
   email: {
     icon: "mdi:email",
-    href: (v: string) => `mailto:${v.replace(/^mailto:/i, "").trim()}`,
+    href: (v: string) => toURL(v, "mailto:").href,
   },
   phone: {
     icon: "mdi:phone",
-    href: (v: string) => `tel:${v.replace(/^tel:/i, "").trim()}`,
+    href: (v: string) => toURL(v, "tel:").href,
   },
   location: {
     icon: "mdi:map-marker",
-    href: (v: string) => `https://maps.google.com/?q=${encodeURIComponent(v)}`,
+    href: (v: string) => toURL(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v)}`).href,
   },
   website: {
     icon: "mdi:web",
-    href: (v: string) => {
-      const s = v.trim().replace(/\/+$/, "");
-      return /^https?:\/\//i.test(s) ? s : `https://${s}`;
-    },
+    href: (v: string) => toURL(v).href,
   },
   linkedin: {
     icon: "mdi:linkedin",
-    href: (v: string) => `https://linkedin.com/in/${v.replace(/^@/, "")}`,
+    href: (v: string) => {
+      if (/linkedin\.com/.test(v)) {
+        return toURL(v).href;
+      }
+      return toURL(`https://linkedin.com/in/${v.replace(/^@/, "")}`).href;
+    },
   },
   github: {
     icon: "mdi:github",
-    href: (v: string) => `https://github.com/${v}`,
+    href: (v: string) => {
+      if (/github\.com/.test(v)) {
+        return toURL(v).href;
+      }
+      return toURL(`https://github.com/${v}`).href;
+    },
   },
 } satisfies Record<ContactKey, { icon: string; href: (v: string) => string }>;
 
