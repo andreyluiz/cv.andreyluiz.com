@@ -54,8 +54,15 @@ const CONTACT_CONFIG = {
       return toURL(`https://github.com/${v}`).href;
     },
   },
+  age: {
+    icon: "mdi:calendar",
+    href: (v: string) => "#",
+  },
+  nationality: {
+    icon: "mdi:flag",
+    href: (v: string) => "#",
+  },
 } satisfies Record<ContactKey, { icon: string; href: (v: string) => string }>;
-
 
 const ContactItem = ({ label, href, icon }: { label: string; href: string; icon: string }) => {
   return (
