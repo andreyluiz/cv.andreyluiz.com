@@ -12,6 +12,8 @@ describe('Simple ContactInfo', () => {
             website: "https://example.com",
             linkedin: "@example",
             github: "example",
+            age: "30",
+            nationality: "American",
         };
 
         render(
@@ -62,6 +64,18 @@ describe('Simple ContactInfo', () => {
         const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
         const githubLink = within(contactInfoRendered).getByRole('link', { name: 'example' });
         expect(githubLink).toHaveAttribute('href', 'https://github.com/example');
+    });
+
+    test('correctly render age', () => {
+        const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
+        const ageItem = within(contactInfoRendered).getByText('30');
+        expect(ageItem).toBeInTheDocument();
+    });
+
+    test('correctly render nationality', () => {
+        const contactInfoRendered = screen.getByRole('region', { name: /Contact/i });
+        const nationalityItem = within(contactInfoRendered).getByText('American');
+        expect(nationalityItem).toBeInTheDocument();
     });
 });
 
