@@ -28,14 +28,14 @@ export interface SkillDomain {
 }
 
 export interface ContactInfo {
-  email: string;
-  phone: string;
-  location: string;
+  email?: string;
+  phone?: string;
+  location?: string;
   website?: string;
   linkedin?: string;
   github?: string;
-  age: string;
-  nationality: string;
+  age?: string;
+  nationality?: string;
 }
 
 export interface Experience {

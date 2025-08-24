@@ -20,12 +20,13 @@ const titleVariants = cva(
 
 interface Props extends PropsWithChildren, VariantProps<typeof titleVariants> {
   className?: string;
+  id?: string;
 }
 
-export default function Title({ children, className, tag }: Props) {
+export default function Title({ children, className, tag, id }: Props) {
   const Tag = tag as keyof React.JSX.IntrinsicElements;
 
   return (
-    <Tag className={cn(titleVariants({ tag, className }))}>{children}</Tag>
+    <Tag className={cn(titleVariants({ tag, className }))} id={id}>{children}</Tag>
   );
 }
